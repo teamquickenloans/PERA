@@ -7,6 +7,7 @@ namespace PERA.Models
 {
     public class GarageManager
     {
+        public int ID { get; set; } //the PK
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email { get; set; }
