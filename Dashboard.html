@@ -1,5 +1,5 @@
  <!DOCTYPE html>
-<html>
+<html ng-app="dashboard">
 <head>
 	<meta charset="UTF-8">
   	<title>Parking Dashboard</title>
@@ -18,21 +18,25 @@
 	
 	<!-- ====================== Google Maps API ============================ -->
 	<style type="text/css">
-		html { height:100%; }
-		body { height:100%; }
+		html, body, #PAContentRow { height:100%; padding:0; margin:0; }
 		body { background-color:#CCC; }
-		#map-canvas { height:1000px; }
-		#sideBar { height:1000px; overflow:auto;}
-		#mainTabs, #sideTabs { height:50px; }
-		.row { max-width: 100%; }
+		#map-canvas { height:100%; }
+		#sideBar { height:100%; overflow:auto;}
+		.row { max-width:100%; }
+		#sideBarContent{ margin:10px; }
     </style>
 
     <script type="text/javascript" 
     	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM">
     </script>
 
+
+    <!-- ====================== app.js (our js code) ============================ --> 
+    <script type="text/javascript" src="app.js"></script>
+
     <script type="text/javascript">
-		function initialize() {
+		function initialize() 
+		{
 	  
 		var styleArray = [
 			{
@@ -43,7 +47,7 @@
 			},{
 				featureType: "all",
 				stylers: [
-					{ saturation: -100 }
+					{ saturation: -25 }
 				]
 			},{
 				featureType: "road",
@@ -82,10 +86,10 @@
         garageMarkers = [];
         garageNumber = 0;
         geocoder = new google.maps.Geocoder();
-        function testClick(event) {
-        	console.log('in here');
-        }
-        function AddGarage(name, address)
+        // function testClick(event) {
+        // 	console.log('in here');
+        // }
+        function AddGarage(name, address, load)
         {
         	//TODO: Geocoding should only be done once upon garage entry into the database, not on each page load!!!
         	//Convert Address to Latitude & Longitude and Create Marker/Marker Listener
@@ -97,8 +101,28 @@
 		      		garageMarkers[garageNumber] = new google.maps.Marker({
 		          		map: map,
 		          		position: results[0].geometry.location,
-		          		icon: 'parking-small.png'
 		      		});
+
+		      		if (load == 'low')
+		      		{
+		      			garageMarkers[garageNumber].setIcon('parking_logo_green.png'); //TODO: Fix click zone
+		      		}
+		      		else if (load == 'medium')
+		      		{
+		      			garageMarkers[garageNumber].setIcon('parking_logo_yellow.png');
+		      		}
+		      		else if (load == 'high')
+		      		{
+		      			garageMarkers[garageNumber].setIcon('parking_logo_red.png');
+		      		}
+		      		else if (load == 'full')
+		      		{
+		      			garageMarkers[garageNumber].setIcon('parking_logo_black.png');
+		      		}
+		      		else
+		      		{
+		      			console.log("load read error for " + name);
+		      		}
 
 		      		//Create Marker Listener
 		      		google.maps.event.addListener(garageMarkers[garageNumber], 'click', function() {
@@ -114,26 +138,34 @@
 
 			//Create Dropdown Entry
 			var newButton = $("<li id='garageButton" + garageNumber + "'></li>");
-			var newAnchor = $("<a href='#'>" + name + "</a>")
-			console.log("here");
-			console.log(newAnchor)
+			var newAnchor = $("<a href='#'>" + name + "</a>");
 			
 			newButton.html(newAnchor);
 			$('#dropdownTopBar').append(newButton);
 
-			var c = $('#garageButton' + garageNumber).find('a');
-			c.on('click', function(event) {
-				event.preventDefault();
-				console.log("CLICK");
-			})
 
-			//Make Dropdown Entry Do Something
+			//Make Dropdown Entry Do Something //TODO: no worky, use angularJS
 			// $("#garageButton" + garageNumber).on('click', function() 
 			// {
 			// 	alert("here I am!"); //TODO
 	  // 			//map.setZoom(16);
 	  //   		//map.setCenter(garageMarkers[garageNumber].getPosition());
 	  // 		});
+
+
+			// var newButton = $("<li id='garageButton" + garageNumber + "'></li>");
+			// var newAnchor = $("<a href='#'>" + name + "</a>")
+			// console.log("here");
+			// console.log(newAnchor)
+			
+			// newButton.html(newAnchor);
+			// $('#dropdownTopBar').append(newButton);
+
+			// var c = $('#garageButton' + garageNumber).find('a');
+			// c.on('click', function(event) {
+			// 	event.preventDefault();
+			// 	console.log("CLICK");
+			// })
 
 
 			garageNumber++;
@@ -150,9 +182,42 @@
 		    for(var i=0; i<data.garage.length; i++)
 		    {
 		        var obj = data.garage[i];
-		        AddGarage(obj.name, obj.address);
+		        AddGarage(obj.name, obj.address, obj.load);
 		    }
 		});
+
+
+
+		//Make the Nav Bar Do Stuff
+		$("#ParkAllocNav").on('click', function() 
+		{
+			$("#ParkAllocNav").addClass("active");
+			$("#ExpRecNav").removeClass("active");
+			$("#NotifNav").removeClass("active");
+  		});
+
+		$("#ExpRecNav").on('click', function() 
+		{
+			$("#ParkAllocNav").removeClass("active");
+			$("#ExpRecNav").addClass("active");
+			$("#NotifNav").removeClass("active");
+  		});
+
+  		$("#NotifNav").on('click', function() 
+		{
+			$("#ParkAllocNav").removeClass("active");
+			$("#ExpRecNav").removeClass("active");
+			$("#NotifNav").addClass("active");
+  		});
+
+
+
+
+
+  		//TODO: Remove these, just here for mockup
+  		$("#OverviewNav").removeClass("active");
+		$("#SingGarNav").addClass("active");
+
 
 
 
@@ -171,7 +236,7 @@
 
 </head>
 
-<body>
+<body ng-controller="ParkingController">
 
 	<!-- ======================== Nav Bar ============================ -->
 	<nav class="top-bar" data-topbar role="navigation">
@@ -186,8 +251,8 @@
 	  <section class="top-bar-section">
 	    <!-- Right Nav Section -->
 	    <ul class="right">
-	      <li class="active"><a href="#">Overview</a></li>
-	      <li class="has-dropdown">
+	      <li id="OverviewNav" class="active"><a href="#">Overview</a></li>
+	      <li id="SingGarNav" class="has-dropdown">
 	        <a href="#">Single Garage</a>
 	        <ul id="dropdownTopBar" class="dropdown">
 	          <!-- <li><a href="#">First link in dropdown</a></li>
@@ -198,8 +263,9 @@
 
 	    <!-- Left Nav Section -->
 	    <ul class="left">
-	      <li class="active"><a href="#">Parking Allocation</a></li>
-	      <li><a href="#">Expense Reconcilliation</a></li>
+	      <li id="ParkAllocNav" class="active"><a href="#">Parking Allocation</a></li>
+	      <li id="ExpRecNav"><a href="#">Expense Reconcilliation</a></li>
+	      <li id="NotifNav"><a href="#">Notifications</a></li>
 	    </ul>
 	  </section>
 	</nav>
@@ -211,11 +277,24 @@
 
 
 	<!-- ======================== Parking Allocation Content ============================ -->
-	<div class="row">
+	<div id="PAContentRow" class="row">
 
 			<div id="map-canvas" class="columns small-10"></div>
 			<div id="sideBar" class="columns small-2">
 				<!-- TODO: add garage info -->
+				<div class="row">
+					<div id="sideBarContent">
+						<h2>One Campus Martius</h2>
+						1188 Farmer Street 
+						Detroit MI 48226
+						(272) 382-0239
+						Open 24 hours
+						Load: 374/450
+					</div>
+				</div>
+				<div class="row">
+
+				</div>
 			</div>
 
 	</div>
