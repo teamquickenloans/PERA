@@ -1,0 +1,82 @@
+﻿@model PERA.Models.TeamMember
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>TeamMember</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Garage.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Garage.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CommonID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CommonID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmploymentStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmploymentStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.TerminationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.TerminationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ParkingStatus)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ParkingStatus)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EnrollmentDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EnrollmentDate)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.BadgeID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

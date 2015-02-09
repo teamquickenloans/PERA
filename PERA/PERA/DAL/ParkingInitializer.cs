@@ -34,7 +34,7 @@ namespace PERA.DAL
             new Garage{GarageID=2021,Name="COBO Congress",WholeGarageCapacity=3,},
             new Garage{GarageID=2042,Name="AT&T Lot",WholeGarageCapacity=4,}
             };
-            Garages.ForEach(s => context.Garages.Add(s));
+            garages.ForEach(s => context.Garages.Add(s));
             context.SaveChanges();
             //var enrollments = new List<Enrollment>
             //{
