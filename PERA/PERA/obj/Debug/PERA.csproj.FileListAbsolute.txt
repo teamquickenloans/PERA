@@ -53,3 +53,5 @@ C:\Users\Chelsea\Documents\pera\PERA\PERA\bin\Microsoft.Owin.Security.Twitter.xm
 C:\Users\Chelsea\Documents\pera\PERA\PERA\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Chelsea\Documents\pera\PERA\PERA\obj\Debug\PERA.dll
 C:\Users\Chelsea\Documents\pera\PERA\PERA\obj\Debug\PERA.pdb
+C:\Users\QuickenTeam\Documents\GitHub\paer\PERA\PERA\obj\Debug\PERA.csprojResolveAssemblyReference.cache
+C:\Users\QuickenTeam\Documents\GitHub\paer\PERA\PERA\obj\Debug\PERA.dll

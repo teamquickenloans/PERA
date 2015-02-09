@@ -26,33 +26,33 @@ namespace PERA.DAL
             context.SaveChanges();
             var garages = new List<Garage>
             {
-            new Garage{GarageID=1050,Name="OCM",Credits=3,},
-            new Garage{GarageID=4022,Name="Premier",Credits=3,},
-            new Garage{GarageID=4041,Name="Book Cadillac",Credits=3,},
-            new Garage{GarageID=1045,Name="1 Detroit",Credits=4,},
-            new Garage{GarageID=3141,Name="2 Detroit",Credits=4,},
-            new Garage{GarageID=2021,Name="COBO Congress",Credits=3,},
-            new Garage{GarageID=2042,Name="AT&T Lot",Credits=4,}
+            new Garage{GarageID=1050,Name="OCM",WholeGarageCapacity=3,},
+            new Garage{GarageID=4022,Name="Premier",WholeGarageCapacity=3,},
+            new Garage{GarageID=4041,Name="Book Cadillac",WholeGarageCapacity=3,},
+            new Garage{GarageID=1045,Name="1 Detroit",WholeGarageCapacity=4,},
+            new Garage{GarageID=3141,Name="2 Detroit",WholeGarageCapacity=4,},
+            new Garage{GarageID=2021,Name="COBO Congress",WholeGarageCapacity=3,},
+            new Garage{GarageID=2042,Name="AT&T Lot",WholeGarageCapacity=4,}
             };
             Garages.ForEach(s => context.Garages.Add(s));
             context.SaveChanges();
-            var enrollments = new List<Enrollment>
-            {
-            new Enrollment{TeamMemberID=1,GarageID=1050,Grade=Grade.A},
-            new Enrollment{TeamMemberID=1,GarageID=4022,Grade=Grade.C},
-            new Enrollment{TeamMemberID=1,GarageID=4041,Grade=Grade.B},
-            new Enrollment{TeamMemberID=2,GarageID=1045,Grade=Grade.B},
-            new Enrollment{TeamMemberID=2,GarageID=3141,Grade=Grade.F},
-            new Enrollment{TeamMemberID=2,GarageID=2021,Grade=Grade.F},
-            new Enrollment{TeamMemberID=3,GarageID=1050},
-            new Enrollment{TeamMemberID=4,GarageID=1050,},
-            new Enrollment{TeamMemberID=4,GarageID=4022,Grade=Grade.F},
-            new Enrollment{TeamMemberID=5,GarageID=4041,Grade=Grade.C},
-            new Enrollment{TeamMemberID=6,GarageID=1045},
-            new Enrollment{TeamMemberID=7,GarageID=3141,Grade=Grade.A},
-            };
-            enrollments.ForEach(s => context.Enrollments.Add(s));
-            context.SaveChanges();
+            //var enrollments = new List<Enrollment>
+            //{
+            //new Enrollment{TeamMemberID=1,GarageID=1050,Grade=Grade.A},
+            //new Enrollment{TeamMemberID=1,GarageID=4022,Grade=Grade.C},
+            //new Enrollment{TeamMemberID=1,GarageID=4041,Grade=Grade.B},
+            //new Enrollment{TeamMemberID=2,GarageID=1045,Grade=Grade.B},
+            //new Enrollment{TeamMemberID=2,GarageID=3141,Grade=Grade.F},
+            //new Enrollment{TeamMemberID=2,GarageID=2021,Grade=Grade.F},
+            //new Enrollment{TeamMemberID=3,GarageID=1050},
+            //new Enrollment{TeamMemberID=4,GarageID=1050,},
+            //new Enrollment{TeamMemberID=4,GarageID=4022,Grade=Grade.F},
+            //new Enrollment{TeamMemberID=5,GarageID=4041,Grade=Grade.C},
+            //new Enrollment{TeamMemberID=6,GarageID=1045},
+            //new Enrollment{TeamMemberID=7,GarageID=3141,Grade=Grade.A},
+            //};
+            //enrollments.ForEach(s => context.Enrollments.Add(s));
+            //context.SaveChanges();
         }
     }
 }
