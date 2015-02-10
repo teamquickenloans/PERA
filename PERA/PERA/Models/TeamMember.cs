@@ -1,6 +1,8 @@
 using PERA.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data.Entity.Core;
 
 namespace PERA.Models
 {
@@ -21,6 +23,7 @@ namespace PERA.Models
     }
     public class TeamMember
     {
+        [Key]
         public int BadgeID { get; set; }  // pk
         public string FirstName { get; set; }
         public string LastName { get; set; }
@@ -28,7 +31,7 @@ namespace PERA.Models
         public int? GarageID { get; set; }
 		public EmploymentStatus? EmploymentStatus { get; set; }
         public DateTime TerminationDate { get; set; }
-        public ParkingStatus ParkingStatus { get; set; }
+        public ParkingStatus? ParkingStatus { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public virtual ICollection<Invoice> PreviousInvoices { get; set; }
 
