@@ -12,19 +12,19 @@ namespace PERA.DAL
         {
             var teamMembers = new List<TeamMember>
             {
-            new TeamMember{FirstName="Carson",LastName="Alexander",EnrollmentDate=DateTime.Parse("2005-09-01"), CommonID=423535, EmploymentStatus=null},
-            new TeamMember{FirstName="Meredith",LastName="Alonso",EnrollmentDate=DateTime.Parse("2002-09-01"), CommonID=423536, EmploymentStatus=null},
-            new TeamMember{FirstName="Arturo",LastName="Anand",EnrollmentDate=DateTime.Parse("2003-09-01"), CommonID=423537, EmploymentStatus=null},
-            new TeamMember{FirstName="Gytis",LastName="Barzdukas",EnrollmentDate=DateTime.Parse("2002-09-01"), CommonID=423538, EmploymentStatus=null},
-            new TeamMember{FirstName="Yan",LastName="Li",EnrollmentDate=DateTime.Parse("2002-09-01"), CommonID=423539, EmploymentStatus=null},
-            new TeamMember{FirstName="Peggy",LastName="Justice",EnrollmentDate=DateTime.Parse("2001-09-01"), CommonID=423540, EmploymentStatus=null},
-            new TeamMember{FirstName="Laura",LastName="Norman",EnrollmentDate=DateTime.Parse("2003-09-01"), CommonID=423541, EmploymentStatus=null},
-            new TeamMember{FirstName="Nino",LastName="Olivetto",EnrollmentDate=DateTime.Parse("2005-09-01"), CommonID=423542, EmploymentStatus=null}
+            new TeamMember{BadgeID=4041,FirstName="Carson",LastName="Alexander",EnrollmentDate=DateTime.Parse("2005-09-01"), CommonID=423535, EmploymentStatus=null,TerminationDate=DateTime.Parse("2005-09-01")},
+            new TeamMember{BadgeID=4042,FirstName="Meredith",LastName="Alonso",EnrollmentDate=DateTime.Parse("2002-09-01"), CommonID=423536, EmploymentStatus=null,TerminationDate=DateTime.Parse("2005-09-01")},
+            new TeamMember{BadgeID=4043,FirstName="Arturo",LastName="Anand",EnrollmentDate=DateTime.Parse("2003-09-01"), CommonID=423537, EmploymentStatus=null,TerminationDate=DateTime.Parse("2005-09-01")},
+            new TeamMember{BadgeID=4044,FirstName="Gytis",LastName="Barzdukas",EnrollmentDate=DateTime.Parse("2002-09-01"), CommonID=423538, EmploymentStatus=null,TerminationDate=DateTime.Parse("2005-09-01")},
+            new TeamMember{BadgeID=4045,FirstName="Yan",LastName="Li",EnrollmentDate=DateTime.Parse("2002-09-01"), CommonID=423539, EmploymentStatus=null,TerminationDate=DateTime.Parse("2005-09-01")},
+            new TeamMember{BadgeID=4046,FirstName="Peggy",LastName="Justice",EnrollmentDate=DateTime.Parse("2001-09-01"), CommonID=423540, EmploymentStatus=null,TerminationDate=DateTime.Parse("2005-09-01")},
+            new TeamMember{BadgeID=4047,FirstName="Laura",LastName="Norman",EnrollmentDate=DateTime.Parse("2003-09-01"), CommonID=423541, EmploymentStatus=null,TerminationDate=DateTime.Parse("2005-09-01")},
+            new TeamMember{BadgeID=4048,FirstName="Nino",LastName="Olivetto",EnrollmentDate=DateTime.Parse("2005-09-01"), CommonID=423542, EmploymentStatus=null,TerminationDate=DateTime.Parse("2005-09-01")}
             };
 
             teamMembers.ForEach(s => context.TeamMembers.Add(s));
             context.SaveChanges();
-            var garages = new List<Garage>
+            /*var garages = new List<Garage>
             {
             new Garage{GarageID=1050,Name="OCM",WholeGarageCapacity=3,},
             new Garage{GarageID=4022,Name="Premier",WholeGarageCapacity=3,},
@@ -35,7 +35,7 @@ namespace PERA.DAL
             new Garage{GarageID=2042,Name="AT&T Lot",WholeGarageCapacity=4,}
             };
             garages.ForEach(s => context.Garages.Add(s));
-            context.SaveChanges();
+            context.SaveChanges();*/
             //var enrollments = new List<Enrollment>
             //{
             //new Enrollment{TeamMemberID=1,GarageID=1050,Grade=Grade.A},

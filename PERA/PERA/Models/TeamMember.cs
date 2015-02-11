@@ -31,7 +31,7 @@ namespace PERA.Models
         public int? GarageID { get; set; }
 		public EmploymentStatus? EmploymentStatus { get; set; }
         public DateTime TerminationDate { get; set; }
-        public ParkingStatus ParkingStatus { get; set; }
+        public ParkingStatus? ParkingStatus { get; set; }
         public DateTime EnrollmentDate { get; set; }
         public virtual ICollection<Invoice> PreviousInvoices { get; set; }
 
