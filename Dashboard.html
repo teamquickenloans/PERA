@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html ng-app="parkingDashboard">
 <head>
 	<meta charset="UTF-8">
@@ -15,9 +15,12 @@
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/css/foundation.min.css">
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/js/foundation.min.js"></script>
 
-	
 	<!-- ====================== Google Maps API ============================ -->
-	<style type="text/css">
+    <script type="text/javascript" 
+    	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM">
+    </script>
+
+    <style type="text/css">
 		html, body, #PAContentRow { height:100%; padding:0; margin:0; }
 		body { background-color:#CCC; }
 		#map-canvas { height:100%; }
@@ -26,14 +29,8 @@
 		#sideBarContent{ margin:10px; }
     </style>
 
-    <script type="text/javascript" 
-    	src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM">
-    </script>
-
-
     <!-- ====================== app.js (our angularJS code) ============================ --> 
     <script type="text/javascript" src="app.js"></script>
-
 	
 	
 	
@@ -84,9 +81,6 @@
             mapOptions);
 			
 
-
-
-
         
 
 
@@ -114,32 +108,14 @@
   		});
 
 
-
-
-
-  		//TODO: Remove these, just here for mockup
-  		$("#OverviewNav").removeClass("active");
-		$("#SingGarNav").addClass("active");
-
-
-
-
-
-		
-		// //Create control panel (ie. site title and 2 buttons) which appears on the right-hand side.
-		// var controlPanelDiv = document.createElement('div');
-	
-
-		// //Add the control panel and reset button (created previously) to the map.
-		// map.controls[google.maps.ControlPosition.RIGHT_TOP].push(controlPanelDiv);
-
       }
       google.maps.event.addDomListener(window, 'load', initialize);
     </script>
 
 </head>
 
-<body ng-controller="ParkingController">
+
+<body ng-controller="ParkingController as parking">
 
 	<!-- ======================== Nav Bar ============================ -->
 	<nav class="top-bar" data-topbar role="navigation">
@@ -158,8 +134,9 @@
 	      <li id="SingGarNav" class="has-dropdown">
 	        <a href="#">Single Garage</a>
 	        <ul id="dropdownTopBar" class="dropdown">
-	          <!-- <li><a href="#">First link in dropdown</a></li>
-	          <li class="active"><a href="#">Active link in dropdown</a></li> -->
+	        	<div ng-repeat="garage in parking.garages">
+          			<li><a href="#">{{garage.name}}</a></li>
+          		</div>
 	        </ul>
 	      </li>
 	    </ul>
