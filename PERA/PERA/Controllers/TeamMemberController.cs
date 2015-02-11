@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Http.Description;
 using PERA.DAL;
 using PERA.Models;
 
@@ -15,12 +16,46 @@ namespace PERA.Controllers
     {
         private ParkingContext db = new ParkingContext();
 
+        private async Task<> NextQuestionAsync(string userId)
+        {
+            var lastQuestionId = await this.db.TriviaAnswers
+                .Where(a => a.UserId == userId)
+                .GroupBy(a => a.QuestionId)
+                .Select(g => new { QuestionId = g.Key, Count = g.Count() })
+                .OrderByDescending(q => new { q.Count, QuestionId = q.QuestionId })
+                .Select(q => q.QuestionId)
+                .FirstOrDefaultAsync();
+
+            var questionsCount = await this.db.TriviaQuestions.CountAsync();
+
+            var nextQuestionId = (lastQuestionId % questionsCount) + 1;
+            return await this.db.TriviaQuestions.FindAsync(CancellationToken.None, nextQuestionId);
+        }
+
+         // GET api/Trivia
+        [ResponseType(typeof())]
+        public async Task<IHttpActionResult> Get()
+        {
+            var userId = User.Identity.Name;
+
+            TriviaQuestion nextQuestion = await this.NextQuestionAsync(userId);
+
+            if (nextQuestion == null)
+            {
+                return this.NotFound();
+            }
+
+            return this.Ok(nextQuestion);
+        }
+
+
         // GET: TeamMember
         public ActionResult Index()
         {
             var teamMembers = db.TeamMembers.Include(t => t.Garage);
             return View(teamMembers.ToList());
         }//test
+
 
         // GET: TeamMember/Details/5
         public ActionResult Details(int? id)
@@ -125,7 +160,7 @@ namespace PERA.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                this.db.Dispose();
             }
             base.Dispose(disposing);
         }
