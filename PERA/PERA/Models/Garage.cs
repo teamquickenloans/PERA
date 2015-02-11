@@ -22,22 +22,22 @@ namespace PERA.Models
         public int GarageID { get; set; } // pk
         public string Name { get; set; }
         public string Address { get; set; }
-        public GeoCoordinate LatitudeLongitude { get; set;}
+        //public GeoCoordinate LatitudeLongitude { get; set;}
         public int WholeGarageCapacity { get; set; }
         public int NumberOfLeasedSpaces { get; set; }
-        public int NumberOfTeamMemberSpaces { get; set; }
-        public int MinimumNumberOfTransientSpaces { get; set; }
-        public double SpaceCost { get; set; }
-        public double ValidationCost { get; set; }
-        public double TransientSalePrice { get; set; }
+        public int? NumberOfTeamMemberSpaces { get; set; }
+        public int? MinimumNumberOfTransientSpaces { get; set; }
+        public double? SpaceCost { get; set; }
+        public double? ValidationCost { get; set; }
+        public double? TransientSalePrice { get; set; }
         public string Owner { get; set; }
         public string BillingParty { get; set; }
-        public ReportType ReportType { get; set; }
-        public AccessToken AccessToken { get; set; }
-        public int AccessTokenCost { get; set; }
-        public double ChangeCost { get; set; }
-        public int NumberOfValidations { get; set; }
-        public int GarageManagerID { get; set; }
+        public ReportType? ReportType { get; set; }
+        public AccessToken? AccessToken { get; set; }
+        public int? AccessTokenCost { get; set; }
+        public double? ChangeCost { get; set; }
+        public int? NumberOfValidations { get; set; }
+        //public int GarageManagerID { get; set; }
 
         public virtual GarageManager GarageManager { get; set; }
 	}

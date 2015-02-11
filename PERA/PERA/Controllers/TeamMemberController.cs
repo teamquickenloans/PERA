@@ -51,11 +51,20 @@ namespace PERA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BadgeID,FirstName,LastName,CommonID,GarageID,EmploymentStatus,TerminationDate,ParkingStatus,EnrollmentDate")] TeamMember teamMember)
         {
-            if (ModelState.IsValid)
+            try
             {
-                db.TeamMembers.Add(teamMember);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+
+                if (ModelState.IsValid)
+                {
+                    db.TeamMembers.Add(teamMember);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+            }
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
             }
 
             ViewBag.GarageID = new SelectList(db.Garages, "GarageID", "Name", teamMember.GarageID);

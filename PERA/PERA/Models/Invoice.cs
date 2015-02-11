@@ -11,14 +11,14 @@ namespace PERA.Models
     }
     public class Invoice
     {
-        public int ID { get; set; }
+        public int InvoiceID { get; set; }
         public int GarageID { get; set; }
         public double TotalAmountBilled { get; set; }
         public DateTime DateReceived { get; set; }
         public DateTime BillingStartDate { get; set; } //Use BillingStartDate.Month and BillingStartDate.Year for the month and year
         public DateTime BillingEndDate { get; set; }
-        public int NumberOfLeasedSpots { get; set; }
-        public int NumberOfValidations { get; set; }
+        public int? NumberOfLeasedSpots { get; set; }
+        public int? NumberOfValidations { get; set; }
         public Format? Format { get; set; }
 
         public virtual ICollection<TeamMember> TeamMembers { get; set; }
