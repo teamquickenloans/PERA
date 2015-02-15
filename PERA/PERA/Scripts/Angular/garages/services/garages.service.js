@@ -15,7 +15,7 @@
     * @namespace Garages
     * @returns {Factory}
     */
-    function Garages($http) {
+    function Garages($http) {   //this is just linking up the functions to variable names and returning them
         var Garages = {
             all: all,
             create: create,
@@ -33,7 +33,7 @@
         * @memberOf thinkster.garages.services.Garages
         */
         function all() {
-            return $http.get('/api/v1/garages/');
+            return $http.get('/api/garages/');
         }
 
 
@@ -45,7 +45,7 @@
         * @memberOf thinkster.garages.services.Garages
         */
         function create(content) {
-            return $http.post('/api/v1/garages/', {
+            return $http.post('/api/garages/', {
                 content: content
             });
         }
@@ -58,7 +58,7 @@
          * @memberOf thinkster.garages.services.Garages
          */
         function get(badgeID) {
-            return $http.get('/api/v1/accounts/' + badgeID + '/garages/');
+            return $http.get('/api/' + badgeID + '/garages/');
         }
     }
 })();

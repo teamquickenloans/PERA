@@ -6,7 +6,8 @@
         'pera.config',
         //'pera.routes',
         //'pera.teamMembers',
-        'pera.garages'
+        'pera.garages',
+        'pera.utils'
       ]);
     
     angular
