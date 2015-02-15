@@ -175,18 +175,35 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\GaragesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
-    <Compile Include="Controllers\TeamMemberController.cs" />
-    <Compile Include="DAL\ParkingContext.cs" />
-    <Compile Include="DAL\ParkingInitializer.cs" />
+    <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502121907418_Initial.cs" />
+    <Compile Include="Migrations\201502121907418_Initial.Designer.cs">
+      <DependentUpon>201502121907418_Initial.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502121923030_Initial1.cs" />
+    <Compile Include="Migrations\201502121923030_Initial1.Designer.cs">
+      <DependentUpon>201502121923030_Initial1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502121933374_Initial2.cs" />
+    <Compile Include="Migrations\201502121933374_Initial2.Designer.cs">
+      <DependentUpon>201502121933374_Initial2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502121936277_Initial3.cs" />
+    <Compile Include="Migrations\201502121936277_Initial3.Designer.cs">
+      <DependentUpon>201502121936277_Initial3.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BadgeScan.cs" />
     <Compile Include="Models\CarpoolGroup.cs" />
     <Compile Include="Models\GarageManager.cs" />
+    <Compile Include="DAL\PERAContext.cs" />
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\Garage.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -267,6 +284,20 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201502121907418_Initial.resx">
+      <DependentUpon>201502121907418_Initial.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502121923030_Initial1.resx">
+      <DependentUpon>201502121923030_Initial1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502121933374_Initial2.resx">
+      <DependentUpon>201502121933374_Initial2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201502121936277_Initial3.resx">
+      <DependentUpon>201502121936277_Initial3.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

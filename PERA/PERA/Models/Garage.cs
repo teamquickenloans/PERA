@@ -22,7 +22,8 @@ namespace PERA.Models
         public int GarageID { get; set; } // pk
         public string Name { get; set; }
         public string Address { get; set; }
-        public GeoCoordinate LatitudeLongitude { get; set;}
+        public double Latitude { get; set; }
+        public double Longitude { get; set;}
         public int WholeGarageCapacity { get; set; }
         public int NumberOfLeasedSpaces { get; set; }
         public int NumberOfTeamMemberSpaces { get; set; }
@@ -34,7 +35,7 @@ namespace PERA.Models
         public string BillingParty { get; set; }
         public ReportType ReportType { get; set; }
         public AccessToken AccessToken { get; set; }
-        public int AccessTokenCost { get; set; }
+        public double AccessTokenCost { get; set; }
         public double ChangeCost { get; set; }
         public int NumberOfValidations { get; set; }
         public int GarageManagerID { get; set; }
