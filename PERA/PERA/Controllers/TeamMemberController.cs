@@ -1,3 +1,4 @@
+
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,6 +7,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Http.Description;
 using PERA.DAL;
 using PERA.Models;
 
@@ -15,12 +17,16 @@ namespace PERA.Controllers
     {
         private ParkingContext db = new ParkingContext();
 
+
+
+
         // GET: TeamMember
         public ActionResult Index()
         {
             var teamMembers = db.TeamMembers.Include(t => t.Garage);
             return View(teamMembers.ToList());
         }//test
+
 
         // GET: TeamMember/Details/5
         public ActionResult Details(int? id)
@@ -51,20 +57,11 @@ namespace PERA.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "BadgeID,FirstName,LastName,CommonID,GarageID,EmploymentStatus,TerminationDate,ParkingStatus,EnrollmentDate")] TeamMember teamMember)
         {
-            try
+            if (ModelState.IsValid)
             {
-
-                if (ModelState.IsValid)
-                {
-                    db.TeamMembers.Add(teamMember);
-                    db.SaveChanges();
-                    return RedirectToAction("Index");
-                }
-            }
-            catch (DataException /* dex */)
-            {
-                //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                db.TeamMembers.Add(teamMember);
+                db.SaveChanges();
+                return RedirectToAction("Index");
             }
 
             ViewBag.GarageID = new SelectList(db.Garages, "GarageID", "Name", teamMember.GarageID);
@@ -134,9 +131,10 @@ namespace PERA.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                this.db.Dispose();
             }
             base.Dispose(disposing);
         }
     }
 }
+
