@@ -3,7 +3,7 @@ namespace PERA.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class InitialCreate : DbMigration
+    public partial class intial : DbMigration
     {
         public override void Up()
         {
@@ -12,11 +12,8 @@ namespace PERA.Migrations
                 c => new
                     {
                         ID = c.Int(nullable: false, identity: true),
-                        FirstName = c.String(),
-                        LastName = c.String(),
-                        Email = c.String(),
-                        PhoneNumber = c.Int(nullable: false),
-                        ManagementCompany = c.String(),
+                        PhoneNumber = c.Int(),
+                        CompanyName = c.String(),
                     })
                 .PrimaryKey(t => t.ID);
             
@@ -29,24 +26,25 @@ namespace PERA.Migrations
                         Address = c.String(),
                         Latitude = c.Double(nullable: false),
                         Longitude = c.Double(nullable: false),
-                        WholeGarageCapacity = c.Int(nullable: false),
+                        Capacity = c.Int(nullable: false),
                         NumberOfLeasedSpaces = c.Int(nullable: false),
                         NumberOfTeamMemberSpaces = c.Int(nullable: false),
-                        MinimumNumberOfTransientSpaces = c.Int(nullable: false),
+                        MinimumNumberOfTransientSpaces = c.Int(),
                         SpaceCost = c.Double(nullable: false),
-                        ValidationCost = c.Double(nullable: false),
-                        TransientSalePrice = c.Double(nullable: false),
+                        TransientSalePrice = c.Double(),
                         Owner = c.String(),
                         BillingParty = c.String(),
                         ReportType = c.Int(nullable: false),
                         AccessToken = c.Int(nullable: false),
+                        AccessTokenOptional = c.Int(),
                         AccessTokenCost = c.Double(nullable: false),
                         ChangeCost = c.Double(nullable: false),
-                        NumberOfValidations = c.Int(nullable: false),
-                        GarageManagerID = c.Int(nullable: false),
+                        ValidationCost = c.Double(),
+                        NumberOfValidations = c.Int(),
+                        GarageManagerID = c.Int(),
                     })
                 .PrimaryKey(t => t.GarageID)
-                .ForeignKey("dbo.GarageManagers", t => t.GarageManagerID, cascadeDelete: true)
+                .ForeignKey("dbo.GarageManagers", t => t.GarageManagerID)
                 .Index(t => t.GarageManagerID);
             
             CreateTable(
