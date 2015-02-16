@@ -223,6 +223,7 @@
     <EmbeddedResource Include="Migrations\201502161730374_intial.resx">
       <DependentUpon>201502161730374_intial.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="DAL\garages2.csv" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />

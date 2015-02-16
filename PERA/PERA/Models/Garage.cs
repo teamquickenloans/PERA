@@ -1,4 +1,5 @@
-﻿using PERA.Models;
+﻿using Newtonsoft.Json;
+using PERA.Models;
 using System;
 using System.Collections.Generic;
 using System.Device.Location;
@@ -41,7 +42,7 @@ namespace PERA.Models
         public double? ValidationCost { get; set; }
         public int? NumberOfValidations { get; set; }
         public int? GarageManagerID { get; set; }
-
+        [JsonIgnore]
         public virtual GarageManager GarageManager { get; set; }
 	}
 }

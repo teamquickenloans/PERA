@@ -1,20 +1,20 @@
-GarageID,Name,Address,Owner,GarageManagerID,Capacity,NumberOfLeasedSpaces,NumberOfTeamMemberSpaces,SpaceCost,ChangeCost,AccessTokenCost,Billing Party,Cost Per Validation,AccessToken,AccessTokenOptional
-1,Compuware Garage (One Campus Martius),"1188 Farmer St, Detroit MI 48226",Bedrock,1,"3,085","1,825","1,657",175.00,0,50.00,UPM,10.00,B,P
-2,Premier,"1206 Woodward Ave, Detroit MI 48226",City of Detroit,7,"1,195",925,899,75.00,20,N/A,City of Detroit,5.00,B,N/A
-3,1001 Woodward,"1001 Woodward Ave, Detroit MI 48226",Bedrock,1,732,226,226,135.00,0,N/A,UPM,10.00,B,H
-4,Book Cadillac,"150 Michigan Ave, Detroit MI 48226",Book Cadillac,2,0,18,18,130.00,0,30.00,UPM,N/A,G,N/A
-5,1 Detroit,"200 Larned St, Detroit MI 48226",One Detroit Center,3,"2,070",491,485,135.00,0,50.00,UPM,N/A,B,H
-6,2 Detroit,"160 E Congress St, Detroit MI 48226",Bedrock,1,"1,100","1,171","1,165",135.00,0,N/A,UPM,10.00,B,N/A
-7,COBO Congress,"467 W Congress St, Detroit MI 48226",COBO,4,300,200,197,95.00,0,N/A,Bedrock,N/A,B,N/A
-8,COBO Rooftop,"625 W Congress St, Detroit MI 48226",COBO,4,"1,200",500,475,95.00,0,N/A,Bedrock,N/A,B,N/A
-9,COBO Washington,"475 Washington Ave, Detroit MI 48226",COBO,4,300,200,197,95.00,0,N/A,Bedrock,N/A,B,N/A
-10,Detroit Opera House,"1426 Broadway St, Detroit MI 48226",Detroit Opera House,1,800,1,1,65.75,0,N/A,N/A,N/A,B,N/A
-11,Financial District (FDG/DIME),"730 Shelby St, Detroit MI 48226",Bedrock,1,934,506,489,135.00,0,N/A,UPM,10.00,B,N/A
-12,AT&T Lot,"421 Bagley St, Detroit MI 48226",Conkey,5,159,159,152,115.00,0,N/A,Bedrock,N/A,B,N/A
-13,Brush St / Greektown,"1001 Brush St, Detroit MI 48226",Bedrock,1,"1,100",625,524,175.00,0,N/A,UPM,N/A,B,N/A
-14,Fort St / Greektown,"419 E Fort St, Detroit MI 48226",Bedrock,1,687,365,324,175.00,0,N/A,UPM,N/A,B,N/A
-15,First National Garage (FNG),"660 Woodward Ave, Detroit MI 48226",Bedrock,1,424,100,100,105.00,0,50.00,UPM,10.00,B,P
-16,The Z,"1234 Library St, Detroit MI 48226",Bedrock,1,"1,287","1,450","1,394",175.00,0,N/A,UPM,10.00,B,N/A
-17,Howard Lot A,"1240 Abbot St, Detroit MI 48226",1200 Sixth St. LLC,6,335,335,306,75.00,0,N/A,Bedrock,N/A,B,N/A
-18,Howard Lot B,"1300 Abbot St, Detroit MI 48226",1200 Sixth St. LLC,6,250,250,214,75.00,0,N/A,Bedrock,N/A,B,N/A
-19,Howard Lot C,"1100 Brooklyn St, Detroit MI 48226",1200 Sixth St. LLC,6,200,200,0,85.00,0,N/A,Bedrock,N/A,B,N/A
+"GarageID","Name","Address","Owner","GarageManagerID","Capacity","NumberOfLeasedSpaces","NumberOfTeamMemberSpaces","SpaceCost","ChangeCost","AccessTokenCost","BillingParty","CostPerValidation"
+"1","Compuware Garage (One Campus Martius)","1188 Farmer St Detroit MI 48226","Bedrock","1","3085","1825","1657","175","0","50","UPM","10"
+"2","Premier","1206 Woodward Ave Detroit MI 48226","City of Detroit","7","1195","925","899","75","20","0","City of Detroit","5"
+"3","1001 Woodward","1001 Woodward Ave Detroit MI 48226","Bedrock","1","732","226","226","135","0","0","UPM","10"
+"4","Book Cadillac","150 Michigan Ave Detroit MI 48226","Book Cadillac","2","0","18","18","130","0","30","UPM","0"
+"5","1 Detroit","200 Larned St Detroit MI 48226","One Detroit Center","3","2070","491","485","135","0","50","UPM","0"
+"6","2 Detroit","160 E Congress St Detroit MI 48226","Bedrock","1","1100","1171","1165","135","0","0","N/A","10"
+"7","COBO Congress","467 W Congress St Detroit MI 48226","COBO","4","300","200","197","95","0","0","Bedrock","0"
+"8","COBO Rooftop","625 W Congress St Detroit MI 48226","COBO","4","1200","500","475","95","0","0","Bedrock","0"
+"9","COBO Washington","475 Washington Ave Detroit MI 48226","COBO","4","300","200","197","95","0","0","Bedrock","0"
+"10","Detroit Opera House","1426 Broadway St Detroit MI 48226","Detroit Opera House","1","800","1","1","65.75","0","0","N/A","0"
+"11","Financial District (FDG/DIME)","730 Shelby St Detroit MI 48226","Bedrock","1","934","506","489","135","0","0","UPM","10"
+"12","AT&T Lot","421 Bagley St Detroit MI 48226","Conkey","5","159","159","152","115","0","0","Bedrock","0"
+"13","Brush St / Greektown","1001 Brush St Detroit MI 48226","Bedrock","1","1100","625","524","175","0","0","UPM","0"
+"14","Fort St / Greektown","419 E Fort St Detroit MI 48226","Bedrock","1","687","365","324","175","0","0","UPM","0"
+"15","First National Garage (FNG)","660 Woodward Ave Detroit MI 48226","Bedrock","1","424","100","100","105","0","50","UPM","10"
+"16","The Z","1234 Library St Detroit MI 48226","Bedrock","1","1287","1450","1394","175","0","0","UPM","10"
+"17","Howard Lot A","1240 Abbot St Detroit MI 48226","1200 Sixth St. LLC","6","335","335","306","75","0","0","Bedrock","0"
+"18","Howard Lot B","1300 Abbot St Detroit MI 48226","1200 Sixth St. LLC","6","250","250","214","75","0","0","Bedrock","0"
+"19","Howard Lot C","1100 Brooklyn St Detroit MI 48226","1200 Sixth St. LLC","6","200","200","0","85","0","0","Bedrock","0"

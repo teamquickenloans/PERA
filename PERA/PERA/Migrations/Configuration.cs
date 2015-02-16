@@ -23,7 +23,7 @@ namespace PERA.Migrations
         protected override void Seed(PERA.Models.PERAContext context)
         {
 
-
+           context.Configuration.LazyLoadingEnabled = false;
            context.GarageManagers.AddOrUpdate(x => x.ID,
             new GarageManager { ID = 1, CompanyName = "Ultimate Parking Management" },
             new GarageManager { ID = 2, CompanyName = "Park-Rite" },
@@ -36,9 +36,12 @@ namespace PERA.Migrations
             );
 
             Assembly assembly = Assembly.GetExecutingAssembly();
-            string resourceName = "SeedingDataFromCSV.DAL.garages.csv";
+            string resourceName = "PERA.DAL.garages.csv";
+
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             {
+                Console.Write("in here");
+                Console.Write(stream);
                 using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
                 {
                     CsvReader csvReader = new CsvReader(reader);
@@ -48,9 +51,7 @@ namespace PERA.Migrations
                 }
             }
  
-
-            //Garage garage = JsonConvert.DeserializeObject<List<Garage>>(lines);
-            /*
+    
             context.TeamMembers.AddOrUpdate(x => x.BadgeID,
                 new TeamMember () {BadgeID=4041,FirstName = "Carson", LastName="Alexander",EnrollmentDate=DateTime.Parse("2005-09-01"), CommonID=423535, EmploymentStatus=null,TerminationDate=DateTime.Parse("2005-09-01")},
                 new TeamMember () {BadgeID=4042,FirstName = "Meredith", LastName="Alonso",EnrollmentDate=DateTime.Parse("2002-09-01"), CommonID=423536, EmploymentStatus=null,TerminationDate=DateTime.Parse("2005-09-01")},
@@ -61,7 +62,6 @@ namespace PERA.Migrations
                 new TeamMember () {BadgeID=4047,FirstName = "Laura",LastName="Norman", EnrollmentDate=DateTime.Parse("2003-09-01"), CommonID=423541, EmploymentStatus=null,TerminationDate=DateTime.Parse("2005-09-01")},
                 new TeamMember () {BadgeID=4048,FirstName = "Nino",LastName="Olivetto", EnrollmentDate=DateTime.Parse("2005-09-01"), CommonID=423542, EmploymentStatus=null,TerminationDate=DateTime.Parse("2005-09-01")}
             );
-            */
 
             /*
             context.Garages.AddOrUpdate(x => x.GarageID,
