@@ -7,13 +7,13 @@ namespace PERA.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
-    public sealed partial class Initial1 : IMigrationMetadata
+    public sealed partial class NewStuff : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(Initial1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(NewStuff));
         
         string IMigrationMetadata.Id
         {
-            get { return "201502121923030_Initial1"; }
+            get { return "201502160031340_NewStuff"; }
         }
         
         string IMigrationMetadata.Source

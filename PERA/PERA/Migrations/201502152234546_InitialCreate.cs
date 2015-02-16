@@ -3,7 +3,7 @@ namespace PERA.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {
@@ -27,13 +27,8 @@ namespace PERA.Migrations
                         GarageID = c.Int(nullable: false, identity: true),
                         Name = c.String(),
                         Address = c.String(),
-                        LatitudeLongitude_Latitude = c.Double(nullable: false),
-                        LatitudeLongitude_Longitude = c.Double(nullable: false),
-                        LatitudeLongitude_Altitude = c.Double(nullable: false),
-                        LatitudeLongitude_HorizontalAccuracy = c.Double(nullable: false),
-                        LatitudeLongitude_VerticalAccuracy = c.Double(nullable: false),
-                        LatitudeLongitude_Speed = c.Double(nullable: false),
-                        LatitudeLongitude_Course = c.Double(nullable: false),
+                        Latitude = c.Double(nullable: false),
+                        Longitude = c.Double(nullable: false),
                         WholeGarageCapacity = c.Int(nullable: false),
                         NumberOfLeasedSpaces = c.Int(nullable: false),
                         NumberOfTeamMemberSpaces = c.Int(nullable: false),
@@ -45,7 +40,7 @@ namespace PERA.Migrations
                         BillingParty = c.String(),
                         ReportType = c.Int(nullable: false),
                         AccessToken = c.Int(nullable: false),
-                        AccessTokenCost = c.Int(nullable: false),
+                        AccessTokenCost = c.Double(nullable: false),
                         ChangeCost = c.Double(nullable: false),
                         NumberOfValidations = c.Int(nullable: false),
                         GarageManagerID = c.Int(nullable: false),

@@ -17,6 +17,7 @@ namespace PERA.Models
     
         public PERAContext() : base("name=PERAContext")
         {
+           
         }
 
         public System.Data.Entity.DbSet<PERA.Models.TeamMember> TeamMembers { get; set; }
