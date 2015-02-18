@@ -59,16 +59,16 @@
                 });
 
                 if (this.garages[i].load == 'low') {
-                    marker.setIcon('parking_logo_green.png'); //TODO: Fix click zone
+                    marker.setIcon('~/Content/Images/parking_logo_green.png'); //TODO: Fix click zone
                 }
                 else if (this.garages[i].load == 'medium') {
-                    marker.setIcon('parking_logo_yellow.png');
+                    marker.setIcon('~/Content/Images/parking_logo_yellow.png');
                 }
                 else if (this.garages[i].load == 'high') {
-                    marker.setIcon('parking_logo_red.png');
+                    marker.setIcon('~/Content/Images/parking_logo_red.png');
                 }
                 else if (this.garages[i].load == 'full') {
-                    marker.setIcon('parking_logo_black.png');
+                    marker.setIcon('~/Content/Images/parking_logo_black.png');
                 }
 
                 this.garageMarkers.push(marker);

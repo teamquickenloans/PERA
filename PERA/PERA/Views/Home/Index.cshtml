@@ -52,8 +52,35 @@
             margin: 10px;
         }
 
-        div.specif.issueRow {
-            background-color: blue;
+        #expenseContent {
+            height: 100%;
+        }
+
+        #expenseMain {
+            height: 100%;
+        }
+
+        .tableHeader {
+            font-weight: bold;
+            font-size: 1.1em;
+            height: 1.65em;
+            background-color: #5ac;
+            padding-right: 15px;
+        }
+
+        #issueTable {
+            height: 60%;
+            overflow: auto;
+        }
+
+        .issueRow {
+            margin-top: 1px;
+            height: 1.65em;
+            background-color: #aaa;
+        }
+
+        .selected {
+            background-color: #6c8;
         }
 
         .left {
@@ -130,8 +157,8 @@
         <!-- ======================== Expense Reconciliation Content ============================ -->
         <div id="expenseContent" class="row" ng-controller="ExpRecController as erc" ng-show="tab.isSet(1)">
 
-            <div id="howdy" class="columns small-10">
-                <div class="row">
+            <div id="expenseMain" class="columns small-8">
+                <div class="row" style="background-color:blue">
                     from the faun forever gone
                     in the towers of your honeycomb
                     I’d a tore your hair out just to climb back darling
@@ -139,9 +166,18 @@
                     can you tell that itʼs just ceremon’
                     now you’ve added up to what you’re from
                 </div>
-                <div class="row" ng-controller="TabController as tab">
+
+                <div class="row tableHeader">
+                    <div class="left">Garages</div>
+                    <div class="center">Issue</div>
+                    <div class="right">Date</div>
+                </div>
+
+                <div class="row" id="issueTable" ng-controller="TabController as tab" ng-init="tab.setTab(-1)">
+                    <!-- ng-init so an issue doesn't start selected -->
+
                     <div ng-repeat="issue in erc.issues">
-                        <div class="issueRow" ng-class="{highlight:tab.isSet($index)}" ng-click="tab.setTab($index)">
+                        <div class="issueRow" ng-class="{selected:tab.isSet($index)}" ng-click="tab.setTab($index)">
                             <div class="left">{{issue.garage}}</div>
                             <div class="center">{{issue.issue}}</div>
                             <div class="right">{{issue.date | date:'MM/dd/yyyy'}}</div>
@@ -149,7 +185,7 @@
                     </div>
                 </div>
             </div>
-            <div id="ho" class="columns small-2">
+            <div id="ho" class="columns small-4">
 
             </div>
 
