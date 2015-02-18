@@ -191,6 +191,14 @@
     <Compile Include="Migrations\201502161730374_intial.Designer.cs">
       <DependentUpon>201502161730374_intial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502181537170_update.cs" />
+    <Compile Include="Migrations\201502181537170_update.Designer.cs">
+      <DependentUpon>201502181537170_update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201502181654288_updateTeamMembers.cs" />
+    <Compile Include="Migrations\201502181654288_updateTeamMembers.Designer.cs">
+      <DependentUpon>201502181654288_updateTeamMembers.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -224,6 +232,10 @@
     <Content Include="Scripts\Angular\utils\utils.module.js" />
     <Content Include="Scripts\js\bootstrap.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
+    <EmbeddedResource Include="DAL\garages.csv" />
+    <EmbeddedResource Include="Migrations\201502181654288_updateTeamMembers.resx">
+      <DependentUpon>201502181654288_updateTeamMembers.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Angular\pera.js" />
     <Content Include="Scripts\Angular\garages\garages.module.js" />
@@ -239,7 +251,9 @@
     <Content Include="Scripts\js\respond.min.js" />
     <Content Include="Scripts\js\_references.js" />
     <Content Include="Views\Javascripts.html" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -283,6 +297,7 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\css\" />
+    <Folder Include="Views\GarageMap\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
@@ -290,6 +305,11 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201502181537170_update.resx">
+      <DependentUpon>201502181537170_update.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -17,6 +17,7 @@ namespace PERA.Models
     
         public PERAContext() : base("name=PERAContext")
         {
+            this.Database.Log = s => System.Diagnostics.Debug.WriteLine(s);
 
         }
 

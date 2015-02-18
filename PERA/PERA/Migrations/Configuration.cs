@@ -40,8 +40,6 @@ namespace PERA.Migrations
 
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             {
-                Console.Write("in here");
-                Console.Write(stream);
                 using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
                 {
                     CsvReader csvReader = new CsvReader(reader);
