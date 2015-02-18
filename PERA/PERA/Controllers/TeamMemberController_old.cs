@@ -15,14 +15,7 @@ namespace PERA.Controllers
 {
     public class TeamMemberController : Controller
     {
-<<<<<<< HEAD:PERA/PERA/Controllers/TeamMemberController.cs
         private ParkingContext db = new ParkingContext();
-
-
-
-=======
-        //private ParkingContext db = new ParkingContext();
->>>>>>> origin/webapi:PERA/PERA/Controllers/TeamMemberController_old.cs
 
         // GET: TeamMember
         public ActionResult Index()
@@ -55,7 +48,7 @@ namespace PERA.Controllers
         }
 
         // POST: TeamMember/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -89,7 +82,7 @@ namespace PERA.Controllers
         }
 
         // POST: TeamMember/Edit/5
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
+        // To protect from overposting attacks, please enable the specific properties you want to bind to, for
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
