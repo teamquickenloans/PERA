@@ -156,8 +156,6 @@
 
         <!-- ======================== Expense Reconciliation Content ============================ -->
         <div id="expenseContent" class="row" ng-controller="ExpRecController as erc" ng-show="tab.isSet(1)">
-
-            <div id="expenseMain" class="columns small-8">
                 <div class="row" style="background-color:blue">
                     from the faun forever gone
                     in the towers of your honeycomb
@@ -166,25 +164,20 @@
                     can you tell that itʼs just ceremon’
                     now you’ve added up to what you’re from
                 </div>
+                <table class="TabController as tabCtrl">
+                    <tr>
+                        <th>Garages</th>
+                        <th>Issue</th>
+                        <th>Date</th>
+                    </tr>
+                    <tr ng-repeat="issue in erc.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)" ng-init="tabCtrl.setTab(-1)">
+                        <!---->
+                        <td>{{issue.garage}}</td>
+                        <td>{{issue.issue}}</td>
+                        <td>{{issue.date | date:'MM/dd/yyyy'}}</td>
+                    </tr>
+                </table>
 
-                <div class="row tableHeader">
-                    <div class="left">Garages</div>
-                    <div class="center">Issue</div>
-                    <div class="right">Date</div>
-                </div>
-
-                <div class="row" id="issueTable" ng-controller="TabController as tab" ng-init="tab.setTab(-1)">
-                    <!-- ng-init so an issue doesn't start selected -->
-
-                    <div ng-repeat="issue in erc.issues">
-                        <div class="issueRow" ng-class="{selected:tab.isSet($index)}" ng-click="tab.setTab($index)">
-                            <div class="left">{{issue.garage}}</div>
-                            <div class="center">{{issue.issue}}</div>
-                            <div class="right">{{issue.date | date:'MM/dd/yyyy'}}</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
             <div id="ho" class="columns small-4">
 
             </div>
