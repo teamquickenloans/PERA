@@ -9,25 +9,21 @@
       .module('pera.dashboard.controllers')
       .controller('MapController', MapController);
 
-    MapController.$inject = ['$scope','Garages'];
+    MapController.$inject = ['$scope','Garages', 'Snackbar'];
 
     /**
     * @namespace MapController
     */
-    function MapController(Garages, $controller){
-        this.map;
-        this.garages = [];
-        this.garageMarkers = [];
-        this.initialized = false; //tracks if the maps has already been initialized
-        
-
+    function MapController($scope, Garages, Snackbar) {
         var vm = this;
+        vm.map;
+        vm.garages = [];
+        vm.garageMarkers = [];
+        vm.initialized = false; //tracks if the maps has already been initialized
         vm.garages = []; //the list of garages to be returned
-
 
         //initialize the map
         this.initialize = initialize;
-
 
           function initialize() {
               var styleArray = [
@@ -61,7 +57,7 @@
                   zoom: 16,
                   styles: styleArray,
                   panControl: false,
-                  zoomControl: false,
+                  zoomControl: true,
                   mapTypeControl: true,
                   scaleControl: false,
                   streetViewControl: false,
@@ -70,11 +66,20 @@
 
               this.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-              PlaceMarkers(this.map, this.garages, this.garageMarkers);
               Garages.all().then(garagesSuccessFn, garagesErrorFn);
 
               this.initialized = true;
           } //end intialize() function
+
+
+          function garagesSuccessFn(data, status, headers, config) {
+              vm.garages = data.data;         //this will depend on what the API returns, it may have to change
+              PlaceMarkers(vm.map, vm.garages, vm.garageMarkers);
+          }
+
+          function garagesErrorFn(data, status, headers, config) {
+              Snackbar.error(data.data.error);
+          }
 
           function PlaceMarkers(map, garages, garageMarkers) {
               for (var i = 0; i < garages.length; i++) {
@@ -83,29 +88,22 @@
                       position: new google.maps.LatLng(garages[i].latitude, garages[i].longitude),
                   });
 
-                  if (garages[i].load == 'low') {
+                  var load = parseFloat(garages[i].numberOfLeasedSpaces) - parseFloat(garages[i].numberOfTeamMemberSpaces);
+                  if (100 < load) {
                       marker.setIcon('../../Content/Images/parking_logo_green.png'); //TODO: Fix click zone
                   }
-                  else if (garages[i].load == 'medium') {
+                  else if ( 50 < load && load < 100) {
+                      console.log(load);
                       marker.setIcon('../../Content/Images/parking_logo_yellow.png');
                   }
-                  else if (garages[i].load == 'high') {
+                  else if (load < 50 && load > 0) {
                       marker.setIcon('../../Content/Images/parking_logo_red.png');
                   }
-                  else if (garages[i].load == 'full') {
+                  else if (load == 0) {
                       marker.setIcon('../../Content/Images/parking_logo_black.png');
                   }
                   garageMarkers.push(marker);
               }
-
-              function garagesSuccessFn(data, status, headers, config) {
-                  vm.garages = data.data;         //this will depend on what the API returns, it may have to change
-              }
-
-              function garagesErrorFn(data, status, headers, config) {
-                  Snackbar.error(data.data.error);
-              }
-
           }
       }
 
