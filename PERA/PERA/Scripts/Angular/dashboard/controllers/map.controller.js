@@ -19,9 +19,15 @@
         this.garages = [];
         this.garageMarkers = [];
         this.initialized = false; //tracks if the maps has already been initialized
+        
 
-          //initialize the map
-          this.initialize = initialize;
+        var vm = this;
+        vm.garages = []; //the list of garages to be returned
+
+
+        //initialize the map
+        this.initialize = initialize;
+
 
           function initialize() {
               var styleArray = [
@@ -65,6 +71,7 @@
               this.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
               PlaceMarkers(this.map, this.garages, this.garageMarkers);
+              Garages.all().then(garagesSuccessFn, garagesErrorFn);
 
               this.initialized = true;
           } //end intialize() function
@@ -90,6 +97,15 @@
                   }
                   garageMarkers.push(marker);
               }
+
+              function garagesSuccessFn(data, status, headers, config) {
+                  vm.garages = data.data;         //this will depend on what the API returns, it may have to change
+              }
+
+              function garagesErrorFn(data, status, headers, config) {
+                  Snackbar.error(data.data.error);
+              }
+
           }
       }
 

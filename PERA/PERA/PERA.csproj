@@ -234,7 +234,7 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\Angular\dashboard\controllers\expense.controller.js" />
     <Content Include="Scripts\Angular\dashboard\controllers\map.controller.js" />
-    <Content Include="Scripts\Angular\dashboard.module.js" />
+    <Content Include="Scripts\Angular\dashboard\dashboard.module.js" />
     <Content Include="Scripts\Angular\garages\controllers\garages.controller.js" />
     <Content Include="Scripts\Angular\pera.config.js" />
     <Content Include="Scripts\Angular\garages\services\garages.service.js" />
