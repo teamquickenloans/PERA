@@ -21,8 +21,8 @@ namespace PERA.Models
         public int? NumberOfValidations { get; set; }
         public Format? Format { get; set; }
 
-        public virtual ICollection<TeamMember> TeamMembers { get; set; }
-        public virtual Garage Garage { get; set; }
+        public ICollection<TeamMember> TeamMembers { get; set; }
+        public Garage Garage { get; set; }
 
         public Invoice()
         {
