@@ -7,12 +7,14 @@
         //'pera.routes',
         //'pera.teamMembers',
         'pera.garages',
-        'pera.utils'
+        'pera.utils',
+        'pera.dashboard',
+        'pera.tabs'
       ]);
     
-    angular
-      .module('thinkster.routes', ['ngRoute']);
+    //angular
+    //  .module('pera.routes', ['ngRoute']);
 
     angular
-      .module('thinkster.config', []);
+      .module('pera.config',[]);
 })();

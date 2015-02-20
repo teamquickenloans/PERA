@@ -1,5 +1,5 @@
 ﻿<!DOCTYPE html>
-<html ng-app="parkingDashboard">
+<html ng-app="pera">
 <head>
 
     <meta charset="UTF-8">
@@ -10,9 +10,10 @@
 
     <!-- ====================== AngularJS ============================== -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-route.js"></script>
 
     <!-- ====================== Foundation ============================ -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/css/foundation.min.css">
+    <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/css/foundation.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/js/foundation.min.js"></script>
 
     <!-- ====================== Google Maps API ============================ -->
@@ -20,94 +21,42 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM">
     </script>
 
-    <!-- ====================== app.js ======================== -->
-    <script src="~/Scripts/Angular/app.js"></script>
+    <!-- =======================Underscore.js =============================== -->
+    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+
+    <!-- ====================== Snackbar.js ============================ -->
+    <script type="text/javascript" src="~/Scripts/js/snackbar.min.js"></script>
+    <link href="~/Scripts/css/snackbar.min.css" rel="stylesheet" />
+    <link href="~/Scripts/css/material.css" rel="stylesheet" />
+
+    <!-- ====================== Angular ======================== -->
+
+
+
+
+    <script type="text/javascript" src="~/Scripts/Angular/pera.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/dashboard.module.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/dashboard/controllers/expense.controller.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/dashboard/controllers/map.controller.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/tabs/tabs.module.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/tabs/controllers/tab.controller.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/pera.config.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/garages/garages.module.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/garages/services/garages.service.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/garages/controllers/garages.controller.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/Angular/utils/utils.module.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/utils/services/snackbar.service.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/tabs/tabs.module.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/tabs/controllers/tab.controller.js"></script>
 
     <!-- ====================== CSS ================================= -->
-    <style type="text/css">
-        html, body, #wrapper, #parkingContent {
-            height: 100%;
-            padding: 0;
-            margin: 0;
-        }
-
-        body {
-            background-color: #CCC;
-        }
-
-        #map-canvas {
-            height: 100%;
-        }
-
-        #sideBar {
-            height: 100%;
-            overflow: auto;
-        }
-
-        .row {
-            max-width: 100%;
-        }
-
-        #sideBarContent {
-            margin: 10px;
-        }
-
-        #expenseContent {
-            height: 100%;
-        }
-
-        #expenseMain {
-            height: 100%;
-        }
-
-        .tableHeader {
-            font-weight: bold;
-            font-size: 1.1em;
-            height: 1.65em;
-            background-color: #5ac;
-            padding-right: 15px;
-        }
-
-        #issueTable {
-            height: 60%;
-            overflow: auto;
-        }
-
-        .issueRow {
-            margin-top: 1px;
-            height: 1.65em;
-            background-color: #aaa;
-        }
-
-        .selected {
-            background-color: #6c8;
-        }
-
-        .left {
-            width: 30%;
-            float: left;
-            text-align: left;
-            margin-left: 5%;
-        }
-
-        .center {
-            width: 30%;
-            float: left;
-            text-align: center;
-        }
-
-        .right {
-            width: 30%;
-            float: left;
-            text-align: right;
-            margin-right: 5%;
-        }
-    </style>
+    <link rel="stylesheet" href="~/Scripts/css/site.css" />
 
 </head>
 
 
-<body ng-controller="MapController as map">
+<body>
 
     <div id="wrapper" ng-controller="TabController as tab">
 
@@ -127,21 +76,24 @@
                     </li>
                     <li id="SingGarNav" ng-class="{active:!tab.sideIsSet(0)}" class="has-dropdown">
                         <a href>Single Garage</a>
-                        <ul id="dropdownTopBar" class="dropdown">
-                            <div ng-repeat="garage in map.garages">
-                                <li><a href ng-click="tab.setSideTab(1)">{{garage.name}}</a></li> <!-- TODO: ng-click event no worky -->
+                        <ul id="dropdownTopBar" class="dropdown" ng-controller="MapController as map">
+                            <div ng-controller="GaragesController as garageCtrl">
+                                <div ng-repeat="garage in garageCtrl.garages">
+                                    <li><a href ng-click="tab.setSideTab(1);console.log(garage.name)">{{garage.name}}</a></li> <!-- TODO: ng-click event no worky -->
+                                </div>
                             </div>
                         </ul>
+
                     </li>
                 </ul>
 
                 <!-- Left Nav Section -->
-                <ul class="left">
+                <ul class="left" ng-controller="MapController as map">
                     <li ng-class="{active:tab.isSet(1)}">
                         <a href ng-click="tab.setTab(1)">Expense Reconcilliation</a>
                     </li>
                     <li ng-class="{active:tab.isSet(2)}">
-                        <a href ng-click="tab.setTab(2); map.initialized || map.initialize();">Parking Allocation</a>
+                        <a href ng-click="tab.setTab(2); map.initialized || map.initialize();">Garage Map</a>
                     </li>
                     <li ng-class="{active:tab.isSet(3)}">
                         <a href ng-click="tab.setTab(3)">Notifications</a>
@@ -155,8 +107,8 @@
 
 
         <!-- ======================== Expense Reconciliation Content ============================ -->
-        <div id="expenseContent" class="row" ng-controller="ExpRecController as erc" ng-show="tab.isSet(1)">
-                <div class="row" style="background-color:blue">
+        <div id="expenseContent" class="row" ng-controller="ExpenseController as expenseCtrl" ng-show="tab.isSet(1)">
+                <div class="row" style="background-color:lightblue">
                     from the faun forever gone
                     in the towers of your honeycomb
                     I’d a tore your hair out just to climb back darling
@@ -164,19 +116,18 @@
                     can you tell that itʼs just ceremon’
                     now you’ve added up to what you’re from
                 </div>
-                <table class="TabController as tabCtrl">
-                    <tr>
-                        <th>Garages</th>
-                        <th>Issue</th>
-                        <th>Date</th>
-                    </tr>
-                    <tr ng-repeat="issue in erc.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)" ng-init="tabCtrl.setTab(-1)">
-                        <!---->
-                        <td>{{issue.garage}}</td>
-                        <td>{{issue.issue}}</td>
-                        <td>{{issue.date | date:'MM/dd/yyyy'}}</td>
-                    </tr>
-                </table>
+            <table class="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+                <tr>
+                    <th>Garages</th>
+                    <th>Issue</th>
+                    <th>Date</th>
+                </tr>
+                <tr ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                    <td>{{issue.garage}}</td>
+                    <td>{{issue.issue}}</td>
+                    <td>{{issue.date | date:'MM/dd/yyyy'}}</td>
+                </tr>
+            </table>
 
             <div id="ho" class="columns small-4">
 

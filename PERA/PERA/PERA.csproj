@@ -197,6 +197,10 @@
     <Compile Include="Migrations\201502181654288_updateTeamMembers.Designer.cs">
       <DependentUpon>201502181654288_updateTeamMembers.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201502200151507_new.cs" />
+    <Compile Include="Migrations\201502200151507_new.Designer.cs">
+      <DependentUpon>201502200151507_new.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -228,21 +232,31 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
-    <Content Include="Scripts\Angular\app.js" />
+    <Content Include="Scripts\Angular\dashboard\controllers\expense.controller.js" />
+    <Content Include="Scripts\Angular\dashboard\controllers\map.controller.js" />
+    <Content Include="Scripts\Angular\dashboard.module.js" />
     <Content Include="Scripts\Angular\garages\controllers\garages.controller.js" />
     <Content Include="Scripts\Angular\pera.config.js" />
     <Content Include="Scripts\Angular\garages\services\garages.service.js" />
+    <Content Include="Scripts\Angular\tabs\controllers\tab.controller.js" />
+    <Content Include="Scripts\Angular\tabs\tabs.module.js" />
     <Content Include="Scripts\Angular\utils\services\snackbar.service.js" />
     <Content Include="Scripts\Angular\utils\utils.module.js" />
-    <Content Include="Scripts\js\bootstrap.js" />
-    <Content Include="Scripts\js\bootstrap.min.js" />
     <EmbeddedResource Include="DAL\garages.csv" />
     <EmbeddedResource Include="Migrations\201502181654288_updateTeamMembers.resx">
       <DependentUpon>201502181654288_updateTeamMembers.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="Scripts\css\material.css" />
+    <Content Include="Scripts\css\snackbar.css.map" />
+    <EmbeddedResource Include="Migrations\201502200151507_new.resx">
+      <DependentUpon>201502200151507_new.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Angular\pera.js" />
     <Content Include="Scripts\Angular\garages\garages.module.js" />
+    <Content Include="Scripts\css\snackbar.css" />
+    <Content Include="Scripts\css\snackbar.min.css" />
+    <Content Include="Scripts\css\site.css" />
     <Content Include="Scripts\js\jquery-1.10.2.js" />
     <Content Include="Scripts\js\jquery-1.10.2.min.js" />
     <None Include="Scripts\js\jquery.validate-vsdoc.js" />
@@ -253,6 +267,8 @@
     <Content Include="Scripts\js\modernizr-2.6.2.js" />
     <Content Include="Scripts\js\respond.js" />
     <Content Include="Scripts\js\respond.min.js" />
+    <Content Include="Scripts\js\snackbar.js" />
+    <Content Include="Scripts\js\snackbar.min.js" />
     <Content Include="Scripts\js\_references.js" />
     <Content Include="Views\Javascripts.html" />
     <Content Include="Web.config">
@@ -276,7 +292,6 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\Angular\map\" />
-    <Folder Include="Scripts\css\" />
     <Folder Include="Views\GarageMap\" />
   </ItemGroup>
   <ItemGroup>

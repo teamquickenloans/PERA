@@ -1,4 +1,8 @@
-﻿(function () {
+﻿/**
+* Garages module
+* @namespace pera.garages
+*/
+(function () {
     'use strict';
 
     angular
@@ -11,5 +15,5 @@
       .module('pera.garages.controllers', []);
 
     angular
-      .module('pera.garages.services', ['ngCookies']);
+      .module('pera.garages.services', []);
 })();

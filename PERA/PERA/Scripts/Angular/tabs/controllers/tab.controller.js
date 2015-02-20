@@ -1,13 +1,13 @@
 ﻿/**
-* Garages controller
-* @namespace thinkster.authentication.controllers
+* Tabs controller
+* @namespace pera.tabs.controllers
 */
 (function () {
     'use strict';
 
     angular
       .module('pera.tabs.controllers')
-      .controller('TabsController', TabController);
+      .controller('TabController', TabController);
 
 
     function TabController() {

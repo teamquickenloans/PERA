@@ -1,0 +1,77 @@
+﻿html, body, #wrapper, #parkingContent {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    background-color: #CCC;
+}
+
+#map-canvas {
+    height: 100%;
+}
+
+#sideBar {
+    height: 100%;
+    overflow: auto;
+}
+
+.row {
+    max-width: 100%;
+}
+
+#sideBarContent {
+    margin: 10px;
+}
+
+#expenseContent {
+    height: 100%;
+}
+
+#expenseMain {
+    height: 100%;
+}
+
+.tableHeader {
+    font-weight: bold;
+    font-size: 1.1em;
+    height: 1.65em;
+    background-color: #5ac;
+    padding-right: 15px;
+}
+
+#issueTable {
+    height: 60%;
+    overflow: auto;
+}
+
+.issueRow {
+    margin-top: 1px;
+    height: 1.65em;
+    background-color: #aaa;
+}
+
+.selected {
+    background-color: #6c8;
+}
+
+.left {
+    width: 30%;
+    float: left;
+    text-align: left;
+    margin-left: 5%;
+}
+
+.center {
+    width: 30%;
+    float: left;
+    text-align: center;
+}
+
+.right {
+    width: 30%;
+    float: left;
+    text-align: right;
+    margin-right: 5%;
+}

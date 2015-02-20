@@ -1,13 +1,13 @@
 ﻿/**
 * Garages
-* @namespace thinkster.garages.services
+* @namespace pera.garages.services
 */
 (function () {
     'use strict';
 
     angular
       .module('pera.garages.services')
-      .factory('Garages',Garages);
+      .factory('Garages', Garages);
 
     Garages.$inject = ['$http'];
 
@@ -19,7 +19,7 @@
         var Garages = {
             all: all,
             create: create,
-            get: get
+            get: get,
         };
 
         return Garages;
@@ -30,7 +30,7 @@
         * @name all
         * @desc Get all Garages
         * @returns {Promise}
-        * @memberOf thinkster.garages.services.Garages
+        * @memberOf pera.garages.services.Garages
         */
         function all() {
             return $http.get('/api/garages/');
