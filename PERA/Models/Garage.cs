@@ -30,7 +30,7 @@ namespace PERA.Models
         public int Capacity { get; set; }
         public int NumberOfLeasedSpaces { get; set; }
         public int NumberOfTeamMemberSpaces { get; set; }
-        public int? MinimumNumberOfTransientSpaces { get; set; }
+        public int? MinimumNumberOfBufferSpaces { get; set; }
         public double SpaceCost { get; set; }
         public double? TransientSalePrice { get; set; }
         public string Owner { get; set; }

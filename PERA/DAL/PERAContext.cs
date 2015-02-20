@@ -26,6 +26,12 @@ namespace PERA.Models
         public System.Data.Entity.DbSet<PERA.Models.Garage> Garages { get; set; }
 
         public System.Data.Entity.DbSet<PERA.Models.GarageManager> GarageManagers { get; set; }
+
+        public System.Data.Entity.DbSet<PERA.Models.BadgeScan> BadgeScans { get; set; }
+
+        public System.Data.Entity.DbSet<PERA.Models.CarpoolGroup> CarpoolGroups { get; set; }
+
+        public System.Data.Entity.DbSet<PERA.Models.Invoice> Invoices { get; set; }
     
     }
 }
