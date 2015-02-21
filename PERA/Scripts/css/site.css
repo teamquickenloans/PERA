@@ -1,4 +1,4 @@
-﻿html, body, #wrapper, #parkingContent {
+﻿html, body, #wrapper, #garageMapContent {
     height: 100%;
     padding: 0;
     margin: 0;
@@ -33,27 +33,13 @@ body {
     height: 100%;
 }
 
-.tableHeader {
-    font-weight: bold;
-    font-size: 1.1em;
-    height: 1.65em;
-    background-color: #5ac;
-    padding-right: 15px;
-}
-
-#issueTable {
+#issueTableWrapper {
     height: 60%;
-    overflow: auto;
 }
 
-.issueRow {
-    margin-top: 1px;
-    height: 1.65em;
-    background-color: #aaa;
-}
-
-.selected {
-    background-color: #6c8;
+#issueTableHeader {
+    background-color: #A5D9E6;
+    width: 100%;
 }
 
 .left {
@@ -75,3 +61,36 @@ body {
     text-align: right;
     margin-right: 5%;
 }
+
+#issueTableContent {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#issueTableContentWrapper {
+    height: 100%;
+    width: 100%;
+    overflow: auto;
+}
+
+.issueRow {
+    background-color: #ddd; /* Currently just overwrites Foundation CSS on every other row to product desired effect. Janky */
+}
+
+tr.issueRow.selected {
+    background-color: #6c8;
+}
+
+#garageTableWrapper {
+    width: 100%;
+}
+
+#garageTable {
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+
+
