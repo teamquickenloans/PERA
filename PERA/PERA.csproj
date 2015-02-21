@@ -52,10 +52,6 @@
     </Reference>
     <Reference Include="Excel">
       <HintPath>..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="ICSharpCode.SharpZipLib">
-      <HintPath>..\packages\SharpZipLib.0.86.0\lib\20\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -197,25 +193,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201502161730374_intial.cs" />
-    <Compile Include="Migrations\201502161730374_intial.Designer.cs">
-      <DependentUpon>201502161730374_intial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502181537170_update.cs" />
-    <Compile Include="Migrations\201502181537170_update.Designer.cs">
-      <DependentUpon>201502181537170_update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502181654288_updateTeamMembers.cs" />
-    <Compile Include="Migrations\201502181654288_updateTeamMembers.Designer.cs">
-      <DependentUpon>201502181654288_updateTeamMembers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502200151507_new.cs" />
-    <Compile Include="Migrations\201502200151507_new.Designer.cs">
-      <DependentUpon>201502200151507_new.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502201628581_updateTeam.cs" />
-    <Compile Include="Migrations\201502201628581_updateTeam.Designer.cs">
-      <DependentUpon>201502201628581_updateTeam.cs</DependentUpon>
+    <Compile Include="Migrations\201502211449480_reset.cs" />
+    <Compile Include="Migrations\201502211449480_reset.Designer.cs">
+      <DependentUpon>201502211449480_reset.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
@@ -259,16 +239,10 @@
     <Content Include="Scripts\Angular\utils\services\snackbar.service.js" />
     <Content Include="Scripts\Angular\utils\utils.module.js" />
     <EmbeddedResource Include="DAL\garages.csv" />
-    <EmbeddedResource Include="Migrations\201502181654288_updateTeamMembers.resx">
-      <DependentUpon>201502181654288_updateTeamMembers.cs</DependentUpon>
-    </EmbeddedResource>
     <Content Include="Scripts\css\material.css" />
     <Content Include="Scripts\css\snackbar.css.map" />
-    <EmbeddedResource Include="Migrations\201502200151507_new.resx">
-      <DependentUpon>201502200151507_new.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502201628581_updateTeam.resx">
-      <DependentUpon>201502201628581_updateTeam.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201502211449480_reset.resx">
+      <DependentUpon>201502211449480_reset.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Angular\pera.js" />
@@ -321,24 +295,10 @@
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201502181537170_update.resx">
-      <DependentUpon>201502181537170_update.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">
       <Guid>{2DF8D04C-5BFA-101B-BDE5-00AA0044DE52}</Guid>
       <VersionMajor>2</VersionMajor>
       <VersionMinor>5</VersionMinor>
-      <Lcid>0</Lcid>
-      <WrapperTool>primary</WrapperTool>
-      <Isolated>False</Isolated>
-      <EmbedInteropTypes>True</EmbedInteropTypes>
-    </COMReference>
-    <COMReference Include="Microsoft.Office.Interop.Excel">
-      <Guid>{00020813-0000-0000-C000-000000000046}</Guid>
-      <VersionMajor>1</VersionMajor>
-      <VersionMinor>7</VersionMinor>
       <Lcid>0</Lcid>
       <WrapperTool>primary</WrapperTool>
       <Isolated>False</Isolated>

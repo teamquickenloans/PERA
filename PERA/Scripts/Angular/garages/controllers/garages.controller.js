@@ -9,12 +9,12 @@
       .module('pera.garages.controllers')
       .controller('GaragesController', GaragesController);
 
-    GaragesController.$inject = ['$scope', 'Garages']; //Here 'Garages' is the Garages Service (pera.garages.service)
+    GaragesController.$inject = ['$scope', 'Garages', 'Snackbar']; //Here 'Garages' is the Garages Service (pera.garages.service)
 
     /**
     * @namespace GaragesController
     */
-    function GaragesController($scope, Garages) {
+    function GaragesController($scope, Garages, Snackbar) {
         var vm = this;
         vm.garages = []; //the list of garages to be returned
         
