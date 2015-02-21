@@ -252,6 +252,9 @@
     <Content Include="Scripts\Angular\utils\services\snackbar.service.js" />
     <Content Include="Scripts\Angular\utils\utils.module.js" />
     <EmbeddedResource Include="DAL\garages.csv" />
+    <EmbeddedResource Include="Migrations\201502161730374_intial.resx">
+      <DependentUpon>201502161730374_intial.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502181654288_updateTeamMembers.resx">
       <DependentUpon>201502181654288_updateTeamMembers.cs</DependentUpon>
     </EmbeddedResource>
