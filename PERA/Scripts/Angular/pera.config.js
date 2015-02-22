@@ -5,14 +5,23 @@
       .module('pera.config')
       .config(config);
 
-    config.$inject = ['$locationProvider'];
+    config.$inject = ['$routeProvider'];
 
     /**
     * @name config
     * @desc Enable HTML5 routing
     */
-    function config($locationProvider) {
-        $locationProvider.html5Mode(true);
-        $locationProvider.hashPrefix('!');
+    function config($routeProvider) {
+
+        $routeProvider.
+        when('/routeOne', {
+            templateUrl: 'ingestInvoice/one'
+        })
+        .when('/routeTwo', {
+            templateUrl: 'ingestInvoice/two'
+        })
+        .when('/routeThree', {
+            templateUrl: 'ingestInvoice/three'
+        });
     }
 })();

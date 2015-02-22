@@ -33,7 +33,6 @@
 
 
 
-
     <script type="text/javascript" src="~/Scripts/Angular/pera.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/dashboard/dashboard.module.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/dashboard/controllers/expense.controller.js"></script>
@@ -44,11 +43,13 @@
     <script type="text/javascript" src="~/Scripts/Angular/garages/garages.module.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/garages/services/garages.service.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/garages/controllers/garages.controller.js"></script>
-
     <script type="text/javascript" src="~/Scripts/Angular/utils/utils.module.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/utils/services/snackbar.service.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/tabs/tabs.module.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/tabs/controllers/tab.controller.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/fileupload/fileupload.module.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/fileupload/controllers/fileupload.controller.js"></script>
+
 
     <!-- ====================== CSS ================================= -->
     <link rel="stylesheet" href="~/Scripts/css/site.css" />
@@ -57,7 +58,6 @@
 
 
 <body>
-
     <div id="wrapper" ng-controller="TabController as tab">
 
         <!-- ======================== Nav Bar ============================ -->
@@ -116,21 +116,29 @@
                     can you tell that itʼs just ceremon’
                     now you’ve added up to what you’re from
                 </div>
-            <table class="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
-                <tr>
-                    <th>Garages</th>
-                    <th>Issue</th>
-                    <th>Date</th>
-                </tr>
-                <tr ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
-                    <td>{{issue.garage}}</td>
-                    <td>{{issue.issue}}</td>
-                    <td>{{issue.date | date:'MM/dd/yyyy'}}</td>
-                </tr>
-            </table>
+            <div class="large-6 columns">
+                <table class="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+                    <tr>
+                        <th>Garages</th>
+                        <th>Issue</th>
+                        <th>Date</th>
+                    </tr>
+                    <tr ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                        <td>{{issue.garage}}</td>
+                        <td>{{issue.issue}}</td>
+                        <td>{{issue.date | date:'MM/dd/yyyy'}}</td>
+                    </tr>
+                </table>
+            </div>
 
-            <div id="ho" class="columns small-4">
-
+            <div id="ho" class="large-3 columns">
+                <h2>File Upload</h2>
+                <div ng-controller="FileUploadController">
+                    <input type="file" id="file" name="file" />
+                    <br>
+                    <button ng-click="upload()">Upload</button>
+                    <p>{{data}}</p>
+                </div>
             </div>
 
         </div>
