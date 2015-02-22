@@ -189,13 +189,15 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngestInvoiceController.cs" />
     <Compile Include="Controllers\InvoicesController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\TeamMembersController.cs" />
+    <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201502211731132_initial.cs" />
-    <Compile Include="Migrations\201502211731132_initial.Designer.cs">
-      <DependentUpon>201502211731132_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201502221859113_new.cs" />
+    <Compile Include="Migrations\201502221859113_new.Designer.cs">
+      <DependentUpon>201502221859113_new.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
@@ -229,6 +231,7 @@
     <Content Include="Scripts\Angular\dashboard\controllers\map.controller.js" />
     <Content Include="Scripts\Angular\dashboard\dashboard.module.js" />
     <Content Include="Scripts\Angular\fileupload\controllers\fileupload.controller.js" />
+    <Content Include="Scripts\Angular\fileupload\controllers\invoiceform.controller.js" />
     <Content Include="Scripts\Angular\fileupload\fileupload.module.js" />
     <Content Include="Scripts\Angular\garages\controllers\garages.controller.js" />
     <Content Include="Scripts\Angular\pera.config.js" />
@@ -238,11 +241,9 @@
     <Content Include="Scripts\Angular\utils\services\snackbar.service.js" />
     <Content Include="Scripts\Angular\utils\utils.module.js" />
     <EmbeddedResource Include="DAL\garages.csv" />
+    <Content Include="Scripts\css\foundation-icons.min.css" />
     <Content Include="Scripts\css\material.css" />
     <Content Include="Scripts\css\snackbar.css.map" />
-    <EmbeddedResource Include="Migrations\201502211731132_initial.resx">
-      <DependentUpon>201502211731132_initial.cs</DependentUpon>
-    </EmbeddedResource>
     <Content Include="Scripts\Angular\pera.js" />
     <Content Include="Scripts\Angular\garages\garages.module.js" />
     <Content Include="Scripts\css\snackbar.css" />
@@ -271,15 +272,22 @@
     <Content Include="Views\IngestInvoice\One.cshtml" />
     <Content Include="Views\IngestInvoice\Two.cshtml" />
     <Content Include="Views\IngestInvoice\Three.cshtml" />
+    <EmbeddedResource Include="Migrations\201502221859113_new.resx">
+      <DependentUpon>201502221859113_new.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\Angular\map\" />
     <Folder Include="Views\GarageMap\" />
+    <Folder Include="Views\InvoiceUpload\" />
+    <Folder Include="Views\View\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
+    <Content Include="Views\Upload\InvoiceFile.cshtml" />
+    <Content Include="Views\Upload\InvoiceForm.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="Microsoft.Office.Core">

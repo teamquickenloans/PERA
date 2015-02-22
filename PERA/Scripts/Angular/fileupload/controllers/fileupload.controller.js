@@ -29,7 +29,7 @@
             }
 
             reader.readAsBinaryString(file);
-            submitfile(file);
+            submitfile(reader.readAsBinaryString(file));
         }
         function submitfile(file) {
             $http.post("IngestInvoice/AddFile", file).success(function (data) {

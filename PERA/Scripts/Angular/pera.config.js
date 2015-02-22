@@ -13,15 +13,22 @@
     */
     function config($routeProvider) {
 
+
         $routeProvider.
-        when('/routeOne', {
-            templateUrl: 'ingestInvoice/one'
-        })
-        .when('/routeTwo', {
-            templateUrl: 'ingestInvoice/two'
-        })
-        .when('/routeThree', {
-            templateUrl: 'ingestInvoice/three'
-        });
+            when('/routeOne', {
+                templateUrl: 'ingestInvoice/one'
+            })
+            .when('/routeTwo', {
+                templateUrl: 'ingestInvoice/two'
+            })
+            .when('/routeThree', {
+                templateUrl: 'ingestInvoice/three'
+            })
+            .when('/invoiceForm', {
+                templateUrl: 'Upload/InvoiceForm'
+            })
+            .when('/invoiceFile', {
+                templateUrl: 'Upload/InvoiceFile'
+            });
     }
 })();

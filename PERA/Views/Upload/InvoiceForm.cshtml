@@ -1,0 +1,20 @@
+﻿
+<div ng-controller="GaragesController">
+    <form ng-submit="upload()">
+        <label for="invoiceID">Invoice Number:</label>
+        <input type="number" ng-model="invoiceForm.invoiceID" id="invoiceID" required />
+
+
+        <label for="garageID">Garage:</label>
+            <select ng-options="garage.name for garage in garages" id="garageID">
+            </select>
+
+        <label for="totalAmountBilled">Amount Billed:</label>
+        <input type="number" ng-model="invoiceForm.totalAmountBilled" id="totalAmountBilled" />
+
+        <button type="submit">Submit</button>
+    </form>
+    <div style="float: right;">
+        <a href="/#/invoiceFile" class="radius button">Next</a>
+    </div>
+</div>
