@@ -9,7 +9,7 @@ namespace PERA.Controllers
 {
     public class IngestInvoice
     {
-        FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
+        /*FileStream stream = File.Open(filePath, FileMode.Open, FileAccess.Read);
 
         //1. Reading from a binary Excel file ('97-2003 format; *.xls)
         IExcelDataReader excelReader = ExcelReaderFactory.CreateBinaryReader(stream);
@@ -31,7 +31,7 @@ namespace PERA.Controllers
         }
 
         //6. Free resources (IExcelDataReader is IDisposable)
-        excelReader.Close();
+        excelReader.Close();*/
 
     }
 }

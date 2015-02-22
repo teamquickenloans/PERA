@@ -57,47 +57,63 @@
 
 
 <body>
-
     <div id="wrapper" ng-controller="TabController as tab">
 
         <!-- ======================== Nav Bar ============================ -->
-        <nav class="top-bar" data-topbar role="navigation">
+        <nav class="top-bar" data-topbar role="navigation" data-options="is_hover:false" ng-init="tab.setSideTab(-1)"> <!-- TODO Make dropdown hoverable AND PROPERLY clickable -->
             <ul class="title-area">
                 <li class="name">
-                    <h1><a href>Parking Dashboard</a></h1>
+                    <h1><a href="#">Parking Dashboard</a></h1>
                 </li>
+                <li class="divider"></li>
             </ul>
 
             <section class="top-bar-section">
                 <!-- Right Nav Section -->
                 <ul class="right">
-                    <li id="OverviewNav" ng-class="{active:tab.sideIsSet(0)}">
-                        <a href ng-click="tab.setSideTab(0)">Overview</a>
-                    </li>
-                    <li id="SingGarNav" ng-class="{active:!tab.sideIsSet(0)}" class="has-dropdown">
-                        <a href>Single Garage</a>
-                        <ul id="dropdownTopBar" class="dropdown" ng-controller="MapController as map">
-                            <div ng-controller="GaragesController as garageCtrl">
-                                <div ng-repeat="garage in garageCtrl.garages">
-                                    <li><a href ng-click="tab.setSideTab(1);console.log(garage.name)">{{garage.name}}</a></li> <!-- TODO: ng-click event no worky -->
-                                </div>
-                            </div>
-                        </ul>
+                    <li class="divider"></li>
 
+                    <!-- Overview -->
+                    <li ng-class="{active:tab.sideIsSet(-1)}">
+                        <a href="#" ng-click="tab.setSideTab(-1)">Overview</a>
+                    </li>
+
+                    <li class="divider"></li>
+
+                    <!-- Single Garage Dropdown -->
+                    <li ng-class="{active:!tab.sideIsSet(-1)}" class="has-dropdown">
+                        <a href="#">Single Garage</a>
+                        <ul class="dropdown" ng-controller="MapController as map">
+                            <li ng-controller="GaragesController as garageCtrl">
+                                <ul ng-repeat="garage in garageCtrl.garages">
+                                    <li ng-class="{active:tab.sideIsSet($index)}"><a href="#" ng-click="tab.setSideTab($index)">{{garage.name}}</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
 
                 <!-- Left Nav Section -->
                 <ul class="left" ng-controller="MapController as map">
+                    <li class="divider"></li>
+
                     <li ng-class="{active:tab.isSet(1)}">
-                        <a href ng-click="tab.setTab(1)">Expense Reconcilliation</a>
+                        <a href="#" ng-click="tab.setTab(1)">Expense Reconcilliation</a>
                     </li>
+
+                    <li class="divider"></li>
+
                     <li ng-class="{active:tab.isSet(2)}">
-                        <a href ng-click="tab.setTab(2); map.initialized || map.initialize();">Garage Map</a>
+                        <a href="#" ng-click="tab.setTab(2); map.initialized || map.initialize();">Garage Map</a>
                     </li>
+
+                    <li class="divider"></li>
+
                     <li ng-class="{active:tab.isSet(3)}">
-                        <a href ng-click="tab.setTab(3)">Notifications</a>
+                        <a href="#" ng-click="tab.setTab(3)">Notifications</a>
                     </li>
+
+                    <li class="divider"></li>
                 </ul>
             </section>
         </nav>
@@ -108,28 +124,26 @@
 
         <!-- ======================== Expense Reconciliation Content ============================ -->
         <div id="expenseContent" class="row" ng-controller="ExpenseController as expenseCtrl" ng-show="tab.isSet(1)">
-                <div class="row" style="background-color:lightblue">
-                    from the faun forever gone
-                    in the towers of your honeycomb
-                    I’d a tore your hair out just to climb back darling
-                    when you’re filling out your only form
-                    can you tell that itʼs just ceremon’
-                    now you’ve added up to what you’re from
-                </div>
-            <table class="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
-                <tr>
-                    <th>Garages</th>
-                    <th>Issue</th>
-                    <th>Date</th>
-                </tr>
-                <tr ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
-                    <td>{{issue.garage}}</td>
-                    <td>{{issue.issue}}</td>
-                    <td>{{issue.date | date:'MM/dd/yyyy'}}</td>
-                </tr>
-            </table>
+            <div id="issueTableWrapper" class="columns small-8">
 
-            <div id="ho" class="columns small-4">
+                <div id="issueTableHeader" class="row">
+                    <div class="left">Garages</div>
+                    <div class="center">Issue</div>
+                    <div class="right">Date</div>
+                </div>
+
+                <div id="issueTableContentWrapper" class="row">
+                    <table id="issueTableContent" class="row" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+                        <tr class="issueRow" ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                            <td>{{issue.garage}}</td>
+                            <td>{{issue.issue}}</td>
+                            <td>{{issue.date | date:'MM/dd/yyyy'}}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <div id="howdy" class="columns small-4">
 
             </div>
 
@@ -138,11 +152,59 @@
 
 
         <!-- ======================== Parking Allocation Content ============================ -->
-        <div id="parkingContent" class="row" ng-show="tab.isSet(2)">
+        <div id="garageMapContent" class="row" ng-show="tab.isSet(2)">
 
             <div id="map-canvas" class="columns small-10"></div>
             <div id="sideBar" class="columns small-2">
-                <!-- TODO: add garage info -->
+                <div id="gargeTableWrapper" class="row">
+                    <table id="garageTable" ng-controller="GaragesController as garageCtrl" ng-show="!tab.sideIsSet(-1)">
+                        <tr>
+                            <td>Name: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].name}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Capacity: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].capacity}}</td>
+                        </tr>
+                        <tr>
+                            <td>Leased Spaces: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].numberOfLeasedSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Team-Member Spaces: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].numberOfTeamMemberSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Required Buffer Size: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].minimumNumberOfBufferSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Cost Per Space: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].spaceCost}}</td>
+                        </tr>
+                        <tr>
+                            <td>Transient Sale Price: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].transientSalePrice}}</td>
+                        </tr>
+                        <tr>
+                            <td>Owner: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].owner}}</td>
+                        </tr>
+                        <tr>
+                            <td>Billing Party: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].billingParty}}</td>
+                        </tr>
+                        <tr>
+                            <td>Garage Manager ID: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].garageManagerID}}</td>
+                        </tr>
+                    </table>
+                </div>
+
             </div>
 
         </div>
@@ -161,6 +223,11 @@
 
     </div>
 
+
+    <!-- Makes Foundation Stuff Work -->
+    <script type="text/javascript">
+        $(document).foundation();
+    </script>
 </body>
 
 </html> 
