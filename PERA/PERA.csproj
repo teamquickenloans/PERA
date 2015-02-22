@@ -193,9 +193,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201502211731132_initial.cs" />
-    <Compile Include="Migrations\201502211731132_initial.Designer.cs">
-      <DependentUpon>201502211731132_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201502221809125_myMigration.cs" />
+    <Compile Include="Migrations\201502221809125_myMigration.Designer.cs">
+      <DependentUpon>201502221809125_myMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
@@ -239,8 +239,8 @@
     <EmbeddedResource Include="DAL\garages.csv" />
     <Content Include="Scripts\css\material.css" />
     <Content Include="Scripts\css\snackbar.css.map" />
-    <EmbeddedResource Include="Migrations\201502211731132_initial.resx">
-      <DependentUpon>201502211731132_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201502221809125_myMigration.resx">
+      <DependentUpon>201502221809125_myMigration.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Angular\pera.js" />

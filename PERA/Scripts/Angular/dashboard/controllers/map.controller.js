@@ -85,7 +85,7 @@
               for (var i = 0; i < garages.length; i++) {
                   var marker = new google.maps.Marker({
                       map: map,
-                      position: new google.maps.LatLng(garages[i].latitude, garages[i].longitude),
+                      position: new google.maps.LatLng(garages[i].latitude, garages[i].longitude)
                   });
 
                   var load = parseFloat(garages[i].numberOfLeasedSpaces) - parseFloat(garages[i].numberOfTeamMemberSpaces);
