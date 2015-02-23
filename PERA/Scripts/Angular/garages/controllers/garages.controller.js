@@ -44,7 +44,7 @@
 
 
         //TODO: do this in the backend and possibly append it to the passed json file.
-        function calculateData ()
+        function calculateData () //TODO: Move this to a service so it is only called once
         {
             for (var i = 0; i < vm.garages.length; i++)
             {
