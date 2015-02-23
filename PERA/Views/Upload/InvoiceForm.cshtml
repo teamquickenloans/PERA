@@ -1,20 +1,40 @@
 ﻿
-<div ng-controller="GaragesController">
+<div ng-controller="FileUploadController">
+    <h3>Invoice Submission</h3>
     <form ng-submit="upload()">
-        <label for="invoiceID">Invoice Number:</label>
-        <input type="number" ng-model="invoiceForm.invoiceID" id="invoiceID" required />
+        <div class="large-10 column">
+            <label for="invoiceID">Invoice Number:</label>
+            <input type="number" ng-model="invoiceForm.invoiceID" id="invoiceID" required />
 
+            <div ng-controller="GaragesController as garageCtrl">
+                <label for="garageID">Garage:</label>
+                <select ng-model="invoice.garageID" ng-options="garage.name for garage in garageCtrl.garages" id="garageID"></select>
+            </div>
 
-        <label for="garageID">Garage:</label>
-            <select ng-options="garage.name for garage in garages" id="garageID">
-            </select>
+            <label for="totalAmountBilled">Amount Billed:</label>
+            <input type="number" ng-model="invoice.totalAmountBilled" id="totalAmountBilled" />
+        </div>
+        <div class="large-4 column">
+            <label for="dateReceived">Date Received:</label>
+            <input type="date" ng-model="invoice.dateReceived" id="dateReceived" />
 
-        <label for="totalAmountBilled">Amount Billed:</label>
-        <input type="number" ng-model="invoiceForm.totalAmountBilled" id="totalAmountBilled" />
+            <label for="billingStartDate">Billing Start Date</label>
+            <input type="date" ng-model="invoice.billingStartDate" id="billingStartDate" />
+        </div>
+        <div class="large-4 column">
+            <label for="numberOfLeasedSpots">Number of Leased Spots:</label>
+            <input type="number" ng-model="invoice.numberOfLeasedSpots" />
 
-        <button type="submit">Submit</button>
+            <label for="numberOfValidations">Number of Validations:</label>
+            <input type="number" ng-model="invoice.numberofValidations" />
+        </div>
+        <center>
+            <input type="file" id="file" name="file" />
+            <br>
+            <button ng-click="upload()">Upload</button>
+            <p></p>
+        </center>
+
     </form>
-    <div style="float: right;">
-        <a href="/#/invoiceFile" class="radius button">Next</a>
-    </div>
+
 </div>

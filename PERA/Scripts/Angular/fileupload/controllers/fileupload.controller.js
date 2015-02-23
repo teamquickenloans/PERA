@@ -18,9 +18,21 @@
   
         $scope.data = 'none'; //the list of garages to be returned
         $scope.upload = upload;
+        $scope.file = [];
+        $scope.month = "";
+        $scope.invoice = {
+            invoiceID: '',
+            garageID: '',
+            totalAmountBilled: '',
+            dateReceived: '',
+            billingStartDate: '',
+            billingEndDate: '',
+            numberOfLeasedSpots: '',
+            numberOfValidations: ''
+        }
 
         function upload() {
-            var file = document.getElementById('file').files[0]
+            $scope.file = document.getElementById('file').files[0]
             var reader = new FileReader();
             reader.onloadend = setData;
 
@@ -28,7 +40,7 @@
                 $scope.data = e.target.result;
             }
 
-            reader.readAsBinaryString(file);
+            //reader.readAsBinaryString(file);
             submitfile(reader.readAsBinaryString(file));
         }
         function submitfile(file) {

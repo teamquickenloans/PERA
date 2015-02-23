@@ -30,8 +30,19 @@
         * @returns {Promise}
         * @memberOf pera.fileupload.services.InvoiceSubmission
         */
-        function submit() {
-            return $http.post('/Upload/Invoice');
+        function submit(file, uploadUrl) {
+            var fd = new FormData();
+            fd.append('file', file);
+            return $http.post(uploadUrl, fd, {
+                transformRequest: angular.identity,
+                headers: { 'Content-Type': undefined }
+            })
+            .success(function () {
+
+            })
+            .error(function () {
+
+            });
         }
 
     }

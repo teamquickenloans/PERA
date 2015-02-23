@@ -25,6 +25,7 @@ namespace PERA.Controllers
 
         public string AddFile(string File)
         {
+            Console.WriteLine(File);
             return File;
         }
     }
