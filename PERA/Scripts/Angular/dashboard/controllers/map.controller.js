@@ -20,7 +20,7 @@
         vm.garages = [];
         vm.garageMarkers = [];
         vm.initialized = false; //tracks if the maps has already been initialized
-        vm.garages = []; //the list of garages to be returned
+        
 
         //initialize the map
         this.initialize = initialize;
@@ -54,7 +54,7 @@
 
               var mapOptions = {
                   center: { lat: 42.33242, lng: -83.04646 },
-                  zoom: 16,
+                  zoom: 17,
                   styles: styleArray,
                   panControl: false,
                   zoomControl: true,
@@ -83,10 +83,16 @@
 
           function PlaceMarkers(map, garages, garageMarkers) {
               for (var i = 0; i < garages.length; i++) {
+                  var position = new google.maps.LatLng(garages[i].latitude, garages[i].longitude);
+
                   var marker = new google.maps.Marker({
                       map: map,
-                      position: new google.maps.LatLng(garages[i].latitude, garages[i].longitude)
+                      position: position
                   });
+
+                  var label = new ELabel(map, position, '<div style="font-size:1.5em; font-weight:bold;">' + garages[i].name + '</div>', null, new google.maps.Size(-20, -72), false);
+                  label.setMap(map);
+
 
                   var load = parseFloat(garages[i].numberOfLeasedSpaces) - parseFloat(garages[i].numberOfTeamMemberSpaces);
                   if (100 < load) {
@@ -105,31 +111,6 @@
               }
           }
       }
-
-
-    var garages = [
-	    { name: "One Campus Martius", address: "1188 Farmer St, Detroit MI 48226", latitude: 42.3333543, longitude: -83.04649310000002, load: "low" },
-	    { name: "Premier", address: "1206 Woodward Ave, Detroit MI 48226", latitude: 42.3337978, longitude: -83.0480407, load: "high" },
-	    { name: "1001 Woodward", address: "1001 Woodward Ave, Detroit MI 48226", latitude: 42.3320291, longitude: -83.04760010000001, load: "low" },
-	    { name: "Book Cadillac", address: "150 Michigan Ave, Detroit MI 48226", latitude: 42.331956, longitude: -83.04931999999997, load: "medium" },
-	    { name: "1 Detroit", address: "200 Larned St, Detroit MI 48226", latitude: 42.3298491, longitude: -83.0442246, load: "low" },
-	    { name: "2 Detroit", address: "160 E Congress St, Detroit MI 48226", latitude: 42.3308968, longitude: -83.0436712, load: "medium" },
-	    { name: "COBO Congress", address: "467 W Congress St, Detroit MI 48226", latitude: 42.3280065, longitude: -83.0508577, load: "full" },
-	    { name: "COBO Rooftop", address: "625 W Congress St, Detroit MI 48226", latitude: 42.3269497, longitude: -83.05304419999999, load: "medium" },
-	    { name: "COBO Washington", address: "475 Washington Ave, Detroit MI 48226", latitude: 42.3279516, longitude: -83.0485974, load: "low" },
-	    { name: "Detroit Opera House", address: "1426 Broadway St, Detroit MI 48226", latitude: 42.3354605, longitude: -83.04736889999998, load: "high" },
-	    { name: "Financial District", address: "730 Shelby St, Detroit MI 48226", latitude: 42.330903, longitude: -83.04879690000001, load: "low" },
-	    { name: "AT&T Lot", address: "421 Bagley St, Detroit MI 48226", latitude: 42.33304, longitude: -83.05418789999999, load: "low" },
-	    { name: "Brush St / Greektown", address: "1001 Brush St, Detroit MI 48226", latitude: 42.333784, longitude: -83.043768, load: "medium" },
-	    { name: "Fort St / Greektown", address: "419 E Fort St, Detroit MI 48226", latitude: 42.333098, longitude: -83.04220499999997, load: "full" },
-	    { name: "First National Garage", address: "660 Woodward Ave, Detroit MI 48226", latitude: 42.3311256, longitude: -83.0459323, load: "low" },
-	    { name: "The Z", address: "1234 Library St, Detroit MI 48226", latitude: 42.334347, longitude: -83.0462809, load: "low" },
-	    { name: "Howard Lot A", address: "1240 Abbot St, Detroit MI 48226", latitude: 42.3287717, longitude: -83.06081230000001, load: "high" },
-	    { name: "Howard Lot B", address: "1300 Abbot St, Detroit MI 48226", latitude: 42.3282795, longitude: -83.06088899999997, load: "medium" },
-	    { name: "Howard Lot C", address: "1100 Brooklyn St, Detroit MI 48226", latitude: 42.3269463, longitude: -83.0601658, load: "low" }
-    ];
-
-
 
 })();
 

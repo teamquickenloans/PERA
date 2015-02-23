@@ -20,6 +20,8 @@
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM">
     </script>
+    <!-- Map Labels -->
+    <script type="text/javascript" src="~/Scripts/Angular/map/ELabels3.js"></script>
 
     <!-- =======================Underscore.js =============================== -->
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
@@ -30,10 +32,6 @@
     <link href="~/Scripts/css/material.css" rel="stylesheet" />
 
     <!-- ====================== Angular ======================== -->
-
-
-
-
     <script type="text/javascript" src="~/Scripts/Angular/pera.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/dashboard/dashboard.module.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/dashboard/controllers/expense.controller.js"></script>
@@ -54,7 +52,6 @@
     <link rel="stylesheet" href="~/Scripts/css/site.css" />
 
 </head>
-
 
 <body>
     <div id="wrapper" ng-controller="TabController as tab">
@@ -119,7 +116,7 @@
         </nav>
 
 
-
+        
 
 
         <!-- ======================== Expense Reconciliation Content ============================ -->
@@ -244,50 +241,80 @@
             <div id="map-canvas" class="columns small-10"></div>
             <div id="sideBar" class="columns small-2">
                 <div class="row">
-                    <table id="garageTable" ng-controller="GaragesController as garageCtrl" ng-show="!tab.sideIsSet(-1)">
-                        <tr>
-                            <td>Name: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].name}}</td>
+
+                    <!-- Overview -->
+                    <table id="garageTable" ng-controller="GaragesController as garageCtrl" ng-show="tab.sideIsSet(-1)">
+                        <tr style="background-color:lightblue">
+                            <th>Name</th>
+                            <th>Usage</th>
                         </tr>
                         <tr>
-                            <td>Address: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].address}}</td>
+                            <th>Jimmy</th>
+                            <th>0/31</th>
                         </tr>
                         <tr>
-                            <td>Capacity: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].capacity}}</td>
+                            <th>Steve</th>
+                            <th>0/31</th>
                         </tr>
                         <tr>
-                            <td>Leased Spaces: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].numberOfLeasedSpaces}}</td>
+                            <th>Joe</th>
+                            <th>3/31</th>
                         </tr>
                         <tr>
-                            <td>Team-Member Spaces: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].numberOfTeamMemberSpaces}}</td>
+                            <th>Regina</th>
+                            <th>7/31</th>
                         </tr>
                         <tr>
-                            <td>Required Buffer Size: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].minimumNumberOfBufferSpaces}}</td>
+                            <th>Haley</th>
+                            <th>13/31</th>
                         </tr>
                         <tr>
-                            <td>Cost Per Space: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].spaceCost}}</td>
+                            <th>Flop</th>
+                            <th>15/31</th>
                         </tr>
                         <tr>
-                            <td>Transient Sale Price: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].transientSalePrice}}</td>
+                            <th>Slater</th>
+                            <th>15/31</th>
                         </tr>
                         <tr>
-                            <td>Owner: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].owner}}</td>
+                            <th>Rachet</th>
+                            <th>17/31</th>
                         </tr>
                         <tr>
-                            <td>Billing Party: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].billingParty}}</td>
+                            <th>Jacob</th>
+                            <th>20/31</th>
                         </tr>
                         <tr>
-                            <td>Garage Manager ID: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].garageManagerID}}</td>
+                            <th>Lauren</th>
+                            <th>20/31</th>
+                        </tr>
+                        <tr>
+                            <th>George</th>
+                            <th>20/31</th>
+                        </tr>
+                        <tr>
+                            <th>Jill</th>
+                            <th>21/31</th>
+                        </tr>
+                        <tr>
+                            <th>Jack</th>
+                            <th>21/31</th>
+                        </tr>
+                        <tr>
+                            <th>Janice</th>
+                            <th>22/31</th>
+                        </tr>
+                        <tr>
+                            <th>Winfrey</th>
+                            <th>23/31</th>
+                        </tr>
+                        <tr>
+                            <th>Walter</th>
+                            <th>25/31</th>
+                        </tr>
+                        <tr>
+                            <th>Harry</th>
+                            <th>25/31</th>
                         </tr>
                     </table>
                 </div>

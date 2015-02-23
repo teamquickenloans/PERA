@@ -34,11 +34,13 @@ body {
 }
 
 #issueTableWrapper {
+    background-color: #A5D9E6;
     height: 60%;
+    margin: 0;
+    padding: 0;
 }
 
 #issueTableHeader {
-    background-color: #A5D9E6;
     width: 100%;
 }
 
@@ -69,9 +71,11 @@ body {
 }
 
 #issueTableContentWrapper {
-    height: 100%;
+    height: 97%;
     width: 100%;
     overflow: auto;
+    margin: 0;
+    padding: 0;
 }
 
 .issueRow {
@@ -87,6 +91,7 @@ tr.issueRow.selected {
     padding: 0;
     margin: 0;
 }
+
 
 
 
