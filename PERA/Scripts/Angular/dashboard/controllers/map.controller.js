@@ -17,7 +17,6 @@
     function MapController($scope, Garages, Snackbar) {
         var vm = this;
         vm.map;
-        vm.garages = [];
         vm.garageMarkers = [];
         vm.initialized = false; //tracks if the maps has already been initialized
         vm.garages = []; //the list of garages to be returned
@@ -67,11 +66,19 @@
               this.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
               Garages.all().then(garagesSuccessFn, garagesErrorFn);
+              PlaceMarkers(vm.map, vm.garages, vm.garageMarkers);
+              console.log(vm.garages);
 
               this.initialized = true;
           } //end intialize() function
 
 
+        /*
+          $scope.$on('receiveGarages', function () {
+              vm.garages = Garages.garages;
+              PlaceMarkers(vm.map, vm.garages, vm.garageMarkers);
+          });
+          */
           function garagesSuccessFn(data, status, headers, config) {
               vm.garages = data.data;         //this will depend on what the API returns, it may have to change
               PlaceMarkers(vm.map, vm.garages, vm.garageMarkers);
@@ -80,7 +87,7 @@
           function garagesErrorFn(data, status, headers, config) {
               Snackbar.error(data.data.error);
           }
-
+          
           function PlaceMarkers(map, garages, garageMarkers) {
               for (var i = 0; i < garages.length; i++) {
                   var marker = new google.maps.Marker({

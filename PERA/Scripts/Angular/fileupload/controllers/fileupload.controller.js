@@ -9,14 +9,17 @@
       .module('pera.fileupload.controllers')
       .controller('FileUploadController', FileUploadController);
 
-    FileUploadController.$inject = ['$scope','$http']; //Here 'Garages' is the Garages Service (pera.garages.service)
+    FileUploadController.$inject = ['$scope','InvoiceForm', 'Garages']; //Here 'Garages' is the Garages Service (pera.garages.service)
 
     /**
     * @namespace FileUploadController
     */
-    function FileUploadController($scope,$http) {
+    function FileUploadController($scope, InvoiceForm, Garages) {
   
-        $scope.data = 'none'; //the list of garages to be returned
+        var vm = this;
+        $scope.garages = [];
+
+        $scope.data = 'none'; //the file
         $scope.upload = upload;
         $scope.file = [];
         $scope.month = "";
@@ -31,6 +34,9 @@
             numberOfValidations: ''
         }
 
+        Garages.all().then(garagesSuccessFn, garagesErrorFn);
+        console.log($scope.garages);
+
         function upload() {
             $scope.file = document.getElementById('file').files[0]
             var reader = new FileReader();
@@ -39,15 +45,27 @@
             function setData(e) {
                 $scope.data = e.target.result;
             }
+            //console.log($scope.data);
+            var fileData = reader.readAsBinaryString($scope.file);
+            //console.log($scope.data);
+            //submitFile(fileData)
+            InvoiceForm.submit($scope.invoice, $scope.file, "IngestInvoice/AddFile");
+        }
 
-            //reader.readAsBinaryString(file);
-            submitfile(reader.readAsBinaryString(file));
-        }
-        function submitfile(file) {
-            $http.post("IngestInvoice/AddFile", file).success(function (data) {
-                alert("ok");});
-        }
         
+        function activate() {
+
+        }
+
+        function garagesSuccessFn(data, status, headers, config) {
+            $scope.garages = data.data;         //this will depend on what the API returns, it may have to change
+            //console.log("fileupload Contoller garages success", $scope.garages);
+        }
+
+        function garagesErrorFn(data, status, headers, config) {
+            Snackbar.error(data.data.error);
+        }
+
 
         /*function activate() {
             Garages.all().then(garagesSuccessFn, garagesErrorFn);

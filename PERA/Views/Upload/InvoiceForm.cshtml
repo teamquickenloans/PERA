@@ -4,12 +4,11 @@
     <form ng-submit="upload()">
         <div class="large-10 column">
             <label for="invoiceID">Invoice Number:</label>
-            <input type="number" ng-model="invoiceForm.invoiceID" id="invoiceID" required />
+            <input type="number" ng-model="invoice.invoiceID" id="invoiceID" required />
 
-            <div ng-controller="GaragesController as garageCtrl">
                 <label for="garageID">Garage:</label>
-                <select ng-model="invoice.garageID" ng-options="garage.name for garage in garageCtrl.garages" id="garageID"></select>
-            </div>
+                <select ng-model="invoice.garageID" ng-options="garage.GarageID as garage.name for garage in garages" id="garageID"></select>
+
 
             <label for="totalAmountBilled">Amount Billed:</label>
             <input type="number" ng-model="invoice.totalAmountBilled" id="totalAmountBilled" />
@@ -20,6 +19,10 @@
 
             <label for="billingStartDate">Billing Start Date</label>
             <input type="date" ng-model="invoice.billingStartDate" id="billingStartDate" />
+
+            <label for="billingEndDate">Billing End Date</label>
+            <input type="date" ng-model="invoice.billingEndDate" id="billingEndDate" />
+
         </div>
         <div class="large-4 column">
             <label for="numberOfLeasedSpots">Number of Leased Spots:</label>
@@ -31,7 +34,7 @@
         <center>
             <input type="file" id="file" name="file" />
             <br>
-            <button ng-click="upload()">Upload</button>
+            <button type="submit">Upload</button>
             <p></p>
         </center>
 

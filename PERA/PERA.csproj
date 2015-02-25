@@ -233,7 +233,7 @@
     <Content Include="Scripts\Angular\fileupload\controllers\fileupload.controller.js" />
     <Content Include="Scripts\Angular\fileupload\controllers\invoiceform.controller.js" />
     <Content Include="Scripts\Angular\fileupload\fileupload.module.js" />
-    <Content Include="Scripts\Angular\fileupload\service\invoiceform.service.js" />
+    <Content Include="Scripts\Angular\fileupload\services\invoiceform.service.js" />
     <Content Include="Scripts\Angular\garages\controllers\garages.controller.js" />
     <Content Include="Scripts\Angular\pera.config.js" />
     <Content Include="Scripts\Angular\garages\services\garages.service.js" />

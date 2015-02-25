@@ -9,17 +9,25 @@
       .module('pera.garages.services')
       .factory('Garages', Garages);
 
-    Garages.$inject = ['$http'];
+    Garages.$inject = ['$http', '$rootScope', '$q', 'Snackbar'];
 
     /**
     * @namespace Garages
     * @returns {Factory}
     */
-    function Garages($http) {   //this is just linking up the functions to variable names and returning them
+    function Garages($http, $rootScope, $q, Snackbar) {   //this is just linking up the functions to variable names and returning them
+        
+        var vm = this;
+        vm.garages = [];
+        var last_request_failed = false;
+        var promise = undefined;
+
+
         var Garages = {
             all: all,
             create: create,
             get: get,
+            share: share
         };
 
         return Garages;
@@ -33,10 +41,38 @@
         * @memberOf pera.garages.services.Garages
         */
         function all() {
-            return $http.get('/api/garages/');
+            if (!promise || last_request_failed) {
+                console.log("querying database");
+                promise = $http.get('/api/garages/');
+                promise.then(garagesSuccessFn, garagesErrorFn);
+            }
+            return promise
         }
 
+        /**
+         * @name garagesSuccessFn
+         * @desc Sets the garages variable to the list of garages
+         * @param {string} badgeID The badgeID to get Garages for
+         * @returns {Promise}
+         * @memberOf thinkster.garages.services.Garages
+         */
+        function garagesSuccessFn(data, status, headers, config, response) {
+            last_request_failed = false;
+            vm.garages = data.data;
+            console.log("service success ", vm.garages);
+            return vm.garages;
+            //share();
+        }
 
+        function garagesErrorFn(data, status, headers, config, response) {
+            last_request_failed = true;
+            Snackbar.error(data.data.error);
+            return $q.reject(response);
+        }
+
+        function share() {
+            $rootScope.$broadcast('receiveGarages');
+        }
         /**
         * @name create
         * @desc Create a new garage
@@ -60,5 +96,7 @@
         function get(badgeID) {
             return $http.get('/api/' + badgeID + '/garages/');
         }
+
+
     }
 })();
