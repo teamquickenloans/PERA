@@ -1,4 +1,4 @@
-﻿html, body, #wrapper, #garageMapContent {
+﻿html, body, #wrapper {
     height: 100%;
     padding: 0;
     margin: 0;
@@ -8,13 +8,21 @@ body {
     background-color: #CCC;
 }
 
+#wrapper {
+    overflow: hidden;
+}
+
+#expenseContent, #garageMapContent, #notificationsContent {
+    height: 96.68%;
+}
+
 #map-canvas {
     height: 100%;
 }
 
 #sideBar {
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
 }
 
 .row {
@@ -23,10 +31,6 @@ body {
 
 #sideBarContent {
     margin: 10px;
-}
-
-#expenseContent {
-    height: 100%;
 }
 
 #expenseMain {
@@ -94,6 +98,10 @@ tr.issueRow.selected {
     margin: 0;
 }
 
-
+#usageHeader, #garageInfoHeader {
+    text-align: center;
+    font-size: 1.2em;
+    font-weight: bold;
+}
 
 

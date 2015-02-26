@@ -217,11 +217,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Images\parking.png" />
-    <Content Include="Content\Images\parking_logo_black.png" />
-    <Content Include="Content\Images\parking_logo_green.png" />
-    <Content Include="Content\Images\parking_logo_red.png" />
-    <Content Include="Content\Images\parking_logo_yellow.png" />
+    <Content Include="Content\Images\parking_black.png" />
+    <Content Include="Content\Images\parking_green.png" />
+    <Content Include="Content\Images\parking_red.png" />
+    <Content Include="Content\Images\parking_yellow.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
