@@ -193,9 +193,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201502221809125_myMigration.cs" />
-    <Compile Include="Migrations\201502221809125_myMigration.Designer.cs">
-      <DependentUpon>201502221809125_myMigration.cs</DependentUpon>
+    <Compile Include="Migrations\201502222346105_myMigration.cs" />
+    <Compile Include="Migrations\201502222346105_myMigration.Designer.cs">
+      <DependentUpon>201502222346105_myMigration.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
@@ -217,11 +217,10 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Content\Images\parking.png" />
-    <Content Include="Content\Images\parking_logo_black.png" />
-    <Content Include="Content\Images\parking_logo_green.png" />
-    <Content Include="Content\Images\parking_logo_red.png" />
-    <Content Include="Content\Images\parking_logo_yellow.png" />
+    <Content Include="Content\Images\parking_black.png" />
+    <Content Include="Content\Images\parking_green.png" />
+    <Content Include="Content\Images\parking_red.png" />
+    <Content Include="Content\Images\parking_yellow.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -230,6 +229,7 @@
     <Content Include="Scripts\Angular\dashboard\controllers\map.controller.js" />
     <Content Include="Scripts\Angular\dashboard\dashboard.module.js" />
     <Content Include="Scripts\Angular\garages\controllers\garages.controller.js" />
+    <Content Include="Scripts\Angular\map\ELabels3.js" />
     <Content Include="Scripts\Angular\pera.config.js" />
     <Content Include="Scripts\Angular\garages\services\garages.service.js" />
     <Content Include="Scripts\Angular\tabs\controllers\tab.controller.js" />
@@ -239,8 +239,8 @@
     <EmbeddedResource Include="DAL\garages.csv" />
     <Content Include="Scripts\css\material.css" />
     <Content Include="Scripts\css\snackbar.css.map" />
-    <EmbeddedResource Include="Migrations\201502221809125_myMigration.resx">
-      <DependentUpon>201502221809125_myMigration.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201502222346105_myMigration.resx">
+      <DependentUpon>201502222346105_myMigration.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Angular\pera.js" />
@@ -282,7 +282,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Angular\map\" />
     <Folder Include="Views\GarageMap\" />
   </ItemGroup>
   <ItemGroup>
