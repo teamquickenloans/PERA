@@ -72,6 +72,10 @@
               };
 
               this.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+   
+              //Add key to map
+              this.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('mapKey'));
+
 
               Garages.all().then(garagesSuccessFn, garagesErrorFn);
 
@@ -97,18 +101,18 @@
                       position: position
                   });
 
-                  var label = new ELabel(map, position, '<div style="font-size:1.5em; font-weight:normal; -webkit-text-stroke: 1px #FFF; text-shadow: 1px 1px 0 #FFF, -1px 1px 0 #FFF, 1px -1px 0 #FFF, -1px -1px 0 #FFF;">' + garages[i].name + '</div>', null, new google.maps.Size(-20, -32), false);
+                  var label = new ELabel(map, position, '<div style="font-size:1.5em; -webkit-text-stroke: 1px #FFF; text-shadow: 1px 1px 0 #FFF, -1px 1px 0 #FFF, 1px -1px 0 #FFF, -1px -1px 0 #FFF;">' + garages[i].name + '</div>', null, new google.maps.Size(-20, -32), false);
                   label.setMap(map);
 
 
                   var load = parseFloat(garages[i].numberOfLeasedSpaces) - parseFloat(garages[i].numberOfTeamMemberSpaces);
-                  if (100 < load) {
+                  if (load > 100) {
                       marker.setIcon('../../Content/Images/parking_green.png'); //TODO: Fix click zone
                   }
-                  else if ( 50 < load && load < 100) {
+                  else if ( load > 50 && load <= 100) {
                       marker.setIcon('../../Content/Images/parking_yellow.png');
                   }
-                  else if (load < 50 && load > 0) {
+                  else if (load <= 50 && load > 0) {
                       marker.setIcon('../../Content/Images/parking_red.png');
                   }
                   else if (load == 0) {

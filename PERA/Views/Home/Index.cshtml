@@ -52,7 +52,6 @@
     <link rel="stylesheet" href="~/Scripts/css/site.css" />
 
 </head>
-
 <body>
     <div id="wrapper" ng-controller="TabController as tab">
 
@@ -244,6 +243,19 @@
         <div id="garageMapContent" class="row" ng-show="tab.isSet(2)">
 
             <div id="map-canvas" class="columns small-10"></div>
+            <div id="mapKey">
+                <div id="greenBox"></div> 
+                <div class="keyText">Unused Spaces > 100</div>
+
+                <div id="yellowBox"></div> 
+                <div class="keyText">50 < Unused Spaces <= 100</div>
+
+                <div id="redBox"></div> 
+                <div class="keyText">0 < Unused Spaces <= 50</div>
+
+                <div id="blackBox"></div> 
+                <div class="keyText">Unused Spaces = 50</div>
+            </div>
             <div id="sideBar" class="columns small-2">
 
                 <div id="garageInfoHeader" class="row">
@@ -291,169 +303,172 @@
                 <!-- Overview -->
                 <div class="row">
                     <table id="garageTable" ng-controller="GaragesController as garageCtrl" ng-show="tab.sideIsSet(-1)">
-                        <tr style="background-color:lightblue">
-                            <th>Name</th>
-                            <th>Usage</th>
-                        </tr>
-                        <tr>
-                            <td>Jesse Lacey</td>
-                            <td>0/31</td>
-                        </tr>
-                        <tr>
-                            <td>Vin Accardi</td>
-                            <td>0/31</td>
-                        </tr>
-                        <tr>
-                            <td>Haley Williams</td>
-                            <td>1/31</td>
-                        </tr>
-                        <tr>
-                            <td>Josh Farro</td>
-                            <td>2/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jose Gonzalez</td>
-                            <td>2/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ben Howard</td>
-                            <td>2/31</td>
-                        </tr>
-                        <tr>
-                            <td>Justin Vernon</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Matt Tuck</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Birdy Sephon</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jamison Parker</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Andrew McMahon</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ben Folds</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Tyler Reinhart</td>
-                            <td>4/31</td>
-                        </tr>
-                        <tr>
-                            <td>Vin Mistborn</td>
-                            <td>4/31</td>
-                        </tr>
-                        <tr>
-                            <td>Elend Venture</td>
-                            <td>4/31</td>
-                        </tr>
-                        <tr>
-                            <td>Sazed Clemins</td>
-                            <td>4/31</td>
-                        </tr>
-
-                        <tr>
-                            <td>Joe Hertler</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Rebecca Holzer</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Emily Rehaert</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Paul Kisvardy</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Leighton Long</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Andy Hull</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jack White</td>
-                            <td>5/31</td>
-                        <tr>
-                            <td>John Smith</td>
-                            <td>5/31</td>
-                        <tr>
-                            <td>Lauren Snyder</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ben Gibbard</td>
-                            <td>6/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ray Myers</td>
-                            <td>7/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jeremy Mayville</td>
-                            <td>9/31</td>
-                        </tr>
-                        <tr>
-                            <td>Brooke Kohlhoff</td>
-                            <td>9/31</td>
-                        </tr>
-                        <tr>
-                            <td>Chelsea Filarski</td>
-                            <td>9/31</td>
-                        </tr>
-                        <tr>
-                            <td>Azurah Sweers</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Katie Werner</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ruby Griggs</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Michael Moore</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jeff Higgins</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Nelson Piper</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Garret Stier</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Steve Irwin</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Edward Grylls</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Albert Ramirez</td>
-                            <td>11/31</td>
-                        </tr>
+                        <thead>
+                            <tr style="background-color:lightblue">
+                                <th>Name</th>
+                                <th>Usage</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Jesse Lacey</td>
+                                <td>0/31</td>
+                            </tr>
+                            <tr>
+                                <td>Vin Accardi</td>
+                                <td>0/31</td>
+                            </tr>
+                            <tr>
+                                <td>Haley Williams</td>
+                                <td>1/31</td>
+                            </tr>
+                            <tr>
+                                <td>Josh Farro</td>
+                                <td>2/31</td>
+                            </tr>
+                            <tr>
+                                <td>Jose Gonzalez</td>
+                                <td>2/31</td>
+                            </tr>
+                            <tr>
+                                <td>Ben Howard</td>
+                                <td>2/31</td>
+                            </tr>
+                            <tr>
+                                <td>Justin Vernon</td>
+                                <td>3/31</td>
+                            </tr>
+                            <tr>
+                                <td>Matt Tuck</td>
+                                <td>3/31</td>
+                            </tr>
+                            <tr>
+                                <td>Birdy Sephon</td>
+                                <td>3/31</td>
+                            </tr>
+                            <tr>
+                                <td>Jamison Parker</td>
+                                <td>3/31</td>
+                            </tr>
+                            <tr>
+                                <td>Andrew McMahon</td>
+                                <td>3/31</td>
+                            </tr>
+                            <tr>
+                                <td>Ben Folds</td>
+                                <td>3/31</td>
+                            </tr>
+                            <tr>
+                                <td>Tyler Reinhart</td>
+                                <td>4/31</td>
+                            </tr>
+                            <tr>
+                                <td>Vin Mistborn</td>
+                                <td>4/31</td>
+                            </tr>
+                            <tr>
+                                <td>Elend Venture</td>
+                                <td>4/31</td>
+                            </tr>
+                            <tr>
+                                <td>Sazed Clemins</td>
+                                <td>4/31</td>
+                            </tr>
+                            <tr>
+                                <td>Joe Hertler</td>
+                                <td>5/31</td>
+                            </tr>
+                            <tr>
+                                <td>Rebecca Holzer</td>
+                                <td>5/31</td>
+                            </tr>
+                            <tr>
+                                <td>Emily Rehaert</td>
+                                <td>5/31</td>
+                            </tr>
+                            <tr>
+                                <td>Paul Kisvardy</td>
+                                <td>5/31</td>
+                            </tr>
+                            <tr>
+                                <td>Leighton Long</td>
+                                <td>5/31</td>
+                            </tr>
+                            <tr>
+                                <td>Andy Hull</td>
+                                <td>5/31</td>
+                            </tr>
+                            <tr>
+                                <td>Jack White</td>
+                                <td>5/31</td>
+                            <tr>
+                                <td>John Smith</td>
+                                <td>5/31</td>
+                            <tr>
+                                <td>Lauren Snyder</td>
+                                <td>5/31</td>
+                            </tr>
+                            <tr>
+                                <td>Ben Gibbard</td>
+                                <td>6/31</td>
+                            </tr>
+                            <tr>
+                                <td>Ray Myers</td>
+                                <td>7/31</td>
+                            </tr>
+                            <tr>
+                                <td>Jeremy Mayville</td>
+                                <td>9/31</td>
+                            </tr>
+                            <tr>
+                                <td>Brooke Kohlhoff</td>
+                                <td>9/31</td>
+                            </tr>
+                            <tr>
+                                <td>Chelsea Filarski</td>
+                                <td>9/31</td>
+                            </tr>
+                            <tr>
+                                <td>Azurah Sweers</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Katie Werner</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Ruby Griggs</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Michael Moore</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Jeff Higgins</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Nelson Piper</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Garret Stier</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Steve Irwin</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Edward Grylls</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Albert Ramirez</td>
+                                <td>11/31</td>
+                            </tr>
+                        </tbody>
                     </table>
                 </div>
             </div>

@@ -104,4 +104,41 @@ tr.issueRow.selected {
     font-weight: bold;
 }
 
+#mapKey {
+    background-color: #FFF;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid black;
+}
+
+.keyText {
+        font-size: 1.5em;  
+}
+
+#greenBox, #yellowBox, #redBox, #blackBox {
+    height: 25px;
+    width: 25px;
+    border: 1px solid black;
+    margin: 1px;
+}
+
+#greenBox {
+    background-color: #859900;
+}
+
+#yellowBox {
+    background-color: #b58900;
+}
+
+#redBox {
+    background-color: #cb4b16;
+}
+
+#blackBox {
+    background-color: #6c71c4;
+}
+
+tbody {
+    overflow: auto;
+}
 
