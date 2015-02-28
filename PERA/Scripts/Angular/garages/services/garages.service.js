@@ -145,7 +145,7 @@
             return vm.averageTransientSalePrice;
         }
 
-        function calculateTotals() //TODO: Move this to a service so it is only called once
+        function calculateTotals()
         {
             for (var i = 0; i < vm.garages.length; i++) {
                 var temp = vm.garages[i].numberOfLeasedSpaces * vm.garages[i].spaceCost;
