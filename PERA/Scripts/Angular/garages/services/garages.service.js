@@ -21,13 +21,28 @@
         vm.garages = [];
         var last_request_failed = false;
         var promise = undefined;
-
-
+        vm.costs = []; //the total cost of leased spaces for each garage
+        vm.totalCost = 0; //the total cost for all garages
+        vm.totalCapacity = 0;
+        vm.totalLeasedSpaces = 0;
+        vm.totalTeamMemberSpaces = 0;
+        vm.totalRequiredBufferSize = 0;
+        vm.averageCostPerSpace = 0;
+        vm.averageTransientSalePrice = 0;
+        
         var Garages = {
             all: all,
             create: create,
             get: get,
-            share: share
+            share: share,
+            costs: getCosts,
+            totalCost: getTotalCost,
+            totalCapacity: getTotalCapacity,
+            totalLeasedSpaces: getTotalLeasedSpaces,
+            totalTeamMemberSpaces: getTotalTeamMemberSpaces,
+            totalRequiredBufferSize: getTotalRequiredBufferSize,
+            averageCostPerSpace: getAverageCostPerSpace,
+            averageTransientSalePrice: getAverageTransientSalePrice
         };
 
         return Garages;
@@ -60,6 +75,7 @@
             last_request_failed = false;
             vm.garages = data.data;
             console.log("service success ", vm.garages);
+            calculateTotals();
             return vm.garages;
             //share();
         }
@@ -97,6 +113,55 @@
             return $http.get('/api/' + badgeID + '/garages/');
         }
 
+        function getCosts() {
+            return vm.costs;
+        }
 
+        function getTotalCost() {
+            return vm.totalCost;
+        }
+
+        function getTotalCapacity() {
+            return vm.totalCapacity;
+        }
+
+        function getTotalLeasedSpaces() {
+            return vm.totalLeasedSpaces;
+        }
+
+        function getTotalRequiredBufferSize() {
+            return vm.totalRequiredBufferSize;
+        }
+
+        function getTotalTeamMemberSpaces() {
+            return vm.getTotalTeamMemberSpaces;
+        }
+
+        function getAverageCostPerSpace() {
+            return vm.averageCostPerSpace;
+        }
+
+        function getAverageTransientSalePrice() {
+            return vm.averageTransientSalePrice;
+        }
+
+        function calculateTotals() //TODO: Move this to a service so it is only called once
+        {
+            for (var i = 0; i < vm.garages.length; i++) {
+                var temp = vm.garages[i].numberOfLeasedSpaces * vm.garages[i].spaceCost;
+                vm.costs[i] = temp;
+                vm.totalCost += temp;
+                vm.totalCapacity += vm.garages[i].capacity;
+                vm.totalLeasedSpaces += vm.garages[i].numberOfLeasedSpaces;
+                vm.totalRequiredBufferSize += vm.garages[i].minimumNumberOfBufferSpaces;
+                vm.totalTeamMemberSpaces += vm.garages[i].numberOfTeamMemberSpaces;
+
+                vm.averageCostPerSpace += vm.garages[i].spaceCost;
+                vm.averageTransientSalePrice += vm.garages[i].transientSalePrice;
+            }
+            vm.averageCostPerSpace = vm.averageCostPerSpace / vm.garages.length;
+            vm.averageTransientSalePrice = vm.averageTransientSalePrice / vm.garages.length;
+
+        };
     }
 })();
