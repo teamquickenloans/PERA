@@ -69,8 +69,10 @@ tr.issueRow.selected {
 
 #usageTableHeader, #garageTableHeader {
     text-align: center;
-    font-size: 1.2em;
-    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    font-weight: normal;
+    background-color: #444444;
 }
 
 #usageTable {
@@ -95,10 +97,15 @@ tr.issueRow.selected {
     padding: 5px;
     border-radius: 5px;
     border: 1px solid black;
+    margin-bottom: 20px;
+    float: left;
+    position: absolute;
+    left: 25px;
+    bottom: 10px;
 }
 
 .keyText {
-        font-size: 1.5em;  
+        font-size: 14px;  
 }
 
 #greenBox, #yellowBox, #redBox, #blackBox {
@@ -106,6 +113,8 @@ tr.issueRow.selected {
     width: 25px;
     border: 1px solid black;
     margin: 1px;
+    margin-right: 5px;
+    float: left;
 }
 
 #greenBox {

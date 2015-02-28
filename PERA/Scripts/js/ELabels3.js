@@ -70,7 +70,7 @@ ELabel.prototype.draw = function (force) {
     var proj = this.getProjection();
     var p = proj.fromLatLngToDivPixel(this.point);
     var h = parseInt(this.div_.clientHeight);
-    this.div_.style.left = (p.x + this.pixelOffset.width) + "px";
+    this.div_.style.left = (p.x + this.pixelOffset.width + 20 - ((this.div_.clientWidth) / 2)) + "px";
     this.div_.style.top = (p.y + this.pixelOffset.height - h) + "px";
 }
 

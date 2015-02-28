@@ -1,0 +1,43 @@
+﻿
+<div ng-controller="FileUploadController">
+    <h3>Invoice Submission</h3>
+    <form ng-submit="upload()">
+        <div class="large-10 column">
+            <label for="invoiceID">Invoice Number:</label>
+            <input type="number" ng-model="invoice.invoiceID" id="invoiceID" required />
+
+                <label for="garageID">Garage:</label>
+                <select ng-model="invoice.garageID" ng-options="garage.GarageID as garage.name for garage in garages" id="garageID"></select>
+
+
+            <label for="totalAmountBilled">Amount Billed:</label>
+            <input type="number" ng-model="invoice.totalAmountBilled" id="totalAmountBilled" />
+        </div>
+        <div class="large-4 column">
+            <label for="dateReceived">Date Received:</label>
+            <input type="date" ng-model="invoice.dateReceived" id="dateReceived" />
+
+            <label for="billingStartDate">Billing Start Date</label>
+            <input type="date" ng-model="invoice.billingStartDate" id="billingStartDate" />
+
+            <label for="billingEndDate">Billing End Date</label>
+            <input type="date" ng-model="invoice.billingEndDate" id="billingEndDate" />
+
+        </div>
+        <div class="large-4 column">
+            <label for="numberOfLeasedSpots">Number of Leased Spots:</label>
+            <input type="number" ng-model="invoice.numberOfLeasedSpots" />
+
+            <label for="numberOfValidations">Number of Validations:</label>
+            <input type="number" ng-model="invoice.numberofValidations" />
+        </div>
+        <center>
+            <input type="file" id="file" name="file" />
+            <br>
+            <button type="submit">Upload</button>
+            <p></p>
+        </center>
+
+    </form>
+
+</div>

@@ -21,7 +21,7 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM">
     </script>
     <!-- Map Labels -->
-    <script type="text/javascript" src="~/Scripts/Angular/map/ELabels3.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/ELabels3.js"></script>
 
     <!-- =======================Underscore.js =============================== -->
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
@@ -42,11 +42,14 @@
     <script type="text/javascript" src="~/Scripts/Angular/garages/garages.module.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/garages/services/garages.service.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/garages/controllers/garages.controller.js"></script>
-
     <script type="text/javascript" src="~/Scripts/Angular/utils/utils.module.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/utils/services/snackbar.service.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/tabs/tabs.module.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/tabs/controllers/tab.controller.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/fileupload/fileupload.module.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/fileupload/services/invoiceform.service.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/fileupload/controllers/fileupload.controller.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/fileupload/controllers/invoiceform.controller.js"></script>
 
     <!-- ====================== CSS ================================= -->
     <link rel="stylesheet" href="~/Scripts/css/site.css" />
@@ -123,6 +126,15 @@
         <div id="expenseContent" class="row" ng-controller="ExpenseController as expenseCtrl" ng-show="tab.isSet(1)">
             <div id="issueTableWrapper" class="columns small-8">
 
+
+                <!-- Invoice Upload -->
+                <a href="/#/invoiceForm" data-reveal-id="uploadInvoiceModal" class="radius button">Upload Invoice</a>
+                <div id="uploadInvoiceModal" class="reveal-modal" data-reveal>
+                    <div ng-view></div>
+                    <a class="close-reveal-modal">&#215;</a>
+                </div>
+
+
                 <table id="issueTableHeader">
                     <tr>
                         <th class="garageCol">Garages</th>
@@ -139,6 +151,7 @@
                     </tr>
                 </table>
  
+
             </div>
 
             <div class="columns small-4" ng-controller="GaragesController as garageCtrl">
@@ -195,8 +208,6 @@
                         </tr>
                     </table>
 
-
-
                     <!-- Overview -->
                     <table id="garageTable" ng-show="tab.sideIsSet(-1)">
                         <tr>
@@ -240,18 +251,20 @@
 
             <div id="map-canvas" class="columns small-9"></div>
             <div id="mapKey">
-                <div id="greenBox"></div> 
-                <div class="keyText">Unused Spaces > 100</div>
-
+                <h5>Spots Available</h5>
+                <div id="greenBox"></div>
+                <div class="keyText">100+ Spots</div>
+                <br />
                 <div id="yellowBox"></div> 
-                <div class="keyText">50 < Unused Spaces <= 100</div>
-
+                <div class="keyText">50 - 100 Spots</div>
+                <br />
                 <div id="redBox"></div> 
-                <div class="keyText">0 < Unused Spaces <= 50</div>
-
+                <div class="keyText">0 - 50 Spots</div>
+                <br />
                 <div id="blackBox"></div> 
-                <div class="keyText">Unused Spaces = 50</div>
+                <div class="keyText">Garage Full</div>
             </div>
+
 
 
             <div id="sideBar" class="columns small-3">
@@ -292,6 +305,7 @@
                         </tr>
                     </table>
                 </div>
+
 
 
 

@@ -9,12 +9,16 @@
         'pera.garages',
         'pera.utils',
         'pera.dashboard',
-        'pera.tabs'
+        'pera.tabs',
+        'pera.fileupload',
+        'ngRoute'
       ]);
     
     //angular
     //  .module('pera.routes', ['ngRoute']);
 
     angular
-      .module('pera.config',[]);
+      .module('pera.config', ['ngRoute']);
+
+
 })();
