@@ -100,8 +100,10 @@ tr.issueRow.selected {
 
 #header {
     text-align: center;
-    font-size: 1.2em;
-    font-weight: bold;
+    font-size: 18px;
+    color: white;
+    font-weight: normal;
+    background-color: #444444;
 }
 
 #mapKey {
@@ -111,6 +113,9 @@ tr.issueRow.selected {
     border: 1px solid black;
     margin-bottom: 20px;
     float: left;
+    position: absolute;
+    left: 25px;
+    bottom: 10px;
 }
 
 .keyText {
