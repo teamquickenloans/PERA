@@ -21,7 +21,7 @@
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM">
     </script>
     <!-- Map Labels -->
-    <script type="text/javascript" src="~/Scripts/Angular/map/ELabels3.js"></script>
+    <script type="text/javascript" src="~/Scripts/js/ELabels3.js"></script>
 
     <!-- =======================Underscore.js =============================== -->
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
@@ -127,8 +127,14 @@
             <div id="issueTableWrapper" class="columns small-8">
 
                 <div id="issueTableFilters" class="row" align="center">
-                    <!-- TODO: dunno if I need this, put some filters in the header -->
-                </div>
+
+                    <a href="/#/invoiceForm" data-reveal-id="uploadInvoiceModal" class="radius button">Upload Invoice</a>
+                    <div id="uploadInvoiceModal" class="reveal-modal" data-reveal>
+                        <div ng-view></div>
+                        <a class="close-reveal-modal">&#215;</a>
+                    </div>
+                        <!-- TODO: dunno if I need this, put some filters in the header -->
+                    </div>
 
                 <div id="issueTableHeader" class="row">
                     <div class="left">Garages</div>
@@ -202,8 +208,6 @@
                         </tr>
                     </table>
 
-
-
                     <!-- Overview -->
                     <table id="garageTable" ng-show="tab.sideIsSet(-1)">
                         <tr>
@@ -247,21 +251,22 @@
 
             <div id="map-canvas" class="columns small-10"></div>
             <div id="mapKey">
-                <div id="greenBox"></div> 
-                <div class="keyText">Unused Spaces > 100</div>
-
+                <h5>Spots Available</h5>
+                <div id="greenBox"></div>
+                <div class="keyText">100+ Spots</div>
+                <br />
                 <div id="yellowBox"></div> 
-                <div class="keyText">50 < Unused Spaces <= 100</div>
-
+                <div class="keyText">50 - 100 Spots</div>
+                <br />
                 <div id="redBox"></div> 
-                <div class="keyText">0 < Unused Spaces <= 50</div>
-
+                <div class="keyText">0 - 50 Spots</div>
+                <br />
                 <div id="blackBox"></div> 
-                <div class="keyText">Unused Spaces = 50</div>
+                <div class="keyText">Garage Full</div>
             </div>
             <div id="sideBar" class="columns small-2">
 
-                <div id="garageInfoHeader" class="row">
+                <div id="header" class="row">
                     Overview
                 </div>
 
@@ -299,7 +304,7 @@
                     </table>
                 </div>
 
-                <div id="usageHeader" class="row">
+                <div id="header" class="row">
                     Parking Usage
                 </div>
 

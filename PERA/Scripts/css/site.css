@@ -98,7 +98,7 @@ tr.issueRow.selected {
     margin: 0;
 }
 
-#usageHeader, #garageInfoHeader {
+#header {
     text-align: center;
     font-size: 1.2em;
     font-weight: bold;
@@ -109,10 +109,12 @@ tr.issueRow.selected {
     padding: 5px;
     border-radius: 5px;
     border: 1px solid black;
+    margin-bottom: 20px;
+    float: left;
 }
 
 .keyText {
-        font-size: 1.5em;  
+        font-size: 14px;  
 }
 
 #greenBox, #yellowBox, #redBox, #blackBox {
@@ -120,6 +122,8 @@ tr.issueRow.selected {
     width: 25px;
     border: 1px solid black;
     margin: 1px;
+    margin-right: 5px;
+    float: left;
 }
 
 #greenBox {
