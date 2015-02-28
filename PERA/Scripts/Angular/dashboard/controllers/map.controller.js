@@ -343,7 +343,7 @@
                       map: map,
                       position: position
                   });
-                  var styleString = '<div style="font-size:12pt; color: #4F4F4F; text-shadow: 1px 1px 0 #FFF, -1px 1px 0 #FFF, 1px -1px 0 #FFF, -1px -1px #FFF;">';
+                  var styleString = '<div style="font-size:14px; color: #4F4F4F; text-shadow: 1px 1px 0 #FFF, -1px 1px 0 #FFF, 1px -1px 0 #FFF, -1px -1px #FFF;">';
                   var label = new ELabel(map, position, styleString + garages[i].name + '</div>', null, new google.maps.Size(-20, -32), false);
                   label.setMap(map);
 
