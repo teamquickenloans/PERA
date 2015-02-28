@@ -1,5 +1,6 @@
 ﻿html, body, #wrapper {
     height: 100%;
+    width: 100%;
     padding: 0;
     margin: 0;
 }
@@ -14,23 +15,20 @@ body {
 
 #expenseContent, #garageMapContent, #notificationsContent {
     height: 96.68%;
-}
-
-#map-canvas {
-    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 #sideBar {
     height: 100%;
-    overflow: hidden;
+    overflow: auto;
+    padding: 0;
+    margin: 0;
 }
 
-.row {
-    max-width: 100%;
-}
-
-#sideBarContent {
-    margin: 10px;
+#map-canvas {
+    height: 100%;
 }
 
 #expenseMain {
@@ -47,41 +45,11 @@ body {
     background-color: #A5D9E6;
 }
 
-.left {
-    width: 30%;
-    float: left;
-    text-align: left;
-    margin-left: 5%;
-}
-
-.center {
-    width: 30%;
-    float: left;
-    text-align: center;
-}
-
-.right {
-    width: 30%;
-    float: left;
-    text-align: right;
-    margin-right: 5%;
-}
-
-#issueTableFilters {
-    height: 10%;
-}
-
 #issueTableContent {
     width: 100%;
     padding: 0;
     margin: 0;
-}
-
-#issueTableContentWrapper {
-    height: 97%;
     overflow: auto;
-    margin: 0;
-    padding: 0;
 }
 
 .issueRow {
@@ -96,12 +64,30 @@ tr.issueRow.selected {
     width: 100%;
     padding: 0;
     margin: 0;
+    overflow: auto;
 }
 
-#usageHeader, #garageInfoHeader {
+#usageTableHeader, #garageTableHeader {
     text-align: center;
     font-size: 1.2em;
     font-weight: bold;
+}
+
+#usageTable {
+    width: 100%;
+    height: 60%;
+}
+
+#usageTableHead {
+    background-color: lightblue;
+}
+
+#usageTableBody {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+    overflow: auto;
 }
 
 #mapKey {
@@ -138,7 +124,4 @@ tr.issueRow.selected {
     background-color: #6c71c4;
 }
 
-tbody {
-    overflow: auto;
-}
 

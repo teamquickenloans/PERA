@@ -123,29 +123,25 @@
         <div id="expenseContent" class="row" ng-controller="ExpenseController as expenseCtrl" ng-show="tab.isSet(1)">
             <div id="issueTableWrapper" class="columns small-8">
 
-                <div id="issueTableFilters" class="row" align="center">
-                    <!-- TODO: dunno if I need this, put some filters in the header -->
-                </div>
+                <table id="issueTableHeader">
+                    <tr>
+                        <th class="garageCol">Garages</th>
+                        <th class="issueCol">Issue</th>
+                        <th class="dateCol">Date</th>
+                    </tr>
+                </table>
 
-                <div id="issueTableHeader" class="row">
-                    <div class="left">Garages</div>
-                    <div class="center">Issue</div>
-                    <div class="right">Date</div>
-                </div>
-
-                <div id="issueTableContentWrapper" class="row">
-                    <table id="issueTableContent" class="row" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
-                        <tr class="issueRow" ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
-                            <td>{{issue.garage}}</td>
-                            <td>{{issue.issue}}</td>
-                            <td>{{issue.date | date:'MM/dd/yyyy'}}</td>
-                        </tr>
-                    </table>
-                </div>
+                <table id="issueTableContent" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+                    <tr class="issueRow" ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                        <td>{{issue.garage}}</td>
+                        <td>{{issue.issue}}</td>
+                        <td>{{issue.date | date:'MM/dd/yyyy'}}</td>
+                    </tr>
+                </table>
+ 
             </div>
 
-            <div class="columns small-4">
-                <div class="row" ng-controller="GaragesController as garageCtrl">
+            <div class="columns small-4" ng-controller="GaragesController as garageCtrl">
 
                     <!-- Single Garage -->
                     <table id="garageTable" ng-show="!tab.sideIsSet(-1)">
@@ -232,7 +228,7 @@
                             <td>{{garageCtrl.averageTransientSalePrice | currency}}</td>
                         </tr>
                     </table>
-                </div>
+          
             </div>
 
         </div>
@@ -240,9 +236,9 @@
 
 
         <!-- ======================== Garage Map Content ============================ -->
-        <div id="garageMapContent" class="row" ng-show="tab.isSet(2)">
+        <div id="garageMapContent" ng-show="tab.isSet(2)">
 
-            <div id="map-canvas" class="columns small-10"></div>
+            <div id="map-canvas" class="columns small-9"></div>
             <div id="mapKey">
                 <div id="greenBox"></div> 
                 <div class="keyText">Unused Spaces > 100</div>
@@ -256,14 +252,15 @@
                 <div id="blackBox"></div> 
                 <div class="keyText">Unused Spaces = 50</div>
             </div>
-            <div id="sideBar" class="columns small-2">
 
-                <div id="garageInfoHeader" class="row">
+
+            <div id="sideBar" class="columns small-3">
+                <!-- Overview -->
+                <div id="garageTableHeader">
                     Overview
                 </div>
 
-                <div class="row" ng-controller="GaragesController as garageCtrl">
-                    <!-- Overview -->
+                <div ng-controller="GaragesController as garageCtrl">
                     <table id="garageTable" ng-show="tab.sideIsSet(-1)">
                         <tr>
                             <td>Cost Per Month: </td>
@@ -296,181 +293,185 @@
                     </table>
                 </div>
 
-                <div id="usageHeader" class="row">
+
+
+                <div id="usageTableHeader">
                     Parking Usage
                 </div>
 
-                <!-- Overview -->
-                <div class="row">
-                    <table id="garageTable" ng-controller="GaragesController as garageCtrl" ng-show="tab.sideIsSet(-1)">
-                        <thead>
-                            <tr style="background-color:lightblue">
-                                <th>Name</th>
-                                <th>Usage</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Jesse Lacey</td>
-                                <td>0/31</td>
-                            </tr>
-                            <tr>
-                                <td>Vin Accardi</td>
-                                <td>0/31</td>
-                            </tr>
-                            <tr>
-                                <td>Haley Williams</td>
-                                <td>1/31</td>
-                            </tr>
-                            <tr>
-                                <td>Josh Farro</td>
-                                <td>2/31</td>
-                            </tr>
-                            <tr>
-                                <td>Jose Gonzalez</td>
-                                <td>2/31</td>
-                            </tr>
-                            <tr>
-                                <td>Ben Howard</td>
-                                <td>2/31</td>
-                            </tr>
-                            <tr>
-                                <td>Justin Vernon</td>
-                                <td>3/31</td>
-                            </tr>
-                            <tr>
-                                <td>Matt Tuck</td>
-                                <td>3/31</td>
-                            </tr>
-                            <tr>
-                                <td>Birdy Sephon</td>
-                                <td>3/31</td>
-                            </tr>
-                            <tr>
-                                <td>Jamison Parker</td>
-                                <td>3/31</td>
-                            </tr>
-                            <tr>
-                                <td>Andrew McMahon</td>
-                                <td>3/31</td>
-                            </tr>
-                            <tr>
-                                <td>Ben Folds</td>
-                                <td>3/31</td>
-                            </tr>
-                            <tr>
-                                <td>Tyler Reinhart</td>
-                                <td>4/31</td>
-                            </tr>
-                            <tr>
-                                <td>Vin Mistborn</td>
-                                <td>4/31</td>
-                            </tr>
-                            <tr>
-                                <td>Elend Venture</td>
-                                <td>4/31</td>
-                            </tr>
-                            <tr>
-                                <td>Sazed Clemins</td>
-                                <td>4/31</td>
-                            </tr>
-                            <tr>
-                                <td>Joe Hertler</td>
-                                <td>5/31</td>
-                            </tr>
-                            <tr>
-                                <td>Rebecca Holzer</td>
-                                <td>5/31</td>
-                            </tr>
-                            <tr>
-                                <td>Emily Rehaert</td>
-                                <td>5/31</td>
-                            </tr>
-                            <tr>
-                                <td>Paul Kisvardy</td>
-                                <td>5/31</td>
-                            </tr>
-                            <tr>
-                                <td>Leighton Long</td>
-                                <td>5/31</td>
-                            </tr>
-                            <tr>
-                                <td>Andy Hull</td>
-                                <td>5/31</td>
-                            </tr>
-                            <tr>
-                                <td>Jack White</td>
-                                <td>5/31</td>
-                            <tr>
-                                <td>John Smith</td>
-                                <td>5/31</td>
-                            <tr>
-                                <td>Lauren Snyder</td>
-                                <td>5/31</td>
-                            </tr>
-                            <tr>
-                                <td>Ben Gibbard</td>
-                                <td>6/31</td>
-                            </tr>
-                            <tr>
-                                <td>Ray Myers</td>
-                                <td>7/31</td>
-                            </tr>
-                            <tr>
-                                <td>Jeremy Mayville</td>
-                                <td>9/31</td>
-                            </tr>
-                            <tr>
-                                <td>Brooke Kohlhoff</td>
-                                <td>9/31</td>
-                            </tr>
-                            <tr>
-                                <td>Chelsea Filarski</td>
-                                <td>9/31</td>
-                            </tr>
-                            <tr>
-                                <td>Azurah Sweers</td>
-                                <td>10/31</td>
-                            </tr>
-                            <tr>
-                                <td>Katie Werner</td>
-                                <td>10/31</td>
-                            </tr>
-                            <tr>
-                                <td>Ruby Griggs</td>
-                                <td>10/31</td>
-                            </tr>
-                            <tr>
-                                <td>Michael Moore</td>
-                                <td>10/31</td>
-                            </tr>
-                            <tr>
-                                <td>Jeff Higgins</td>
-                                <td>10/31</td>
-                            </tr>
-                            <tr>
-                                <td>Nelson Piper</td>
-                                <td>10/31</td>
-                            </tr>
-                            <tr>
-                                <td>Garret Stier</td>
-                                <td>10/31</td>
-                            </tr>
-                            <tr>
-                                <td>Steve Irwin</td>
-                                <td>10/31</td>
-                            </tr>
-                            <tr>
-                                <td>Edward Grylls</td>
-                                <td>10/31</td>
-                            </tr>
-                            <tr>
-                                <td>Albert Ramirez</td>
-                                <td>11/31</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                <table id="usageTable" ng-controller="GaragesController as garageCtrl" ng-show="tab.sideIsSet(-1)">
+                    <thead id="usageTableHead">
+                        <tr>
+                            <th>Name</th>
+                            <th>Usage</th>
+                        </tr>
+                    </thead>
+                    <tbody id="usageTableBody">
+                        <tr>
+                            <td>Jesse Lacey</td>
+                            <td>0/31</td>
+                        </tr>
+                        <tr>
+                            <td>Vin Accardi</td>
+                            <td>0/31</td>
+                        </tr>
+                        <tr>
+                            <td>Quellin Quinn</td>
+                            <td>0/31</td>
+                        </tr>
+                        <tr>
+                            <td>Haley Williams</td>
+                            <td>1/31</td>
+                        </tr>
+                        <tr>
+                            <td>Josh Farro</td>
+                            <td>2/31</td>
+                        </tr>
+                        <tr>
+                            <td>Jose Gonzalez</td>
+                            <td>2/31</td>
+                        </tr>
+                        <tr>
+                            <td>Ben Howard</td>
+                            <td>2/31</td>
+                        </tr>
+                        <tr>
+                            <td>Justin Vernon</td>
+                            <td>3/31</td>
+                        </tr>
+                        <tr>
+                            <td>Matt Tuck</td>
+                            <td>3/31</td>
+                        </tr>
+                        <tr>
+                            <td>Birdy Sephon</td>
+                            <td>3/31</td>
+                        </tr>
+                        <tr>
+                            <td>Jamison Parker</td>
+                            <td>3/31</td>
+                        </tr>
+                        <tr>
+                            <td>Andrew McMahon</td>
+                            <td>3/31</td>
+                        </tr>
+                        <tr>
+                            <td>Ben Folds</td>
+                            <td>3/31</td>
+                        </tr>
+                        <tr>
+                            <td>Tyler Reinhart</td>
+                            <td>4/31</td>
+                        </tr>
+                        <tr>
+                            <td>Vin Mistborn</td>
+                            <td>4/31</td>
+                        </tr>
+                        <tr>
+                            <td>Elend Venture</td>
+                            <td>4/31</td>
+                        </tr>
+                        <tr>
+                            <td>Sazed Clemins</td>
+                            <td>4/31</td>
+                        </tr>
+                        <tr>
+                            <td>Joe Hertler</td>
+                            <td>5/31</td>
+                        </tr>
+                        <tr>
+                            <td>Rebecca Holzer</td>
+                            <td>5/31</td>
+                        </tr>
+                        <tr>
+                            <td>Emily Rehaert</td>
+                            <td>5/31</td>
+                        </tr>
+                        <tr>
+                            <td>Paul Kisvardy</td>
+                            <td>5/31</td>
+                        </tr>
+                        <tr>
+                            <td>Leighton Long</td>
+                            <td>5/31</td>
+                        </tr>
+                        <tr>
+                            <td>Andy Hull</td>
+                            <td>5/31</td>
+                        </tr>
+                        <tr>
+                            <td>Jack White</td>
+                            <td>5/31</td>
+                        <tr>
+                            <td>John Smith</td>
+                            <td>5/31</td>
+                        <tr>
+                            <td>Lauren Snyder</td>
+                            <td>5/31</td>
+                        </tr>
+                        <tr>
+                            <td>Ben Gibbard</td>
+                            <td>6/31</td>
+                        </tr>
+                        <tr>
+                            <td>Ray Myers</td>
+                            <td>7/31</td>
+                        </tr>
+                        <tr>
+                            <td>Jeremy Mayville</td>
+                            <td>9/31</td>
+                        </tr>
+                        <tr>
+                            <td>Brooke Kohlhoff</td>
+                            <td>9/31</td>
+                        </tr>
+                        <tr>
+                            <td>Chelsea Filarski</td>
+                            <td>9/31</td>
+                        </tr>
+                        <tr>
+                            <td>Azurah Sweers</td>
+                            <td>10/31</td>
+                        </tr>
+                        <tr>
+                            <td>Katie Werner</td>
+                            <td>10/31</td>
+                        </tr>
+                        <tr>
+                            <td>Ruby Griggs</td>
+                            <td>10/31</td>
+                        </tr>
+                        <tr>
+                            <td>Michael Moore</td>
+                            <td>10/31</td>
+                        </tr>
+                        <tr>
+                            <td>Jeff Higgins</td>
+                            <td>10/31</td>
+                        </tr>
+                        <tr>
+                            <td>Nelson Piper</td>
+                            <td>10/31</td>
+                        </tr>
+                        <tr>
+                            <td>Garret Stier</td>
+                            <td>10/31</td>
+                        </tr>
+                        <tr>
+                            <td>Steve Irwin</td>
+                            <td>10/31</td>
+                        </tr>
+                        <tr>
+                            <td>Edward Grylls</td>
+                            <td>10/31</td>
+                        </tr>
+                        <tr>
+                            <td>Albert Ramirez</td>
+                            <td>11/31</td>
+                        </tr>
+                    </tbody>
+                </table>
+          
             </div>
           
 
