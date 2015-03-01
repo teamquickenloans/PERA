@@ -20,7 +20,7 @@ body {
     margin: 0;
 }
 
-#sideBar {
+.sideBar {
     height: 100%;
     overflow: auto;
     padding: 0;
@@ -36,17 +36,22 @@ body {
 }
 
 #issueTableWrapper {
+    width: 100%;
     height: 60%;
     margin: 0;
     padding: 0;
 }
 
-#issueTableHeader {
+#issueTableHead {
     background-color: #A5D9E6;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
-#issueTableContent {
+#issueTableBody {
     width: 100%;
+    height: 100%;
     padding: 0;
     margin: 0;
     overflow: auto;
@@ -65,6 +70,18 @@ tr.issueRow.selected {
     padding: 0;
     margin: 0;
     overflow: auto;
+}
+
+.garageCol {
+    width: 33%;
+}
+
+.issueCol {
+    width: 33%;
+}
+
+.dateCol {
+    width: 33%;
 }
 
 #usageTableHeader, #garageTableHeader {

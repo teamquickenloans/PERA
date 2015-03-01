@@ -128,16 +128,7 @@
         <div id="expenseContent" class="row" ng-controller="ExpenseController as expenseCtrl" ng-show="tab.isSet(1)">
             <div id="issueTableWrapper" class="columns small-8">
 
-
-                <!-- Invoice Upload -->
-                <a href="/#/invoiceForm" data-reveal-id="uploadInvoiceModal" class="radius button">Upload Invoice</a>
-                <div id="uploadInvoiceModal" class="reveal-modal" data-reveal>
-                    <div ng-view></div>
-                    <a class="close-reveal-modal">&#215;</a>
-                </div>
-
-
-                <table id="issueTableHeader">
+                <table id="issueTableHead">
                     <tr>
                         <th class="garageCol">Garages</th>
                         <th class="issueCol">Issue</th>
@@ -145,102 +136,110 @@
                     </tr>
                 </table>
 
-                <table id="issueTableContent" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+                <table id="issueTableBody" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
                     <tr class="issueRow" ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
-                        <td>{{issue.garage}}</td>
-                        <td>{{issue.issue}}</td>
-                        <td>{{issue.date | date:'MM/dd/yyyy'}}</td>
+                        <td class="garageCol">{{issue.garage}}</td>
+                        <td class="issueCol">{{issue.issue}}</td>
+                        <td class="dateCol">{{issue.date | date:'MM/dd/yyyy'}}</td>
                     </tr>
                 </table>
- 
 
             </div>
 
-            <div class="columns small-4" ng-controller="GaragesController as garageCtrl">
 
-                    <!-- Single Garage -->
-                    <table id="garageTable" ng-show="!tab.sideIsSet(-1)">
-                        <tr>
-                            <td>Name: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].name}}</td>
-                        </tr>
-                        <tr>
-                            <td>Cost Per Month: </td>
-                            <td>{{garageCtrl.costs[tab.sideTab] | currency}}</td>
-                        </tr>
-                        <tr>
-                            <td>Address: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].address}}</td>
-                        </tr>
-                        <tr>
-                            <td>Capacity: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].capacity}}</td>
-                        </tr>
-                        <tr>
-                            <td>Leased Spaces: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].numberOfLeasedSpaces}}</td>
-                        </tr>
-                        <tr>
-                            <td>Team-Member Spaces: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].numberOfTeamMemberSpaces}}</td>
-                        </tr>
-                        <tr>
-                            <td>Required Buffer Size: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].minimumNumberOfBufferSpaces}}</td>
-                        </tr>
-                        <tr>
-                            <td>Cost Per Space: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].spaceCost | currency}}</td>
-                        </tr>
-                        <tr>
-                            <td>Transient Sale Price: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].transientSalePrice | currency}}</td>
-                        </tr>
-                        <tr>
-                            <td>Owner: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].owner}}</td>
-                        </tr>
-                        <tr>
-                            <td>Billing Party: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].billingParty}}</td>
-                        </tr>
-                        <tr>
-                            <td>Garage Manager ID: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].garageManagerID}}</td>
-                        </tr>
-                    </table>
 
-                    <!-- Overview -->
-                    <table id="garageTable" ng-show="tab.sideIsSet(-1)">
-                        <tr>
-                            <td>Cost Per Month: </td>
-                            <td>{{garageCtrl.totalCost | currency}}</td>
-                        </tr>
-                        <tr>
-                            <td>Capacity: </td>
-                            <td>{{garageCtrl.totalCapacity}}</td>
-                        </tr>
-                        <tr>
-                            <td>Leased Spaces: </td>
-                            <td>{{garageCtrl.totalLeasedSpaces}}</td>
-                        </tr>
-                        <tr>
-                            <td>Team-Member Spaces: </td>
-                            <td>{{garageCtrl.totalTeamMemberSpaces}}</td>
-                        </tr>
-                        <tr>
-                            <td>Required Buffer Size: </td>
-                            <td>{{garageCtrl.totalRequiredBufferSize}}</td>
-                        </tr>
-                        <tr>
-                            <td>Average Cost Per Space: </td>
-                            <td>{{garageCtrl.averageCostPerSpace | currency}}</td>
-                        </tr>
-                        <tr>
-                            <td>Average Transient Sale Price: </td>
-                            <td>{{garageCtrl.averageTransientSalePrice | currency}}</td>
-                        </tr>
-                    </table>
+            <div class="sideBar columns small-4" ng-controller="GaragesController as garageCtrl">
+
+                <!-- Single Garage -->
+                <table id="garageTable" ng-show="!tab.sideIsSet(-1)">
+                    <tr>
+                        <td>Name: </td>
+                        <td>{{garageCtrl.garages[tab.sideTab].name}}</td>
+                    </tr>
+                    <tr>
+                        <td>Cost Per Month: </td>
+                        <td>{{garageCtrl.costs[tab.sideTab] | currency}}</td>
+                    </tr>
+                    <tr>
+                        <td>Address: </td>
+                        <td>{{garageCtrl.garages[tab.sideTab].address}}</td>
+                    </tr>
+                    <tr>
+                        <td>Capacity: </td>
+                        <td>{{garageCtrl.garages[tab.sideTab].capacity}}</td>
+                    </tr>
+                    <tr>
+                        <td>Leased Spaces: </td>
+                        <td>{{garageCtrl.garages[tab.sideTab].numberOfLeasedSpaces}}</td>
+                    </tr>
+                    <tr>
+                        <td>Team-Member Spaces: </td>
+                        <td>{{garageCtrl.garages[tab.sideTab].numberOfTeamMemberSpaces}}</td>
+                    </tr>
+                    <tr>
+                        <td>Required Buffer Size: </td>
+                        <td>{{garageCtrl.garages[tab.sideTab].minimumNumberOfBufferSpaces}}</td>
+                    </tr>
+                    <tr>
+                        <td>Cost Per Space: </td>
+                        <td>{{garageCtrl.garages[tab.sideTab].spaceCost | currency}}</td>
+                    </tr>
+                    <tr>
+                        <td>Transient Sale Price: </td>
+                        <td>{{garageCtrl.garages[tab.sideTab].transientSalePrice | currency}}</td>
+                    </tr>
+                    <tr>
+                        <td>Owner: </td>
+                        <td>{{garageCtrl.garages[tab.sideTab].owner}}</td>
+                    </tr>
+                    <tr>
+                        <td>Billing Party: </td>
+                        <td>{{garageCtrl.garages[tab.sideTab].billingParty}}</td>
+                    </tr>
+                    <tr>
+                        <td>Garage Manager ID: </td>
+                        <td>{{garageCtrl.garages[tab.sideTab].garageManagerID}}</td>
+                    </tr>
+                </table>
+
+                <!-- Overview -->
+                <table id="garageTable" ng-show="tab.sideIsSet(-1)">
+                    <tr>
+                        <td>Cost Per Month: </td>
+                        <td>{{garageCtrl.totalCost | currency}}</td>
+                    </tr>
+                    <tr>
+                        <td>Capacity: </td>
+                        <td>{{garageCtrl.totalCapacity}}</td>
+                    </tr>
+                    <tr>
+                        <td>Leased Spaces: </td>
+                        <td>{{garageCtrl.totalLeasedSpaces}}</td>
+                    </tr>
+                    <tr>
+                        <td>Team-Member Spaces: </td>
+                        <td>{{garageCtrl.totalTeamMemberSpaces}}</td>
+                    </tr>
+                    <tr>
+                        <td>Required Buffer Size: </td>
+                        <td>{{garageCtrl.totalRequiredBufferSize}}</td>
+                    </tr>
+                    <tr>
+                        <td>Average Cost Per Space: </td>
+                        <td>{{garageCtrl.averageCostPerSpace | currency}}</td>
+                    </tr>
+                    <tr>
+                        <td>Average Transient Sale Price: </td>
+                        <td>{{garageCtrl.averageTransientSalePrice | currency}}</td>
+                    </tr>
+                </table>
+
+                <!-- Invoice Upload -->
+                <a href="/#/invoiceForm" data-reveal-id="uploadInvoiceModal" class="radius button">Upload Invoice</a>
+                <div id="uploadInvoiceModal" class="reveal-modal" data-reveal>
+                    <div ng-view></div>
+                    <a class="close-reveal-modal">&#215;</a>
+                </div>
           
             </div>
 
@@ -269,7 +268,7 @@
 
 
 
-            <div id="sideBar" class="columns small-3">
+            <div class="sideBar columns small-3">
                 <!-- Overview -->
                 <div id="garageTableHeader">
                     Overview
