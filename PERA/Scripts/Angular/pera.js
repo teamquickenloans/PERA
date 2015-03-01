@@ -11,7 +11,8 @@
         'pera.dashboard',
         'pera.tabs',
         'pera.fileupload',
-        'ngRoute'
+        'ngRoute',
+        'pera.teammembers'
       ]);
     
     //angular

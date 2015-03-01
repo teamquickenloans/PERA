@@ -13,7 +13,7 @@ body {
     overflow: hidden;
 }
 
-#expenseContent, #garageMapContent, #notificationsContent {
+#issuesContent, #uploadHistoryContent, #garageMapContent, #notificationsContent {
     height: 96.68%;
     width: 100%;
     padding: 0;
@@ -60,11 +60,36 @@ body {
     margin: 0;
 }
 
-.issueRow {
+#uploadTableWrapper {
+    height: 60%;
+    margin: 0;
+    padding: 0;
+}
+
+#uploadTableBodyWrapper {
+    height: 100%;
+    overflow: auto;
+}
+
+#uploadTableHead {
+    background-color: #A5D9E6;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#uploadTableBody {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.tableRow {
     background-color: #ddd; /* Currently just overwrites Foundation CSS on every other row to product desired effect. Janky */
 }
 
-tr.issueRow.selected {
+tr.tableRow.selected {
     background-color: #6c8;
 }
 
@@ -75,15 +100,27 @@ tr.issueRow.selected {
     overflow: auto;
 }
 
-.garageCol {
+.garageColIssueTable {
     width: 33%;
 }
 
-.issueCol {
+.issueColIssueTable {
     width: 33%;
 }
 
-.dateCol {
+.dateColIssueTable {
+    width: 33%;
+}
+
+.garageColUploadTable {
+    width: 33%;
+}
+
+.typeColUploadTable {
+    width: 33%;
+}
+
+.dateColUploadTable {
     width: 33%;
 }
 
@@ -120,11 +157,11 @@ tr.issueRow.selected {
     margin: 0;
 }
 
-.nameCol {
+.nameColUsageTable {
     width: 50%;
 }
 
-.usageCol {
+.usageColUsageTable {
     width: 50%;
 }
 

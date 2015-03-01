@@ -231,6 +231,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Angular\teammembers\controllers\teammembers.controller.js" />
+    <Content Include="Scripts\Angular\teammembers\services\teammembers.service.js" />
+    <Content Include="Scripts\Angular\teammembers\teammembers.module.js" />
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload-all.js" />
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload-all.min.js" />
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload-shim.js" />
