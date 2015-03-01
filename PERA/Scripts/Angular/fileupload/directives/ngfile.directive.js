@@ -5,13 +5,17 @@
 (function () {
     'use strict';
 
+    /**
+    * @desc file directive that can be used anywhere across the pera app
+    * @example <div acme-sales-customer-info></div>
+    */
     angular
       .module('pera.fileupload')
       .controller('InvoiceFormController', InvoiceFormController);
 
     InvoiceFormController.$inject = ['$scope', '$http']; //Here 'Garages' is the Garages Service (pera.garages.service)
 
-    /**
+    /**aaaaaaaaaaaaaaa
     * @namespace InvoiceFormController
     */
 
