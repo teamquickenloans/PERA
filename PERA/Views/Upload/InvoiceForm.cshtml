@@ -32,7 +32,10 @@
             <input type="number" ng-model="invoice.numberofValidations" />
         </div>
         <center>
-            <input type="file" id="file" name="file" />
+
+            <!--<input type="file" id="file" name="file" />-->
+                <input type="file" ng-file-select="upload($files)" multiple>
+
             <br>
             <button type="submit">Upload</button>
             <p></p>
