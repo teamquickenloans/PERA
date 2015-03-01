@@ -18,12 +18,13 @@
   
         var vm = this;
         $scope.garages = [];
+        $scope.uploads = [];
 
         $scope.data = 'none'; //the file
-        $scope.upload = upload;
-        $scope.file = [];
-        $scope.month = "";
-        $scope.invoice = {
+        //$scope.upload = upload;
+        //$scope.file = [];
+        vm.month = "";
+        vm.invoice = {
             invoiceID: '',
             garageID: '',
             totalAmountBilled: '',
@@ -35,34 +36,47 @@
         }
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
+
         //console.log($scope.garages);
 
-        $scope.$watch('files', function () {
-            $scope.upload($scope.files);
-        });
+        //scope.onFileSelect = upload($files)
 
-        
-        function upload(files) {
-            if (files && files.length) {
-                for (var i = 0; i < files.length; i++) {
-                    var file = files[i];
-                    $upload.upload({
-                        url: 'https://angular-file-upload-cors-srv.appspot.com/upload',
-                        fields: {
-                            'invoice': $scope.invoice
-                        },
-                        file: file
-                    }).progress(function (evt) {
-                        var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
-                        console.log('progress: ' + progressPercentage + '% ' +
-                                    evt.config.file.name);
-                    }).success(function (data, status, headers, config) {
-                        console.log('file ' + config.file.name + 'uploaded. Response: ' +
-                                    JSON.stringify(data));
-                    });
+
+        /*$scope.$watch('files', function () {
+            $scope.upload($scope.files);
+        });*/
+
+        /**
+        * @name upload
+        * @desc Try to upload a file using angular-file-upload
+        */
+        function upload($files) {
+            if ($files && $files.length) {
+                for (var i = 0; i < $files.length; i++) {
+                    var $file = $files[i];
+                    (function post(index) {
+                        $scope.uploads[index] = $upload.upload({
+                            url: "./api/files/upload", // webapi url
+                            method: "POST",
+                            data: { invoice: vm.invoice },
+                            file: $file
+                        }, uploadProgessFn, uploadSuccessFn)
+                    })(i);
                 }
             }
         };
+
+        function uploadProgressFn(evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+        };
+        function uploadSuccessFn(data, status, headers, config) {
+            console.log('file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data));
+        };
+
+        function abortUpload(index) {
+            $scope.uploads[index].abort();
+        }
 
         /*
         function upload() {
@@ -93,18 +107,5 @@
         function garagesErrorFn(data, status, headers, config) {
             Snackbar.error(data.data.error);
         }
-
-
-        /*function activate() {
-            Garages.all().then(garagesSuccessFn, garagesErrorFn);
-        }
-
-        function garagesSuccessFn(data, status, headers, config) {
-            vm.garages = data.data;         //this will depend on what the API returns, it may have to change
-        }
-
-        function garagesErrorFn(data, status, headers, config) {
-            Snackbar.error(data.data.error);
-        }*/
     }
 })();
