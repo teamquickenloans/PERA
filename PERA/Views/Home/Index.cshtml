@@ -57,7 +57,7 @@
     <link rel="stylesheet" href="~/Scripts/css/site.css" />
 
 </head>
-<body>
+<body ng-controller="MapController as map">
     <div id="wrapper" ng-controller="TabController as tab">
 
         <!-- ======================== Nav Bar ============================ -->
@@ -96,7 +96,7 @@
                 </ul>
 
                 <!-- Left Nav Section -->
-                <ul class="left" ng-controller="MapController as map">
+                <ul class="left">
                     <li class="divider"></li>
 
                     <li ng-class="{active:tab.isSet(1)}">
@@ -125,7 +125,7 @@
 
 
         <!-- ======================== Expense Reconciliation Content ============================ -->
-        <div id="expenseContent" class="row" ng-controller="ExpenseController as expenseCtrl" ng-show="tab.isSet(1)">
+        <div id="expenseContent" ng-controller="ExpenseController as expenseCtrl" ng-show="tab.isSet(1)">
             <div id="issueTableWrapper" class="columns small-8">
 
                 <table id="issueTableHead">
@@ -136,13 +136,15 @@
                     </tr>
                 </table>
 
-                <table id="issueTableBody" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
-                    <tr class="issueRow" ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
-                        <td class="garageCol">{{issue.garage}}</td>
-                        <td class="issueCol">{{issue.issue}}</td>
-                        <td class="dateCol">{{issue.date | date:'MM/dd/yyyy'}}</td>
-                    </tr>
-                </table>
+                <div id="issueTableBodyWrapper">
+                    <table id="issueTableBody" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+                        <tr class="issueRow" ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                            <td class="garageCol">{{issue.garage}}</td>
+                            <td class="issueCol">{{issue.issue}}</td>
+                            <td class="dateCol">{{issue.date | date:'MM/dd/yyyy'}}</td>
+                        </tr>
+                    </table>
+                </div>
 
             </div>
 
@@ -150,132 +152,13 @@
 
             <div class="sideBar columns small-4" ng-controller="GaragesController as garageCtrl">
 
-                <!-- Single Garage -->
-                <table id="garageTable" ng-show="!tab.sideIsSet(-1)">
-                    <tr>
-                        <td>Name: </td>
-                        <td>{{garageCtrl.garages[tab.sideTab].name}}</td>
-                    </tr>
-                    <tr>
-                        <td>Cost Per Month: </td>
-                        <td>{{garageCtrl.costs[tab.sideTab] | currency}}</td>
-                    </tr>
-                    <tr>
-                        <td>Address: </td>
-                        <td>{{garageCtrl.garages[tab.sideTab].address}}</td>
-                    </tr>
-                    <tr>
-                        <td>Capacity: </td>
-                        <td>{{garageCtrl.garages[tab.sideTab].capacity}}</td>
-                    </tr>
-                    <tr>
-                        <td>Leased Spaces: </td>
-                        <td>{{garageCtrl.garages[tab.sideTab].numberOfLeasedSpaces}}</td>
-                    </tr>
-                    <tr>
-                        <td>Team-Member Spaces: </td>
-                        <td>{{garageCtrl.garages[tab.sideTab].numberOfTeamMemberSpaces}}</td>
-                    </tr>
-                    <tr>
-                        <td>Required Buffer Size: </td>
-                        <td>{{garageCtrl.garages[tab.sideTab].minimumNumberOfBufferSpaces}}</td>
-                    </tr>
-                    <tr>
-                        <td>Cost Per Space: </td>
-                        <td>{{garageCtrl.garages[tab.sideTab].spaceCost | currency}}</td>
-                    </tr>
-                    <tr>
-                        <td>Transient Sale Price: </td>
-                        <td>{{garageCtrl.garages[tab.sideTab].transientSalePrice | currency}}</td>
-                    </tr>
-                    <tr>
-                        <td>Owner: </td>
-                        <td>{{garageCtrl.garages[tab.sideTab].owner}}</td>
-                    </tr>
-                    <tr>
-                        <td>Billing Party: </td>
-                        <td>{{garageCtrl.garages[tab.sideTab].billingParty}}</td>
-                    </tr>
-                    <tr>
-                        <td>Garage Manager ID: </td>
-                        <td>{{garageCtrl.garages[tab.sideTab].garageManagerID}}</td>
-                    </tr>
-                </table>
-
                 <!-- Overview -->
-                <table id="garageTable" ng-show="tab.sideIsSet(-1)">
-                    <tr>
-                        <td>Cost Per Month: </td>
-                        <td>{{garageCtrl.totalCost | currency}}</td>
-                    </tr>
-                    <tr>
-                        <td>Capacity: </td>
-                        <td>{{garageCtrl.totalCapacity}}</td>
-                    </tr>
-                    <tr>
-                        <td>Leased Spaces: </td>
-                        <td>{{garageCtrl.totalLeasedSpaces}}</td>
-                    </tr>
-                    <tr>
-                        <td>Team-Member Spaces: </td>
-                        <td>{{garageCtrl.totalTeamMemberSpaces}}</td>
-                    </tr>
-                    <tr>
-                        <td>Required Buffer Size: </td>
-                        <td>{{garageCtrl.totalRequiredBufferSize}}</td>
-                    </tr>
-                    <tr>
-                        <td>Average Cost Per Space: </td>
-                        <td>{{garageCtrl.averageCostPerSpace | currency}}</td>
-                    </tr>
-                    <tr>
-                        <td>Average Transient Sale Price: </td>
-                        <td>{{garageCtrl.averageTransientSalePrice | currency}}</td>
-                    </tr>
-                </table>
+                <div ng-show="tab.sideIsSet(-1)">
+                    <div id="garageTableHeader">
+                        Overview
+                    </div>
 
-                <!-- Invoice Upload -->
-                <a href="/#/invoiceForm" data-reveal-id="uploadInvoiceModal" class="radius button">Upload Invoice</a>
-                <div id="uploadInvoiceModal" class="reveal-modal" data-reveal>
-                    <div ng-view></div>
-                    <a class="close-reveal-modal">&#215;</a>
-                </div>
-          
-            </div>
-
-        </div>
-
-
-
-        <!-- ======================== Garage Map Content ============================ -->
-        <div id="garageMapContent" ng-show="tab.isSet(2)">
-
-            <div id="map-canvas" class="columns small-9"></div>
-            <div id="mapKey">
-                <h5>&nbsp;&nbsp;Spots Available&nbsp;&nbsp;&nbsp;</h5>
-                <div id="greenBox"></div>
-                <div class="keyText">100+ Spots</div>
-                <br />
-                <div id="yellowBox"></div> 
-                <div class="keyText">50 - 100 Spots</div>
-                <br />
-                <div id="redBox"></div> 
-                <div class="keyText">0 - 50 Spots</div>
-                <br />
-                <div id="blackBox"></div> 
-                <div class="keyText">Garage Full</div>
-            </div>
-
-
-
-            <div class="sideBar columns small-3">
-                <!-- Overview -->
-                <div id="garageTableHeader">
-                    Overview
-                </div>
-
-                <div ng-controller="GaragesController as garageCtrl">
-                    <table id="garageTable" ng-show="tab.sideIsSet(-1)">
+                    <table id="garageTable">
                         <tr>
                             <td>Cost Per Month: </td>
                             <td>{{garageCtrl.totalCost | currency}}</td>
@@ -307,6 +190,188 @@
                     </table>
                 </div>
 
+                <!-- Single Garage -->
+                <div ng-show="!tab.sideIsSet(-1)">
+                    <div id="garageTableHeader">
+                        {{garageCtrl.garages[tab.sideTab].name}}
+                    </div>
+
+                    <table id="garageTable">
+                        <tr>
+                            <td>Cost Per Month: </td>
+                            <td>{{garageCtrl.costs[tab.sideTab] | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Capacity: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].capacity}}</td>
+                        </tr>
+                        <tr>
+                            <td>Leased Spaces: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].numberOfLeasedSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Team-Member Spaces: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].numberOfTeamMemberSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Required Buffer Size: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].minimumNumberOfBufferSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Cost Per Space: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].spaceCost | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Transient Sale Price: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].transientSalePrice | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Owner: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].owner}}</td>
+                        </tr>
+                        <tr>
+                            <td>Billing Party: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].billingParty}}</td>
+                        </tr>
+                        <tr>
+                            <td>Garage Manager ID: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].garageManagerID}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+              
+
+                <!-- Invoice Upload -->
+                <a href="/#/invoiceForm" data-reveal-id="uploadInvoiceModal" class="radius button">Upload Invoice</a>
+                <div id="uploadInvoiceModal" class="reveal-modal" data-reveal>
+                    <div ng-view></div>
+                    <a class="close-reveal-modal">&#215;</a>
+                </div>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ======================== Garage Map Content ============================ -->
+        <div id="garageMapContent" ng-show="tab.isSet(2)">
+
+            <div id="map-canvas" class="columns small-9"></div>
+            <div id="mapKey">
+                <h5>&nbsp;&nbsp;Spots Available&nbsp;&nbsp;&nbsp;</h5>
+                <div id="greenBox"></div>
+                <div class="keyText">100+ Spots</div>
+                <br />
+                <div id="yellowBox"></div>
+                <div class="keyText">50 - 100 Spots</div>
+                <br />
+                <div id="redBox"></div>
+                <div class="keyText">0 - 50 Spots</div>
+                <br />
+                <div id="blackBox"></div>
+                <div class="keyText">Garage Full</div>
+            </div>
+
+
+
+            <div class="sideBar columns small-3" ng-controller="GaragesController as garageCtrl">
+                <!-- Overview -->
+                <div ng-show="tab.sideIsSet(-1)">
+                    <div id="garageTableHeader">
+                        Overview
+                    </div>
+
+                    <table id="garageTable">
+                        <tr>
+                            <td>Cost Per Month: </td>
+                            <td>{{garageCtrl.totalCost | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Capacity: </td>
+                            <td>{{garageCtrl.totalCapacity}}</td>
+                        </tr>
+                        <tr>
+                            <td>Leased Spaces: </td>
+                            <td>{{garageCtrl.totalLeasedSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Team-Member Spaces: </td>
+                            <td>{{garageCtrl.totalTeamMemberSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Required Buffer Size: </td>
+                            <td>{{garageCtrl.totalRequiredBufferSize}}</td>
+                        </tr>
+                        <tr>
+                            <td>Average Cost Per Space: </td>
+                            <td>{{garageCtrl.averageCostPerSpace | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Average Transient Sale Price: </td>
+                            <td>{{garageCtrl.averageTransientSalePrice | currency}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Single Garage -->
+                <div ng-show="!tab.sideIsSet(-1)">
+                    <div id="garageTableHeader">
+                        {{garageCtrl.garages[tab.sideTab].name}}
+                    </div>
+
+                    <table id="garageTable">
+                        <tr>
+                            <td>Cost Per Month: </td>
+                            <td>{{garageCtrl.costs[tab.sideTab] | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Capacity: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].capacity}}</td>
+                        </tr>
+                        <tr>
+                            <td>Leased Spaces: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].numberOfLeasedSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Team-Member Spaces: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].numberOfTeamMemberSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Required Buffer Size: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].minimumNumberOfBufferSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Cost Per Space: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].spaceCost | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Transient Sale Price: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].transientSalePrice | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Owner: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].owner}}</td>
+                        </tr>
+                        <tr>
+                            <td>Billing Party: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].billingParty}}</td>
+                        </tr>
+                        <tr>
+                            <td>Garage Manager ID: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].garageManagerID}}</td>
+                        </tr>
+                    </table>
+                </div>
 
 
 
@@ -314,181 +379,188 @@
                     Parking Usage
                 </div>
 
-                <table id="usageTable" ng-controller="GaragesController as garageCtrl" ng-show="tab.sideIsSet(-1)">
-                    <thead id="usageTableHead">
+                <div id="usageTableWrapper">
+
+                    <table id="issueTableHead">
                         <tr>
-                            <th>Name</th>
-                            <th>Usage</th>
+                            <th class="nameCol">Name</th>
+                            <th class="usageCol">Usage</th>
                         </tr>
-                    </thead>
-                    <tbody id="usageTableBody">
-                        <tr>
-                            <td>Jesse Lacey</td>
-                            <td>0/31</td>
-                        </tr>
-                        <tr>
-                            <td>Vin Accardi</td>
-                            <td>0/31</td>
-                        </tr>
-                        <tr>
-                            <td>Quellin Quinn</td>
-                            <td>0/31</td>
-                        </tr>
-                        <tr>
-                            <td>Haley Williams</td>
-                            <td>1/31</td>
-                        </tr>
-                        <tr>
-                            <td>Josh Farro</td>
-                            <td>2/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jose Gonzalez</td>
-                            <td>2/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ben Howard</td>
-                            <td>2/31</td>
-                        </tr>
-                        <tr>
-                            <td>Justin Vernon</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Matt Tuck</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Birdy Sephon</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jamison Parker</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Andrew McMahon</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ben Folds</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Tyler Reinhart</td>
-                            <td>4/31</td>
-                        </tr>
-                        <tr>
-                            <td>Vin Mistborn</td>
-                            <td>4/31</td>
-                        </tr>
-                        <tr>
-                            <td>Elend Venture</td>
-                            <td>4/31</td>
-                        </tr>
-                        <tr>
-                            <td>Sazed Clemins</td>
-                            <td>4/31</td>
-                        </tr>
-                        <tr>
-                            <td>Joe Hertler</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Rebecca Holzer</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Emily Rehaert</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Paul Kisvardy</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Leighton Long</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Andy Hull</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jack White</td>
-                            <td>5/31</td>
-                        <tr>
-                            <td>John Smith</td>
-                            <td>5/31</td>
-                        <tr>
-                            <td>Lauren Snyder</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ben Gibbard</td>
-                            <td>6/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ray Myers</td>
-                            <td>7/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jeremy Mayville</td>
-                            <td>9/31</td>
-                        </tr>
-                        <tr>
-                            <td>Brooke Kohlhoff</td>
-                            <td>9/31</td>
-                        </tr>
-                        <tr>
-                            <td>Chelsea Filarski</td>
-                            <td>9/31</td>
-                        </tr>
-                        <tr>
-                            <td>Azurah Sweers</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Katie Werner</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ruby Griggs</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Michael Moore</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jeff Higgins</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Nelson Piper</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Garret Stier</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Steve Irwin</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Edward Grylls</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Albert Ramirez</td>
-                            <td>11/31</td>
-                        </tr>
-                    </tbody>
-                </table>
-          
-            </div>
-          
+                    </table>
+
+                    <div id="usageTableBodyWrapper">
+                        <table id="usageTableBody">
+                            <tr>
+                                <td class="nameCol">Jesse Lacey</td>
+                                <td class="usageCol">0/31</td>
+                            </tr>
+                            <tr>
+                                <td class="nameCol">Vin Accardi</td>
+                                <td class="usageCol">0/31</td>
+                            </tr>
+                            <tr>
+                                <td class="nameCol">Quellin Quinn</td>
+                                <td class="usageCol">0/31</td>
+                            </tr>
+                            <tr>
+                                <td>Haley Williams</td>
+                                <td>1/31</td>
+                            </tr>
+                            <tr>
+                                <td>Josh Farro</td>
+                                <td>2/31</td>
+                            </tr>
+                            <tr>
+                                <td>Jose Gonzalez</td>
+                                <td>2/31</td>
+                            </tr>
+                            <tr>
+                                <td>Ben Howard</td>
+                                <td>2/31</td>
+                            </tr>
+                            <tr>
+                                <td>Justin Vernon</td>
+                                <td>3/31</td>
+                            </tr>
+                            <tr>
+                                <td>Matt Tuck</td>
+                                <td>3/31</td>
+                            </tr>
+                            <tr>
+                                <td>Birdy Sephon</td>
+                                <td>3/31</td>
+                            </tr>
+                            <tr>
+                                <td>Jamison Parker</td>
+                                <td>3/31</td>
+                            </tr>
+                            <tr>
+                                <td>Andrew McMahon</td>
+                                <td>3/31</td>
+                            </tr>
+                            <tr>
+                                <td>Ben Folds</td>
+                                <td>3/31</td>
+                            </tr>
+                            <tr>
+                                <td>Tyler Reinhart</td>
+                                <td>4/31</td>
+                            </tr>
+                            <tr>
+                                <td>Vin Mistborn</td>
+                                <td>4/31</td>
+                            </tr>
+                            <tr>
+                                <td>Elend Venture</td>
+                                <td>4/31</td>
+                            </tr>
+                            <tr>
+                                <td>Sazed Clemins</td>
+                                <td>4/31</td>
+                            </tr>
+                            <tr>
+                                <td>Joe Hertler</td>
+                                <td>5/31</td>
+                            </tr>
+                            <tr>
+                                <td>Rebecca Holzer</td>
+                                <td>5/31</td>
+                            </tr>
+                            <tr>
+                                <td>Emily Rehaert</td>
+                                <td>5/31</td>
+                            </tr>
+                            <tr>
+                                <td>Paul Kisvardy</td>
+                                <td>5/31</td>
+                            </tr>
+                            <tr>
+                                <td>Leighton Long</td>
+                                <td>5/31</td>
+                            </tr>
+                            <tr>
+                                <td>Andy Hull</td>
+                                <td>5/31</td>
+                            </tr>
+                            <tr>
+                                <td>Jack White</td>
+                                <td>5/31</td>
+                            <tr>
+                                <td>John Smith</td>
+                                <td>5/31</td>
+                            <tr>
+                                <td>Lauren Snyder</td>
+                                <td>5/31</td>
+                            </tr>
+                            <tr>
+                                <td>Ben Gibbard</td>
+                                <td>6/31</td>
+                            </tr>
+                            <tr>
+                                <td>Ray Myers</td>
+                                <td>7/31</td>
+                            </tr>
+                            <tr>
+                                <td>Jeremy Mayville</td>
+                                <td>9/31</td>
+                            </tr>
+                            <tr>
+                                <td>Brooke Kohlhoff</td>
+                                <td>9/31</td>
+                            </tr>
+                            <tr>
+                                <td>Chelsea Filarski</td>
+                                <td>9/31</td>
+                            </tr>
+                            <tr>
+                                <td>Azurah Sweers</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Katie Werner</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Ruby Griggs</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Michael Moore</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Jeff Higgins</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Nelson Piper</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Garret Stier</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Steve Irwin</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Edward Grylls</td>
+                                <td>10/31</td>
+                            </tr>
+                            <tr>
+                                <td>Albert Ramirez</td>
+                                <td>11/31</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div> <!-- usageTableWrapper end -->
+
+                
+
+            </div> <!-- sideBar end -->
+
 
         </div>
 

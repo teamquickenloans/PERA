@@ -22,7 +22,7 @@ body {
 
 .sideBar {
     height: 100%;
-    overflow: auto;
+    overflow: hidden;
     padding: 0;
     margin: 0;
 }
@@ -36,10 +36,14 @@ body {
 }
 
 #issueTableWrapper {
-    width: 100%;
     height: 60%;
     margin: 0;
     padding: 0;
+}
+
+#issueTableBodyWrapper {
+    height: 100%;
+    overflow: auto;
 }
 
 #issueTableHead {
@@ -54,7 +58,6 @@ body {
     height: 100%;
     padding: 0;
     margin: 0;
-    overflow: auto;
 }
 
 .issueRow {
@@ -92,13 +95,22 @@ tr.issueRow.selected {
     background-color: #444444;
 }
 
-#usageTable {
-    width: 100%;
-    height: 60%;
+#usageTableWrapper {
+    height: 71.65%;
+    margin: 0;
+    padding: 0;
+}
+
+#usageTableBodyWrapper {
+    height: 100%;
+    overflow: auto;
 }
 
 #usageTableHead {
-    background-color: lightblue;
+    background-color: #A5D9E6;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 #usageTableBody {
@@ -106,7 +118,14 @@ tr.issueRow.selected {
     height: 100%;
     padding: 0;
     margin: 0;
-    overflow: auto;
+}
+
+.nameCol {
+    width: 50%;
+}
+
+.usageCol {
+    width: 50%;
 }
 
 #mapKey {
