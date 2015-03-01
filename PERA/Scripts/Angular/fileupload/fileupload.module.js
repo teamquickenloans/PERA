@@ -12,4 +12,7 @@
 
     angular
       .module('pera.fileupload.services', []);
+
+    angular
+  .module('pera.fileupload.services', []);
 })();

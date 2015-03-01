@@ -19,10 +19,11 @@
         var vm = this;
         $scope.garages = [];
         $scope.uploads = [];
+        $scope.upload = upload;
 
         $scope.data = 'none'; //the file
-        //$scope.upload = upload;
         //$scope.file = [];
+
         vm.month = "";
         vm.invoice = {
             invoiceID: '',
@@ -37,9 +38,7 @@
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
 
-        //console.log($scope.garages);
 
-        //scope.onFileSelect = upload($files)
 
 
         /*$scope.$watch('files', function () {
@@ -51,16 +50,19 @@
         * @desc Try to upload a file using angular-file-upload
         */
         function upload($files) {
+            console.log("in upload fn");
             if ($files && $files.length) {
+                console.log("in if");
                 for (var i = 0; i < $files.length; i++) {
                     var $file = $files[i];
-                    (function post(index) {
+                    (function (index) {
+                        console.log("posting..");
                         $scope.uploads[index] = $upload.upload({
                             url: "./api/files/upload", // webapi url
                             method: "POST",
                             data: { invoice: vm.invoice },
                             file: $file
-                        }, uploadProgessFn, uploadSuccessFn)
+                        }, uploadProgressFn, uploadSuccessFn)
                     })(i);
                 }
             }
@@ -71,6 +73,7 @@
             console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
         };
         function uploadSuccessFn(data, status, headers, config) {
+            console.log("posted!");
             console.log('file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data));
         };
 
