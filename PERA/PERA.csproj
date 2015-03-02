@@ -231,6 +231,9 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\Angular\invoiceTeamMembers\controllers\invoiceTeamMember.controller.js" />
+    <Content Include="Scripts\Angular\invoiceTeamMembers\invoiceTeamMembers.module.js" />
+    <Content Include="Scripts\Angular\invoiceTeamMembers\services\invoiceTeamMember.service.js" />
     <Content Include="Scripts\Angular\teammembers\controllers\teammembers.controller.js" />
     <Content Include="Scripts\Angular\teammembers\services\teammembers.service.js" />
     <Content Include="Scripts\Angular\teammembers\teammembers.module.js" />
