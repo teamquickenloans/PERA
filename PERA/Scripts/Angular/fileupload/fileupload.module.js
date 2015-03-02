@@ -8,8 +8,11 @@
       ]);
 
     angular
-      .module('pera.fileupload.controllers', []);
+      .module('pera.fileupload.controllers', ['angularFileUpload']);
 
     angular
       .module('pera.fileupload.services', []);
+
+    angular
+  .module('pera.fileupload.services', []);
 })();

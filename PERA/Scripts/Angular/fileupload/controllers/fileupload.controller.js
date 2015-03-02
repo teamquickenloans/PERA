@@ -9,20 +9,23 @@
       .module('pera.fileupload.controllers')
       .controller('FileUploadController', FileUploadController);
 
-    FileUploadController.$inject = ['$scope','InvoiceForm', 'Garages']; //Here 'Garages' is the Garages Service (pera.garages.service)
+    FileUploadController.$inject = ['$scope', '$upload', 'InvoiceForm', 'Garages', 'Snackbar']; //Here 'Garages' is the Garages Service (pera.garages.service)
 
     /**
     * @namespace FileUploadController
     */
-    function FileUploadController($scope, InvoiceForm, Garages) {
+    function FileUploadController($scope, $upload, InvoiceForm, Garages, Snackbar) {
   
         var vm = this;
+        vm.files = [];
         $scope.garages = [];
+        $scope.uploads = [];
+        $scope.upload = upload;
 
         $scope.data = 'none'; //the file
-        $scope.upload = upload;
-        $scope.file = [];
-        $scope.month = "";
+        //$scope.file = [];
+
+        vm.month = "";
         $scope.invoice = {
             invoiceID: '',
             garageID: '',
@@ -35,8 +38,50 @@
         }
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
-        console.log($scope.garages);
 
+
+
+
+        /*$scope.$watch('files', function () {
+            $scope.upload($scope.files);
+        });*/
+
+        /**
+        * @name upload
+        * @desc Try to upload a file using angular-file-upload
+        */
+        function upload(files) {
+            console.log($scope.invoice.invoiceID);
+            if (files && files.length) {
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    (function (index) {
+                        console.log("posting..");
+                        $scope.uploads[index] = $upload.upload({
+                            url: "./api/files/upload", // webapi url
+                            method: "POST",
+                            data: { invoice: $scope.invoice },
+                            file: files
+                        }, uploadProgressFn, uploadSuccessFn)
+                    })(i);
+                }
+            }
+        };
+
+        function uploadProgressFn(evt) {
+            var progressPercentage = parseInt(100.0 * evt.loaded / evt.total);
+            console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
+        };
+        function uploadSuccessFn(data, status, headers, config) {
+            console.log("posted!");
+            console.log('file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data));
+        };
+
+        function abortUpload(index) {
+            $scope.uploads[index].abort();
+        }
+
+        /*
         function upload() {
             $scope.file = document.getElementById('file').files[0]
             var reader = new FileReader();
@@ -50,7 +95,7 @@
             //console.log($scope.data);
             //submitFile(fileData)
             InvoiceForm.submit($scope.invoice, $scope.file, "IngestInvoice/AddFile");
-        }
+        }*/
 
         
         function activate() {
@@ -65,18 +110,5 @@
         function garagesErrorFn(data, status, headers, config) {
             Snackbar.error(data.data.error);
         }
-
-
-        /*function activate() {
-            Garages.all().then(garagesSuccessFn, garagesErrorFn);
-        }
-
-        function garagesSuccessFn(data, status, headers, config) {
-            vm.garages = data.data;         //this will depend on what the API returns, it may have to change
-        }
-
-        function garagesErrorFn(data, status, headers, config) {
-            Snackbar.error(data.data.error);
-        }*/
     }
 })();
