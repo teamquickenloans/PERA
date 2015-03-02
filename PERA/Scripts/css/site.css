@@ -67,7 +67,7 @@ body {
 }
 
 #itmTableWrapper {
-    height: 45%; /*Set this to limit height of table*/
+    height: 100%; /*Set this to limit height of table*/
     margin: 0;
     padding: 0;
 }
@@ -138,11 +138,11 @@ tr.tableRow.selected {
     width: 33%;
 }
 
-nameColITMTable {
+.nameColITMTable {
     width: 50%;
 }
 
-tokenIDColITMTable {
+.tokenIDColITMTable {
     width: 50%
 }
 
