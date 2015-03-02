@@ -190,9 +190,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngestInvoiceController.cs" />
     <Compile Include="Controllers\InvoicesController.cs" />
-    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -234,6 +234,7 @@
     <Content Include="Scripts\Angular\teammembers\controllers\teammembers.controller.js" />
     <Content Include="Scripts\Angular\teammembers\services\teammembers.service.js" />
     <Content Include="Scripts\Angular\teammembers\teammembers.module.js" />
+    <Content Include="Scripts\Angular\fileupload\directives\ngfile.directive.js" />
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload-all.js" />
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload-all.min.js" />
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload-shim.js" />
@@ -302,8 +303,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\Angular\map\" />
+    <Folder Include="Views\Files\" />
     <Folder Include="Views\GarageMap\" />
-    <Folder Include="Views\InvoiceUpload\" />
     <Folder Include="Views\View\" />
   </ItemGroup>
   <ItemGroup>

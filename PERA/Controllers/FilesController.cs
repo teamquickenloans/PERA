@@ -13,6 +13,7 @@ using System.Threading.Tasks;
 using System.IO;
 using System.Web;
 using Newtonsoft.Json;
+using System.Diagnostics;
 
 namespace PERA.Controllers
 {
@@ -28,6 +29,7 @@ namespace PERA.Controllers
 
             var provider = GetMultipartProvider();
             var result = await Request.Content.ReadAsMultipartAsync(provider);
+            // Stream stream = await Request.Content.ReadAsStreamAsync();
 
             // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
             // so this is how you can get the original file name
@@ -37,9 +39,13 @@ namespace PERA.Controllers
             // creation time, directory name, a few filesystem methods etc..
             var uploadedFileInfo = new FileInfo(result.FileData.First().LocalFileName);
 
+            ExcelParser(result.FileData);
+            Trace.WriteLine("hello");
             // Remove this line as well as GetFormData method if you're not
             // sending any form data with your upload request
-            var fileUploadObj = GetFormData<Invoice>(result);
+            Invoice fileUploadObj = GetFormData(result);
+            //Invoice newInvoice = JsonConvert.DeserializeObject<Invoice>(result.FormData);
+            Trace.WriteLine(fileUploadObj.InvoiceID);
 
             // Through the request response you can return an object to the Angular controller
             // You will be able to access this in the .success callback through its data attribute
@@ -47,6 +53,12 @@ namespace PERA.Controllers
             var returnData = "ReturnTest";
             return this.Request.CreateResponse(HttpStatusCode.OK, new { returnData });
         }
+
+        private void ExcelParser(System.Collections.ObjectModel.Collection<MultipartFileData> collection)
+        {
+
+        }
+
 
         // You could extract these two private methods to a separate utility class since
         // they do not really belong to a controller class but that is up to you
@@ -61,14 +73,19 @@ namespace PERA.Controllers
         }
 
         // Extracts Request FormatData as a strongly typed model
-        private object GetFormData<T>(MultipartFormDataStreamProvider result)
+        private Invoice GetFormData(MultipartFormDataStreamProvider result)
         {
             if (result.FormData.HasKeys())
             {
                 var unescapedFormData = Uri.UnescapeDataString(result.FormData
                     .GetValues(0).FirstOrDefault() ?? String.Empty);
                 if (!String.IsNullOrEmpty(unescapedFormData))
-                    return JsonConvert.DeserializeObject<T>(unescapedFormData);
+                {
+                    System.Diagnostics.Debug.WriteLine("inside if form data");
+                    Console.WriteLine("insdie if");
+                    return JsonConvert.DeserializeObject<Invoice>(unescapedFormData);
+                }
+                    
             }
 
             return null;

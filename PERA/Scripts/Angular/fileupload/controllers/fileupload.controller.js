@@ -9,22 +9,24 @@
       .module('pera.fileupload.controllers')
       .controller('FileUploadController', FileUploadController);
 
-    FileUploadController.$inject = ['$scope', '$upload', 'InvoiceForm', 'Garages']; //Here 'Garages' is the Garages Service (pera.garages.service)
+    FileUploadController.$inject = ['$scope', '$upload', 'InvoiceForm', 'Garages', 'Snackbar']; //Here 'Garages' is the Garages Service (pera.garages.service)
 
     /**
     * @namespace FileUploadController
     */
-    function FileUploadController($scope, $upload, InvoiceForm, Garages) {
+    function FileUploadController($scope, $upload, InvoiceForm, Garages, Snackbar) {
   
         var vm = this;
+        vm.files = [];
         $scope.garages = [];
         $scope.uploads = [];
+        $scope.upload = upload;
 
         $scope.data = 'none'; //the file
-        //$scope.upload = upload;
         //$scope.file = [];
+
         vm.month = "";
-        vm.invoice = {
+        $scope.invoice = {
             invoiceID: '',
             garageID: '',
             totalAmountBilled: '',
@@ -37,9 +39,7 @@
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
 
-        //console.log($scope.garages);
 
-        //scope.onFileSelect = upload($files)
 
 
         /*$scope.$watch('files', function () {
@@ -50,17 +50,19 @@
         * @name upload
         * @desc Try to upload a file using angular-file-upload
         */
-        function upload($files) {
-            if ($files && $files.length) {
-                for (var i = 0; i < $files.length; i++) {
-                    var $file = $files[i];
-                    (function post(index) {
+        function upload(files) {
+            console.log($scope.invoice.invoiceID);
+            if (files && files.length) {
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
+                    (function (index) {
+                        console.log("posting..");
                         $scope.uploads[index] = $upload.upload({
                             url: "./api/files/upload", // webapi url
                             method: "POST",
-                            data: { invoice: vm.invoice },
-                            file: $file
-                        }, uploadProgessFn, uploadSuccessFn)
+                            data: { invoice: $scope.invoice },
+                            file: files
+                        }, uploadProgressFn, uploadSuccessFn)
                     })(i);
                 }
             }
@@ -71,6 +73,7 @@
             console.log('progress: ' + progressPercentage + '% ' + evt.config.file.name);
         };
         function uploadSuccessFn(data, status, headers, config) {
+            console.log("posted!");
             console.log('file ' + config.file.name + 'uploaded. Response: ' + JSON.stringify(data));
         };
 
