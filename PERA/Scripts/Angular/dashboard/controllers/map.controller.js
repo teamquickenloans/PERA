@@ -61,7 +61,7 @@
               vm.garages = data.data;         //this will depend on what the API returns, it may have to change
               PlaceMarkers(vm.map, vm.garages, vm.garageMarkers);
           }
-
+          
           function garagesErrorFn(data, status, headers, config) {
               Snackbar.error(data.data.error);
           }
@@ -70,15 +70,24 @@
               for (var i = 0; i < garages.length; i++) {
                   var position = new google.maps.LatLng(garages[i].latitude, garages[i].longitude);
 
+                  //create marker
                   var marker = new google.maps.Marker({
                       map: map,
                       position: position
                   });
+
+                  //add label
                   var styleString = '<div style="font-size:14px; color: #4F4F4F; text-shadow: 1px 1px 0 #FFF, -1px 1px 0 #FFF, 1px -1px 0 #FFF, -1px -1px #FFF;">';
                   var label = new ELabel(map, position, styleString + garages[i].name + '</div>', null, new google.maps.Size(-20, -32), false);
                   label.setMap(map);
 
+                  //add click event
+                  google.maps.event.addListener(marker, 'click', function () {
+                      alert("Congratulations, you've clicked on a garage!");
+                      //TODO: tab.setSideTab(i); //This is what I want to do
+                  });
 
+                  //add marker image
                   var load = parseFloat(garages[i].numberOfLeasedSpaces) - parseFloat(garages[i].numberOfTeamMemberSpaces);
                   if (load > 100) {
                       marker.setIcon('../../Content/Images/parking_green.png'); //TODO: Fix click zone

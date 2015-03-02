@@ -13,16 +13,16 @@ body {
     overflow: hidden;
 }
 
-#expenseContent, #garageMapContent, #notificationsContent {
+#issuesContent, #uploadHistoryContent, #garageMapContent, #notificationsContent {
     height: 96.68%;
     width: 100%;
     padding: 0;
     margin: 0;
 }
 
-#sideBar {
+.sideBar {
     height: 100%;
-    overflow: auto;
+    overflow: auto; /*change back to "hidden" after alpha presentation*/
     padding: 0;
     margin: 0;
 }
@@ -36,35 +36,100 @@ body {
 }
 
 #issueTableWrapper {
-    height: 60%;
+    height: 96.5%; /*Set this to limit height of table*/
     margin: 0;
     padding: 0;
 }
 
-#issueTableHeader {
-    background-color: #A5D9E6;
-}
-
-#issueTableContent {
-    width: 100%;
-    padding: 0;
-    margin: 0;
+#issueTableBodyWrapper {
+    height: 100%;
     overflow: auto;
 }
 
-.issueRow {
+#issueTableHead {
+    background-color: #A5D9E6;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#issueTableBody {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#uploadTableWrapper {
+    height: 96.5%; /*Set this to limit height of table*/
+    margin: 0;
+    padding: 0;
+}
+
+#uploadTableBodyWrapper {
+    height: 100%;
+    overflow: auto;
+}
+
+#uploadTableHead {
+    background-color: #A5D9E6;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+#uploadTableBody {
+    width: 100%;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+.tableRow {
     background-color: #ddd; /* Currently just overwrites Foundation CSS on every other row to product desired effect. Janky */
 }
 
-tr.issueRow.selected {
+tr.tableRow.selected {
     background-color: #6c8;
 }
 
 #garageTable {
     width: 100%;
+    height: 100%;
     padding: 0;
     margin: 0;
-    overflow: auto;
+}
+
+.garageColIssueTable {
+    width: 20%;
+}
+
+.nameColIssueTable {
+    width: 20%;
+}
+
+.commonIDColIssueTable {
+    width: 20%;
+}
+
+.issueColIssueTable {
+    width: 20%;
+}
+
+.dateColIssueTable {
+    width: 20%;
+}
+
+.garageColUploadTable {
+    width: 33%;
+}
+
+.typeColUploadTable {
+    width: 33%;
+}
+
+.dateColUploadTable {
+    width: 33%;
 }
 
 #usageTableHeader, #garageTableHeader {
@@ -75,13 +140,22 @@ tr.issueRow.selected {
     background-color: #444444;
 }
 
-#usageTable {
-    width: 100%;
-    height: 60%;
+#usageTableWrapper {
+    height: 71.65%;
+    margin: 0;
+    padding: 0;
+}
+
+#usageTableBodyWrapper {
+    height: 100%;
+    overflow: auto;
 }
 
 #usageTableHead {
-    background-color: lightblue;
+    background-color: #A5D9E6;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
 
 #usageTableBody {
@@ -89,7 +163,14 @@ tr.issueRow.selected {
     height: 100%;
     padding: 0;
     margin: 0;
-    overflow: auto;
+}
+
+.nameColUsageTable {
+    width: 50%;
+}
+
+.usageColUsageTable {
+    width: 50%;
 }
 
 #mapKey {
@@ -133,4 +214,6 @@ tr.issueRow.selected {
     background-color: #6c71c4;
 }
 
-
+#uploadInvoiceButton {
+    
+}

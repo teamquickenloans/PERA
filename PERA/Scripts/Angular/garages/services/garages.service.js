@@ -134,7 +134,7 @@
         }
 
         function getTotalTeamMemberSpaces() {
-            return vm.getTotalTeamMemberSpaces;
+            return vm.totalTeamMemberSpaces;
         }
 
         function getAverageCostPerSpace() {
