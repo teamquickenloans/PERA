@@ -5,7 +5,6 @@
       .module('pera', [
         'pera.config',
         //'pera.routes',
-        //'pera.teamMembers',
         'pera.garages',
         'pera.utils',
         'pera.dashboard',

@@ -146,7 +146,10 @@
                 <table id="issueTableHead">
                     <tr>
                         <th class="garageColIssueTable">Garages</th>
+                        <th class="nameColIssueTable">Name</th>
+                        <th class="commonIDColIssueTable">Common ID</th>
                         <th class="issueColIssueTable">Issue</th>
+                        <th class="badgeID"></th>
                         <th class="dateColIssueTable">Date</th>
                     </tr>
                 </table>
@@ -155,6 +158,8 @@
                     <table id="issueTableBody" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
                         <tr class="tableRow" ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
                             <td class="garageColIssueTable">{{issue.garage}}</td>
+                            <td class="nameColIssueTable">{{issue.name}}</td>
+                            <td class="commonIDColIssueTable">{{issue.commonID}}</td>
                             <td class="issueColIssueTable">{{issue.issue}}</td>
                             <td class="dateColIssueTable">{{issue.date | date:'MM/dd/yyyy'}}</td>
                         </tr>
@@ -259,15 +264,6 @@
                     </table>
                 </div>
 
-              
-
-                <!-- Invoice Upload -->
-                <a href="/#/invoiceForm" data-reveal-id="uploadInvoiceModal" class="radius button">Upload Invoice</a>
-                <div id="uploadInvoiceModal" class="reveal-modal" data-reveal>
-                    <div ng-view></div>
-                    <a class="close-reveal-modal">&#215;</a>
-                </div>
-
             </div>
 
         </div>
@@ -296,10 +292,10 @@
 
                 <div id="uploadTableBodyWrapper">
                     <table id="uploadTableBody" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
-                        <tr class="tableRow" ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
-                            <td class="garageColUploadTable">{{issue.garage}}</td>
-                            <td class="typeColUploadTable">{{issue.issue}}</td>
-                            <td class="dateColUploadTable">{{issue.date | date:'MM/dd/yyyy'}}</td>
+                        <tr class="tableRow" ng-repeat="upload in expenseCtrl.uploads" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                            <td class="garageColUploadTable">{{upload.garage}}</td>
+                            <td class="typeColUploadTable">{{upload.type}}</td>
+                            <td class="dateColUploadTable">{{upload.date | date:'MM/dd/yyyy'}}</td>
                         </tr>
                     </table>
                 </div>
@@ -405,7 +401,7 @@
 
 
                 <!-- Invoice Upload -->
-                <a href="/#/invoiceForm" data-reveal-id="uploadInvoiceModal" class="radius button">Upload Invoice</a>
+                <a id="uploadInvoiceButton" href="/#/invoiceForm" data-reveal-id="uploadInvoiceModal" class="radius button">Upload Invoice</a>
                 <div id="uploadInvoiceModal" class="reveal-modal" data-reveal>
                     <div ng-view></div>
                     <a class="close-reveal-modal">&#215;</a>
@@ -482,8 +478,9 @@
                             <td>Average Transient Sale Price: </td>
                             <td>{{garageCtrl.averageTransientSalePrice | currency}}</td>
                         </tr>
-                    </table>
+                    </table>   
                 </div>
+
 
                 <!-- Single Garage -->
                 <div ng-show="!tab.sideIsSet(-1)">
