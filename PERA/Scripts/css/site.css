@@ -66,6 +66,12 @@ body {
     padding: 0;
 }
 
+#itmTableWrapper {
+    height: 45%; /*Set this to limit height of table*/
+    margin: 0;
+    padding: 0;
+}
+
 #uploadTableBodyWrapper {
     height: 100%;
     overflow: auto;
@@ -130,6 +136,14 @@ tr.tableRow.selected {
 
 .dateColUploadTable {
     width: 33%;
+}
+
+nameColITMTable {
+    width: 50%;
+}
+
+tokenIDColITMTable {
+    width: 50%
 }
 
 #usageTableHeader, #garageTableHeader {

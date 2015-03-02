@@ -49,6 +49,9 @@
     <script type="text/javascript" src="~/Scripts/Angular/teammembers/teammembers.module.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/teammembers/services/teammembers.service.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/teammembers/controllers/teammembers.controller.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/invoiceTeamMembers/invoiceTeamMembers.module.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/invoiceTeamMembers/services/invoiceTeamMembers.service.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/invoiceTeamMembers/controllers/invoiceTeamMembers.controller.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/utils/utils.module.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/utils/services/snackbar.service.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/tabs/tabs.module.js"></script>
@@ -300,8 +303,39 @@
                     </table>
                 </div>
 
+
+
+
+                <!-- CLEAN UP LATER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+                <div id="itmTableWrapper">
+
+                    <table id="uploadTableHead">
+                        <tr>
+                            <th class="nameColITMTable">Name</th>
+                            <th class="tokenIDColITMTable">Token ID</th>
+                        </tr>
+                    </table>
+
+                    <div id="uploadTableBodyWrapper">
+                        <table id="uploadTableBody" ng-controller="InvoiceTeamMembersController as ITMCtrl">
+                            <tr class="tableRow" ng-repeat="itm in ITMCtrl.invoiceTeamMembers">
+                                <td class="nameColITMTable">{{itm.firstname}} {{itm.lastname}}</td>
+                                <td class="tokenIDColITMTable">{{itm.tokenid}}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <!-- CLEAN UP LATER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+
+
+
+
             </div>
 
+
+
+            
 
 
             <div class="sideBar columns small-4" ng-controller="GaragesController as garageCtrl">
