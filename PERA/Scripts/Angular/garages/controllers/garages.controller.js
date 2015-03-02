@@ -47,7 +47,7 @@
         }
 
         function garagesErrorFn(data, status, headers, config) {
-            Snackbar.error(data.data.error);
+            Snackbar.error("Failed to retrieve garages");
         }
 
         
