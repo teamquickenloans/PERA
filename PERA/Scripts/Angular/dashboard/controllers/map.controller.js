@@ -61,7 +61,7 @@
               vm.garages = data.data;         //this will depend on what the API returns, it may have to change
               PlaceMarkers(vm.map, vm.garages, vm.garageMarkers);
           }
-
+          
           function garagesErrorFn(data, status, headers, config) {
               Snackbar.error(data.data.error);
           }
@@ -83,7 +83,8 @@
 
                   //add click event
                   google.maps.event.addListener(marker, 'click', function () {
-                      //TODO: tab.setSideTab(i);
+                      alert("Congratulations, you've clicked on a garage!");
+                      //TODO: tab.setSideTab(i); //This is what I want to do
                   });
 
                   //add marker image
