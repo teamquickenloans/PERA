@@ -61,7 +61,7 @@ body {
 }
 
 #uploadTableWrapper {
-    height: 96.5%; /*Set this to limit height of table*/
+    height: 45%;/*96.5%; /*Set this to limit height of table*/
     margin: 0;
     padding: 0;
 }
