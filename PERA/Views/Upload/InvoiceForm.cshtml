@@ -1,13 +1,14 @@
 ﻿
 <div ng-controller="FileUploadController">
     <h3>Invoice Submission</h3>
-    <form ng-submit="upload()">
+    <form ng-submit="upload(files)">
         <div class="large-10 column">
             <label for="invoiceID">Invoice Number:</label>
             <input type="number" ng-model="invoice.invoiceID" id="invoiceID" required />
 
                 <label for="garageID">Garage:</label>
-                <select ng-model="invoice.garageID" ng-options="garage.GarageID as garage.name for garage in garages" id="garageID"></select>
+                <select ng-model="invoice.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID">
+                </select>
 
 
             <label for="totalAmountBilled">Amount Billed:</label>
@@ -34,7 +35,7 @@
         <center>
 
             <!--<input type="file" id="file" name="file" />-->
-                <input type="file" ng-file-select="upload($files)" multiple>
+            <input type="file" ng-file-select ng-model="files" ng-multiple="false">
 
             <br>
             <button type="submit">Upload</button>

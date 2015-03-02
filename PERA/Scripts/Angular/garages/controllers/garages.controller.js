@@ -28,7 +28,7 @@
 
 
         
-            Garages.all().then(garagesSuccessFn, garagesErrorFn);
+        Garages.all().then(garagesSuccessFn, garagesErrorFn);
         //vm.garages = Garages.all();
         //console.log(vm.garages);
 
