@@ -14,11 +14,14 @@ using System.IO;
 using System.Web;
 using Newtonsoft.Json;
 using System.Diagnostics;
+using System.Text;
+using Excel;
 
 namespace PERA.Controllers
 {
     public class FilesController : ApiController
     {
+        private PERAContext db = new PERAContext();
         [HttpPost] // This is from System.Web.Http, and not from System.Web.Mvc
         public async Task<HttpResponseMessage> Upload()
         {
@@ -29,7 +32,6 @@ namespace PERA.Controllers
 
             var provider = GetMultipartProvider();
             var result = await Request.Content.ReadAsMultipartAsync(provider);
-            // Stream stream = await Request.Content.ReadAsStreamAsync();
 
             // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
             // so this is how you can get the original file name
@@ -39,7 +41,9 @@ namespace PERA.Controllers
             // creation time, directory name, a few filesystem methods etc..
             var uploadedFileInfo = new FileInfo(result.FileData.First().LocalFileName);
 
-            ExcelParser(result.FileData);
+            FileStream stream = File.Open(result.FileData.First().LocalFileName, FileMode.Open, FileAccess.Read);
+            ExcelParser(stream);
+
             Trace.WriteLine("hello");
             // Remove this line as well as GetFormData method if you're not
             // sending any form data with your upload request
@@ -54,8 +58,83 @@ namespace PERA.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, new { returnData });
         }
 
-        private void ExcelParser(System.Collections.ObjectModel.Collection<MultipartFileData> collection)
+        private void ExcelParser(FileStream stream)
         {
+            // Reading from a binary Excel file ('97-2003 format; *.xls)
+            IExcelDataReader excelReader = ExcelReaderFactory.CreateBinaryReader(stream);
+
+            // Create column names from first row
+            excelReader.IsFirstRowAsColumnNames = true;
+            // The result of each spreadsheet will be created in the result.Tables
+            DataSet result = excelReader.AsDataSet();
+
+            List<InvoiceTeamMember> teamMembers = new List<InvoiceTeamMember>();
+            foreach (DataTable table in result.Tables)
+            {
+                foreach (DataRow row in table.Rows)
+                {
+                    // if this row is the headings, skip this row
+                    System.Diagnostics.Debug.WriteLine("loop");
+                    if(row == null )
+                    {
+                        System.Diagnostics.Debug.WriteLine("null");
+                        continue;
+                    }
+                    //System.Diagnostics.Debug.WriteLine("b4");
+                    if(row[0] is String)
+                    {
+                        System.Diagnostics.Debug.WriteLine(row[0]);
+                        continue;
+                    }
+                    //System.Diagnostics.Debug.WriteLine("after");
+
+                    InvoiceTeamMember teamMember = new InvoiceTeamMember();
+
+                    string fullName = (string)row[2];
+
+                    string[] names = fullName.Split(',');   //split the name
+                    string firstName, lastName;
+                    if (names.Length < 2)
+                    {
+                        firstName = names[0];
+                        lastName = "";
+                    }
+                    else
+                    {
+                        firstName = names[1];
+                        lastName = names[0];
+                    }
+
+                    //string cardNumber = (string)row[3];
+                    double cardNumberD = 0;
+                    int cardNumber = 0;
+                    for(int i = 3; i < 8; i++)
+                    {
+                        if(row[i] is System.DBNull)
+                            continue;
+                        //System.Diagnostics.Debug.WriteLine(row[i].GetType());
+                        cardNumberD = (System.Double)row[i];
+                        cardNumber = Convert.ToInt32(cardNumberD);
+                    }
+
+
+                    teamMember.FirstName = firstName;
+                    teamMember.LastName = lastName;
+                    teamMember.TokenID = cardNumber;
+
+                    teamMembers.Add(teamMember);
+
+                    db.InvoiceTeamMembers.Add(teamMember);
+                    db.SaveChanges();
+
+                      /*
+                    foreach (DataColumn column in table.Columns)
+                    {
+                        System.Diagnostics.Debug.WriteLine(row[column]);
+                    }*/
+                                       
+                } // end for columns
+            } // end for tables
 
         }
 
@@ -82,8 +161,7 @@ namespace PERA.Controllers
                 if (!String.IsNullOrEmpty(unescapedFormData))
                 {
                     System.Diagnostics.Debug.WriteLine("inside if form data");
-                    Console.WriteLine("insdie if");
-                    return JsonConvert.DeserializeObject<Invoice>(unescapedFormData);
+                    return JsonConvert.DeserializeObject<Invoice>(result.FormData.GetValues(0).FirstOrDefault());
                 }
                     
             }

@@ -28,6 +28,7 @@ namespace PERA.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int CommonID { get; set; }
+        public int TokenID { get; set; }
         public int? GarageID { get; set; }
 		public EmploymentStatus? EmploymentStatus { get; set; }
         public DateTime TerminationDate { get; set; }

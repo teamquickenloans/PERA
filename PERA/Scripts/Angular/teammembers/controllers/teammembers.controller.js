@@ -30,7 +30,8 @@
         }
 
         function teammembersErrorFn(data, status, headers, config) {
-            Snackbar.error(data.data.error);
+            Snackbar.error("Failed to retreive Team Members");
+
         }
 
 

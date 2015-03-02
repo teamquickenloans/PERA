@@ -66,7 +66,7 @@
 
         function teammembersErrorFn(data, status, headers, config, response) {
             last_request_failed = true;
-            Snackbar.error(data.data.error);
+            //Snackbar.error(data.data.error);
             return $q.reject(response);
         }
 

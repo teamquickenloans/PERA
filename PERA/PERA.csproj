@@ -190,6 +190,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngestInvoiceController.cs" />
     <Compile Include="Controllers\InvoicesController.cs" />
+    <Compile Include="Controllers\InvoiceTeamMembersController.cs" />
     <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
@@ -204,12 +205,25 @@
     <Compile Include="Migrations\201502222349156_initial.Designer.cs">
       <DependentUpon>201502222349156_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503021505553_tokenID.cs" />
+    <Compile Include="Migrations\201503021505553_tokenID.Designer.cs">
+      <DependentUpon>201503021505553_tokenID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503021606441_invoiceteammembers.cs" />
+    <Compile Include="Migrations\201503021606441_invoiceteammembers.Designer.cs">
+      <DependentUpon>201503021606441_invoiceteammembers.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503021728116_new.cs" />
+    <Compile Include="Migrations\201503021728116_new.Designer.cs">
+      <DependentUpon>201503021728116_new.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BadgeScan.cs" />
     <Compile Include="Models\CarpoolGroup.cs" />
+    <Compile Include="Models\InvoiceTeamMember.cs" />
     <Compile Include="Models\GarageManager.cs" />
     <Compile Include="DAL\PERAContext.cs" />
     <Compile Include="Models\TeamMember.cs" />
@@ -238,6 +252,7 @@
     <Content Include="Scripts\Angular\teammembers\services\teammembers.service.js" />
     <Content Include="Scripts\Angular\teammembers\teammembers.module.js" />
     <Content Include="Scripts\Angular\fileupload\directives\ngfile.directive.js" />
+    <Content Include="Scripts\Angular\teammembers.controller.js" />
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload-all.js" />
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload-all.min.js" />
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload-shim.js" />
@@ -267,6 +282,15 @@
     <Content Include="Scripts\css\snackbar.css.map" />
     <EmbeddedResource Include="Migrations\201502222346105_myMigration.resx">
       <DependentUpon>201502222346105_myMigration.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503021505553_tokenID.resx">
+      <DependentUpon>201503021505553_tokenID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503021606441_invoiceteammembers.resx">
+      <DependentUpon>201503021606441_invoiceteammembers.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503021728116_new.resx">
+      <DependentUpon>201503021728116_new.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Angular\pera.js" />
