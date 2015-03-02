@@ -1,39 +1,50 @@
 ﻿/**
 * ng-file directive
-* @namespace pera.fileupload.directives
+* @namespace pera.fileupload
 */
 (function () {
     'use strict';
 
     /**
     * @desc file directive that can be used anywhere across the pera app
-    * @example <div acme-sales-customer-info></div>
+    * @example <div ng-file></div>
     */
     angular
       .module('pera.fileupload')
-      .controller('InvoiceFormController', InvoiceFormController);
+      .directive('ngFile', ngFile);
 
-    InvoiceFormController.$inject = ['$scope', '$http']; //Here 'Garages' is the Garages Service (pera.garages.service)
+    ngFile.$inject = ['$scope', '$http']; //Here 'Garages' is the Garages Service (pera.garages.service)
 
     /**aaaaaaaaaaaaaaa
     * @namespace InvoiceFormController
     */
+    function ngFile(){
 
-.directive("fileread", [function () {
-    return {
-        scope: {
+        var scope = { 
             fileread: "="
-        },
-        link: function (scope, element, attributes) {
-            element.bind("change", function (changeEvent) {
+        }
+
+        return {
+            scope: scope,
+            link: link
+        }
+        /**
+         * @ name link
+         */
+        function link(scope, element, attributes) {
+            element.bind("change", change);
+
+            function change(changeEvent) {
                 var reader = new FileReader();
-                reader.onload = function (loadEvent) {
+                reader.onload = onload;
+
+                function onload(loadEvent) {
                     scope.$apply(function () {
                         scope.fileread = loadEvent.target.result;
                     });
                 }
                 reader.readAsDataURL(changeEvent.target.files[0]);
-            });
+            };
         }
     }
-}]);
+})();

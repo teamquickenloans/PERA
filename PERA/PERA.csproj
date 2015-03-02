@@ -190,9 +190,9 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\IngestInvoiceController.cs" />
     <Compile Include="Controllers\InvoicesController.cs" />
-    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -300,8 +300,8 @@
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\Angular\map\" />
+    <Folder Include="Views\Files\" />
     <Folder Include="Views\GarageMap\" />
-    <Folder Include="Views\InvoiceUpload\" />
     <Folder Include="Views\View\" />
   </ItemGroup>
   <ItemGroup>

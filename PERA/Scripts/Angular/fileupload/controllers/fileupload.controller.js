@@ -9,14 +9,15 @@
       .module('pera.fileupload.controllers')
       .controller('FileUploadController', FileUploadController);
 
-    FileUploadController.$inject = ['$scope', '$upload', 'InvoiceForm', 'Garages']; //Here 'Garages' is the Garages Service (pera.garages.service)
+    FileUploadController.$inject = ['$scope', '$upload', 'InvoiceForm', 'Garages', 'Snackbar']; //Here 'Garages' is the Garages Service (pera.garages.service)
 
     /**
     * @namespace FileUploadController
     */
-    function FileUploadController($scope, $upload, InvoiceForm, Garages) {
+    function FileUploadController($scope, $upload, InvoiceForm, Garages, Snackbar) {
   
         var vm = this;
+        vm.files = [];
         $scope.garages = [];
         $scope.uploads = [];
         $scope.upload = upload;
@@ -25,7 +26,7 @@
         //$scope.file = [];
 
         vm.month = "";
-        vm.invoice = {
+        $scope.invoice = {
             invoiceID: '',
             garageID: '',
             totalAmountBilled: '',
@@ -49,19 +50,18 @@
         * @name upload
         * @desc Try to upload a file using angular-file-upload
         */
-        function upload($files) {
-            console.log("in upload fn");
-            if ($files && $files.length) {
-                console.log("in if");
-                for (var i = 0; i < $files.length; i++) {
-                    var $file = $files[i];
+        function upload(files) {
+            console.log($scope.invoice.invoiceID);
+            if (files && files.length) {
+                for (var i = 0; i < files.length; i++) {
+                    var file = files[i];
                     (function (index) {
                         console.log("posting..");
                         $scope.uploads[index] = $upload.upload({
                             url: "./api/files/upload", // webapi url
                             method: "POST",
-                            data: { invoice: vm.invoice },
-                            file: $file
+                            data: { invoice: $scope.invoice },
+                            file: files
                         }, uploadProgressFn, uploadSuccessFn)
                     })(i);
                 }
