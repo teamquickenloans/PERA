@@ -22,7 +22,7 @@ body {
 
 .sideBar {
     height: 100%;
-    overflow: auto; /*change back to "hidden" after alpha presentation*/
+    overflow: hidden;
     padding: 0;
     margin: 0;
 }
