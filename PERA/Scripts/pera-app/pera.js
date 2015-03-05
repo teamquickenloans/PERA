@@ -12,7 +12,6 @@
         'pera.fileupload',
         'pera.teammembers',
         'pera.invoiceTeamMembers',
-        'ngRoute',
         'ui.router'
       ]);
     
@@ -20,7 +19,7 @@
     //  .module('pera.routes', ['ngRoute']);
 
     angular
-      .module('pera.config', ['ngRoute']);
+      .module('pera.config', []);
 
 
 })();

@@ -261,6 +261,7 @@
       @name pera-app
       @desc AngularJS application
     -->
+    <Content Include="Scripts\js\angular-ui-router.js" />
     <Content Include="Scripts\pera-app\invoiceTeamMembers\invoiceTeamMembers.module.js" />
     <Content Include="Scripts\pera-app\pera.js" />
     <Content Include="Scripts\pera-app\pera.config.js" />
@@ -333,10 +334,13 @@
     <EmbeddedResource Include="Migrations\201502222349156_initial.resx">
       <DependentUpon>201502222349156_initial.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="Views\ReconcileExpenses\detectedIssues.html" />
+    <Content Include="Views\GarageMap\garageMap.html" />
     <Content Include="Views\Javascripts.html" />
     <!--
       @name Config Files
     -->
+    <Content Include="Views\ReconcileExpenses\uploadHistory.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -364,7 +368,6 @@
     <Folder Include="App_Data\" />
     <Folder Include="Scripts\pera-app\map\" />
     <Folder Include="Views\Files\" />
-    <Folder Include="Views\GarageMap\" />
     <Folder Include="Views\View\" />
   </ItemGroup>
   <ItemGroup>

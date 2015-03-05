@@ -6,7 +6,7 @@
     <title>Parking Dashboard</title>
     <!-- <link rel="stylesheet" type="text/css" href="dashboard.css"> -->
     <!-- ====================== jQuery ============================== -->
-    <!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>-->
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
     @Scripts.Render("~/bundles/jquery")
 
     <script type="text/javascript">
@@ -28,7 +28,10 @@
     <!-- ====================== angular-file-upload ============================== -->
     <script type="text/javascript" src="~/Scripts/js/angular-file-upload/angular-file-upload-shim.min.js"></script>
     <script type="text/javascript" src="~/Scripts/js/angular-file-upload/angular-file-upload.min.js"></script>
+
     <script type="text/javascript" src="~/Scripts/js/angular-ui-router.js"></script>
+
+
     <!-- ====================== Foundation ============================ -->
     <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/css/foundation.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/js/foundation.min.js"></script>
@@ -49,9 +52,8 @@
     <link href="~/Scripts/css/material.css" rel="stylesheet" />
 
     <!-- ====================== pera-app ======================== -->
-    @Styles.Render("~/bundles/pera-app");
+    <!--@Styles.Render("~/bundles/pera-app");-->
 
-    <!--
     <script type="text/javascript" src="~/Scripts/pera-app/pera.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/dashboard/dashboard.module.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/dashboard/controllers/expense.controller.js"></script>
@@ -73,7 +75,9 @@
     <script type="text/javascript" src="~/Scripts/pera-app/fileupload/services/invoiceform.service.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/fileupload/controllers/fileupload.controller.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/fileupload/controllers/invoiceform.controller.js"></script>
-        -->
+    <script type="text/javascript" src="~/Scripts/pera-app/invoiceTeamMembers/invoiceTeamMembers.module.js"></script>
+    <script type="text/javascript" src="~/Scripts/pera-app/invoiceTeamMembers/services/invoiceTeamMembers.service.js"></script>
+    <script type="text/javascript" src="~/Scripts/pera-app/invoiceTeamMembers/controllers/invoiceTeamMembers.controller.js"></script>
 
     <!-- ====================== CSS ================================= -->
     <link rel="stylesheet" href="~/Scripts/css/site.css" />
@@ -122,14 +126,20 @@
                     <li class="divider"></li>
 
                     <li ng-class="{active:tab.isSet(1) || tab.isSet(2)}" class="has-dropdown">
-                        <a href="#">Expense Reconcilliation</a>
+                        <a href="#">Reconcile Expenses</a>
                         <ul class="dropdown">
                             <li>
                                 <ul>
-                                    <li ng-class="{active:tab.isSet(1)}"><a href="#" ng-click="tab.setTab(1)">Detected Issues</a></li>
+                                    <li ng-class="{active:tab.isSet(1)}">
+                                        <a ui-sref="detectedissues">Detected Issues</a>
+                                    <!--<a href="#" ng-click="tab.setTab(1)">Detected Issues</a>-->
+                                    </li>
                                 </ul>
                                 <ul>
-                                    <li ng-class="{active:tab.isSet(2)}"><a href="#" ng-click="tab.setTab(2)">Upload History</a></li>
+                                    <li ng-class="{active:tab.isSet(2)}">
+                                        <a ui-sref="uploadHistory">Upload History</a>
+                                    <!--<a href="#" ng-click="tab.setTab(2)">Upload History</a>-->
+                                    </li>
                                 </ul>
                             </li>
                         </ul>
@@ -138,7 +148,8 @@
                     <li class="divider"></li>
 
                     <li ng-class="{active:tab.isSet(3)}">
-                        <a href="#" ng-click="tab.setTab(3); map.initialized || map.initialize();">Garage Map</a>
+                        <a ui-sref="reconcile">Garage Map</a>
+                        <!--<a href="#" ng-click="tab.setTab(3); map.initialized || map.initialize();">Garage Map</a>-->
                     </li>
 
                     <li class="divider"></li>
@@ -157,39 +168,13 @@
 
 
         <!-- ======================== Detected Issues Content ============================ -->
-        <div id="issuesContent" ng-controller="ExpenseController as expenseCtrl" ng-show="tab.isSet(1)">
-            <div id="issueTableWrapper" class="columns small-8">
-
-                <table id="issueTableHead">
-                    <tr>
-                        <th class="garageColIssueTable">Garages</th>
-                        <th class="nameColIssueTable">Name</th>
-                        <th class="commonIDColIssueTable">Common ID</th>
-                        <th class="issueColIssueTable">Issue</th>
-                        <th class="badgeID"></th>
-                        <th class="dateColIssueTable">Date</th>
-                    </tr>
-                </table>
-
-                <div id="issueTableBodyWrapper">
-                    <table id="issueTableBody" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
-                        <tr class="tableRow" ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
-                            <td class="garageColIssueTable">{{issue.garage}}</td>
-                            <td class="nameColIssueTable">{{issue.name}}</td>
-                            <td class="commonIDColIssueTable">{{issue.commonID}}</td>
-                            <td class="issueColIssueTable">{{issue.issue}}</td>
-                            <td class="dateColIssueTable">{{issue.date | date:'MM/dd/yyyy'}}</td>
-                        </tr>
-                    </table>
-                </div>
-
-            </div>
-
-
+        <div ui-view>
+        </div> <!-- end div ui-view -->
 
             <div class="sideBar columns small-4" ng-controller="GaragesController as garageCtrl">
 
                 <!-- Overview -->
+                <!--
                 <div ng-show="tab.sideIsSet(-1)">
                     <div id="garageTableHeader">
                         Overview
@@ -225,9 +210,10 @@
                             <td>{{garageCtrl.averageTransientSalePrice | currency}}</td>
                         </tr>
                     </table>
-                </div>
+                </div>-->
 
                 <!-- Single Garage -->
+                <!-- 
                 <div ng-show="!tab.sideIsSet(-1)">
                     <div id="garageTableHeader">
                         {{garageCtrl.garages[tab.sideTab].name}}
@@ -283,7 +269,7 @@
 
             </div>
 
-        </div>
+        </div>    -->
 
 
 

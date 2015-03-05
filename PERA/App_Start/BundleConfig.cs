@@ -8,7 +8,9 @@ namespace PERA
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            const string ANGULAR_APP_ROOT = "~/Scripts/pera-app/";
             BundleTable.EnableOptimizations = true;
+
 
              bundles.UseCdn = true;   //enable CDN support
 
@@ -21,9 +23,19 @@ namespace PERA
 
   
 
-            var peraBundle = new ScriptBundle("~/bundles/pera-app");                    
+            var peraBundle = new ScriptBundle("~/bundles/pera-app");
             peraBundle
-                .Include("~/Scripts/pera-app/pera.js")
+               .Include("~/Scripts/pera-app/pera.js")
+               .Include("~/Scripts/pera-app/dashboard/dashboard.module.js")
+               .Include("~/Scripts/pera-app/fileupload/fileupload.module.js")
+                .Include("~/Scripts/pera-app/garages/garages.module.js")
+                .Include("~/Scripts/pera-app/teammembers/teammembers.module.js")
+                .Include("~/Scripts/pera-app/utils/utils.module.js")
+                .Include("~/Scripts/pera-app/tabs/tab.module.js")
+                .Include("~/Scripts/pera-app/fileupload/fileUpload.module.js")
+                .Include("~/Scripts/pera-app/invoiceTeamMembers/invoiceTeamMembers.module.js")
+                .IncludeDirectory(ANGULAR_APP_ROOT, "*.js", searchSubdirectories: true);
+                /*
                 .Include("~/Scripts/pera-app/pera.config.js")
                 .IncludeDirectory("~/Scripts/pera-app/dashboard/", "*.js", true)
                 .IncludeDirectory("~/Scripts/pera-app/fileupload/", "*.js", true)
@@ -33,6 +45,7 @@ namespace PERA
                 .IncludeDirectory("~/Scripts/pera-app/tabs/", "*.js", true)
                 .IncludeDirectory("~/Scripts/pera-app/fileupload/", "*.js", true)
                 .IncludeDirectory("~/Scripts/pera-app/invoiceTeamMembers/", "*.js", true);
+                 */
             bundles.Add(peraBundle);
                 /*
                 "~/Scripts/pera-app/dashboard/dashboard.module.js",
