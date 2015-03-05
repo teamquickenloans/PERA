@@ -13,7 +13,7 @@ namespace PERA.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201502222349156_initial"; }
+            get { return "201503051637274_initial"; }
         }
         
         string IMigrationMetadata.Source
