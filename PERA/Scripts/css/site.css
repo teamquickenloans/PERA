@@ -22,7 +22,7 @@ body {
 
 .sideBar {
     height: 100%;
-    overflow: auto; /*change back to "hidden" after alpha presentation*/
+    overflow: hidden;
     padding: 0;
     margin: 0;
 }
@@ -61,7 +61,13 @@ body {
 }
 
 #uploadTableWrapper {
-    height: 96.5%; /*Set this to limit height of table*/
+    height: 45%;/*96.5%; /*Set this to limit height of table*/
+    margin: 0;
+    padding: 0;
+}
+
+#itmTableWrapper {
+    height: 100%; /*Set this to limit height of table*/
     margin: 0;
     padding: 0;
 }
@@ -130,6 +136,14 @@ tr.tableRow.selected {
 
 .dateColUploadTable {
     width: 33%;
+}
+
+.nameColITMTable {
+    width: 50%;
+}
+
+.tokenIDColITMTable {
+    width: 50%
 }
 
 #usageTableHeader, #garageTableHeader {
