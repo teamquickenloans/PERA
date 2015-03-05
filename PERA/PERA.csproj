@@ -197,25 +197,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201502222346105_myMigration.cs" />
-    <Compile Include="Migrations\201502222346105_myMigration.Designer.cs">
-      <DependentUpon>201502222346105_myMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502222349156_initial.cs" />
-    <Compile Include="Migrations\201502222349156_initial.Designer.cs">
-      <DependentUpon>201502222349156_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503021505553_tokenID.cs" />
-    <Compile Include="Migrations\201503021505553_tokenID.Designer.cs">
-      <DependentUpon>201503021505553_tokenID.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503021606441_invoiceteammembers.cs" />
-    <Compile Include="Migrations\201503021606441_invoiceteammembers.Designer.cs">
-      <DependentUpon>201503021606441_invoiceteammembers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503021728116_new.cs" />
-    <Compile Include="Migrations\201503021728116_new.Designer.cs">
-      <DependentUpon>201503021728116_new.cs</DependentUpon>
+    <Compile Include="Migrations\201503051637274_initial.cs" />
+    <Compile Include="Migrations\201503051637274_initial.Designer.cs">
+      <DependentUpon>201503051637274_initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
@@ -280,17 +264,8 @@
     <Content Include="Scripts\css\foundation-icons.min.css" />
     <Content Include="Scripts\css\material.css" />
     <Content Include="Scripts\css\snackbar.css.map" />
-    <EmbeddedResource Include="Migrations\201502222346105_myMigration.resx">
-      <DependentUpon>201502222346105_myMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503021505553_tokenID.resx">
-      <DependentUpon>201503021505553_tokenID.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503021606441_invoiceteammembers.resx">
-      <DependentUpon>201503021606441_invoiceteammembers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503021728116_new.resx">
-      <DependentUpon>201503021728116_new.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201503051637274_initial.resx">
+      <DependentUpon>201503051637274_initial.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Angular\pera.js" />
@@ -323,9 +298,6 @@
     <Content Include="Views\IngestInvoice\One.cshtml" />
     <Content Include="Views\IngestInvoice\Two.cshtml" />
     <Content Include="Views\IngestInvoice\Three.cshtml" />
-    <EmbeddedResource Include="Migrations\201502222349156_initial.resx">
-      <DependentUpon>201502222349156_initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
