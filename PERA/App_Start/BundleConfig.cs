@@ -33,6 +33,7 @@ namespace PERA
                 .IncludeDirectory("~/Scripts/pera-app/tabs/", "*.js", true)
                 .IncludeDirectory("~/Scripts/pera-app/fileupload/", "*.js", true)
                 .IncludeDirectory("~/Scripts/pera-app/invoiceTeamMembers/", "*.js", true);
+            bundles.Add(peraBundle);
                 /*
                 "~/Scripts/pera-app/dashboard/dashboard.module.js",
                 "~/Scripts/pera-app/dashboard/controllers/expense.controller.js",
