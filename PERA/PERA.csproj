@@ -182,21 +182,30 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <!--
+      @name ASP.NET MVC Controllers
+    -->
+    <Compile Include="Controllers\IngestInvoiceController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
+    <!--
+      @name WebAPI Contollers
+    -->
     <Compile Include="Controllers\BadgeScansController.cs" />
     <Compile Include="Controllers\CarpoolGroupsController.cs" />
     <Compile Include="Controllers\FilesController.cs" />
     <Compile Include="Controllers\GarageManagersController.cs" />
     <Compile Include="Controllers\GaragesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
-    <Compile Include="Controllers\IngestInvoiceController.cs" />
     <Compile Include="Controllers\InvoicesController.cs" />
     <Compile Include="Controllers\InvoiceTeamMembersController.cs" />
     <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
-    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <!--
+      @name Entity Framework Migrations
+    -->
     <Compile Include="Migrations\201502222346105_myMigration.cs" />
     <Compile Include="Migrations\201502222346105_myMigration.Designer.cs">
       <DependentUpon>201502222346105_myMigration.cs</DependentUpon>
@@ -220,18 +229,21 @@
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
     </Compile>
+    <!--
+      @name Entity Framework Models
+    -->
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\BadgeScan.cs" />
     <Compile Include="Models\CarpoolGroup.cs" />
     <Compile Include="Models\InvoiceTeamMember.cs" />
     <Compile Include="Models\GarageManager.cs" />
-    <Compile Include="DAL\PERAContext.cs" />
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\Garage.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\InvoiceToTeamMember.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="DAL\PERAContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs">
       <SubType>Code</SubType>
@@ -245,6 +257,11 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <!--
+      @name pera-app
+      @desc AngularJS application
+    -->
+    <Content Include="Scripts\pera-app\invoiceTeamMembers\invoiceTeamMembers.module.js" />
     <Content Include="Scripts\pera-app\pera.js" />
     <Content Include="Scripts\pera-app\pera.config.js" />
     <Content Include="Scripts\pera-app\teammembers\controllers\teammembers.controller.js" />
@@ -260,25 +277,47 @@
     <Content Include="Scripts\pera-app\fileupload\services\invoiceform.service.js" />
     <Content Include="Scripts\pera-app\garages\controllers\garages.controller.js" />
     <Content Include="Scripts\pera-app\garages\services\garages.service.js" />
+    <Content Include="Scripts\pera-app\garages\garages.module.js" />
     <Content Include="Scripts\pera-app\tabs\controllers\tab.controller.js" />
     <Content Include="Scripts\pera-app\tabs\tabs.module.js" />
     <Content Include="Scripts\pera-app\utils\services\snackbar.service.js" />
     <Content Include="Scripts\pera-app\utils\utils.module.js" />
-
+    <Content Include="Scripts\pera-app\invoiceTeamMembers\controllers\invoiceTeamMembers.controller.js" />
+    <Content Include="Scripts\pera-app\invoiceTeamMembers\services\invoiceTeamMembers.service.js" />
+    <!--
+      @name JavaScript Files
+    -->
     <Content Include="Scripts\js\angular-file-upload\FileAPI.flash.swf" />
     <Content Include="Scripts\js\angular-file-upload\FileAPI.min.js" />
     <Content Include="Scripts\js\ELabels3.js" />
+    <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\css\snackbar.css" />
+    <Content Include="Scripts\css\snackbar.min.css" />
+    <Content Include="Scripts\css\site.css" />
+    <Content Include="Scripts\js\snackbar.js" />
+    <Content Include="Scripts\js\snackbar.min.js" />
+    <Content Include="Scripts\js\_references.js" />
+    <!--
+      @name AngularJS
+    -->
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload-all.js" />
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload-all.min.js" />
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload-shim.js" />
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload-shim.min.js" />
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload.js" />
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload.min.js" />
-
+    <Content Include="Scripts\js\angular-file-upload\ng-file-upload-all.js" />
+    <Content Include="Scripts\js\angular-file-upload\ng-file-upload-all.min.js" />
     <EmbeddedResource Include="DAL\garages.csv" />
+    <!--
+      @ name CSS Stylesheets
+    -->
     <Content Include="Scripts\css\foundation-icons.min.css" />
     <Content Include="Scripts\css\material.css" />
     <Content Include="Scripts\css\snackbar.css.map" />
+    <!--
+      @name Embedded Resources
+    -->
     <EmbeddedResource Include="Migrations\201502222346105_myMigration.resx">
       <DependentUpon>201502222346105_myMigration.cs</DependentUpon>
     </EmbeddedResource>
@@ -291,18 +330,13 @@
     <EmbeddedResource Include="Migrations\201503021728116_new.resx">
       <DependentUpon>201503021728116_new.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
-    <Content Include="Scripts\pera-app\pera.js" />
-    <Content Include="Scripts\pera-app\garages\garages.module.js" />
-    <Content Include="Scripts\css\snackbar.css" />
-    <Content Include="Scripts\css\snackbar.min.css" />
-    <Content Include="Scripts\css\site.css" />
-    <Content Include="Scripts\js\snackbar.js" />
-    <Content Include="Scripts\js\snackbar.min.js" />
-    <Content Include="Scripts\js\_references.js" />
-    <Content Include="Scripts\js\angular-file-upload\ng-file-upload-all.js" />
-    <Content Include="Scripts\js\angular-file-upload\ng-file-upload-all.min.js" />
+    <EmbeddedResource Include="Migrations\201502222349156_initial.resx">
+      <DependentUpon>201502222349156_initial.cs</DependentUpon>
+    </EmbeddedResource>
     <Content Include="Views\Javascripts.html" />
+    <!--
+      @name Config Files
+    -->
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -312,6 +346,9 @@
     <Content Include="Web.Release.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
+    <!--
+    * @name ASP.NET MVC Views
+    -->
     <Content Include="Views\Web.config" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\TeamMember\Create.cshtml" />
@@ -322,9 +359,6 @@
     <Content Include="Views\IngestInvoice\One.cshtml" />
     <Content Include="Views\IngestInvoice\Two.cshtml" />
     <Content Include="Views\IngestInvoice\Three.cshtml" />
-    <EmbeddedResource Include="Migrations\201502222349156_initial.resx">
-      <DependentUpon>201502222349156_initial.cs</DependentUpon>
-    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

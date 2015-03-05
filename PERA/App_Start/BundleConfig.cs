@@ -15,14 +15,25 @@ namespace PERA
             //add link to jquery on the CDN
              var jqueryCdnPath = "http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js";
 
-            bundles.Add(new ScriptBundle("~/bundles/jquery",
-                        jqueryCdnPath).Include(
-                "~/Scripts/jquery-{version}.js"));
+             var jqueryBundle = new ScriptBundle("~/bundles/jquery", jqueryCdnPath);
+            //jqueryBundle.Include("~/Scripts/jquery-{version}.js");
+            bundles.Add(jqueryBundle);
 
+  
 
-            bundles.Add(new ScriptBundle("~/bundles/pera-app").Include(
-                "~/Scripts/pera-app/pera.js",
-                "~/Scripts/pera-app/pera.config.js",
+            var peraBundle = new ScriptBundle("~/bundles/pera-app");                    
+            peraBundle
+                .Include("~/Scripts/pera-app/pera.js")
+                .Include("~/Scripts/pera-app/pera.config.js")
+                .IncludeDirectory("~/Scripts/pera-app/dashboard/", "*.js", true)
+                .IncludeDirectory("~/Scripts/pera-app/fileupload/", "*.js", true)
+                .IncludeDirectory("~/Scripts/pera-app/garages/", "*.js", true)
+                .IncludeDirectory("~/Scripts/pera-app/teammembers/", "*.js", true)
+                .IncludeDirectory("~/Scripts/pera-app/utils/", "*.js", true)
+                .IncludeDirectory("~/Scripts/pera-app/tabs/", "*.js", true)
+                .IncludeDirectory("~/Scripts/pera-app/fileupload/", "*.js", true)
+                .IncludeDirectory("~/Scripts/pera-app/invoiceTeamMembers/", "*.js", true);
+                /*
                 "~/Scripts/pera-app/dashboard/dashboard.module.js",
                 "~/Scripts/pera-app/dashboard/controllers/expense.controller.js",
                 "~/Scripts/pera-app/dashboard/controllers/map.controller.js",
@@ -43,7 +54,9 @@ namespace PERA
                 "~/Scripts/pera-app/fileupload/services/invoiceform.service.js",
                 "~/Scripts/pera-app/fileupload/controllers/fileupload.controller.js",
                 "~/Scripts/pera-app/fileupload/controllers/invoiceform.controller.js"
-                ));
+                 
+                 */
+          
         }
     }
 }

@@ -10,9 +10,10 @@
         'pera.dashboard',
         'pera.tabs',
         'pera.fileupload',
-        'ngRoute',
         'pera.teammembers',
-        'pera.invoiceTeamMembers'
+        'pera.invoiceTeamMembers',
+        'ngRoute',
+        'ui.router'
       ]);
     
     //angular
