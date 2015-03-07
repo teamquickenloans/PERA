@@ -323,7 +323,6 @@
     <!--
       @name Config Files
     -->
-    <Content Include="Views\ReconcileExpenses\uploadHistory.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>
@@ -352,6 +351,8 @@
     <Content Include="Scripts\pera-app\sidebar\controllers\sidebar.controller.js" />
     <Content Include="Views\GarageMap\Overview.cshtml" />
     <Content Include="Views\GarageMap\SingleGarage.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\ReconcileExpenses\UploadHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

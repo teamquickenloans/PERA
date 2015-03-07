@@ -52,8 +52,14 @@
               
           })
           .state('uploadHistory', {
-              templateUrl: 'ReconcileExpenses/UploadHistory'
+              views: {
+                  'content': {
+                      templateUrl: 'ReconcileExpenses/UploadHistory',
+                      controller: 'ExpensesController as expenseCtrl'
+                  }
+              }
           })
+
 
           .state('overview', {
               views: {
