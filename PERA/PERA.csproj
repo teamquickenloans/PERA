@@ -203,34 +203,12 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <!--
       @name Entity Framework Migrations
     -->
-    <Compile Include="Migrations\201502222346105_myMigration.cs" />
-    <Compile Include="Migrations\201502222346105_myMigration.Designer.cs">
-      <DependentUpon>201502222346105_myMigration.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201502222349156_initial.cs" />
-    <Compile Include="Migrations\201502222349156_initial.Designer.cs">
-      <DependentUpon>201502222349156_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503021505553_tokenID.cs" />
-    <Compile Include="Migrations\201503021505553_tokenID.Designer.cs">
-      <DependentUpon>201503021505553_tokenID.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503021606441_invoiceteammembers.cs" />
-    <Compile Include="Migrations\201503021606441_invoiceteammembers.Designer.cs">
-      <DependentUpon>201503021606441_invoiceteammembers.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503021728116_new.cs" />
-    <Compile Include="Migrations\201503021728116_new.Designer.cs">
-      <DependentUpon>201503021728116_new.cs</DependentUpon>
-=======
     <Compile Include="Migrations\201503051637274_initial.cs" />
     <Compile Include="Migrations\201503051637274_initial.Designer.cs">
       <DependentUpon>201503051637274_initial.cs</DependentUpon>
->>>>>>> origin/develop
     </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
@@ -275,9 +253,10 @@
     <Content Include="Scripts\pera-app\teammembers\services\teammembers.service.js" />
     <Content Include="Scripts\pera-app\teammembers\teammembers.module.js" />
     <Content Include="Scripts\pera-app\fileupload\directives\ngfile.directive.js" />
-    <Content Include="Scripts\pera-app\dashboard\controllers\expense.controller.js" />
-    <Content Include="Scripts\pera-app\dashboard\controllers\map.controller.js" />
-    <Content Include="Scripts\pera-app\dashboard\dashboard.module.js" />
+    <Content Include="Scripts\pera-app\expenses\controllers\expenses.controller.js" />
+    <Content Include="Scripts\pera-app\expenses\expenses.module.js" />
+    <Content Include="Scripts\pera-app\map\controllers\map.controller.js" />
+    <Content Include="Scripts\pera-app\map\map.module.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\fileupload.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\invoiceform.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\fileupload.module.js" />
@@ -297,6 +276,9 @@
     <Content Include="Scripts\js\angular-file-upload\FileAPI.flash.swf" />
     <Content Include="Scripts\js\angular-file-upload\FileAPI.min.js" />
     <Content Include="Scripts\js\ELabels3.js" />
+    <EmbeddedResource Include="Migrations\201503051637274_initial.resx">
+      <DependentUpon>201503051637274_initial.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
     <Content Include="Scripts\css\snackbar.min.css" />
@@ -322,29 +304,9 @@
     <Content Include="Scripts\css\foundation-icons.min.css" />
     <Content Include="Scripts\css\material.css" />
     <Content Include="Scripts\css\snackbar.css.map" />
-<<<<<<< HEAD
     <!--
       @name Embedded Resources
     -->
-    <EmbeddedResource Include="Migrations\201502222346105_myMigration.resx">
-      <DependentUpon>201502222346105_myMigration.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503021505553_tokenID.resx">
-      <DependentUpon>201503021505553_tokenID.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503021606441_invoiceteammembers.resx">
-      <DependentUpon>201503021606441_invoiceteammembers.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503021728116_new.resx">
-      <DependentUpon>201503021728116_new.cs</DependentUpon>
-=======
-    <EmbeddedResource Include="Migrations\201503051637274_initial.resx">
-      <DependentUpon>201503051637274_initial.cs</DependentUpon>
->>>>>>> origin/develop
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201502222349156_initial.resx">
-      <DependentUpon>201502222349156_initial.cs</DependentUpon>
-    </EmbeddedResource>
     <Content Include="Views\ReconcileExpenses\detectedIssues.html" />
     <Content Include="Views\GarageMap\garageMap.html" />
     <Content Include="Views\Javascripts.html" />
