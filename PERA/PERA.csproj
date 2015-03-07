@@ -203,6 +203,7 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+<<<<<<< HEAD
     <!--
       @name Entity Framework Migrations
     -->
@@ -225,6 +226,11 @@
     <Compile Include="Migrations\201503021728116_new.cs" />
     <Compile Include="Migrations\201503021728116_new.Designer.cs">
       <DependentUpon>201503021728116_new.cs</DependentUpon>
+=======
+    <Compile Include="Migrations\201503051637274_initial.cs" />
+    <Compile Include="Migrations\201503051637274_initial.Designer.cs">
+      <DependentUpon>201503051637274_initial.cs</DependentUpon>
+>>>>>>> origin/develop
     </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
@@ -316,6 +322,7 @@
     <Content Include="Scripts\css\foundation-icons.min.css" />
     <Content Include="Scripts\css\material.css" />
     <Content Include="Scripts\css\snackbar.css.map" />
+<<<<<<< HEAD
     <!--
       @name Embedded Resources
     -->
@@ -330,6 +337,10 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503021728116_new.resx">
       <DependentUpon>201503021728116_new.cs</DependentUpon>
+=======
+    <EmbeddedResource Include="Migrations\201503051637274_initial.resx">
+      <DependentUpon>201503051637274_initial.cs</DependentUpon>
+>>>>>>> origin/develop
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201502222349156_initial.resx">
       <DependentUpon>201502222349156_initial.cs</DependentUpon>
