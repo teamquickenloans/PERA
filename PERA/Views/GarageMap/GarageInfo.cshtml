@@ -1,0 +1,31 @@
+﻿<div class="sideBar">
+
+
+    <div id="usageTableHeader">
+        Parking Usage
+    </div>
+
+    <div id="usageTableWrapper">
+
+        <table id="usageTableHead">
+            <tr>
+                <th class="nameColUsageTable">Name</th>
+                <th class="usageColUsageTable">Usage</th>
+            </tr>
+        </table>
+
+        <div id="usageTableBodyWrapper">
+            <table id="usageTableBody" ng-controller="TeamMembersController as teamCtrl">
+                <tr class="tableRow" ng-repeat="teammember in teamCtrl.teammembers">
+                    <td class="nameColUsageTable">{{teammember.firstName}} {{teammember.lastName}}</td>
+                    <td class="usageColUsageTable">0/31</td>
+                </tr>
+            </table>
+        </div>
+
+    </div> <!-- usageTableWrapper end -->
+
+
+
+</div> <!-- sideBar end -->
+

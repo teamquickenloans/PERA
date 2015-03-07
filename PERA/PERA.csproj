@@ -185,7 +185,9 @@
     <!--
       @name ASP.NET MVC Controllers
     -->
+    <Compile Include="Controllers\GarageMapController.cs" />
     <Compile Include="Controllers\IngestInvoiceController.cs" />
+    <Compile Include="Controllers\ReconcileExpensesController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <!--
       @name WebAPI Contollers
@@ -197,7 +199,6 @@
     <Compile Include="Controllers\GaragesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoicesController.cs" />
-    <Compile Include="Controllers\InvoiceTeamMembersController.cs" />
     <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Global.asax.cs">
@@ -210,6 +211,10 @@
     <Compile Include="Migrations\201503051637274_initial.Designer.cs">
       <DependentUpon>201503051637274_initial.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503071416105_update-models.cs" />
+    <Compile Include="Migrations\201503071416105_update-models.Designer.cs">
+      <DependentUpon>201503071416105_update-models.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -217,15 +222,17 @@
       @name Entity Framework Models
     -->
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
     <Compile Include="Models\CarpoolGroup.cs" />
-    <Compile Include="Models\InvoiceTeamMember.cs" />
+    <Compile Include="Models\QLActiveParkerReport.cs" />
+    <Compile Include="Models\InvoiceActiveParkerReport.cs" />
+    <Compile Include="Models\ParkerReportTeamMember.cs" />
     <Compile Include="Models\GarageManager.cs" />
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\Garage.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoice.cs" />
-    <Compile Include="Models\InvoiceToTeamMember.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="DAL\PERAContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -247,8 +254,10 @@
     -->
     <Content Include="Scripts\js\angular-ui-router.js" />
     <Content Include="Scripts\pera-app\invoiceTeamMembers\invoiceTeamMembers.module.js" />
+    <Content Include="Scripts\pera-app\map\map.module.js" />
     <Content Include="Scripts\pera-app\pera.js" />
     <Content Include="Scripts\pera-app\pera.config.js" />
+    <Content Include="Scripts\pera-app\sidebar\sidebar.module.js" />
     <Content Include="Scripts\pera-app\teammembers\controllers\teammembers.controller.js" />
     <Content Include="Scripts\pera-app\teammembers\services\teammembers.service.js" />
     <Content Include="Scripts\pera-app\teammembers\teammembers.module.js" />
@@ -279,6 +288,9 @@
     <EmbeddedResource Include="Migrations\201503051637274_initial.resx">
       <DependentUpon>201503051637274_initial.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503071416105_update-models.resx">
+      <DependentUpon>201503071416105_update-models.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
     <Content Include="Scripts\css\snackbar.min.css" />
@@ -307,8 +319,6 @@
     <!--
       @name Embedded Resources
     -->
-    <Content Include="Views\ReconcileExpenses\detectedIssues.html" />
-    <Content Include="Views\GarageMap\garageMap.html" />
     <Content Include="Views\Javascripts.html" />
     <!--
       @name Config Files
@@ -336,11 +346,18 @@
     <Content Include="Views\IngestInvoice\One.cshtml" />
     <Content Include="Views\IngestInvoice\Two.cshtml" />
     <Content Include="Views\IngestInvoice\Three.cshtml" />
+    <Content Include="Views\GarageMap\GarageMap.cshtml" />
+    <Content Include="Views\ReconcileExpenses\DetectedIssues.cshtml" />
+    <Content Include="Views\GarageMap\GarageInfo.cshtml" />
+    <Content Include="Scripts\pera-app\sidebar\controllers\sidebar.controller.js" />
+    <Content Include="Views\GarageMap\Overview.cshtml" />
+    <Content Include="Views\GarageMap\SingleGarage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\pera-app\map\" />
+    <Folder Include="Views\ActiveParkerReport\" />
     <Folder Include="Views\Files\" />
+    <Folder Include="Views\QLActiveParkerReport\" />
     <Folder Include="Views\View\" />
   </ItemGroup>
   <ItemGroup>

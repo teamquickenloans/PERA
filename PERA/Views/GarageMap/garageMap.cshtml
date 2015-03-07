@@ -5,7 +5,8 @@
 
 <div id="garageMapContent">
 
-    <div id="map-canvas" class="columns small-9"></div>
+    <div id="map-canvas" ui-view="canvas" class="columns small-9"></div>
+
     <div id="mapKey">
         <h5>&nbsp;&nbsp;Spots Available&nbsp;&nbsp;&nbsp;</h5>
         <div id="greenBox"></div>
@@ -20,131 +21,15 @@
         <div id="blackBox"></div>
         <div class="keyText">Garage Full</div>
     </div>
+    <div class="row">
+        <div ui-view="sidebartop" class="columns small-3">
 
-
-
-    <div class="sideBar columns small-3" ng-controller="GaragesController as garageCtrl">
-        <!-- Overview -->
-            <div id="garageTableHeader">
-                Overview
-            </div>
-
-            <table id="garageTable">
-                <tr>
-                    <td>Cost Per Month: </td>
-                    <td>{{garageCtrl.totalCost | currency}}</td>
-                </tr>
-                <tr>
-                    <td>Capacity: </td>
-                    <td>{{garageCtrl.totalCapacity}}</td>
-                </tr>
-                <tr>
-                    <td>Leased Spaces: </td>
-                    <td>{{garageCtrl.totalLeasedSpaces}}</td>
-                </tr>
-                <tr>
-                    <td>Team-Member Spaces: </td>
-                    <td>{{garageCtrl.totalTeamMemberSpaces}}</td>
-                </tr>
-                <tr>
-                    <td>Required Buffer Size: </td>
-                    <td>{{garageCtrl.totalRequiredBufferSize}}</td>
-                </tr>
-                <tr>
-                    <td>Average Cost Per Space: </td>
-                    <td>{{garageCtrl.averageCostPerSpace | currency}}</td>
-                </tr>
-                <tr>
-                    <td>Average Transient Sale Price: </td>
-                    <td>{{garageCtrl.averageTransientSalePrice | currency}}</td>
-                </tr>
-            </table>
-
-
-        <!-- Single Garage -->
-
-            <div id="garageTableHeader">
-                {{garageCtrl.garages[tab.sideTab].name}}
-            </div>
-
-            <table id="garageTable">
-                <tr>
-                    <td>Cost Per Month: </td>
-                    <td>{{garageCtrl.costs[tab.sideTab] | currency}}</td>
-                </tr>
-                <tr>
-                    <td>Address: </td>
-                    <td>{{garageCtrl.garages[tab.sideTab].address}}</td>
-                </tr>
-                <tr>
-                    <td>Capacity: </td>
-                    <td>{{garageCtrl.garages[tab.sideTab].capacity}}</td>
-                </tr>
-                <tr>
-                    <td>Leased Spaces: </td>
-                    <td>{{garageCtrl.garages[tab.sideTab].numberOfLeasedSpaces}}</td>
-                </tr>
-                <tr>
-                    <td>Team-Member Spaces: </td>
-                    <td>{{garageCtrl.garages[tab.sideTab].numberOfTeamMemberSpaces}}</td>
-                </tr>
-                <tr>
-                    <td>Required Buffer Size: </td>
-                    <td>{{garageCtrl.garages[tab.sideTab].minimumNumberOfBufferSpaces}}</td>
-                </tr>
-                <tr>
-                    <td>Cost Per Space: </td>
-                    <td>{{garageCtrl.garages[tab.sideTab].spaceCost | currency}}</td>
-                </tr>
-                <tr>
-                    <td>Transient Sale Price: </td>
-                    <td>{{garageCtrl.garages[tab.sideTab].transientSalePrice | currency}}</td>
-                </tr>
-                <tr>
-                    <td>Owner: </td>
-                    <td>{{garageCtrl.garages[tab.sideTab].owner}}</td>
-                </tr>
-                <tr>
-                    <td>Billing Party: </td>
-                    <td>{{garageCtrl.garages[tab.sideTab].billingParty}}</td>
-                </tr>
-                <tr>
-                    <td>Garage Manager ID: </td>
-                    <td>{{garageCtrl.garages[tab.sideTab].garageManagerID}}</td>
-                </tr>
-            </table>
-
-
-
-
-        <div id="usageTableHeader">
-            Parking Usage
         </div>
+    </div>
+    <div class="row">
+        <div ui-view="sidebarbottom" class="columns small-3">
 
-        <div id="usageTableWrapper">
-
-            <table id="usageTableHead">
-                <tr>
-                    <th class="nameColUsageTable">Name</th>
-                    <th class="usageColUsageTable">Usage</th>
-                </tr>
-            </table>
-
-            <div id="usageTableBodyWrapper">
-                <table id="usageTableBody" ng-controller="TeamMembersController as teamCtrl">
-                    <tr class="tableRow" ng-repeat="teammember in teamCtrl.teammembers">
-                        <td class="nameColUsageTable">{{teammember.firstName}} {{teammember.lastName}}</td>
-                        <td class="usageColUsageTable">0/31</td>
-                    </tr>
-                </table>
-            </div>
-
-        </div> <!-- usageTableWrapper end -->
-
-
-
-    </div> <!-- sideBar end -->
-
-
+        </div>
+    </div>
 </div>
 

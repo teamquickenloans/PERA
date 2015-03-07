@@ -68,7 +68,7 @@ namespace PERA.Controllers
             // The result of each spreadsheet will be created in the result.Tables
             DataSet result = excelReader.AsDataSet();
 
-            List<InvoiceTeamMember> teamMembers = new List<InvoiceTeamMember>();
+            List<ParkerReportTeamMember> teamMembers = new List<ParkerReportTeamMember>();
             foreach (DataTable table in result.Tables)
             {
                 foreach (DataRow row in table.Rows)
@@ -88,7 +88,7 @@ namespace PERA.Controllers
                     }
                     //System.Diagnostics.Debug.WriteLine("after");
 
-                    InvoiceTeamMember teamMember = new InvoiceTeamMember();
+                    ParkerReportTeamMember teamMember = new ParkerReportTeamMember();
 
                     string fullName = (string)row[2];
 
@@ -120,11 +120,11 @@ namespace PERA.Controllers
 
                     teamMember.FirstName = firstName;
                     teamMember.LastName = lastName;
-                    teamMember.TokenID = cardNumber;
+                    teamMember.BadgeID = cardNumber;
 
                     teamMembers.Add(teamMember);
 
-                    db.InvoiceTeamMembers.Add(teamMember);
+                    db.ParkerReportTeamMembers.Add(teamMember);
                     db.SaveChanges();
 
                       /*

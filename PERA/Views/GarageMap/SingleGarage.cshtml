@@ -1,0 +1,51 @@
+﻿<!--Single Garage-->
+<div id="garageTableHeader">
+    {{sidebar.currentGarage.name}}
+</div>
+
+<table id="garageTable">
+    <tr>
+        <td>Cost Per Month: </td>
+        <td>{{sidebar.currentGarage.costs | currency}}</td>
+    </tr>
+    <tr>
+        <td>Address: </td>
+        <td>{{sidebar.currentGarage.address}}</td>
+    </tr>
+    <tr>
+        <td>Capacity: </td>
+        <td>{{garageCtrl.garages[tab.sideTab].capacity}}</td>
+    </tr>
+    <tr>
+        <td>Leased Spaces: </td>
+        <td>{{garageCtrl.garages[tab.sideTab].numberOfLeasedSpaces}}</td>
+    </tr>
+    <tr>
+        <td>Team-Member Spaces: </td>
+        <td>{{garageCtrl.garages[tab.sideTab].numberOfTeamMemberSpaces}}</td>
+    </tr>
+    <tr>
+        <td>Required Buffer Size: </td>
+        <td>{{garageCtrl.garages[tab.sideTab].minimumNumberOfBufferSpaces}}</td>
+    </tr>
+    <tr>
+        <td>Cost Per Space: </td>
+        <td>{{garageCtrl.garages[tab.sideTab].spaceCost | currency}}</td>
+    </tr>
+    <tr>
+        <td>Transient Sale Price: </td>
+        <td>{{garageCtrl.garages[tab.sideTab].transientSalePrice | currency}}</td>
+    </tr>
+    <tr>
+        <td>Owner: </td>
+        <td>{{garageCtrl.garages[tab.sideTab].owner}}</td>
+    </tr>
+    <tr>
+        <td>Billing Party: </td>
+        <td>{{garageCtrl.garages[tab.sideTab].billingParty}}</td>
+    </tr>
+    <tr>
+        <td>Garage Manager ID: </td>
+        <td>{{garageCtrl.garages[tab.sideTab].garageManagerID}}</td>
+    </tr>
+</table>

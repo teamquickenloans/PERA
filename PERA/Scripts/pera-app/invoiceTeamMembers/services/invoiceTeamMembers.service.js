@@ -1,5 +1,5 @@
 ﻿/**
-* InvoiceTeamMembers
+* ParkerReportTeamMembers
 * @namespace pera.invoiceTeamMembers.services
 */
 (function () {
@@ -7,15 +7,15 @@
 
     angular
       .module('pera.invoiceTeamMembers.services')
-      .factory('InvoiceTeamMembers', InvoiceTeamMembers);
+      .factory('ParkerReportTeamMembers', ParkerReportTeamMembers);
 
-    InvoiceTeamMembers.$inject = ['$http', '$rootScope', '$q', 'Snackbar'];
+    ParkerReportTeamMembers.$inject = ['$http', '$rootScope', '$q', 'Snackbar'];
 
     /**
-    * @namespace InvoiceTeamMembers
+    * @namespace ParkerReportTeamMembers
     * @returns {Factory}
     */
-    function InvoiceTeamMembers($http, $rootScope, $q, Snackbar) {   //this is just linking up the functions to variable names and returning them
+    function ParkerReportTeamMembers($http, $rootScope, $q, Snackbar) {   //this is just linking up the functions to variable names and returning them
 
         var vm = this;
         vm.invoiceTeamMembers = [];
@@ -23,22 +23,22 @@
         var promise = undefined;
 
 
-        var InvoiceTeamMembers = {
+        var ParkerReportTeamMembers = {
             all: all,
             create: create,
             get: get,
             share: share
         };
 
-        return InvoiceTeamMembers;
+        return ParkerReportTeamMembers;
 
         ////////////////////
 
         /**
         * @name all
-        * @desc Get all InvoiceTeamMembers
+        * @desc Get all ParkerReportTeamMembers
         * @returns {Promise}
-        * @memberOf pera.invoiceTeamMembers.services.InvoiceTeamMembers
+        * @memberOf pera.invoiceTeamMembers.services.ParkerReportTeamMembers
         */
         function all() {
             if (!promise || last_request_failed) {
@@ -52,9 +52,9 @@
         /**
          * @name invoiceTeamMembersSuccessFn
          * @desc Sets the invoiceTeamMembers variable to the list of invoiceTeamMembers
-         * @param {string} badgeID The badgeID to get InvoiceTeamMembers for
+         * @param {string} badgeID The badgeID to get ParkerReportTeamMembers for
          * @returns {Promise}
-         * @memberOf thinkster.invoiceTeamMembers.services.InvoiceTeamMembers
+         * @memberOf thinkster.invoiceTeamMembers.services.ParkerReportTeamMembers
          */
         function invoiceTeamMembersSuccessFn(data, status, headers, config, response) {
             last_request_failed = false;
@@ -71,14 +71,14 @@
         }
 
         function share() {
-            $rootScope.$broadcast('receiveInvoiceTeamMembers');
+            $rootScope.$broadcast('receiveParkerReportTeamMembers');
         }
         /**
         * @name create
         * @desc Create a new invoiceTeamMembers
         * @param {string} content The content of the new invoiceTeamMembers
         * @returns {Promise}
-        * @memberOf thinkster.invoiceTeamMembers.services.InvoiceTeamMembers
+        * @memberOf thinkster.invoiceTeamMembers.services.ParkerReportTeamMembers
         */
         function create(content) {
             return $http.post('/api/invoiceTeamMembers/', {
@@ -88,10 +88,10 @@
 
         /**
          * @name get
-         * @desc Get the InvoiceTeamMembers of a given badge ID
-         * @param {string} badgeID The badgeID to get InvoiceTeamMembers for
+         * @desc Get the ParkerReportTeamMembers of a given badge ID
+         * @param {string} badgeID The badgeID to get ParkerReportTeamMembers for
          * @returns {Promise}
-         * @memberOf thinkster.invoiceTeamMembers.services.InvoiceTeamMembers
+         * @memberOf thinkster.invoiceTeamMembers.services.ParkerReportTeamMembers
          */
         function get(badgeID) {
             return $http.get('/api/' + badgeID + '/invoiceTeamMembers/');

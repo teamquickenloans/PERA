@@ -23,7 +23,7 @@ namespace PERA.Models
 
         public System.Data.Entity.DbSet<PERA.Models.TeamMember> TeamMembers { get; set; }
 
-        public System.Data.Entity.DbSet<PERA.Models.InvoiceTeamMember> InvoiceTeamMembers { get; set; }
+        public System.Data.Entity.DbSet<PERA.Models.ParkerReportTeamMember> ParkerReportTeamMembers { get; set; }
 
         public System.Data.Entity.DbSet<PERA.Models.Garage> Garages { get; set; }
 

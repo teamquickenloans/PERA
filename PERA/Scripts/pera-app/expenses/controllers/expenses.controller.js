@@ -10,8 +10,9 @@
       .controller('ExpensesController', ExpensesController);
 
     function ExpensesController() {
-        this.issues = issues;
-        this.uploads = uploads;
+        var vm = this;
+        vm.issues = issues;
+        vm.uploads = uploads;
     };
     
 

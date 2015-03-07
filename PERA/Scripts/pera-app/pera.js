@@ -7,11 +7,13 @@
         //'pera.routes',
         'pera.garages',
         'pera.utils',
-        'pera.dashboard',
+        'pera.expenses',
+        'pera.map',
         'pera.tabs',
         'pera.fileupload',
         'pera.teammembers',
         'pera.invoiceTeamMembers',
+        'pera.sidebar',
         'ui.router'
       ]);
     
@@ -19,7 +21,7 @@
     //  .module('pera.routes', ['ngRoute']);
 
     angular
-      .module('pera.config', []);
+      .module('pera.config', ['ui.router','ngRoute']);
 
 
 })();

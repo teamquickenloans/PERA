@@ -1,11 +1,11 @@
 ﻿<!DOCTYPE html>
-<html ng-app="pera">
+<html>
 <head>
 
     <meta charset="UTF-8">
     <title>Parking Dashboard</title>
-    <!-- <link rel="stylesheet" type="text/css" href="dashboard.css"> -->
-    <!-- ====================== jQuery ============================== -->
+     
+      <!-- ====================== jQuery ============================== -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
     @Scripts.Render("~/bundles/jquery")
 
@@ -21,47 +21,48 @@
 
 
 
-    <!-- ====================== AngularJS ============================== -->
+    <!--====================== AngularJS ============================== -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-route.js"></script>
 
-    <!-- ====================== angular-file-upload ============================== -->
+    <!--====================== angular-file-upload ============================== -->
     <script type="text/javascript" src="~/Scripts/js/angular-file-upload/angular-file-upload-shim.min.js"></script>
     <script type="text/javascript" src="~/Scripts/js/angular-file-upload/angular-file-upload.min.js"></script>
 
     <script type="text/javascript" src="~/Scripts/js/angular-ui-router.js"></script>
 
 
-    <!-- ====================== Foundation ============================ -->
+      <!--====================== Foundation ============================ -->
     <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/css/foundation.min.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/js/foundation.min.js"></script>
 
-    <!-- ====================== Google Maps API ============================ -->
+      <!--====================== Google Maps API ============================ -->
     <script type="text/javascript"
             src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM">
     </script>
-    <!-- Map Labels -->
+      @*Map Labels*@ 
     <script type="text/javascript" src="~/Scripts/js/ELabels3.js"></script>
 
-    <!-- =======================Underscore.js =============================== -->
+      <!--=======================Underscore.js =============================== -->
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 
-    <!-- ====================== Snackbar.js ============================ -->
+      <!--====================== Snackbar.js ============================ -->
     <script type="text/javascript" src="~/Scripts/js/snackbar.min.js"></script>
     <link href="~/Scripts/css/snackbar.min.css" rel="stylesheet" />
     <link href="~/Scripts/css/material.css" rel="stylesheet" />
 
-    <!-- ====================== pera-app ======================== -->
-    <!--@Styles.Render("~/bundles/pera-app");-->
+      <!--====================== pera-app ======================== -->
+     @Styles.Render("~/bundles/pera-app")
 
     <script type="text/javascript" src="~/Scripts/pera-app/pera.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/map/map.module.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/map/controllers/map.controller.js"></script>
+
+    <script type="text/javascript" src="~/Scripts/pera-app/pera.config.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/expenses/expenses.module.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/expenses/controllers/expenses.controller.js"></script>
+    <script type="text/javascript" src="~/Scripts/pera-app/map/map.module.js"></script>
+    <script type="text/javascript" src="~/Scripts/pera-app/map/controllers/map.controller.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/tabs/tabs.module.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/tabs/controllers/tab.controller.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/pera.config.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/garages/garages.module.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/garages/services/garages.service.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/garages/controllers/garages.controller.js"></script>
@@ -79,18 +80,20 @@
     <script type="text/javascript" src="~/Scripts/pera-app/invoiceTeamMembers/invoiceTeamMembers.module.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/invoiceTeamMembers/services/invoiceTeamMembers.service.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/invoiceTeamMembers/controllers/invoiceTeamMembers.controller.js"></script>
+    <script type="text/javascript" src="~/Scripts/pera-app/sidebar/sidebar.module.js"></script>
+    <script type="text/javascript" src="~/Scripts/pera-app/sidebar/controllers/sidebar.controller.js"></script>
 
-    <!-- ====================== CSS ================================= -->
+      <!--====================== CSS ================================= -->
     <link rel="stylesheet" href="~/Scripts/css/site.css" />
 
 </head>
-<body ng-controller="MapController as map">
-    <div id="wrapper" ng-controller="TabController as tab">
+<body ng-app="pera">
 
-        <!-- ======================== Nav Bar ============================ -->
-        <nav class="top-bar" data-topbar role="navigation" data-options="is_hover:false" ng-init="tab.setSideTab(-1)">
-            <!-- TODO Make dropdown hoverable AND PROPERLY clickable -->
-            <ul class="title-area">
+
+          <!--======================== Nav Bar ============================ -->
+         <nav class="top-bar" data-topbar role="navigation" data-options="is_hover:false"> <!-- ng-init="tab.setSideTab(-1)"-->
+              <!--TODO Make dropdown hoverable AND PROPERLY clickable -->
+             <ul class="title-area">
                 <li class="name">
                     <h1><a href="#">Parking Dashboard</a></h1>
                 </li>
@@ -98,84 +101,92 @@
             </ul>
 
             <section class="top-bar-section">
-                <!-- Right Nav Section -->
-                <ul class="right">
+                 <!-- Right Nav Section -->
+                 <ul class="right">
                     <li class="divider"></li>
 
-                    <!-- Overview -->
-                    <li ng-class="{active:tab.sideIsSet(-1)}">
-                        <a href="#" ng-click="tab.setSideTab(-1)">Overview</a>
+                     <li> <!--ng-class="{active:tab.sideIsSet(-1)}">-->
+                          <!-- <a href="#" ng-click="tab.setSideTab(-1)">Overview</a>-->
+                         <a ui-sref="overview">Overview</a>
                     </li>
 
                     <li class="divider"></li>
 
-                    <!-- Single Garage Dropdown -->
-                    <li ng-class="{active:!tab.sideIsSet(-1)}" class="has-dropdown">
+                      @*Single Garage Dropdown*@ 
+                     <li ng-class="{active:!tab.sideIsSet(-1)}" class="has-dropdown">
                         <a href="#">Single Garage</a>
                         <ul class="dropdown">
-                            <li ng-controller="GaragesController as garageCtrl">
-                                <ul ng-repeat="garage in garageCtrl.garages">
-                                    <li ng-class="{active:tab.sideIsSet($index)}"><a href="#" ng-click="tab.setSideTab($index)">{{garage.name}}</a></li>
+                            <li ng-controller="SideBarController as sidebar">
+                                <ul ng-repeat="garage in sidebar.garages">
+                                    <li ng-class="{active:tab.sideIsSet($index)}"><a ui-sref="singleGarage" ng-click="sidebar.setCurrent(garage)">{{garage.name}}</a></li>
                                 </ul>
                             </li>
                         </ul>
                     </li>
                 </ul>
-
-                <!-- Left Nav Section -->
-                <ul class="left">
+                        
+                  <!-- Left Nav Section -->
+                   <ul class="left">
                     <li class="divider"></li>
 
-                    <li ng-class="{active:tab.isSet(1) || tab.isSet(2)}" class="has-dropdown">
-                        <a href="#">Reconcile Expenses</a>
-                        <ul class="dropdown">
-                            <li>
-                                <ul>
-                                    <li ng-class="{active:tab.isSet(1)}">
-                                        <a ui-sref="detectedissues">Detected Issues</a>
-                                    <!--<a href="#" ng-click="tab.setTab(1)">Detected Issues</a>-->
-                                    </li>
-                                </ul>
-                                <ul>
-                                    <li ng-class="{active:tab.isSet(2)}">
-                                        <a ui-sref="uploadHistory">Upload History</a>
-                                    <!--<a href="#" ng-click="tab.setTab(2)">Upload History</a>-->
-                                    </li>
-                                </ul>
-                            </li>
-                        </ul>
-                    </li>
+                       <!--<li ng-class="{active:tab.isSet(1) || tab.isSet(2)}" class="has-dropdown">-->
+                       <li class="has-dropdown">
+                           <a href="#">Reconcile Expenses</a>
+                           <ul class="dropdown">
+                               <li>
+                                   <ul>
+                                       <!--<li ng-class="{active:tab.isSet(1)}">-->
+                                       <li>
+                                           <a ui-sref="detectedIssues">Detected Issues</a>
+                                       </li>
+                                   </ul>
+                                   <ul>
+                                       <li>
+<!--                                       <li ng-class="{active:tab.isSet(2)}">-->
 
+                                           <a ui-sref="uploadHistory">Upload History</a>
+                                           <!--<a href="#" ng-click="tab.setTab(2)">Upload History</a>-->
+                                       </li>
+                                   </ul>
+                               </li>
+                           </ul>
+                       </li>
+                    @*<li class="divider"></li>*@
+                        <li>
+                          <!--   <a ui-sref="garageMap">Garage Map</a>-->
+                             <a href="/#/garageMap" >Garage Map</a> 
+                        </li>
                     <li class="divider"></li>
 
-                    <li ng-class="{active:tab.isSet(3)}">
-                        <a ui-sref="reconcile">Garage Map</a>
-                        <!--<a href="#" ng-click="tab.setTab(3); map.initialized || map.initialize();">Garage Map</a>-->
-                    </li>
-
-                    <li class="divider"></li>
-
-                    <li ng-class="{active:tab.isSet(4)}">
-                        <a href="#" ng-click="tab.setTab(4)">Notifications</a>
+                    <li>
+                        <a href="#">Notifications</a>
                     </li>
 
                     <li class="divider"></li>
                 </ul>
             </section>
         </nav>
+    <div class="row"></div>
+        <div ui-view="content" class="columns small-9">
+        Stuff goes here
+        </div>   <!--end div ui-view-->
+        <div ui-view="sidebar" class="columns small-3">
+        </div>
+  </div>
 
 
 
+           <!--
+       ======================== Detected Issues Content ============================ 
+        <div class="row">
+            <div ui-view="content" class="columns small-8">
+            </div>   end div ui-view 
 
-
-        <!-- ======================== Detected Issues Content ============================ -->
-        <div ui-view>
-        </div> <!-- end div ui-view -->
-
+        </div>
             <div class="sideBar columns small-4" ng-controller="GaragesController as garageCtrl">
 
-                <!-- Overview -->
-                <!--
+                  Overview 
+                 
                 <div ng-show="tab.sideIsSet(-1)">
                     <div id="garageTableHeader">
                         Overview
@@ -211,10 +222,10 @@
                             <td>{{garageCtrl.averageTransientSalePrice | currency}}</td>
                         </tr>
                     </table>
-                </div>-->
+                </div>
 
-                <!-- Single Garage -->
-                <!-- 
+                  Single Garage 
+                  
                 <div ng-show="!tab.sideIsSet(-1)">
                     <div id="garageTableHeader">
                         {{garageCtrl.garages[tab.sideTab].name}}
@@ -270,7 +281,7 @@
 
             </div>
 
-        </div>    -->
+        </div>    
 
 
 
@@ -282,9 +293,9 @@
 
 
 
-        <!-- ======================== Upload History Content ============================ -->
-        <div id="uploadHistoryContent" ng-controller="ExpenseController as expenseCtrl" ng-show="tab.isSet(2)">
-            <div id="uploadTableWrapper" class="columns small-8">
+          ======================== Upload History Content ============================ 
+        <div id="uploadHistoryContent" ng-controller="ExpensesController as expenseCtrl" ng-show="tab.isSet(2)">
+            <div id="uploadTableWrapper" class="columns small-8" >
 
                 <table id="uploadTableHead">
                     <tr>
@@ -306,10 +317,8 @@
 
 
 
-
-                <!-- CLEAN UP LATER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+                  CLEAN UP LATER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
                 <div id="itmTableWrapper">
-
                     <table id="uploadTableHead">
                         <tr>
                             <th class="nameColITMTable">Name</th>
@@ -318,7 +327,7 @@
                     </table>
 
                     <div id="uploadTableBodyWrapper">
-                        <table id="uploadTableBody" ng-controller="InvoiceTeamMembersController as ITMCtrl">
+                        <table id="uploadTableBody" ng-controller="ParkerReportTeamMembersController as ITMCtrl">
                             <tr class="tableRow" ng-repeat="itm in ITMCtrl.invoiceTeamMembers">
                                 <td class="nameColITMTable">{{itm.firstName}} {{itm.lastName}}</td>
                                 <td class="tokenIDColITMTable">{{itm.tokenID}}</td>
@@ -327,21 +336,14 @@
                     </div>
 
                 </div>
-                <!-- CLEAN UP LATER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
-
-
-
-
+                  CLEAN UP LATER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< 
             </div>
-
-
-
 
 
 
             <div class="sideBar columns small-4" ng-controller="GaragesController as garageCtrl">
 
-                <!-- Overview -->
+                  Overview 
                 <div ng-show="tab.sideIsSet(-1)">
                     <div id="garageTableHeader">
                         Overview
@@ -379,7 +381,7 @@
                     </table>
                 </div>
 
-                <!-- Single Garage -->
+                  Single Garage 
                 <div ng-show="!tab.sideIsSet(-1)">
                     <div id="garageTableHeader">
                         {{garageCtrl.garages[tab.sideTab].name}}
@@ -435,7 +437,7 @@
 
 
 
-                <!-- Invoice Upload -->
+                  Invoice Upload 
                 <a id="uploadInvoiceButton" href="/#/invoiceForm" data-reveal-id="uploadInvoiceModal" class="radius button">Upload Invoice</a>
                 <div id="uploadInvoiceModal" class="reveal-modal" data-reveal>
                     <div ng-view></div>
@@ -445,176 +447,22 @@
             </div>
 
         </div>
+    </div>
 
 
+          ======================== Garage Map Content ============================ 
+   
 
-
-
-
-
-
-
-
-
-        <!-- ======================== Garage Map Content ============================ -->
-        <div id="garageMapContent" ng-show="tab.isSet(3)">
-
-            <div id="map-canvas" class="columns small-9"></div>
-            <div id="mapKey">
-                <h5>&nbsp;&nbsp;Spots Available&nbsp;&nbsp;&nbsp;</h5>
-                <div id="greenBox"></div>
-                <div class="keyText">100+ Spots</div>
-                <br />
-                <div id="yellowBox"></div>
-                <div class="keyText">50 - 100 Spots</div>
-                <br />
-                <div id="redBox"></div>
-                <div class="keyText">0 - 50 Spots</div>
-                <br />
-                <div id="blackBox"></div>
-                <div class="keyText">Garage Full</div>
-            </div>
-
-
-
-            <div class="sideBar columns small-3" ng-controller="GaragesController as garageCtrl">
-                <!-- Overview -->
-                <div ng-show="tab.sideIsSet(-1)">
-                    <div id="garageTableHeader">
-                        Overview
-                    </div>
-
-                    <table id="garageTable">
-                        <tr>
-                            <td>Cost Per Month: </td>
-                            <td>{{garageCtrl.totalCost | currency}}</td>
-                        </tr>
-                        <tr>
-                            <td>Capacity: </td>
-                            <td>{{garageCtrl.totalCapacity}}</td>
-                        </tr>
-                        <tr>
-                            <td>Leased Spaces: </td>
-                            <td>{{garageCtrl.totalLeasedSpaces}}</td>
-                        </tr>
-                        <tr>
-                            <td>Team-Member Spaces: </td>
-                            <td>{{garageCtrl.totalTeamMemberSpaces}}</td>
-                        </tr>
-                        <tr>
-                            <td>Required Buffer Size: </td>
-                            <td>{{garageCtrl.totalRequiredBufferSize}}</td>
-                        </tr>
-                        <tr>
-                            <td>Average Cost Per Space: </td>
-                            <td>{{garageCtrl.averageCostPerSpace | currency}}</td>
-                        </tr>
-                        <tr>
-                            <td>Average Transient Sale Price: </td>
-                            <td>{{garageCtrl.averageTransientSalePrice | currency}}</td>
-                        </tr>
-                    </table>
-                </div>
-
-
-                <!-- Single Garage -->
-                <div ng-show="!tab.sideIsSet(-1)">
-                    <div id="garageTableHeader">
-                        {{garageCtrl.garages[tab.sideTab].name}}
-                    </div>
-
-                    <table id="garageTable">
-                        <tr>
-                            <td>Cost Per Month: </td>
-                            <td>{{garageCtrl.costs[tab.sideTab] | currency}}</td>
-                        </tr>
-                        <tr>
-                            <td>Address: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].address}}</td>
-                        </tr>
-                        <tr>
-                            <td>Capacity: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].capacity}}</td>
-                        </tr>
-                        <tr>
-                            <td>Leased Spaces: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].numberOfLeasedSpaces}}</td>
-                        </tr>
-                        <tr>
-                            <td>Team-Member Spaces: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].numberOfTeamMemberSpaces}}</td>
-                        </tr>
-                        <tr>
-                            <td>Required Buffer Size: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].minimumNumberOfBufferSpaces}}</td>
-                        </tr>
-                        <tr>
-                            <td>Cost Per Space: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].spaceCost | currency}}</td>
-                        </tr>
-                        <tr>
-                            <td>Transient Sale Price: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].transientSalePrice | currency}}</td>
-                        </tr>
-                        <tr>
-                            <td>Owner: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].owner}}</td>
-                        </tr>
-                        <tr>
-                            <td>Billing Party: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].billingParty}}</td>
-                        </tr>
-                        <tr>
-                            <td>Garage Manager ID: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].garageManagerID}}</td>
-                        </tr>
-                    </table>
-                </div>
-
-
-
-                <div id="usageTableHeader">
-                    Parking Usage
-                </div>
-
-                <div id="usageTableWrapper">
-
-                    <table id="usageTableHead">
-                        <tr>
-                            <th class="nameColUsageTable">Name</th>
-                            <th class="usageColUsageTable">Usage</th>
-                        </tr>
-                    </table>
-
-                    <div id="usageTableBodyWrapper">
-                        <table id="usageTableBody" ng-controller="TeamMembersController as teamCtrl">
-                            <tr class="tableRow" ng-repeat="teammember in teamCtrl.teammembers">
-                                <td class="nameColUsageTable">{{teammember.firstName}} {{teammember.lastName}}</td>
-                                <td class="usageColUsageTable">0/31</td>
-                            </tr>
-                        </table>
-                    </div>
-
-                </div> <!-- usageTableWrapper end -->
-
-
-
-            </div> <!-- sideBar end -->
-
-
-        </div>
-
-
-
-        <!-- ======================== Notifications Content ============================ -->
+          ======================== Notifications Content ============================ 
         <div id="notificationsContent" class="row" ng-show="tab.isSet(4)">
-            <!-- TODO: this -->
+              TODO: this 
         </div>
 
     </div>
 
+        -->
 
-    <!-- Makes Foundation Stuff Work -->
+      <!-- Makes Foundation Stuff Work -->
     <script type="text/javascript">
         $(document).foundation();
     </script>

@@ -7,13 +7,13 @@ namespace PERA.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.2-31219")]
-    public sealed partial class updatemodel : IMigrationMetadata
+    public sealed partial class updatemodels : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(updatemodel));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(updatemodels));
         
         string IMigrationMetadata.Id
         {
-            get { return "201503071255295_update-model"; }
+            get { return "201503071416105_update-models"; }
         }
         
         string IMigrationMetadata.Source

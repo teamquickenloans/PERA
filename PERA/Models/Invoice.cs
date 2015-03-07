@@ -12,22 +12,17 @@ namespace PERA.Models
     public class Invoice
     {
         public int InvoiceID { get; set; }
-        public int GarageID { get; set; }
         public double TotalAmountBilled { get; set; }
         public DateTime DateReceived { get; set; }
-        public DateTime BillingStartDate { get; set; } //Use BillingStartDate.Month and BillingStartDate.Year for the month and year
-        public DateTime BillingEndDate { get; set; }
-        public int? NumberOfLeasedSpots { get; set; }
-        public int? NumberOfValidations { get; set; }
-        public Format? Format { get; set; }
+        public DateTime DateUploaded { get; set; }
+        public DateTime MonthYear { get; set; }
+        public int? TotalLeasedSpots { get; set; }
+        public int? Validations { get; set; }
+        //public Format? Format { get; set; }
 
-        public ICollection<TeamMember> TeamMembers { get; set; }
+        public ICollection<InvoiceActiveParkerReport> InvoiceActiveParkerReports { get; set; }
         public Garage Garage { get; set; }
 
-        public Invoice()
-        {
-            TeamMembers = new HashSet<TeamMember>();
-        }
 
     }
 }

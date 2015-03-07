@@ -18,7 +18,7 @@ namespace PERA.Models
     // G: garage badge
     public enum AccessToken
     {
-        B, P, H
+        B, P, H, G
     }
 	public class Garage
 	{

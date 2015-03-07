@@ -18,5 +18,20 @@ namespace PERA.Controllers
         {
             return View();
         }
+
+        public ActionResult GarageInfo()
+        {
+            return View();
+        }
+
+        public ActionResult Overview()
+        {
+            return View();
+        }
+
+        public ActionResult SingleGarage()
+        {
+            return View();
+        }
     }
 }

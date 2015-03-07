@@ -1,0 +1,36 @@
+﻿    <!-- Overview -->
+<div id="garageTableHeader">
+    Overview
+</div>
+
+
+<table id="garageTable">
+    <tr>
+        <td>Cost Per Month: </td>
+        <td>{{garageCtrl.totalCost | currency}}</td>
+    </tr>
+    <tr>
+        <td>Capacity: </td>
+        <td>{{garageCtrl.totalCapacity}}</td>
+    </tr>
+    <tr>
+        <td>Leased Spaces: </td>
+        <td>{{garageCtrl.totalLeasedSpaces}}</td>
+    </tr>
+    <tr>
+        <td>Team-Member Spaces: </td>
+        <td>{{garageCtrl.totalTeamMemberSpaces}}</td>
+    </tr>
+    <tr>
+        <td>Required Buffer Size: </td>
+        <td>{{garageCtrl.totalRequiredBufferSize}}</td>
+    </tr>
+    <tr>
+        <td>Average Cost Per Space: </td>
+        <td>{{garageCtrl.averageCostPerSpace | currency}}</td>
+    </tr>
+    <tr>
+        <td>Average Transient Sale Price: </td>
+        <td>{{garageCtrl.averageTransientSalePrice | currency}}</td>
+    </tr>
+</table>
