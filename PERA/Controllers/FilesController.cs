@@ -21,6 +21,7 @@ namespace PERA.Controllers
 {
     public class FilesController : ApiController
     {
+
         private PERAContext db = new PERAContext();
         [HttpPost] // This is from System.Web.Http, and not from System.Web.Mvc
         public async Task<HttpResponseMessage> Upload()
@@ -69,8 +70,7 @@ namespace PERA.Controllers
             DataSet result = excelReader.AsDataSet();
 
             List<ParkerReportTeamMember> teamMembers = new List<ParkerReportTeamMember>();
-            foreach (DataTable table in result.Tables)
-            {
+            var table = result.Tables[0];
                 foreach (DataRow row in table.Rows)
                 {
                     // if this row is the headings, skip this row
@@ -134,7 +134,7 @@ namespace PERA.Controllers
                     }*/
                                        
                 } // end for columns
-            } // end for tables
+            //}  end for tables
 
         }
 

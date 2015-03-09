@@ -9,21 +9,23 @@
       .module('pera.map.controllers')
       .controller('MapController', MapController);
 
-    MapController.$inject = ['$scope','Garages', 'Snackbar'];
+    MapController.$inject = ['$scope','Garages', 'Snackbar', 'Initializer'];
 
     /**
     * @namespace MapController
     */
-    function MapController($scope, Garages, Snackbar) {
+    function MapController($scope, Garages, Snackbar, Initializer) {
         var vm = this;
         vm.map;
         vm.garages = [];
         vm.garageMarkers = [];
         vm.initialized = false; //tracks if the maps has already been initialized
+
         //vm.styleArray = styleArray;
 
         //initialize the map
-        this.initialize = initialize;
+        console.log('map ctrl');
+        vm.initialize = initialize;
         initialize();
 
         function initialize() {
@@ -40,15 +42,19 @@
                   overviewMapControl: false
               };
               console.log("initalize");
-              this.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-   
-              //Add key to map
-              this.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('mapKey'));
 
-              Garages.all().then(garagesSuccessFn, garagesErrorFn);
+              vm.map = Initializer.mapsInitialized
+                  .then(function () {
+                      console.log('create map');
+                      Garages.all().then(garagesSuccessFn, garagesErrorFn);
+                      vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                      //Add key to map
+                      vm.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('mapKey'));
+                  });
+              //vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
               console.log(vm.garages);
 
-              this.initialized = true;
+              vm.initialized = true;
           } //end intialize function
 
 

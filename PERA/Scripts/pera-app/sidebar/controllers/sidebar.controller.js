@@ -9,15 +9,16 @@
       .module('pera.sidebar.controllers')
       .controller('SideBarController', SideBarController);
 
-	SideBarController.$inject = ['$scope', 'Garages', 'Snackbar'];
+	SideBarController.$inject = ['$scope', 'SideBar', 'Garages', 'Snackbar'];
 
 	/**
     * @namespace SideBarController
     */
-	function SideBarController($scope, Garages, Snackbar) {
+	function SideBarController($scope, SideBar, Garages, Snackbar) {
 		var vm = this;
 		vm.garages = [];
 		vm.currentGarage = null;
+		vm.getCurrent = getCurrent;
 		vm.setCurrent = setCurrent;
 
 		vm.costs = [];
@@ -31,6 +32,9 @@
 
 		Garages.all().then(garagesSuccessFn);
 
+		function all() {
+		    return Garages.all();
+		}
 		function garagesSuccessFn(data, status, headers, config) {
 			vm.garages = data.data;
 			vm.costs = Garages.costs();
@@ -42,11 +46,14 @@
 			vm.averageCostPerSpace = Garages.averageCostPerSpace();
 			vm.averageTransientSalePrice = Garages.averageTransientSalePrice();
 		}
+        
+		function getCurrent() {
+		    vm.currentGarage = SideBar.getCurrent();
+		    return vm.currentGarage;
+		}_
 
-		function setCurrent(garage) {
-			vm.currentGarage = garage;
-			console.log(garage.name);
+		function setCurrent(current) {
+		    SideBar.setCurrent(current);
 		}
-
 	}
 })();

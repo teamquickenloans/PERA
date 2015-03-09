@@ -252,11 +252,17 @@
       @name pera-app
       @desc AngularJS application
     -->
+    <Content Include="Scripts\js\ui-router-extras\ct-ui-router-extras.core.js" />
+    <Content Include="Scripts\js\ui-router-extras\ct-ui-router-extras.min.js" />
     <Content Include="Scripts\js\angular-ui-router.js" />
+    <Content Include="Scripts\js\ui-router-extras\ct-ui-router-extras.js" />
+    <Content Include="Scripts\js\ui-router-extras\ct-ui-router-extras.sticky.min.js" />
     <Content Include="Scripts\pera-app\invoiceTeamMembers\invoiceTeamMembers.module.js" />
     <Content Include="Scripts\pera-app\map\map.module.js" />
+    <Content Include="Scripts\pera-app\map\services\mapinitializer.service.js" />
     <Content Include="Scripts\pera-app\pera.js" />
     <Content Include="Scripts\pera-app\pera.config.js" />
+    <Content Include="Scripts\pera-app\sidebar\services\sidebar.service.js" />
     <Content Include="Scripts\pera-app\sidebar\sidebar.module.js" />
     <Content Include="Scripts\pera-app\teammembers\controllers\teammembers.controller.js" />
     <Content Include="Scripts\pera-app\teammembers\services\teammembers.service.js" />
@@ -351,7 +357,6 @@
     <Content Include="Scripts\pera-app\sidebar\controllers\sidebar.controller.js" />
     <Content Include="Views\GarageMap\Overview.cshtml" />
     <Content Include="Views\GarageMap\SingleGarage.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\ReconcileExpenses\UploadHistory.cshtml" />
   </ItemGroup>
   <ItemGroup>

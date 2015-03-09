@@ -8,10 +8,12 @@
 
     angular
       .module('pera.sidebar', [
-        'pera.sidebar.controllers'
+        'pera.sidebar.controllers',
+        'pera.sidebar.services'
       ]);
 
     angular
       .module('pera.sidebar.controllers', []);
-
+    angular
+      .module('pera.sidebar.services', []);
 })();

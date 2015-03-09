@@ -11,7 +11,7 @@
     * @name config
     * @desc Enable HTML5 routing
     */
-    function config($stateProvider, $routeProvider) {
+    function config($stateProvider, $routeProvider, $urlRouterProvider) {
         /*
         
         $routeProvider
@@ -19,76 +19,128 @@
                       templateUrl: "GarageMap/garageMap",
                       controller: 'MapController as map'
                   });*/
-                      /*
-            when('/routeOne', {
-                templateUrl: 'ingestInvoice/one'
-            })
-            .when('/routeTwo', {
-                templateUrl: 'ingestInvoice/two'
-            })
-            .when('/routeThree', {
-                templateUrl: 'ingestInvoice/three'
-            })
-            .when('/invoiceForm', {
-                templateUrl: 'Upload/InvoiceForm'
-            })
-            .when('/invoiceFile', {
-                templateUrl: 'Upload/InvoiceFile'
-            });*/
-       
-        $stateProvider
-          .state('detectedIssues', {
-              url: "/detectedIssues",
-              views: {
-                  'content': {
-                      templateUrl: "ReconcileExpenses/DetectedIssues",
-                      controller: "ExpensesController as expenseCtrl"
-                  },
-                  'sidebar': {
-                      templateUrl: "GarageMap/Overview",
-                      controller: "SideBarController as garageCtrl"
-                  }
-              }
-              
-          })
-          .state('uploadHistory', {
-              views: {
-                  'content': {
-                      templateUrl: 'ReconcileExpenses/UploadHistory',
-                      controller: 'ExpensesController as expenseCtrl'
-                  }
-              }
-          })
+        /*
+when('/routeOne', {
+  templateUrl: 'ingestInvoice/one'
+})
+.when('/routeTwo', {
+  templateUrl: 'ingestInvoice/two'
+})
+.when('/routeThree', {
+  templateUrl: 'ingestInvoice/three'
+})
+.when('/invoiceForm', {
+  templateUrl: 'Upload/InvoiceForm'
+})
+.when('/invoiceFile', {
+  templateUrl: 'Upload/InvoiceFile'
+});*/
+
+        var home = {
+            name: 'home',
+            url: '/',
+            template: 'welcome to the Parking Dashboard'
+        };
+
+        var overview = {
+            name: 'overview',
+            url: '/overview',
+            sticky: true,
+            views: {
+                'sidebar': {
+                    templateUrl: "GarageMap/Overview",
+                    controller: "SideBarController as garageCtrl"
+                }
+            }
+        };
+
+        //////////////////////
+        //  GarageMap       //
+        //////////////////////
+        var garageMap = {
+            name: 'garageMap',
+            sticky: true,
+            templateUrl: "GarageMap/GarageMap",
+            controller: "MapController as map"
+        };
+        //////////////////////
+        // GarageMap > List //
+        //////////////////////
+        var garageMapOV = {
+            name: 'garageMap.map',
+            
+            templateUrl: "GarageMap/GarageMap",
+            controller: "MapController as map"
+
+        };
 
 
-          .state('overview', {
-              views: {
-                  'sidebar': {
-                      templateUrl: "GarageMap/Overview",
-                      controller: "SideBarController as garageCtrl"
-                  }
-              }
-          })
-          .state('singleGarage', {
-              views: {
-                  'sidebar': {
-                      templateUrl: "GarageMap/SingleGarage"
-                  }
-              }
-
-          })
-          .state('garageMap', {
-              templateUrl: 'GarageMap/GarageMap',
-              views: {
-                  'garageMap.sidebartop@garageMap': {
-                      templateUrl: 'GarageMap/Overview',
-                      controller: 'MapController as map'
-                  },
-                  'garageMap.sidebarbottom@garageMap': {
-                      templateUrl: 'GarageMap/SingleGarage',
-                      controller: 'MapController as map'
-                  }
+        var singleGarage = {
+            name: 'singleGarage',
+            views:
+                {
+                    'sidebar': {
+                        templateUrl: "GarageMap/SingleGarage",
+                        controller: "SideBarController as sidebar"
+                    }
+                }
         }
-          });
+
+        var detectedIssues = {
+            name: 'detectedIssues',
+            url: "/detectedIssues",
+            sticky: true,
+            views: {
+                'main': {
+                    templateUrl: "ReconcileExpenses/DetectedIssues",
+                    controller: "ExpensesController as expenseCtrl"
+                }
+            }
+        }
+        var uploadHistory = {
+            name: 'uploadHistory',
+            views: {
+                'main': {
+                    templateUrl: 'ReconcileExpenses/UploadHistory',
+                    controller: 'ExpensesController as expenseCtrl'
+                }
+            }
+        }
+        var uploadHistory_singleGarage = {
+            name: 'uploadHistory.singleGarage',
+            views: {
+                'sidebar': {
+                    templateUrl: "GarageMap/SingleGarage",
+                    controller: "SideBarController as sidebar"
+                },
+                'content': {
+                    templateUrl: 'ReconcileExpenses/UploadHistory',
+                    controller: 'ExpensesController as expenseCtrl'
+                }
+            }
+        };
+
+        var uploadHistory_invoice = {
+            name: 'uploadHistory.invoice',
+            templateUrl: 'Upload/InvoiceForm'
+        }
+
+
+        var garageMapSG = {
+        name: 'garageMap.singleGarge',
+        templateUrl: "GarageMap/SingleGarage",
+        controller: "SideBarController as sidebar"
+        };
+        $stateProvider.state(home);
+        $stateProvider.state(overview);
+        $stateProvider.state(singleGarage);
+        $stateProvider.state(detectedIssues);
+        $stateProvider.state(uploadHistory);
+        $stateProvider.state(uploadHistory_singleGarage);
+        $stateProvider.state(garageMap);
+        $stateProvider.state(garageMapSG);
+        $stateProvider.state(uploadHistory_invoice);
+
+
     }
 })();

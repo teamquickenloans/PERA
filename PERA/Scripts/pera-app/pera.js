@@ -15,13 +15,18 @@
         'pera.invoiceTeamMembers',
         'pera.sidebar',
         'ui.router'
-      ]);
+      ])
     
     //angular
     //  .module('pera.routes', ['ngRoute']);
 
     angular
-      .module('pera.config', ['ui.router','ngRoute']);
+      .module('pera.config', [
+          'ui.router',
+          'ngRoute',
+          'ngResource',
+          'ngSanitize'
+      ])
 
 
 })();
