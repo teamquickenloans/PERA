@@ -14,8 +14,9 @@
         'pera.teammembers',
         'pera.invoiceTeamMembers',
         'pera.sidebar',
-        'ui.router'
-      ])
+        'ui.router',
+        'ct.ui.router.extras'
+        ])
     
     //angular
     //  .module('pera.routes', ['ngRoute']);
@@ -25,7 +26,8 @@
           'ui.router',
           'ngRoute',
           'ngResource',
-          'ngSanitize'
+          'ngSanitize',
+          'ct.ui.router.extras'
       ])
 
 

@@ -60,23 +60,19 @@ when('/routeOne', {
         var garageMap = {
             name: 'garageMap',
             sticky: true,
-            templateUrl: "GarageMap/GarageMap",
-            controller: "MapController as map"
-        };
-        //////////////////////
-        // GarageMap > List //
-        //////////////////////
-        var garageMapOV = {
-            name: 'garageMap.map',
-            
-            templateUrl: "GarageMap/GarageMap",
-            controller: "MapController as map"
+            views:
+                {
+                    'main' : {
+                        templateUrl: "GarageMap/GarageMap",
+                        controller: "MapController as map"
+                    }
+                }
 
         };
-
 
         var singleGarage = {
             name: 'singleGarage',
+            sticky: true,
             views:
                 {
                     'sidebar': {
@@ -88,7 +84,6 @@ when('/routeOne', {
 
         var detectedIssues = {
             name: 'detectedIssues',
-            url: "/detectedIssues",
             sticky: true,
             views: {
                 'main': {
@@ -99,6 +94,7 @@ when('/routeOne', {
         }
         var uploadHistory = {
             name: 'uploadHistory',
+            sticky: true,
             views: {
                 'main': {
                     templateUrl: 'ReconcileExpenses/UploadHistory',
@@ -106,6 +102,13 @@ when('/routeOne', {
                 }
             }
         }
+
+        var uploadHistory_invoice = {
+            name: 'uploadHistory.invoice',
+            templateUrl: 'Upload/InvoiceForm'
+        }
+
+        /*
         var uploadHistory_singleGarage = {
             name: 'uploadHistory.singleGarage',
             views: {
@@ -120,25 +123,23 @@ when('/routeOne', {
             }
         };
 
-        var uploadHistory_invoice = {
-            name: 'uploadHistory.invoice',
-            templateUrl: 'Upload/InvoiceForm'
-        }
+        
 
 
         var garageMapSG = {
         name: 'garageMap.singleGarge',
         templateUrl: "GarageMap/SingleGarage",
         controller: "SideBarController as sidebar"
-        };
+        };*/
+
         $stateProvider.state(home);
         $stateProvider.state(overview);
         $stateProvider.state(singleGarage);
         $stateProvider.state(detectedIssues);
         $stateProvider.state(uploadHistory);
-        $stateProvider.state(uploadHistory_singleGarage);
+        //$stateProvider.state(uploadHistory_singleGarage);
         $stateProvider.state(garageMap);
-        $stateProvider.state(garageMapSG);
+        //$stateProvider.state(garageMapSG);
         $stateProvider.state(uploadHistory_invoice);
 
 

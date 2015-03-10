@@ -257,6 +257,20 @@
     <Content Include="Scripts\js\angular-ui-router.js" />
     <Content Include="Scripts\js\ui-router-extras\ct-ui-router-extras.js" />
     <Content Include="Scripts\js\ui-router-extras\ct-ui-router-extras.sticky.min.js" />
+    <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.core.js" />
+    <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.core.min.js" />
+    <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.dsr.js" />
+    <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.dsr.min.js" />
+    <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.future.js" />
+    <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.future.min.js" />
+    <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.previous.js" />
+    <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.previous.min.js" />
+    <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.statevis.js" />
+    <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.statevis.min.js" />
+    <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.sticky.js" />
+    <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.sticky.min.js" />
+    <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.js" />
+    <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.min.js" />
     <Content Include="Scripts\pera-app\invoiceTeamMembers\invoiceTeamMembers.module.js" />
     <Content Include="Scripts\pera-app\map\map.module.js" />
     <Content Include="Scripts\pera-app\map\services\mapinitializer.service.js" />
@@ -358,9 +372,11 @@
     <Content Include="Views\GarageMap\Overview.cshtml" />
     <Content Include="Views\GarageMap\SingleGarage.cshtml" />
     <Content Include="Views\ReconcileExpenses\UploadHistory.cshtml" />
+    <Content Include="Scripts\js\snackbar.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\Angular\" />
     <Folder Include="Views\ActiveParkerReport\" />
     <Folder Include="Views\Files\" />
     <Folder Include="Views\QLActiveParkerReport\" />
@@ -433,7 +449,7 @@
     <VisualStudio>
       <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
         <WebProjectProperties>
-          <UseIIS>True</UseIIS>
+          <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>50507</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
