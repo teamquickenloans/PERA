@@ -34,6 +34,10 @@ namespace PERA.Models
         public System.Data.Entity.DbSet<PERA.Models.CarpoolGroup> CarpoolGroups { get; set; }
 
         public System.Data.Entity.DbSet<PERA.Models.Invoice> Invoices { get; set; }
+
+        public System.Data.Entity.DbSet<PERA.Models.InvoiceActiveParkerReport> InvoiceActiveParkerReports { get; set; }
+
+        public System.Data.Entity.DbSet<PERA.Models.QLActiveParkerReport> QLActiveParkerReports { get; set; }
     
     }
 }

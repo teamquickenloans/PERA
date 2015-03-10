@@ -120,7 +120,7 @@ namespace PERA.Controllers
 
                     teamMember.FirstName = firstName;
                     teamMember.LastName = lastName;
-                    teamMember.BadgeID = cardNumber;
+                    teamMember.BusinessHoursTokenID = cardNumber;
 
                     teamMembers.Add(teamMember);
 

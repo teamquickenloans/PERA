@@ -6,22 +6,23 @@ using System.Web.Mvc;
 
 namespace PERA.Controllers
 {
-    public class GarageMapController : Controller
+    public class SideBarController : Controller
     {
-        // GET: GarageMap
+        // GET: SideBar
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult GarageMap()
+        public ActionResult Overview()
         {
             return View();
         }
 
-        public ActionResult GarageInfo()
+        public ActionResult SingleGarage()
         {
             return View();
         }
+
     }
 }

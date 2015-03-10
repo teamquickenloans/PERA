@@ -17,19 +17,37 @@
             name: 'home',
             url: '/',
             template: 'welcome to the Parking Dashboard'
-        };
+        }
 
+        ////////////////////////////////////////////////////
+        //          SideBar                               //
+        ////////////////////////////////////////////////////
         var overview = {
             name: 'overview',
-            url: '/overview',
             sticky: true,
             views: {
                 'sidebar': {
-                    templateUrl: "GarageMap/Overview",
+                    templateUrl: "SideBar/Overview",
                     controller: "SideBarController as garageCtrl"
                 }
             }
-        };
+        }
+
+        var singleGarage = {
+            name: 'singleGarage',
+            sticky: true,
+            views:
+                {
+                    'sidebar': {
+                        templateUrl: "SideBar/SingleGarage",
+                        controller: "SideBarController as sidebar"
+                    }
+                }
+        }
+
+        ////////////////////////////////////////////////////
+        //          Main                                  //
+        ////////////////////////////////////////////////////
 
         var garageMap = {
             name: 'garageMap',
@@ -42,18 +60,6 @@
                     }
                 }
 
-        };
-
-        var singleGarage = {
-            name: 'singleGarage',
-            sticky: true,
-            views:
-                {
-                    'sidebar': {
-                        templateUrl: "GarageMap/SingleGarage",
-                        controller: "SideBarController as sidebar"
-                    }
-                }
         }
 
         var detectedIssues = {
@@ -81,7 +87,13 @@
         //this is a nested view.  it will populate the ui-view inside of Upload/InvoiceForm.cshtml
         var uploadHistory_invoice = {
             name: 'uploadHistory.invoice',
-            templateUrl: 'Upload/InvoiceForm'
+            views: {
+                'modal':{
+                    templateUrl: 'Upload/InvoiceForm',
+                    controller: 'FileUploadController'
+                }
+            }
+
         }
 
 

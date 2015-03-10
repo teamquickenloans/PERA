@@ -187,7 +187,9 @@
     -->
     <Compile Include="Controllers\GarageMapController.cs" />
     <Compile Include="Controllers\IngestInvoiceController.cs" />
+    <Compile Include="Controllers\ParkerReportTeamMembersController.cs" />
     <Compile Include="Controllers\ReconcileExpensesController.cs" />
+    <Compile Include="Controllers\SideBarController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
     <!--
       @name WebAPI Contollers
@@ -201,26 +203,20 @@
     <Compile Include="Controllers\InvoicesController.cs" />
     <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="DAL\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <!--
       @name Entity Framework Migrations
     -->
-    <Compile Include="Migrations\201503051637274_initial.cs" />
-    <Compile Include="Migrations\201503051637274_initial.Designer.cs">
-      <DependentUpon>201503051637274_initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503071416105_update-models.cs" />
-    <Compile Include="Migrations\201503071416105_update-models.Designer.cs">
-      <DependentUpon>201503071416105_update-models.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <!--
       @name Entity Framework Models
     -->
+    <Compile Include="Migrations\201503101415582_init.cs" />
+    <Compile Include="Migrations\201503101415582_init.Designer.cs">
+      <DependentUpon>201503101415582_init.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
@@ -305,11 +301,8 @@
     <Content Include="Scripts\js\angular-file-upload\FileAPI.flash.swf" />
     <Content Include="Scripts\js\angular-file-upload\FileAPI.min.js" />
     <Content Include="Scripts\js\ELabels3.js" />
-    <EmbeddedResource Include="Migrations\201503051637274_initial.resx">
-      <DependentUpon>201503051637274_initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503071416105_update-models.resx">
-      <DependentUpon>201503071416105_update-models.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201503101415582_init.resx">
+      <DependentUpon>201503101415582_init.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
@@ -355,7 +348,9 @@
     <!--
     * @name ASP.NET MVC Views
     -->
-    <Content Include="Views\Web.config" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\TeamMember\Create.cshtml" />
     <Content Include="Views\TeamMember\Delete.cshtml" />
@@ -369,14 +364,13 @@
     <Content Include="Views\ReconcileExpenses\DetectedIssues.cshtml" />
     <Content Include="Views\GarageMap\GarageInfo.cshtml" />
     <Content Include="Scripts\pera-app\sidebar\controllers\sidebar.controller.js" />
-    <Content Include="Views\GarageMap\Overview.cshtml" />
-    <Content Include="Views\GarageMap\SingleGarage.cshtml" />
+    <Content Include="Views\SideBar\Overview.cshtml" />
+    <Content Include="Views\SideBar\SingleGarage.cshtml" />
     <Content Include="Views\ReconcileExpenses\UploadHistory.cshtml" />
     <Content Include="Scripts\js\snackbar.min.js.map" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\Angular\" />
     <Folder Include="Views\ActiveParkerReport\" />
     <Folder Include="Views\Files\" />
     <Folder Include="Views\QLActiveParkerReport\" />
