@@ -21,7 +21,9 @@ namespace PERA.Controllers
 {
     public class FilesController : ApiController
     {
+        // make a instance of database context
         private PERAContext db = new PERAContext();
+
         [HttpPost] // This is from System.Web.Http, and not from System.Web.Mvc
         public async Task<HttpResponseMessage> Upload()
         {
@@ -124,6 +126,7 @@ namespace PERA.Controllers
 
                     teamMembers.Add(teamMember);
 
+                    //Add it to the database
                     db.InvoiceTeamMembers.Add(teamMember);
                     db.SaveChanges();
 
