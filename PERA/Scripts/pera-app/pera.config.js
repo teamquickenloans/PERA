@@ -86,11 +86,11 @@
 
         //this is a nested view.  it will populate the ui-view inside of Upload/InvoiceForm.cshtml
         var uploadHistory_invoice = {
-            name: 'uploadHistory.invoice',
+            name: 'invoice',
             views: {
                 'modal':{
                     templateUrl: 'Upload/InvoiceForm',
-                    controller: 'FileUploadController'
+                    controller: 'FileUploadController as fileCtrl'
                 }
             }
 

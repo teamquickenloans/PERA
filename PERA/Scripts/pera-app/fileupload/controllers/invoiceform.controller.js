@@ -17,7 +17,6 @@
     function InvoiceFormController($scope, $http) {
         $scope.invoiceForm = {
             invoiceID: '',
-            garageID: '',
             totalAmountBilled: '',
             dateReceived: '',
             billingStartDate: '',

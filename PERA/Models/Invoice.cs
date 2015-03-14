@@ -21,7 +21,6 @@ namespace PERA.Models
         //public Format? Format { get; set; }
 
         public ICollection<InvoiceActiveParkerReport> InvoiceActiveParkerReports { get; set; }
-        public Garage Garage { get; set; }
 
 
     }

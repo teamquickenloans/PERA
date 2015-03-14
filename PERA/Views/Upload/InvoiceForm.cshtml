@@ -1,43 +1,96 @@
-﻿    <h3>Invoice Submission</h3>
-    <form ng-submit="upload(files)">
-        <div class="large-10 column">
+﻿    <h3>Upload an Invoice</h3>
+<p> This form allows you to upload an invoice along with one or more active parker reports.  This data will be ingested into the database
+    and can be used in the Expense Reconciliation Tool to identify discrepancies in the active parker reports from Garage managers.
+   
+    
+    </p>
+    <form ng-submit="uploadAll()">
+        <div class="small-12 column">
+            <h4> Invoice Meta-Data</h4>
             <label for="invoiceID">Invoice Number:</label>
             <input type="number" ng-model="invoice.invoiceID" id="invoiceID" required />
 
-                <label for="garageID">Garage:</label>
-                <select ng-model="invoice.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID">
-                </select>
-
-
             <label for="totalAmountBilled">Amount Billed:</label>
-            <input type="number" ng-model="invoice.totalAmountBilled" id="totalAmountBilled" />
+            <input type="number" ng-model="invoice.totalAmountBilled id="totalAmountBilled" />
         </div>
-        <div class="large-4 column">
-            <label for="dateReceived">Date Received:</label>
-            <input type="date" ng-model="invoice.dateReceived" id="dateReceived" />
+        <div class="small-5 column">
 
-            <label for="billingStartDate">Billing Start Date</label>
-            <input type="date" ng-model="invoice.billingStartDate" id="billingStartDate" />
-
-            <label for="billingEndDate">Billing End Date</label>
-            <input type="date" ng-model="invoice.billingEndDate" id="billingEndDate" />
-
-        </div>
-        <div class="large-4 column">
             <label for="numberOfLeasedSpots">Number of Leased Spots:</label>
-            <input type="number" ng-model="invoice.numberOfLeasedSpots" />
+            <input type="number" ng-model="invoice.totalLeasedSpaces" />
+           
+
+            <label for="monthYear">Month/Year of Billing</label>
+            <input type="text" ng-model="invoice.monthYear" id="monthYear" class="month-picker" required/>
+
+        </div>
+        <div class="small-5 column">
 
             <label for="numberOfValidations">Number of Validations:</label>
-            <input type="number" ng-model="invoice.numberofValidations" />
+            <input type="number" ng-model="invoice.validations" placeholder="optional" />
+
+            <label for="dateReceived">Date Received:</label>
+            <input type="text" ng-model="invoice.dateReceived" id="dateReceived" class="date-picker" placeholder="optional" />
+
         </div>
-        <center>
 
-            <!--<input type="file" id="file" name="file" />-->
-            <input type="file" ng-file-select ng-model="files" ng-multiple="false">
+        <div class="small-10 column">
+            <h4> Active Parker Reports</h4>
+            <!--<input type="file" class="fileInput" ng-file-select ng-model="files" ng-multiple="false" />-->
+            <div class="row" ng-repeat="report in fileCtrl.reports">
 
-            <br>
-            <button type="submit">Upload</button>
-            <p></p>
-        </center>
+                <div class="small-4 column">
+                    <label for="garageID">Garage:</label>
+                    <select ng-model="report.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID">
+                        <option value="">-- select a garage --</option>
+                    </select>
+                </div>
+                <div class="small-3 column">
+                    <a href="#" class="radius button" ng-file-select ng-model="report.file">Select a file</a>
+                </div>
+                <div class="small-5 column">
+                    <br />
+                    {{ report.file[0].name }}
+                </div>
+            </div>
+            <div class="row">
+                <a ng-click="fileCtrl.addReport()">+ Add a report</a><br />
+                <button class="radius button" type="submit">Upload</button>
+
+            </div>
+        </div>
+        <br />
+
+
+
+        <!--
+        <script>
+            $('#monthYear').MonthPicker({ ShowIcon: false });
+        </script>-->
+        
+        <script type="text/javascript">
+            $(function () {
+                $('.month-picker').datepicker({
+                    changeMonth: true,
+                    changeYear: true,
+                    showButtonPanel: true,
+                    dateFormat: 'MM yy',
+                    onClose: function (dateText, inst) {
+                        var month = $("#ui-datepicker-div .ui-datepicker-month :selected").val();
+                        var year = $("#ui-datepicker-div .ui-datepicker-year :selected").val();
+                        $(this).datepicker('setDate', new Date(year, month, 1));
+                    }
+                });
+            });
+            $(function () {
+                $('.date-picker').datepicker({});
+            });
+
+        </script>
+
+        <style>
+        .ui-datepicker-calendar {
+            display: none;
+            }
+        </style>
 
     </form>

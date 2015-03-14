@@ -1,6 +1,6 @@
 ﻿/**
-* Garages
-* @namespace pera.garages.services
+* Invoice Form
+* @namespace pera.fileupload.services
 */
 (function () {
     'use strict';
@@ -16,6 +16,7 @@
     * @returns {Factory}
     */
     function InvoiceForm($http, $q, Snackbar) {   //this is just linking up the functions to variable names and returning them
+
         var InvoiceForm = {
             submit: submit
         };

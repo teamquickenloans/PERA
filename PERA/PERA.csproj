@@ -42,6 +42,10 @@
     <Reference Include="CsvHelper">
       <HintPath>..\packages\CsvHelper.2.10.0\lib\net40-client\CsvHelper.dll</HintPath>
     </Reference>
+    <Reference Include="DocumentFormat.OpenXml, Version=2.5.5631.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\DocumentFormat.OpenXml.2.5\lib\DocumentFormat.OpenXml.dll</HintPath>
+    </Reference>
     <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.dll</HintPath>
@@ -50,8 +54,13 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\EntityFramework.6.1.2\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="Excel">
-      <HintPath>..\packages\ExcelDataReader.2.1.2.3\lib\net45\Excel.dll</HintPath>
+    <Reference Include="Excel, Version=2.1.2.3, Culture=neutral, PublicKeyToken=93517dbe6a4012fa, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Excel.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.SharpZipLib, Version=0.86.0.518, Culture=neutral, PublicKeyToken=1b03e6acf1164f73, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
@@ -128,6 +137,7 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -217,6 +227,18 @@
     <Compile Include="Migrations\201503101415582_init.Designer.cs">
       <DependentUpon>201503101415582_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503131157212_invoice.cs" />
+    <Compile Include="Migrations\201503131157212_invoice.Designer.cs">
+      <DependentUpon>201503131157212_invoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503131218335_snapshot.cs" />
+    <Compile Include="Migrations\201503131218335_snapshot.Designer.cs">
+      <DependentUpon>201503131218335_snapshot.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503131222480_APR.cs" />
+    <Compile Include="Migrations\201503131222480_APR.Designer.cs">
+      <DependentUpon>201503131222480_APR.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
@@ -248,6 +270,8 @@
       @name pera-app
       @desc AngularJS application
     -->
+    <Content Include="Scripts\js\MonthPicker.js" />
+    <Content Include="Scripts\js\MonthPicker.min.js" />
     <Content Include="Scripts\js\ui-router-extras\ct-ui-router-extras.core.js" />
     <Content Include="Scripts\js\ui-router-extras\ct-ui-router-extras.min.js" />
     <Content Include="Scripts\js\angular-ui-router.js" />
@@ -267,6 +291,7 @@
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.sticky.min.js" />
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.js" />
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.min.js" />
+    <Content Include="Scripts\pera-app\fileupload\services\upload.service.js" />
     <Content Include="Scripts\pera-app\invoiceTeamMembers\invoiceTeamMembers.module.js" />
     <Content Include="Scripts\pera-app\map\map.module.js" />
     <Content Include="Scripts\pera-app\map\services\mapinitializer.service.js" />
@@ -303,6 +328,15 @@
     <Content Include="Scripts\js\ELabels3.js" />
     <EmbeddedResource Include="Migrations\201503101415582_init.resx">
       <DependentUpon>201503101415582_init.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503131157212_invoice.resx">
+      <DependentUpon>201503131157212_invoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503131218335_snapshot.resx">
+      <DependentUpon>201503131218335_snapshot.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503131222480_APR.resx">
+      <DependentUpon>201503131222480_APR.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
@@ -428,6 +462,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

@@ -21,79 +21,88 @@
 
 
 
-    <!--====================== AngularJS ============================== -->
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-resource.js"></script>
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-route.js"></script>
-    <script src="https://code.angularjs.org/1.3.13/angular-sanitize.js"></script>
+    <link href="http://code.jquery.com/ui/1.10.2/themes/smoothness/jquery-ui.css" media="all" rel="stylesheet" type="text/css" />
+    <link href="https://github.com/KidSysco/jquery-ui-month-picker/blob/master/css/MonthPicker.css" rel="stylesheet"/>
+
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js" type="text/javascript"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js" type="text/javascript"></script>
+    <script src="https://raw.github.com/digitalBush/jquery.maskedinput/1.3.1/dist/jquery.maskedinput.min.js" type="text/javascript"></script>
+    <script src="~/Scripts/js/MonthPicker.min.js"></script>
+
+        <!--====================== AngularJS ============================== -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular.min.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-resource.js"></script>
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.3.13/angular-route.js"></script>
+        <script src="https://code.angularjs.org/1.3.13/angular-sanitize.js"></script>
 
 
-    <!--====================== angular-file-upload ============================== -->
-    <script type="text/javascript" src="~/Scripts/js/angular-file-upload/angular-file-upload-shim.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/js/angular-file-upload/angular-file-upload.min.js"></script>
+        <!--====================== angular-file-upload ============================== -->
+        <script type="text/javascript" src="~/Scripts/js/angular-file-upload/angular-file-upload-shim.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/js/angular-file-upload/angular-file-upload.min.js"></script>
 
-    <script type="text/javascript" src="~/Scripts/js/angular-ui-router.js"></script>
+        <script type="text/javascript" src="~/Scripts/js/angular-ui-router.js"></script>
 
-    <script type="text/javascript" src="~/Scripts/js/ui-router-extras/ct-ui-router-extras.js"></script>
-    <script type="text/javascript" src="~/Scripts/js/ui-router-extras/ct-ui-router-extras.core.js"></script>
-    <script type="text/javascript" src="~/Scripts/js/ui-router-extras/ct-ui-router-extras.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/js/ui-router-extras/modular/ct-ui-router-extras.sticky.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/js/ui-router-extras/ct-ui-router-extras.js"></script>
+        <script type="text/javascript" src="~/Scripts/js/ui-router-extras/ct-ui-router-extras.core.js"></script>
+        <script type="text/javascript" src="~/Scripts/js/ui-router-extras/ct-ui-router-extras.min.js"></script>
+        <script type="text/javascript" src="~/Scripts/js/ui-router-extras/modular/ct-ui-router-extras.sticky.min.js"></script>
 
-      <!--====================== Foundation ============================ -->
-    <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/css/foundation.min.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/js/foundation.min.js"></script>
+        <!--====================== Foundation ============================ -->
+        <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/css/foundation.min.css" />
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/js/foundation.min.js"></script>
 
-      <!--====================== Google Maps API ============================ -->
-    <!--<script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM">-->
-    </script>
-      @*Map Labels*@ 
-    <script type="text/javascript" src="~/Scripts/js/ELabels3.js"></script>
+        <!--====================== Google Maps API ============================ -->
+        <!--<script type="text/javascript"
+                src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM">-->
+        <!--</script>-->
+        @*Map Labels*@
+        <script type="text/javascript" src="~/Scripts/js/ELabels3.js"></script>
 
-      <!--=======================Underscore.js =============================== -->
-    <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
+        <!--=======================Underscore.js =============================== -->
+        <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 
-      <!--====================== Snackbar.js ============================ -->
-    <script type="text/javascript" src="~/Scripts/js/snackbar.min.js"></script>
-    <link href="~/Scripts/css/snackbar.min.css" rel="stylesheet" />
-    <link href="~/Scripts/css/material.css" rel="stylesheet" />
+        <!--====================== Snackbar.js ============================ -->
+        <script type="text/javascript" src="~/Scripts/js/snackbar.min.js"></script>
+        <link href="~/Scripts/css/snackbar.min.css" rel="stylesheet" />
+        <link href="~/Scripts/css/material.css" rel="stylesheet" />
 
-      <!--====================== pera-app ======================== -->
-     @Styles.Render("~/bundles/pera-app")
+        <!--====================== pera-app ======================== -->
+        @Styles.Render("~/bundles/pera-app")
 
-    <script type="text/javascript" src="~/Scripts/pera-app/pera.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/pera.js"></script>
 
-    <script type="text/javascript" src="~/Scripts/pera-app/pera.config.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/expenses/expenses.module.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/expenses/controllers/expenses.controller.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/map/map.module.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/map/services/mapinitializer.service.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/map/controllers/map.controller.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/tabs/tabs.module.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/tabs/controllers/tab.controller.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/garages/garages.module.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/garages/services/garages.service.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/garages/controllers/garages.controller.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/teammembers/teammembers.module.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/teammembers/services/teammembers.service.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/teammembers/controllers/teammembers.controller.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/utils/utils.module.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/utils/services/snackbar.service.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/tabs/tabs.module.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/tabs/controllers/tab.controller.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/fileupload/fileupload.module.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/fileupload/services/invoiceform.service.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/fileupload/controllers/fileupload.controller.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/fileupload/controllers/invoiceform.controller.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/invoiceTeamMembers/invoiceTeamMembers.module.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/invoiceTeamMembers/services/invoiceTeamMembers.service.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/invoiceTeamMembers/controllers/invoiceTeamMembers.controller.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/sidebar/sidebar.module.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/sidebar/services/sidebar.service.js"></script>
-    <script type="text/javascript" src="~/Scripts/pera-app/sidebar/controllers/sidebar.controller.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/pera.config.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/expenses/expenses.module.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/expenses/controllers/expenses.controller.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/map/map.module.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/map/services/mapinitializer.service.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/map/controllers/map.controller.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/tabs/tabs.module.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/tabs/controllers/tab.controller.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/garages/garages.module.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/garages/services/garages.service.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/garages/controllers/garages.controller.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/teammembers/teammembers.module.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/teammembers/services/teammembers.service.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/teammembers/controllers/teammembers.controller.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/utils/utils.module.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/utils/services/snackbar.service.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/tabs/tabs.module.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/tabs/controllers/tab.controller.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/fileupload/fileupload.module.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/fileupload/services/upload.service.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/fileupload/services/invoiceform.service.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/fileupload/controllers/fileupload.controller.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/fileupload/controllers/invoiceform.controller.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/invoiceTeamMembers/invoiceTeamMembers.module.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/invoiceTeamMembers/services/invoiceTeamMembers.service.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/invoiceTeamMembers/controllers/invoiceTeamMembers.controller.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/sidebar/sidebar.module.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/sidebar/services/sidebar.service.js"></script>
+        <script type="text/javascript" src="~/Scripts/pera-app/sidebar/controllers/sidebar.controller.js"></script>
 
-      <!--====================== CSS ================================= -->
-    <link rel="stylesheet" href="~/Scripts/css/site.css" />
+        <!--====================== CSS ================================= -->
+        <link rel="stylesheet" href="~/Scripts/css/site.css" />
 
 </head>
 <body ng-app="pera">
@@ -181,11 +190,11 @@
         </div>
         <div ui-view="sidebar" class="columns small-3"></div>
 
-        <!--<div id="uploadInvoiceModal" class="reveal-modal" data-reveal>
+        <div id="uploadInvoiceModal" class="reveal-modal" data-reveal>
             <div ui-view="modal"></div>
-            <a class="close-reveal-modal">&#215;</a>
+            <a class="close-reveal-modal">&#215;</a> <!-- the x which closes the modal -->
         </div>
-            -->
+ 
     </div>
 
 

@@ -50,7 +50,7 @@ namespace PERA.Migrations
             }
 
 
-            context.TeamMembers.AddOrUpdate(x => x.BadgeID,
+            context.TeamMembers.AddOrUpdate(x => x.primaryKey,
                 new TeamMember() { BadgeID = 4041, FirstName = "Carson", LastName = "Alexander", EnrollmentDate = DateTime.Parse("2005-09-01"), CommonID = 423535, EmploymentStatus = null, TerminationDate = DateTime.Parse("2005-09-01") },
                 new TeamMember() { BadgeID = 4042, FirstName = "Meredith", LastName = "Alonso", EnrollmentDate = DateTime.Parse("2002-09-01"), CommonID = 423536, EmploymentStatus = null, TerminationDate = DateTime.Parse("2005-09-01") },
                 new TeamMember() { BadgeID = 4043, FirstName = "Arturo", LastName = "Anand", EnrollmentDate = DateTime.Parse("2003-09-01"), CommonID = 423537, EmploymentStatus = null, TerminationDate = DateTime.Parse("2005-09-01") },
