@@ -223,6 +223,7 @@
     <!--
       @name Entity Framework Models
     -->
+    <Compile Include="HelperClasses\ExcelData.cs" />
     <Compile Include="Migrations\201503101415582_init.cs" />
     <Compile Include="Migrations\201503101415582_init.Designer.cs">
       <DependentUpon>201503101415582_init.cs</DependentUpon>
