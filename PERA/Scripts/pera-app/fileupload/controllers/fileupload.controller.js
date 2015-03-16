@@ -25,19 +25,18 @@
         $scope.data = 'none'; //the file
 
         vm.addReport = addReport;
-        $scope.uploadAll = uploadAll;
+        vm.uploadAll = uploadAll;
 
         //$scope.file = [];
 
-        $scope.invoice = {
+        vm.invoice = {
             invoiceID: '',
             totalAmountBilled: '',
             dateReceived: '',
-            dateUploaded: '',
-            monthYear: '',
+            dateUploaded: Date.now(),
             totalLeasedSpots: '',
             validations: '',
-            reports: vm.reports
+            monthYear: new Date(1984, 1, 1)
         }
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
@@ -51,9 +50,10 @@
         function uploadAll()
         {
             var date = Date.now();
-            $scope.invoice.dateUploaded = $filter('date')(date, 'MM-dd-yyyy') 
+            vm.invoice.dateUploaded = $filter('date')(date, 'MM/dd/yyyy');
             console.log("Upload all");
-            console.log($scope.invoice.dateReceived);
+            console.log("uploadAll monthYear:" + vm.invoice.monthYear);
+            console.log("uploadAll dateReceived:" + vm.invoice.dateReceived);
 
             if (vm.reports && vm.reports.length)
             {
@@ -61,7 +61,7 @@
                     console.log(vm.reports[i].file[0].name)
                     vm.files.push(vm.reports[i].file[0])
                 }
-                Upload.upload(vm.files, $scope.invoice);
+                Upload.upload(vm.files, vm.invoice, vm.reports);
             }
 
         }

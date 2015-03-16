@@ -20,6 +20,8 @@ using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
 using PERA.HelperClasses;
+using System.Runtime.Serialization;
+using Newtonsoft.Json.Converters;
 
 public struct columns
 {
@@ -32,11 +34,17 @@ public struct columns
 
 namespace PERA.Controllers
 {
+    public class Name
+    {
+        public int first {set; get;}
+        public int last {set; get;}
+    }
     public class FilesController : ApiController
     {
 
         private PERAContext db = new PERAContext();
 
+        // key: garageID, value: column index # of token ID (badge, hangtag, puck)
         Dictionary<int, int> invoiceTokenColumns = new Dictionary<int, int>()
         {
             {5,3},
@@ -52,9 +60,27 @@ namespace PERA.Controllers
             {16,3},
         };
 
+        //These have the format row[2] = Lastname, Firstname
         Dictionary<int, int> invoiceNameColumns = new Dictionary<int, int>()
         {
+            {5,2},
+            {6,2},
+            {3,2},
+            {4,2},
+            {13,2},
+            {11,2},
+            {15,2},
+            {14,2},
+            {1,2},
+            {2,2},
+            {16,2},
+        };
 
+
+        //The name is split into two columns
+        Dictionary<int, Name> invoiceSplitNameColumns = new Dictionary<int, Name>()
+        {
+          { 2, new Name{first = 3, last = 2}},
         };
 
         [HttpPost] // This is from System.Web.Http, and not from System.Web.Mvc
@@ -68,25 +94,15 @@ namespace PERA.Controllers
             var provider = GetMultipartProvider();
             var result = await Request.Content.ReadAsMultipartAsync(provider);
 
-            Dictionary<string, string> invoice = GetFormData(result);
 
             //string invoice = result.FormData.GetValues(0).FirstOrDefault();
             //Invoice newInvoice = JsonConvert.DeserializeObject<Invoice>(fileUploadObj);
-           
-            Trace.WriteLine(invoice);
-            int i = 0;
-            foreach(var file in result.FileData)
-            {
-                // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
-                // so this is how you can get the original file name
-                var originalFileName = GetDeserializedFileName(file);
-                var uploadedFileInfo = new FileInfo(file.LocalFileName);
+            Invoice invoice = GetFormData(result);
+            Trace.WriteLine("invoice.InvoiceID: " + invoice.InvoiceID);
+            Trace.WriteLine("invoice.MonthYear: " + invoice.MonthYear);
+            Trace.WriteLine("invoice.TotalAmountBilled: " + invoice.TotalAmountBilled);
 
-                //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
-
-                ExcelParser(file.LocalFileName, originalFileName, invoice, i);
-                i++;
-            }
+            //FileHandler(result, invoice);
 
 
             // Through the request response you can return an object to the Angular controller
@@ -96,14 +112,40 @@ namespace PERA.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, new { returnData });
         }
 
-        private void ExcelParser(string path, string name, Dictionary<string, string> invoice, int index)
+        private void FileHandler(MultipartFormDataStreamProvider result, Invoice invoice){
+
+            int i = 0;
+            foreach(var file in result.FileData)
+            {
+                // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
+                // so this is how you can get the original file name
+                var originalFileName = GetDeserializedFileName(file);
+                var uploadedFileInfo = new FileInfo(file.LocalFileName);
+                int garageID = Convert.ToInt32(result.FormData.GetValues("garageID").First());
+            
+                InvoiceActiveParkerReport APR = new InvoiceActiveParkerReport();
+                APR.GarageID = garageID;
+                APR.DateUploaded = DateTime.Now;
+                APR.Invoice = invoice;
+                //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
+                List<ParkerReportTeamMember> teamMembers = 
+                    ExcelParser(file.LocalFileName, originalFileName, invoice, garageID);
+                foreach (ParkerReportTeamMember teamMember in teamMembers)
+                {
+                    APR.ParkerReportTeamMembers.Add(teamMember);
+                }
+                i++;
+            }
+        }
+        
+        private List<ParkerReportTeamMember> ExcelParser(string path, string name, Invoice invoice, int garageID)
         {
             System.Diagnostics.Debug.WriteLine("begin excel parser");
             IExcelDataReader reader = null;
-            Trace.WriteLine(path);
+            //Trace.WriteLine(garageID);
             var excelData = new ExcelData(path);
             reader = excelData.getExcelReader(name);
-
+            //Trace.WriteLine(invoice.InvoiceID);
 
             /*if (reader == null)
             {
@@ -139,34 +181,60 @@ namespace PERA.Controllers
                     }
                    
                     ParkerReportTeamMember teamMember = new ParkerReportTeamMember();
-
-                    string fullName = (string)row[2];
-
-                    string[] names = fullName.Split(',');   //split the name
                     string firstName, lastName;
-                    if (names.Length < 2)
+                    if(garageID == 2)
                     {
-                        firstName = names[0];
-                        lastName = "";
+                        var first = row[invoiceSplitNameColumns[garageID].first];
+                        var last = row[invoiceSplitNameColumns[garageID].last];
+                        if(first == null){
+                            firstName = "";
+                        }
+                        else if(last == null)
+                        {
+                            lastName = "";
+                        }
+                        firstName = (string)first;
+                        lastName = (string)last;
+
                     }
                     else
                     {
-                        firstName = names[1];
-                        lastName = names[0];
+                        string fullName = (string)row[invoiceNameColumns[garageID]];
+                        string[] names = fullName.Split(',');   //split the name
+                        
+                        if (names.Length < 2)
+                        {
+                            firstName = names[0];
+                            lastName = "";
+                        }
+
+                        else
+                        {
+                            firstName = names[1];
+                            lastName = names[0];
+                        }
                     }
 
-                    //string cardNumber = (string)row[3];
-                    double cardNumberD = 0;
-                    int cardNumber = 0;
-                    
-                    cardNumberD = (System.Double)row[1];
-                    cardNumber = Convert.ToInt32(cardNumberD);
-                    
+                    int index = invoiceTokenColumns[garageID];
+                    var cardNumberV = row[index];
+                    Trace.WriteLine(cardNumberV.GetType());
+                    double cardNumberD;
+                    int cardNumber;
 
+                    if(cardNumberV != DBNull.Value)
+                    {
+                        cardNumberD = (System.Double)cardNumberV;
+                        cardNumber = Convert.ToInt32(cardNumberD);
+                        teamMember.BusinessHoursTokenID = cardNumber;
+                    }
+                    else 
+                    {
+                        teamMember.BusinessHoursTokenID = null;
+                    }
 
                     teamMember.FirstName = firstName;
                     teamMember.LastName = lastName;
-                    teamMember.BusinessHoursTokenID = cardNumber;
+
 
                     teamMembers.Add(teamMember);
 
@@ -181,6 +249,7 @@ namespace PERA.Controllers
                                        
                 } // end for columns
             }  // end for tables
+            return teamMembers;
         }
 
 
@@ -197,20 +266,21 @@ namespace PERA.Controllers
         }
 
         // Extracts Request FormatData as a strongly typed model
-        private Dictionary<string,string> GetFormData(MultipartFormDataStreamProvider result)
+        private Invoice GetFormData(MultipartFormDataStreamProvider result)
         {
             if (result.FormData.HasKeys())
             {
+
                 var unescapedFormData = Uri.UnescapeDataString(result.FormData
-                    .GetValues(0).FirstOrDefault() ?? String.Empty);
+                    .GetValues("data").FirstOrDefault() ?? String.Empty);
+                Trace.WriteLine(unescapedFormData);
+
                 if (!String.IsNullOrEmpty(unescapedFormData))
                 {
-                    System.Diagnostics.Debug.WriteLine("inside if form data");
-                    return JsonConvert.DeserializeObject<Dictionary<string, string>>(result.FormData.GetValues(0).FirstOrDefault());
+                    return JsonConvert.DeserializeObject<Invoice>(unescapedFormData,
+                         new IsoDateTimeConverter { DateTimeFormat = "MM/dd/yyyy" });
                 }
-                    
             }
-
             return null;
         }
 
@@ -224,66 +294,6 @@ namespace PERA.Controllers
         {
             return fileData.Headers.ContentDisposition.FileName;
         }
-
-        /*  private void XLSXParser(string filename)
-  {
-
-      SpreadsheetDocument spreadsheetDocument = SpreadsheetDocument.Open(filename, false);
-      WorkbookPart workbookPart = spreadsheetDocument.WorkbookPart;
-      // Iterate through all WorksheetParts
-      foreach (WorksheetPart worksheetPart in workbookPart.WorksheetParts)
-      {
-          OpenXmlPartReader reader = new OpenXmlPartReader(worksheetPart);
-          string text;
-          string rowNum;
-          while (reader.Read())
-          {
-             if (reader.ElementType == typeof(Cell))
-              {
-                  Cell c = (Cell)reader.LoadCurrentElement();
-
-                  string cellValue;
-
-                  if (c.DataType != null && c.DataType == CellValues.SharedString)
-                  {
-                      SharedStringItem ssi = workbookPart.SharedStringTablePart.SharedStringTable.Elements<SharedStringItem>().ElementAt(int.Parse(c.CellValue.InnerText));
-
-                      cellValue = ssi.Text.Text;
-                  }
-                  else
-                  {
-                      cellValue = c.CellValue.InnerText;
-                  }
-
-                  Console.Out.Write("{0}: {1} ", c.CellReference, cellValue);
-              }
-                          
-
-              System.Diagnostics.Debug.WriteLine("xlsx for loop");
-              Trace.WriteLine("row");
-              do
-              {
-
-                  if (reader.HasAttributes)
-                  {
-                      rowNum = reader.Attributes.First(a => a.LocalName == "r").Value;
-                      Trace.WriteLine("rowNum: " + rowNum);
-                  }
-
-              } while (reader.ReadNextSibling()); // Skip to the next row
-
-              break; // We just looped through all the rows so no 
-              // need to continue reading the worksheet
-          }
-
-          if (reader.ElementType != typeof(Worksheet))
-              reader.Skip();
-
-          reader.Close();
-      }        
-  }
-        
-  */
     }
 }
 

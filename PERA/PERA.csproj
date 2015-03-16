@@ -71,6 +71,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
     </Reference>
+    <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Web.DynamicData" />
     <Reference Include="System.Web.Entity" />
     <Reference Include="System.Web.ApplicationServices" />
@@ -240,6 +241,22 @@
     <Compile Include="Migrations\201503131222480_APR.Designer.cs">
       <DependentUpon>201503131222480_APR.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503151528303_PRTpk.cs" />
+    <Compile Include="Migrations\201503151528303_PRTpk.Designer.cs">
+      <DependentUpon>201503151528303_PRTpk.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503151633246_PRT.cs" />
+    <Compile Include="Migrations\201503151633246_PRT.Designer.cs">
+      <DependentUpon>201503151633246_PRT.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503151638413_PRTpk2.cs" />
+    <Compile Include="Migrations\201503151638413_PRTpk2.Designer.cs">
+      <DependentUpon>201503151638413_PRTpk2.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503152318263_update-3-15.cs" />
+    <Compile Include="Migrations\201503152318263_update-3-15.Designer.cs">
+      <DependentUpon>201503152318263_update-3-15.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
@@ -271,6 +288,8 @@
       @name pera-app
       @desc AngularJS application
     -->
+    <Content Include="Scripts\css\foundation-datepicker.css" />
+    <Content Include="Scripts\js\foundation-datepicker.js" />
     <Content Include="Scripts\js\MonthPicker.js" />
     <Content Include="Scripts\js\MonthPicker.min.js" />
     <Content Include="Scripts\js\ui-router-extras\ct-ui-router-extras.core.js" />
@@ -338,6 +357,18 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503131222480_APR.resx">
       <DependentUpon>201503131222480_APR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503151528303_PRTpk.resx">
+      <DependentUpon>201503151528303_PRTpk.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503151633246_PRT.resx">
+      <DependentUpon>201503151633246_PRT.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503151638413_PRTpk2.resx">
+      <DependentUpon>201503151638413_PRTpk2.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503152318263_update-3-15.resx">
+      <DependentUpon>201503152318263_update-3-15.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />

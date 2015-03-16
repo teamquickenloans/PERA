@@ -4,32 +4,32 @@
    
     
     </p>
-    <form ng-submit="uploadAll()">
+    <form ng-submit="fileCtrl.uploadAll()">
         <div class="small-12 column">
             <h4> Invoice Meta-Data</h4>
             <label for="invoiceID">Invoice Number:</label>
-            <input type="number" ng-model="invoice.invoiceID" id="invoiceID" required />
+            <input type="number" ng-model="fileCtrl.invoice.invoiceID" id="invoiceID" required />
 
             <label for="totalAmountBilled">Amount Billed:</label>
-            <input type="number" ng-model="invoice.totalAmountBilled" id="totalAmountBilled" />
+            <input type="number" step="any" min="0" ng-model="fileCtrl.invoice.totalAmountBilled" id="totalAmountBilled" />
         </div>
         <div class="small-5 column">
 
             <label for="numberOfLeasedSpots">Number of Leased Spots:</label>
-            <input type="number" ng-model="invoice.totalLeasedSpaces" />
+            <input type="number" ng-model="fileCtrl.invoice.totalLeasedSpots" />
            
 
             <label for="monthYear">Month/Year of Billing</label>
-            <input type="text" ng-model="invoice.monthYear" id="monthYear" class="month-picker" required/>
+            <input type="date" ng-model="fileCtrl.invoice.monthYear" id="monthYear" class="date-picker" required />
 
         </div>
         <div class="small-5 column">
 
             <label for="numberOfValidations">Number of Validations:</label>
-            <input type="number" ng-model="invoice.validations" placeholder="optional" />
+            <input type="number" ng-model="fileCtrl.invoice.validations" placeholder="optional" />
 
             <label for="dateReceived">Date Received:</label>
-            <input type="text" ng-model="invoice.dateReceived" id="dateReceived" class="date-picker" placeholder="optional" />
+            <input type="date" ng-model="fileCtrl.invoice.dateReceived" id="dateReceived" class="date-picker" placeholder="optional" />
 
         </div>
 
@@ -61,12 +61,12 @@
         <br />
 
 
-
         <!--
+        
         <script>
             $('#monthYear').MonthPicker({ ShowIcon: false });
-        </script>-->
-        
+        </script>
+        -->
         <script type="text/javascript">
             $(function () {
                 $('.month-picker').datepicker({
@@ -82,15 +82,15 @@
                 });
             });
             $(function () {
-                $('.date-picker').datepicker({});
+                $('.date-picker').fdatepicker({});
             });
 
         </script>
 
-        <style>
+        <!--<style>
         .ui-datepicker-calendar {
             display: none;
             }
-        </style>
+        </style>-->
 
     </form>
