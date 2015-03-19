@@ -83,12 +83,22 @@
                 }
             }
         }
-
+        /*
         //this is a nested view.  it will populate the ui-view inside of Upload/InvoiceForm.cshtml
         var uploadHistory_invoice = {
             name: 'invoice',
             views: {
                 'modal':{
+                    templateUrl: 'Upload/InvoiceForm',
+                    controller: 'FileUploadController as fileCtrl'
+                }
+            }*/
+
+        var invoice = {
+            name: 'invoice',
+            sticky: true,
+            views: {
+                'main' : {
                     templateUrl: 'Upload/InvoiceForm',
                     controller: 'FileUploadController as fileCtrl'
                 }
@@ -102,9 +112,9 @@
         $stateProvider.state(singleGarage);
         $stateProvider.state(detectedIssues);
         $stateProvider.state(uploadHistory);
-        $stateProvider.state(uploadHistory_invoice);
+        //$stateProvider.state(uploadHistory_invoice);
         $stateProvider.state(garageMap);
-
+        $stateProvider.state(invoice);
 
     }
 })();

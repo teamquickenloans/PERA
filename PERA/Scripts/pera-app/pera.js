@@ -15,7 +15,11 @@
         'pera.invoiceTeamMembers',
         'pera.sidebar',
         'ui.router',
-        'ct.ui.router.extras'
+        'angularFileUpload',
+        //'mm.foundation',
+        'ct.ui.router.extras',
+        'angular-datepicker',
+        'bzm-date-picker'
         ])
     
     //angular

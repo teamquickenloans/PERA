@@ -10,6 +10,13 @@ namespace PERA.Models
 {
     public class ParkerReportTeamMember
     {
+        public enum BadgeType
+        {
+            GarageBadgeID,
+            BadgeID,
+            PuckBadgeID,
+            HangTagID
+        }
         [Key]
         public int ParkerReportTeamMemberID { get; set; }
         [Column(Order = 10)]
@@ -17,7 +24,11 @@ namespace PERA.Models
         [Column(Order = 20)]
         public string LastName { get; set; }
         [Column(Order = 30)]
-        public int? BusinessHoursTokenID { get; set; }
-        public int? AfterHoursTokenID { get; set; }
+        public BadgeType? BusinessHoursTokenID { get; set; }
+        public BadgeType? AfterHoursTokenID { get; set; }
+        public int? GarageBadgeID { get; set; }
+        public int? BadgeID { get; set; }
+        public int? PuckBadgeID { get; set; }
+        public int? HangTagID { get; set; }
     }
 }

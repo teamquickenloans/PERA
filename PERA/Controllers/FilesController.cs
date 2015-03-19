@@ -102,7 +102,7 @@ namespace PERA.Controllers
             Trace.WriteLine("invoice.MonthYear: " + invoice.MonthYear);
             Trace.WriteLine("invoice.TotalAmountBilled: " + invoice.TotalAmountBilled);
 
-            //FileHandler(result, invoice);
+            FileHandler(result, invoice);
 
 
             // Through the request response you can return an object to the Angular controller
@@ -128,17 +128,17 @@ namespace PERA.Controllers
                 APR.DateUploaded = DateTime.Now;
                 APR.Invoice = invoice;
                 //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
-                List<ParkerReportTeamMember> teamMembers = 
+                List<TeamMember> teamMembers = 
                     ExcelParser(file.LocalFileName, originalFileName, invoice, garageID);
-                foreach (ParkerReportTeamMember teamMember in teamMembers)
+                foreach (TeamMember teamMember in teamMembers)
                 {
-                    APR.ParkerReportTeamMembers.Add(teamMember);
+                    //APR.TeamMembers.Add(teamMember);
                 }
                 i++;
             }
         }
         
-        private List<ParkerReportTeamMember> ExcelParser(string path, string name, Invoice invoice, int garageID)
+        private List<TeamMember> ExcelParser(string path, string name, Invoice invoice, int garageID)
         {
             System.Diagnostics.Debug.WriteLine("begin excel parser");
             IExcelDataReader reader = null;
@@ -158,7 +158,7 @@ namespace PERA.Controllers
             // The result of each spreadsheet will be created in the result.Tables
             DataSet result = reader.AsDataSet();
 
-            List<ParkerReportTeamMember> teamMembers = new List<ParkerReportTeamMember>();
+            List<TeamMember> teamMembers = new List<TeamMember>();
             
             System.Diagnostics.Debug.WriteLine("begin for loop");
 
@@ -180,7 +180,7 @@ namespace PERA.Controllers
                         continue;
                     }
                    
-                    ParkerReportTeamMember teamMember = new ParkerReportTeamMember();
+                    TeamMember teamMember = new TeamMember();
                     string firstName, lastName;
                     if(garageID == 2)
                     {
@@ -238,7 +238,7 @@ namespace PERA.Controllers
 
                     teamMembers.Add(teamMember);
 
-                    db.ParkerReportTeamMembers.Add(teamMember);
+                    db.TeamMembers.Add(teamMember);
                     db.SaveChanges();
 
                       /*
@@ -278,7 +278,7 @@ namespace PERA.Controllers
                 if (!String.IsNullOrEmpty(unescapedFormData))
                 {
                     return JsonConvert.DeserializeObject<Invoice>(unescapedFormData,
-                         new IsoDateTimeConverter { DateTimeFormat = "MM/dd/yyyy" });
+                         new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-dd" });
                 }
             }
             return null;

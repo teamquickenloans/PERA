@@ -36,7 +36,7 @@
             dateUploaded: Date.now(),
             totalLeasedSpots: '',
             validations: '',
-            monthYear: new Date(1984, 1, 1)
+            monthYear: ''
         }
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
@@ -49,12 +49,21 @@
 
         function uploadAll()
         {
+            var invoice = vm.invoice;
             var date = Date.now();
-            vm.invoice.dateUploaded = $filter('date')(date, 'MM/dd/yyyy');
+            invoice.dateUploaded = $filter('date')(date, 'yyyy-MM-dd');
+            if (invoice.dateReceived == '') {
+                invoice.dateReceived = null;
+            }
+            if (invoice.totalAmountBilled == '')
+            {
+                invoice.totalAmountBilled = 0;
+            }
+            //invoice.monthYear = '01-' + invoice.monthYear 
             console.log("Upload all");
             console.log("uploadAll monthYear:" + vm.invoice.monthYear);
             console.log("uploadAll dateReceived:" + vm.invoice.dateReceived);
-
+            console.log("uploadAll dateUploaded:" + vm.invoice.dateUploaded);
             if (vm.reports && vm.reports.length)
             {
                 for (var i = 0; i < vm.reports.length; i++) {

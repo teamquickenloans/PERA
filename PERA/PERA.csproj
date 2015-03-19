@@ -257,6 +257,14 @@
     <Compile Include="Migrations\201503152318263_update-3-15.Designer.cs">
       <DependentUpon>201503152318263_update-3-15.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503181513477_teammemberUpdate.cs" />
+    <Compile Include="Migrations\201503181513477_teammemberUpdate.Designer.cs">
+      <DependentUpon>201503181513477_teammemberUpdate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503181545017_iapr.cs" />
+    <Compile Include="Migrations\201503181545017_iapr.Designer.cs">
+      <DependentUpon>201503181545017_iapr.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
@@ -288,7 +296,10 @@
       @name pera-app
       @desc AngularJS application
     -->
+    <Content Include="Scripts\css\bzm-date-picker.css" />
     <Content Include="Scripts\css\foundation-datepicker.css" />
+    <Content Include="Scripts\js\angular-datepicker.js" />
+    <Content Include="Scripts\js\bzm-date-picker.min.js" />
     <Content Include="Scripts\js\foundation-datepicker.js" />
     <Content Include="Scripts\js\MonthPicker.js" />
     <Content Include="Scripts\js\MonthPicker.min.js" />
@@ -311,6 +322,7 @@
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.sticky.min.js" />
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.js" />
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.min.js" />
+    <Content Include="Scripts\pera-app\fileupload\directives\double.directive.js" />
     <Content Include="Scripts\pera-app\fileupload\services\upload.service.js" />
     <Content Include="Scripts\pera-app\invoiceTeamMembers\invoiceTeamMembers.module.js" />
     <Content Include="Scripts\pera-app\map\map.module.js" />
@@ -336,6 +348,7 @@
     <Content Include="Scripts\pera-app\garages\garages.module.js" />
     <Content Include="Scripts\pera-app\tabs\controllers\tab.controller.js" />
     <Content Include="Scripts\pera-app\tabs\tabs.module.js" />
+    <Content Include="Scripts\pera-app\utils\directives\datepicker.directive.js" />
     <Content Include="Scripts\pera-app\utils\services\snackbar.service.js" />
     <Content Include="Scripts\pera-app\utils\utils.module.js" />
     <Content Include="Scripts\pera-app\invoiceTeamMembers\controllers\invoiceTeamMembers.controller.js" />
@@ -369,6 +382,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503152318263_update-3-15.resx">
       <DependentUpon>201503152318263_update-3-15.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503181513477_teammemberUpdate.resx">
+      <DependentUpon>201503181513477_teammemberUpdate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503181545017_iapr.resx">
+      <DependentUpon>201503181545017_iapr.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />

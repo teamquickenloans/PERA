@@ -37,7 +37,7 @@ namespace PERA.Migrations
 
             Assembly assembly = Assembly.GetExecutingAssembly();
             string resourceName = "PERA.DAL.garages.csv";
-
+            
             using (Stream stream = assembly.GetManifestResourceStream(resourceName))
             {
                 using (StreamReader reader = new StreamReader(stream, Encoding.UTF8))
@@ -49,7 +49,7 @@ namespace PERA.Migrations
                 }
             }
 
-
+            
             context.TeamMembers.AddOrUpdate(x => x.primaryKey,
                 new TeamMember() { BadgeID = 4041, FirstName = "Carson", LastName = "Alexander", EnrollmentDate = DateTime.Parse("2005-09-01"), CommonID = 423535, EmploymentStatus = null, TerminationDate = DateTime.Parse("2005-09-01") },
                 new TeamMember() { BadgeID = 4042, FirstName = "Meredith", LastName = "Alonso", EnrollmentDate = DateTime.Parse("2002-09-01"), CommonID = 423536, EmploymentStatus = null, TerminationDate = DateTime.Parse("2005-09-01") },

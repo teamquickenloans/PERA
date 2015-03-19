@@ -30,12 +30,14 @@ namespace PERA.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int CommonID { get; set; }
-        public int? GarageID { get; set; }
-        public int BadgeID { get; set; }
-        /*public int? GarageBadgeBadgeID { get; set; }
+        //public int? GarageID { get; set; }
+        //public int BadgeID { get; set; }
+        public int? BusinessHoursTokenID { get; set; }
+        public int? AfterHoursTokenID { get; set; }
+        public int? GarageBadgeID { get; set; }
         public int? BadgeID { get; set; }
         public int? PuckBadgeID { get; set; }
-        public int? HangTagID { get; set; }*/
+        public int? HangTagID { get; set; }
 		public EmploymentStatus? EmploymentStatus { get; set; }
         public DateTime? TerminationDate { get; set; }
         public ParkingStatus? ParkingStatus { get; set; }

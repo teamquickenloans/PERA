@@ -1,6 +1,6 @@
 ﻿/**
 * ng-file directive
-* @namespace pera.fileupload
+* @namespace pera.fileupload.directives
 */
 (function () {
     'use strict';

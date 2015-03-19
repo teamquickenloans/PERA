@@ -14,5 +14,7 @@
       .module('pera.fileupload.services', []);
 
     angular
-  .module('pera.fileupload.services', []);
+      .module('pera.fileupload.directives', []);
+
+
 })();
