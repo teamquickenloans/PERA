@@ -12,4 +12,7 @@
 
     angular
       .module('pera.utils.controllers', []);
+
+    angular
+      .module('pera.utils.directives', []);
 })();

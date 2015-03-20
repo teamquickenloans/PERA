@@ -1,5 +1,5 @@
 ﻿/**
-* InvoiceTeamMembers controller
+* ParkerReportTeamMembers controller
 * @namespace pera.invoiceTeamMembers.controllers
 */
 (function () {
@@ -7,20 +7,20 @@
 
     angular
       .module('pera.invoiceTeamMembers.controllers')
-      .controller('InvoiceTeamMembersController', InvoiceTeamMembersController);
+      .controller('ParkerReportTeamMembersController', ParkerReportTeamMembersController);
 
-    InvoiceTeamMembersController.$inject = ['$scope', 'InvoiceTeamMembers', 'Snackbar']; //Here 'InvoiceTeamMembers' is the InvoiceTeamMembers Service (pera.invoiceTeamMembers.service)
+    ParkerReportTeamMembersController.$inject = ['$scope', 'ParkerReportTeamMembers', 'Snackbar']; //Here 'ParkerReportTeamMembers' is the ParkerReportTeamMembers Service (pera.invoiceTeamMembers.service)
 
     /**
-    * @namespace InvoiceTeamMembersController
+    * @namespace ParkerReportTeamMembersController
     */
-    function InvoiceTeamMembersController($scope, InvoiceTeamMembers, Snackbar) {
+    function ParkerReportTeamMembersController($scope, ParkerReportTeamMembers, Snackbar) {
         var vm = this;
         vm.invoiceTeamMembers = []; //the list of invoiceTeamMembers to be returned
 
 
-        InvoiceTeamMembers.all().then(invoiceTeamMembersSuccessFn, invoiceTeamMembersErrorFn);
-        //vm.invoiceTeamMembers = InvoiceTeamMembers.all();
+        ParkerReportTeamMembers.all().then(invoiceTeamMembersSuccessFn, invoiceTeamMembersErrorFn);
+        //vm.invoiceTeamMembers = ParkerReportTeamMembers.all();
         //console.log(vm.invoiceTeamMembers);
 
 

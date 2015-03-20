@@ -1,5 +1,5 @@
 ﻿/**
-* InvoiceTeamMembers module
+* ParkerReportTeamMembers module
 * @namespace pera.invoiceTeamMembers
 */
 (function () {

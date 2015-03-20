@@ -7,19 +7,32 @@
         //'pera.routes',
         'pera.garages',
         'pera.utils',
-        'pera.dashboard',
+        'pera.expenses',
+        'pera.map',
         'pera.tabs',
         'pera.fileupload',
-        'ngRoute',
         'pera.teammembers',
-        'pera.invoiceTeamMembers'
-      ]);
+        'pera.invoiceTeamMembers',
+        'pera.sidebar',
+        'ui.router',
+        'angularFileUpload',
+        //'mm.foundation',
+        'ct.ui.router.extras',
+        'angular-datepicker',
+        'bzm-date-picker'
+        ])
     
     //angular
     //  .module('pera.routes', ['ngRoute']);
 
     angular
-      .module('pera.config', ['ngRoute']);
+      .module('pera.config', [
+          'ui.router',
+          'ngRoute',
+          'ngResource',
+          'ngSanitize',
+          'ct.ui.router.extras'
+      ])
 
 
 })();

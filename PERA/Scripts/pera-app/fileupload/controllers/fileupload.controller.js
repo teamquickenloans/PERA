@@ -9,59 +9,98 @@
       .module('pera.fileupload.controllers')
       .controller('FileUploadController', FileUploadController);
 
-    FileUploadController.$inject = ['$scope', '$upload', 'InvoiceForm', 'Garages', 'Snackbar']; //Here 'Garages' is the Garages Service (pera.garages.service)
+    FileUploadController.$inject = ['$scope', '$upload', 'Upload', 'Garages', 'Snackbar', '$filter']; //Here 'Garages' is the Garages Service (pera.garages.service)
 
     /**
     * @namespace FileUploadController
     */
-    function FileUploadController($scope, $upload, InvoiceForm, Garages, Snackbar) {
+    function FileUploadController($scope, $upload, Upload, Garages, Snackbar, $filter) {
   
         var vm = this;
         vm.files = [];
-        $scope.garages = [];
-        $scope.uploads = [];
-        $scope.upload = upload;
+        vm.counter = 0;
+        vm.reports = [{ garageID: 0 }];
 
+        $scope.garages = [];
         $scope.data = 'none'; //the file
+
+        vm.addReport = addReport;
+        vm.uploadAll = uploadAll;
+
         //$scope.file = [];
 
-        vm.month = "";
-        $scope.invoice = {
+        vm.invoice = {
             invoiceID: '',
-            garageID: '',
             totalAmountBilled: '',
             dateReceived: '',
-            billingStartDate: '',
-            billingEndDate: '',
-            numberOfLeasedSpots: '',
-            numberOfValidations: ''
+            dateUploaded: Date.now(),
+            totalLeasedSpots: '',
+            validations: '',
+            monthYear: ''
         }
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
 
+        function addReport() {
+            vm.counter++;
+            console.log("add file");
+            vm.reports.push({ garageID: 0 });
+        }
 
+        function uploadAll()
+        {
+            var invoice = vm.invoice;
+            var date = Date.now();
+            invoice.dateUploaded = $filter('date')(date, 'yyyy-MM-dd');
+            if (invoice.dateReceived == '') {
+                invoice.dateReceived = null;
+            }
+            if (invoice.totalAmountBilled == '')
+            {
+                invoice.totalAmountBilled = 0;
+            }
+            //invoice.monthYear = '01-' + invoice.monthYear 
+            console.log("Upload all");
+            console.log("uploadAll monthYear:" + vm.invoice.monthYear);
+            console.log("uploadAll dateReceived:" + vm.invoice.dateReceived);
+            console.log("uploadAll dateUploaded:" + vm.invoice.dateUploaded);
+            if (vm.reports && vm.reports.length)
+            {
+                for (var i = 0; i < vm.reports.length; i++) {
+                    console.log(vm.reports[i].file[0].name)
+                    vm.files.push(vm.reports[i].file[0])
+                }
+                Upload.upload(vm.files, vm.invoice, vm.reports);
+            }
 
+        }
 
-        /*$scope.$watch('files', function () {
-            $scope.upload($scope.files);
-        });*/
+        function garagesSuccessFn(data, status, headers, config) {
+            $scope.garages = data.data;         //this will depend on what the API returns, it may have to change
+            //console.log("fileupload Contoller garages success", $scope.garages);
+        }
+
+        function garagesErrorFn(data, status, headers, config) {
+            Snackbar.error(data.data.error);
+        }
 
         /**
         * @name upload
-        * @desc Try to upload a file using angular-file-upload
-        */
+        * @desc Try to upload a file using ng-file-upload
+        *//*
         function upload(files) {
             console.log($scope.invoice.invoiceID);
             if (files && files.length) {
                 for (var i = 0; i < files.length; i++) {
                     var file = files[i];
+                    console.log(file.name);
                     (function (index) {
                         console.log("posting..");
                         $scope.uploads[index] = $upload.upload({
                             url: "./api/files/upload", // webapi url
                             method: "POST",
                             data: { invoice: $scope.invoice },
-                            file: files
+                            file: file
                         }, uploadProgressFn, uploadSuccessFn)
                     })(i);
                 }
@@ -80,35 +119,7 @@
         function abortUpload(index) {
             $scope.uploads[index].abort();
         }
-
-        /*
-        function upload() {
-            $scope.file = document.getElementById('file').files[0]
-            var reader = new FileReader();
-            reader.onloadend = setData;
-
-            function setData(e) {
-                $scope.data = e.target.result;
-            }
-            //console.log($scope.data);
-            var fileData = reader.readAsBinaryString($scope.file);
-            //console.log($scope.data);
-            //submitFile(fileData)
-            InvoiceForm.submit($scope.invoice, $scope.file, "IngestInvoice/AddFile");
-        }*/
-
         
-        function activate() {
-
-        }
-
-        function garagesSuccessFn(data, status, headers, config) {
-            $scope.garages = data.data;         //this will depend on what the API returns, it may have to change
-            //console.log("fileupload Contoller garages success", $scope.garages);
-        }
-
-        function garagesErrorFn(data, status, headers, config) {
-            Snackbar.error(data.data.error);
-        }
+        */
     }
 })();

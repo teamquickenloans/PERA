@@ -86,6 +86,24 @@
             return $q.reject(response);
         }
 
+        function calculateTotals() {
+            for (var i = 0; i < vm.garages.length; i++) {
+                var temp = vm.garages[i].numberOfLeasedSpaces * vm.garages[i].spaceCost;
+                vm.garages[i].cost = temp;
+                vm.totalCost += temp;
+                vm.totalCapacity += vm.garages[i].capacity;
+                vm.totalLeasedSpaces += vm.garages[i].numberOfLeasedSpaces;
+                vm.totalRequiredBufferSize += vm.garages[i].minimumNumberOfBufferSpaces;
+                vm.totalTeamMemberSpaces += vm.garages[i].numberOfTeamMemberSpaces;
+
+                vm.averageCostPerSpace += vm.garages[i].spaceCost;
+                vm.averageTransientSalePrice += vm.garages[i].transientSalePrice;
+            }
+            vm.averageCostPerSpace = vm.averageCostPerSpace / vm.garages.length;
+            vm.averageTransientSalePrice = vm.averageTransientSalePrice / vm.garages.length;
+
+        };
+
         function share() {
             $rootScope.$broadcast('receiveGarages');
         }
@@ -145,23 +163,6 @@
             return vm.averageTransientSalePrice;
         }
 
-        function calculateTotals()
-        {
-            for (var i = 0; i < vm.garages.length; i++) {
-                var temp = vm.garages[i].numberOfLeasedSpaces * vm.garages[i].spaceCost;
-                vm.costs[i] = temp;
-                vm.totalCost += temp;
-                vm.totalCapacity += vm.garages[i].capacity;
-                vm.totalLeasedSpaces += vm.garages[i].numberOfLeasedSpaces;
-                vm.totalRequiredBufferSize += vm.garages[i].minimumNumberOfBufferSpaces;
-                vm.totalTeamMemberSpaces += vm.garages[i].numberOfTeamMemberSpaces;
 
-                vm.averageCostPerSpace += vm.garages[i].spaceCost;
-                vm.averageTransientSalePrice += vm.garages[i].transientSalePrice;
-            }
-            vm.averageCostPerSpace = vm.averageCostPerSpace / vm.garages.length;
-            vm.averageTransientSalePrice = vm.averageTransientSalePrice / vm.garages.length;
-
-        };
     }
 })();
