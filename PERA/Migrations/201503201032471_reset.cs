@@ -3,11 +3,11 @@ namespace PERA.Migrations
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class reset : DbMigration
     {
         public override void Up()
         {
-            CreateTable(
+        /*    CreateTable(
                 "dbo.BadgeScans",
                 c => new
                     {
@@ -70,6 +70,7 @@ namespace PERA.Migrations
                         FirstName = c.String(),
                         LastName = c.String(),
                         CommonID = c.Int(nullable: false),
+                        TokenID = c.Int(nullable: false),
                         GarageID = c.Int(),
                         EmploymentStatus = c.Int(),
                         TerminationDate = c.DateTime(nullable: false),
@@ -98,14 +99,17 @@ namespace PERA.Migrations
                         Format = c.Int(),
                         TeamMember_BadgeID = c.Int(),
                         TeamMember_BadgeID1 = c.Int(),
+                        InvoiceTeamMember_pk = c.Int(),
                     })
                 .PrimaryKey(t => t.InvoiceID)
                 .ForeignKey("dbo.Garages", t => t.GarageID, cascadeDelete: true)
                 .ForeignKey("dbo.TeamMembers", t => t.TeamMember_BadgeID)
                 .ForeignKey("dbo.TeamMembers", t => t.TeamMember_BadgeID1)
+                .ForeignKey("dbo.InvoiceTeamMembers", t => t.InvoiceTeamMember_pk)
                 .Index(t => t.GarageID)
                 .Index(t => t.TeamMember_BadgeID)
-                .Index(t => t.TeamMember_BadgeID1);
+                .Index(t => t.TeamMember_BadgeID1)
+                .Index(t => t.InvoiceTeamMember_pk);
             
             CreateTable(
                 "dbo.CarpoolGroups",
@@ -118,10 +122,26 @@ namespace PERA.Migrations
                 .ForeignKey("dbo.TeamMembers", t => t.BadgeID, cascadeDelete: true)
                 .Index(t => t.BadgeID);
             
+            CreateTable(
+                "dbo.InvoiceTeamMembers",
+                c => new
+                    {
+                        pk = c.Int(nullable: false, identity: true),
+                        FirstName = c.String(),
+                        LastName = c.String(),
+                        TokenID = c.Int(nullable: false),
+                        GarageID = c.Int(),
+                    })
+                .PrimaryKey(t => t.pk)
+                .ForeignKey("dbo.Garages", t => t.GarageID)
+                .Index(t => t.GarageID);
+            */
         }
         
         public override void Down()
         {
+            DropForeignKey("dbo.Invoices", "InvoiceTeamMember_pk", "dbo.InvoiceTeamMembers");
+            DropForeignKey("dbo.InvoiceTeamMembers", "GarageID", "dbo.Garages");
             DropForeignKey("dbo.CarpoolGroups", "BadgeID", "dbo.TeamMembers");
             DropForeignKey("dbo.BadgeScans", "BadgeID", "dbo.TeamMembers");
             DropForeignKey("dbo.Invoices", "TeamMember_BadgeID1", "dbo.TeamMembers");
@@ -131,7 +151,9 @@ namespace PERA.Migrations
             DropForeignKey("dbo.TeamMembers", "GarageID", "dbo.Garages");
             DropForeignKey("dbo.BadgeScans", "GarageID", "dbo.Garages");
             DropForeignKey("dbo.Garages", "GarageManagerID", "dbo.GarageManagers");
+            DropIndex("dbo.InvoiceTeamMembers", new[] { "GarageID" });
             DropIndex("dbo.CarpoolGroups", new[] { "BadgeID" });
+            DropIndex("dbo.Invoices", new[] { "InvoiceTeamMember_pk" });
             DropIndex("dbo.Invoices", new[] { "TeamMember_BadgeID1" });
             DropIndex("dbo.Invoices", new[] { "TeamMember_BadgeID" });
             DropIndex("dbo.Invoices", new[] { "GarageID" });
@@ -140,6 +162,7 @@ namespace PERA.Migrations
             DropIndex("dbo.Garages", new[] { "GarageManagerID" });
             DropIndex("dbo.BadgeScans", new[] { "BadgeID" });
             DropIndex("dbo.BadgeScans", new[] { "GarageID" });
+            DropTable("dbo.InvoiceTeamMembers");
             DropTable("dbo.CarpoolGroups");
             DropTable("dbo.Invoices");
             DropTable("dbo.TeamMembers");

@@ -197,9 +197,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201503051637274_initial.cs" />
-    <Compile Include="Migrations\201503051637274_initial.Designer.cs">
-      <DependentUpon>201503051637274_initial.cs</DependentUpon>
+    <Compile Include="Migrations\201503201032471_reset.cs" />
+    <Compile Include="Migrations\201503201032471_reset.Designer.cs">
+      <DependentUpon>201503201032471_reset.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs">
       <SubType>Code</SubType>
@@ -264,8 +264,8 @@
     <Content Include="Scripts\css\foundation-icons.min.css" />
     <Content Include="Scripts\css\material.css" />
     <Content Include="Scripts\css\snackbar.css.map" />
-    <EmbeddedResource Include="Migrations\201503051637274_initial.resx">
-      <DependentUpon>201503051637274_initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201503201032471_reset.resx">
+      <DependentUpon>201503201032471_reset.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\Angular\pera.js" />
