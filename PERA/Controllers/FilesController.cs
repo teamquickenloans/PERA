@@ -23,29 +23,18 @@ using PERA.HelperClasses;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
-public struct columns
-{
-    public int invoice;
-    public int QL;
-}
-
-
 
 
 namespace PERA.Controllers
 {
-    public class Name
-    {
-        public int first {set; get;}
-        public int last {set; get;}
-    }
+
     public class FilesController : ApiController
     {
 
         private PERAContext db = new PERAContext();
 
         // key: garageID, value: column index # of token ID (badge, hangtag, puck)
-        Dictionary<int, int> invoiceTokenColumns = new Dictionary<int, int>()
+        Dictionary<int, int> tokenColumns = new Dictionary<int, int>()
         {
             {5,3},
             {6,3},
@@ -57,11 +46,11 @@ namespace PERA.Controllers
             {14,3},
             {1,0},
             {2,1},
-            {16,3},
+            {16,3}
         };
 
         //These have the format row[2] = Lastname, Firstname
-        Dictionary<int, int> invoiceNameColumns = new Dictionary<int, int>()
+        Dictionary<int, int> nameColumns = new Dictionary<int, int>()
         {
             {5,2},
             {6,2},
@@ -73,19 +62,21 @@ namespace PERA.Controllers
             {14,2},
             {1,2},
             {2,2},
-            {16,2},
+            {16,2}
         };
 
 
         //The name is split into two columns
-        Dictionary<int, Name> invoiceSplitNameColumns = new Dictionary<int, Name>()
+        Dictionary<int, Name> splitNameColumns = new Dictionary<int, Name>()
         {
           { 2, new Name{first = 3, last = 2}},
         };
 
+
         [HttpPost] // This is from System.Web.Http, and not from System.Web.Mvc
         public async Task<HttpResponseMessage> Upload()
         {
+            Trace.WriteLine("Begin Upload!!!");
             if (!Request.Content.IsMimeMultipartContent())
             {
                 this.Request.CreateResponse(HttpStatusCode.UnsupportedMediaType);
@@ -98,6 +89,16 @@ namespace PERA.Controllers
             //string invoice = result.FormData.GetValues(0).FirstOrDefault();
             //Invoice newInvoice = JsonConvert.DeserializeObject<Invoice>(fileUploadObj);
             Invoice invoice = GetFormData(result);
+
+            //var exists = db.Invoices.Where(x => x.InvoiceID == invoice.InvoiceID);
+
+            var exists = db.Invoices.Any(x => x.InvoiceID == invoice.InvoiceID);
+
+            if(exists)
+            {
+                invoice = db.Invoices.Find(invoice.InvoiceID);
+            }
+
             Trace.WriteLine("invoice.InvoiceID: " + invoice.InvoiceID);
             Trace.WriteLine("invoice.MonthYear: " + invoice.MonthYear);
             Trace.WriteLine("invoice.TotalAmountBilled: " + invoice.TotalAmountBilled);
@@ -128,9 +129,9 @@ namespace PERA.Controllers
                 APR.DateUploaded = DateTime.Now;
                 APR.Invoice = invoice;
                 //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
-                List<TeamMember> teamMembers = 
+                List<ParkerReportTeamMember> teamMembers = 
                     ExcelParser(file.LocalFileName, originalFileName, invoice, garageID);
-                foreach (TeamMember teamMember in teamMembers)
+                foreach (ParkerReportTeamMember teamMember in teamMembers)
                 {
                     //APR.TeamMembers.Add(teamMember);
                 }
@@ -138,7 +139,7 @@ namespace PERA.Controllers
             }
         }
         
-        private List<TeamMember> ExcelParser(string path, string name, Invoice invoice, int garageID)
+        private List<ParkerReportTeamMember> ExcelParser(string path, string name, Invoice invoice, int garageID)
         {
             System.Diagnostics.Debug.WriteLine("begin excel parser");
             IExcelDataReader reader = null;
@@ -158,7 +159,7 @@ namespace PERA.Controllers
             // The result of each spreadsheet will be created in the result.Tables
             DataSet result = reader.AsDataSet();
 
-            List<TeamMember> teamMembers = new List<TeamMember>();
+            List<ParkerReportTeamMember> teamMembers = new List<ParkerReportTeamMember>();
             
             System.Diagnostics.Debug.WriteLine("begin for loop");
 
@@ -180,12 +181,12 @@ namespace PERA.Controllers
                         continue;
                     }
                    
-                    TeamMember teamMember = new TeamMember();
+                    ParkerReportTeamMember teamMember = new ParkerReportTeamMember();
                     string firstName, lastName;
                     if(garageID == 2)
                     {
-                        var first = row[invoiceSplitNameColumns[garageID].first];
-                        var last = row[invoiceSplitNameColumns[garageID].last];
+                        var first = row[splitNameColumns[garageID].first];
+                        var last = row[splitNameColumns[garageID].last];
                         if(first == null){
                             firstName = "";
                         }
@@ -199,7 +200,7 @@ namespace PERA.Controllers
                     }
                     else
                     {
-                        string fullName = (string)row[invoiceNameColumns[garageID]];
+                        string fullName = (string)row[nameColumns[garageID]];
                         string[] names = fullName.Split(',');   //split the name
                         
                         if (names.Length < 2)
@@ -215,7 +216,7 @@ namespace PERA.Controllers
                         }
                     }
 
-                    int index = invoiceTokenColumns[garageID];
+                    int index = tokenColumns[garageID];
                     var cardNumberV = row[index];
                     Trace.WriteLine(cardNumberV.GetType());
                     double cardNumberD;
@@ -225,11 +226,11 @@ namespace PERA.Controllers
                     {
                         cardNumberD = (System.Double)cardNumberV;
                         cardNumber = Convert.ToInt32(cardNumberD);
-                        teamMember.BusinessHoursTokenID = cardNumber;
+                        teamMember.BadgeID = cardNumber;
                     }
                     else 
                     {
-                        teamMember.BusinessHoursTokenID = null;
+                        //teamMember.BadgeID = null;
                     }
 
                     teamMember.FirstName = firstName;
@@ -238,7 +239,7 @@ namespace PERA.Controllers
 
                     teamMembers.Add(teamMember);
 
-                    db.TeamMembers.Add(teamMember);
+                    db.ParkerReportTeamMembers.Add(teamMember);
                     db.SaveChanges();
 
                       /*

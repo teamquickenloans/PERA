@@ -70,7 +70,7 @@
                     console.log(vm.reports[i].file[0].name)
                     vm.files.push(vm.reports[i].file[0])
                 }
-                Upload.upload(vm.files, vm.invoice, vm.reports);
+                Upload.upload(vm.files, vm.invoice, vm.reports, "./api/files/upload");
             }
 
         }

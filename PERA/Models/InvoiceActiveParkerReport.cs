@@ -7,7 +7,9 @@ namespace PERA.Models
 {
     public class InvoiceActiveParkerReport : ActiveParkerReport
     {
-        public virtual ICollection<TeamMember> TeamMembers { get; set; }
+        public int InvoiceID { get; set; }
+        public Invoice Invoice { get; set; }
+        public virtual ICollection<ParkerReportTeamMember> TeamMembers { get; set; }
         public int? LeasedSpots { get; set; }
 
     }

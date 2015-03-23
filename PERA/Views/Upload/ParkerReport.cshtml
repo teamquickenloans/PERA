@@ -1,0 +1,70 @@
+﻿
+<h3>Upload an Active Parker Report</h3>
+<p>
+    This form allows you to upload a Quicken Loans active parker report.  The report can be a System Galaxy
+    excel file, but could be other formats as well. This data will be ingested into the database
+    and can be used in the Expense Reconciliation Tool to identify discrepancies.
+
+
+</p>
+<form novalidate ng-submit="fileCtrl.uploadAll()">
+    <div class="small-12 column">
+        <h4> Reports</h4>
+    <div class="small-5 column">
+
+
+
+        <label for="monthYear">Month/Year of Report</label>
+
+        <date-picker id="monthYear" format="MMM yyyy" placeholder="."
+                     ng-model="fileCtrl.form.monthYear">
+        </date-picker>
+
+        @*<input type="text" ng-model="fileCtrl.invoice.monthYear" id="monthYear" ng-datepicker="{}" required />*@
+    </div>
+
+       
+        <label for="dateReceived">Date Received:</label>
+        @*<input type="date" ng-model="fileCtrl.invoice.dateReceived" id="dateReceived" ng-datepicker="{}" placeholder="optional" />*@
+        @*<input type="date" ng-model="fileCtrl.invoice.dateReceived" id="dateReceived" pick-a-date="date" placeholder="optional" />*@
+        <date-picker id="dateReceived"
+                     format="dd MMM yyyy" placeholder="optional" today="Today Not Tomorrow"
+                     ng-model="fileCtrl.form.dateReceived"></date-picker>
+
+    </div>
+
+    <div class="small-10 column">
+        <h4> Active Parker Reports</h4>
+        <!--<input type="file" class="fileInput" ng-file-select ng-model="files" ng-multiple="false" />-->
+        <div class="row" ng-repeat="report in fileCtrl.reports">
+
+            <div class="small-4 column">
+                <label for="garageID">Garage:</label>
+                <select ng-model="report.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID">
+                    <option value="">-- select a garage --</option>
+                </select>
+            </div>
+            <div class="small-3 column">
+                <a href="#" class="radius button" ng-file-select ng-model="report.file">Select a file</a>
+            </div>
+            <div class="small-5 column">
+                <br />
+                {{ report.file[0].name }}
+            </div>
+        </div>
+        <div class="row">
+            <a ng-click="fileCtrl.addReport()">+ Add a report</a><br />
+            <button class="radius button" type="submit">Upload</button>
+
+        </div>
+    </div>
+    <br />
+
+
+</form>
+
+
+
+@*<script type="text/javascript">
+        $('.date-pick').pickadate()
+    </script>*@

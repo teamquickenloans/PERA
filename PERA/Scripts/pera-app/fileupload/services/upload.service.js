@@ -27,8 +27,7 @@
         * @name upload
         * @desc Try to upload a file using ng-file-upload
         */
-        function upload(files, invoice, reports) {
-            console.log(invoice.monthYear);
+        function upload(files, form, reports, url) {
             if (files && files.length) {
                 for (var i = 0; i < files.length; i++) {
                     var file = files[i];
@@ -36,9 +35,9 @@
                     (function (index) {
                         console.log("posting..");
                         vm.uploads[index] = $upload.upload({
-                            url: "./api/files/upload", // webapi url
+                            url: url, // webapi url
                             method: "POST",
-                            data: invoice,
+                            data: form,
                             fields: { garageID: reports[i].garageID },
                             file: file
                         }, uploadProgressFn, uploadSuccessFn)

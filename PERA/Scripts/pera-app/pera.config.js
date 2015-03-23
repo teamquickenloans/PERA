@@ -61,6 +61,8 @@
                 }
 
         }
+        
+
 
         var detectedIssues = {
             name: 'detectedIssues',
@@ -106,6 +108,17 @@
 
         }
 
+        var parkerReport = {
+            name: 'parkerReport',
+            sticky: true,
+            views: {
+                'main': {
+                    templateUrl: 'Upload/ParkerReport',
+                    controller: 'ParkerReportController as fileCtrl'
+                }
+            }
+        }
+
 
         $stateProvider.state(home);
         $stateProvider.state(overview);
@@ -115,6 +128,7 @@
         //$stateProvider.state(uploadHistory_invoice);
         $stateProvider.state(garageMap);
         $stateProvider.state(invoice);
+        $stateProvider.state(parkerReport);
 
     }
 })();

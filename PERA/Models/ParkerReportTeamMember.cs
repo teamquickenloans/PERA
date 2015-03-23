@@ -26,9 +26,8 @@ namespace PERA.Models
         [Column(Order = 30)]
         public BadgeType? BusinessHoursTokenID { get; set; }
         public BadgeType? AfterHoursTokenID { get; set; }
-        public int? GarageBadgeID { get; set; }
-        public int? BadgeID { get; set; }
-        public int? PuckBadgeID { get; set; }
-        public int? HangTagID { get; set; }
+        public int BadgeID { get; set; }
+        public int? TokenID { get; set; }
+
     }
 }

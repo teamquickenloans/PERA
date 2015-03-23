@@ -19,5 +19,9 @@ namespace PERA.Controllers
         {
             return View();
         }
+        public ActionResult ParkerReport()
+        {
+            return View();
+        }
     }
 }

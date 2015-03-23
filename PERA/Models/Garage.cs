@@ -16,6 +16,7 @@ namespace PERA.Models
     // P: puck
     // H: hangtag
     // G: garage badge
+    [Serializable]
     public enum AccessToken
     {
         B, P, H, G

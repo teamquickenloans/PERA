@@ -26,7 +26,8 @@
         //initialize the map
         console.log('map ctrl');
         vm.initialize = initialize;
-        initialize();
+        //if(!initialized)
+        //    initialize();
 
         function initialize() {
 
@@ -46,11 +47,18 @@
               vm.map = Initializer.mapsInitialized
                   .then(function () {
                       console.log('create map');
-                      Garages.all().then(garagesSuccessFn, garagesErrorFn);
+
                       vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
                       //Add key to map
+                      var element = document.createElement("script");
+                      element.setAttribute("type", "text/javascript");
+                      element.setAttribute("src", "~/Scripts/js/ELabels3.js");
+
                       vm.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('mapKey'));
+                      Garages.all().then(garagesSuccessFn, garagesErrorFn);
+                      //    <script type="text/javascript" src="~/Scripts/js/ELabels3.js"></script>
                   });
+
               //vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
               console.log(vm.garages);
 
@@ -108,7 +116,7 @@
                   else if (load == 0) {
                       marker.setIcon('../../Content/Images/parking_black.png');
                   }
-                  garageMarkers.push(marker);
+                  vm.garageMarkers.push(marker);
               }
           }
           var styleArray = [
