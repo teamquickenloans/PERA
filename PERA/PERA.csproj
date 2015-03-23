@@ -254,6 +254,10 @@
     <Compile Include="Migrations\201503230100383_PRTM.Designer.cs">
       <DependentUpon>201503230100383_PRTM.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503231133449_update.cs" />
+    <Compile Include="Migrations\201503231133449_update.Designer.cs">
+      <DependentUpon>201503231133449_update.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
@@ -382,6 +386,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503230100383_PRTM.resx">
       <DependentUpon>201503230100383_PRTM.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503231133449_update.resx">
+      <DependentUpon>201503231133449_update.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />

@@ -190,9 +190,9 @@ namespace PERA.Controllers
 
             int i = 0;
             System.Diagnostics.Debug.WriteLine("begin for loop");
-
-            foreach (DataTable table in result.Tables)
-            {
+            DataTable table = result.Tables[0];
+            //foreach (DataTable table in result.Tables)
+            //{
                 foreach (DataRow row in table.Rows)
                 {
                     // if this row is the headings, skip this row
@@ -253,12 +253,15 @@ namespace PERA.Controllers
                         throw new System.ArgumentException("Invalid GarageID");
                     }
 
+                    double tokenAd, tokenBd;
+                    QLTeamMember teamMember = new QLTeamMember();
                     int itokenA, itokenB = 0;
                     if(splitTokenColumns.ContainsKey(garageID))
                     {
                         Token tokens = splitTokenColumns[garageID];
                         itokenA = tokens.ID_CODE_26W;
                         itokenB = tokens.HID_CORP1K_ID;
+
                     }
                     else if(tokenColumns.ContainsKey(garageID))
                     {
@@ -271,18 +274,17 @@ namespace PERA.Controllers
 
                     var tokenAv = row[itokenA];
                     var tokenBv = row[itokenB];
-                    
-                    double tokenAd, tokenBd;
-                    QLTeamMember teamMember = new QLTeamMember();
+
 
                     if (tokenAv != DBNull.Value)
                     {
                         tokenAd = (System.Double)tokenAv;
                         teamMember.BadgeID = Convert.ToInt32(tokenAd);
                     }
+
                     else
                     {
-                        //teamMember.BadgeID = null;
+                        teamMember.BadgeID = null;
                     }
                     if (tokenBv != DBNull.Value)
                     {
@@ -299,9 +301,9 @@ namespace PERA.Controllers
                     db.QLTeamMembers.Add(teamMember);
                     db.SaveChanges();
 
-
+                    Trace.WriteLine(teamMember.FirstName + teamMember.LastName + teamMember.BadgeID);
                 } // end for columns
-            }  // end for tables
+           // }  // end for tables
             return teamMembers;
         }
 
