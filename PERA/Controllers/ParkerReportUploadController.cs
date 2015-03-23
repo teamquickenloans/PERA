@@ -23,15 +23,6 @@ using PERA.HelperClasses;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
 
-public struct columns
-{
-    public int invoice;
-    public int QL;
-}
-
-
-
-
 namespace PERA.Controllers
 {
     public class Name
