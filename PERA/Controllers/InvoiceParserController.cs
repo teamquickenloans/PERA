@@ -28,7 +28,7 @@ using Newtonsoft.Json.Converters;
 namespace PERA.Controllers
 {
 
-    public class FilesController : ApiController
+    public class InvoiceParserController : ApiController
     {
 
         private PERAContext db = new PERAContext();

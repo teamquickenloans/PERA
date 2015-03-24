@@ -196,19 +196,19 @@
     <!--
       @name ASP.NET MVC Controllers
     -->
-    <Compile Include="Controllers\GarageMapController.cs" />
+    <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\IngestInvoiceController.cs" />
     <Compile Include="Controllers\ParkerReportTeamMembersController.cs" />
     <Compile Include="Controllers\ParkerReportUploadController.cs" />
-    <Compile Include="Controllers\ReconcileExpensesController.cs" />
-    <Compile Include="Controllers\SideBarController.cs" />
-    <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\ExpenseController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\FormController.cs" />
     <!--
       @name WebAPI Contollers
     -->
     <Compile Include="Controllers\BadgeScansController.cs" />
     <Compile Include="Controllers\CarpoolGroupsController.cs" />
-    <Compile Include="Controllers\FilesController.cs" />
+    <Compile Include="Controllers\InvoiceParserController.cs" />
     <Compile Include="Controllers\GarageManagersController.cs" />
     <Compile Include="Controllers\GaragesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -295,8 +295,8 @@
       @name pera-app
       @desc AngularJS application
     -->
-    <Content Include="Scripts\bootstrap.js" />
-    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\js\bootstrap.js" />
+    <Content Include="Scripts\js\bootstrap.min.js" />
     <Content Include="Scripts\css\bzm-date-picker.css" />
     <Content Include="Scripts\css\foundation-datepicker.css" />
     <Content Include="Scripts\js\angular-datepicker.js" />
@@ -323,7 +323,7 @@
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.sticky.min.js" />
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.js" />
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.min.js" />
-    <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\js\modernizr-2.6.2.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\parkerreport.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\directives\double.directive.js" />
     <Content Include="Scripts\pera-app\fileupload\services\upload.service.js" />
@@ -446,16 +446,20 @@
     <Content Include="Views\IngestInvoice\One.cshtml" />
     <Content Include="Views\IngestInvoice\Two.cshtml" />
     <Content Include="Views\IngestInvoice\Three.cshtml" />
-    <Content Include="Views\GarageMap\GarageMap.cshtml" />
-    <Content Include="Views\ReconcileExpenses\DetectedIssues.cshtml" />
-    <Content Include="Views\GarageMap\GarageInfo.cshtml" />
+    <Content Include="Views\Map\Map.cshtml" />
+    <Content Include="Views\Expense\DetectedIssues.cshtml" />
+    <Content Include="Views\Map\GarageInfo.cshtml" />
     <Content Include="Scripts\pera-app\sidebar\controllers\sidebar.controller.js" />
-    <Content Include="Views\SideBar\Overview.cshtml" />
-    <Content Include="Views\SideBar\SingleGarage.cshtml" />
-    <Content Include="Views\ReconcileExpenses\UploadHistory.cshtml" />
+    <Content Include="Views\Navigation\Overview.cshtml" />
+    <Content Include="Views\Navigation\Garage.cshtml" />
+    <Content Include="Views\Expense\UploadHistory.cshtml" />
     <Content Include="Scripts\js\snackbar.min.js.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Upload\ParkerReport.cshtml" />
+    <Content Include="Views\Form\ParkerReport.cshtml" />
+    <Content Include="Views\Expense\Base.cshtml" />
+    <Content Include="Views\Navigation\TopBar.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Map\Base.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -468,8 +472,8 @@
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
-    <Content Include="Views\Upload\InvoiceFile.cshtml" />
-    <Content Include="Views\Upload\InvoiceForm.cshtml" />
+    <Content Include="Views\Form\InvoiceFile.cshtml" />
+    <Content Include="Views\Form\Invoice.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <COMReference Include="ExcelAddin_PHLib">

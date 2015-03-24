@@ -1,27 +1,32 @@
-﻿using PERA.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace PERA.Controllers
 {
-    public class UploadController : Controller
+    public class NavigationController : Controller
     {
-        // GET: InvoiceUpload
+        // GET: SideBar
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult InvoiceForm()
+
+        public ActionResult Overview()
         {
             return View();
         }
-        public ActionResult ParkerReport()
+
+        public ActionResult Garage()
         {
             return View();
         }
+        public ActionResult TopBar()
+        {
+            return View();
+        }
+
     }
 }

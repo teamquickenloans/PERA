@@ -18,117 +18,182 @@
             url: '/',
             template: 'welcome to the Parking Dashboard'
         }
+        $stateProvider.state(home);
 
-        ////////////////////////////////////////////////////
-        //          SideBar                               //
-        ////////////////////////////////////////////////////
+          /////////////////
+         //    Overview //
+        /////////////////
         var overview = {
             name: 'overview',
-            sticky: true,
             views: {
                 'sidebar': {
-                    templateUrl: "SideBar/Overview",
-                    controller: "SideBarController as garageCtrl"
+                    templateUrl: 'Navigation/Overview',
+                    controller: 'SideBarController as garageCtrl'
                 }
             }
         }
+        $stateProvider.state(overview);
 
+          /////////////////////
+         //   Single Garage //
+        /////////////////////
         var singleGarage = {
             name: 'singleGarage',
-            sticky: true,
             views:
                 {
                     'sidebar': {
-                        templateUrl: "SideBar/SingleGarage",
-                        controller: "SideBarController as sidebar"
+                        templateUrl: 'Navigation/SingleGarage',
+                        controller: 'SideBarController as sidebar'
                     }
                 }
         }
+        $stateProvider.state(singleGarage);
 
-        ////////////////////////////////////////////////////
-        //          Main                                  //
-        ////////////////////////////////////////////////////
 
-        var garageMap = {
-            name: 'garageMap',
-            sticky: true,
-            views:
-                {
-                    'main' : {
-                        templateUrl: "GarageMap/GarageMap",
-                        controller: "MapController as map"
-                    }
-                }
-
+          ///////////////////
+         //           Map //
+        ///////////////////
+        var map = {
+            name: 'map',
+            abstract: true,
+            url: '/map',
+            templateUrl: 'Map/Base'
         }
-        
+        $stateProvider.state(map);
 
-
-        var detectedIssues = {
-            name: 'detectedIssues',
-            sticky: true,
+          //////////////////////
+         //        Map > Map //
+        //////////////////////
+        var mapView = {
+            name: 'map.map',
+            url: '',
             views: {
-                'main': {
-                    templateUrl: "ReconcileExpenses/DetectedIssues",
-                    controller: "ExpensesController as expenseCtrl"
+                '': {
+                    templateUrl: 'Map/Map',
+                    controller: 'MapController as map'
+                },
+                'right-nav@': {
+                    templateUrl: 'Navigation/TopBar',
+                    controller: 'SideBarController as sidebar'
+                },
+                //view@state -> this targets the "sidebar" view inside the expense template: Expense/Base
+                'sidebar@expense': {
+                    templateUrl: 'Map/GarageInfo',
+                    controller: ''
                 }
             }
         }
+        $stateProvider.state(mapView);
 
-        var uploadHistory = {
-            name: 'uploadHistory',
-            sticky: true,
+          //////////////////////
+         //          Expense //
+        //////////////////////
+        var expense = {
+            name: 'expense',
+            abstract: true,
+            url: '/expense',
+            templateUrl: 'Expense/Base',
+        }
+        $stateProvider.state(expense);
+
+          /////////////////////////////////
+         //   Expense > Detected Issues //
+        /////////////////////////////////
+        var detectedIssues = {
+            name: 'expense.detectedIssues',
+            url: '',
             views: {
-                'main': {
-                    templateUrl: 'ReconcileExpenses/UploadHistory',
+                // targets the unnamed ui-view in parent template
+                '': {
+                    templateUrl: 'Expense/DetectedIssues',
+                    controller: 'ExpensesController as expenseCtrl'
+                },
+                // targets the ui-view='right-nav' in index.html
+                'right-nav@': {
+                    templateUrl: 'Navigation/TopBar',
+                    controller: 'SideBarController as sidebar'
+                },
+                'sidebar@expense': {
+                    templateUrl: 'Navigation/Overview',
+                    controller: 'SideBarController as sidebar'
+                }
+            }
+        }
+        $stateProvider.state(detectedIssues);
+        
+          ////////////////////////////////////////////
+         //   Expense > Detected Issues > Overview //
+        ////////////////////////////////////////////
+        var detectedIssuesOverview = {
+            name: 'expense.detectedIssues.overview',
+            views: {
+                'sidebar@expense': {
+                    templateUrl: 'Navigation/Overview',
+                    controller: 'SideBarController as sidebar'
+                }
+            }
+        }
+        $stateProvider.state(detectedIssuesOverview);
+
+        ///////////////////////////////////////////
+        //   Expense > Detected Issues > Garage //
+        //////////////////////////////////////////
+        var detectedIssuesGarage = {
+            name: 'expense.detectedIssues.garage',
+            views: {
+                'sidebar@expense': {
+                    templateUrl: 'Navigation/Garage',
+                    controller: 'SideBarController as sidebar'
+                }
+            }
+        }
+        $stateProvider.state(detectedIssuesGarage);
+
+          /////////////////////////////////
+         //    Expense > Upload History //
+        /////////////////////////////////
+        var uploadHistory = {
+            name: 'expense.uploadHistory',
+            views: {
+                '': {
+                    templateUrl: 'Expense/UploadHistory',
                     controller: 'ExpensesController as expenseCtrl'
                 }
             }
         }
-        /*
-        //this is a nested view.  it will populate the ui-view inside of Upload/InvoiceForm.cshtml
-        var uploadHistory_invoice = {
-            name: 'invoice',
-            views: {
-                'modal':{
-                    templateUrl: 'Upload/InvoiceForm',
-                    controller: 'FileUploadController as fileCtrl'
-                }
-            }*/
+        $stateProvider.state(uploadHistory);
 
+          /////////////////////////////////
+         //           Expense > Invoice //
+        /////////////////////////////////
         var invoice = {
-            name: 'invoice',
-            sticky: true,
+            name: 'expense.invoice',
             views: {
-                'main' : {
-                    templateUrl: 'Upload/InvoiceForm',
+                '' : {
+                    templateUrl: 'Form/Invoice',
                     controller: 'FileUploadController as fileCtrl'
                 }
             }
-
         }
+        $stateProvider.state(invoice);
 
+          /////////////////////////////////
+         //     Expense > Parker Report //
+        /////////////////////////////////
         var parkerReport = {
-            name: 'parkerReport',
-            sticky: true,
+            name: 'expense.parkerReport',
             views: {
-                'main': {
-                    templateUrl: 'Upload/ParkerReport',
+                '': {
+                    templateUrl: 'Form/ParkerReport',
                     controller: 'ParkerReportController as fileCtrl'
                 }
             }
         }
-
-
-        $stateProvider.state(home);
-        $stateProvider.state(overview);
-        $stateProvider.state(singleGarage);
-        $stateProvider.state(detectedIssues);
-        $stateProvider.state(uploadHistory);
-        //$stateProvider.state(uploadHistory_invoice);
-        $stateProvider.state(garageMap);
-        $stateProvider.state(invoice);
         $stateProvider.state(parkerReport);
+
+
+        //$stateProvider.state(uploadHistory_invoice);
+
 
     }
 })();

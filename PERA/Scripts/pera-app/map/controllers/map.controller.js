@@ -78,7 +78,7 @@
           }
           
           function garagesErrorFn(data, status, headers, config) {
-              Snackbar.error(data.data.error);
+              //Snackbar.error(data.data.error);
           }
           
           function PlaceMarkers(map, garages, garageMarkers) {

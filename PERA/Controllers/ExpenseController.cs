@@ -6,23 +6,28 @@ using System.Web.Mvc;
 
 namespace PERA.Controllers
 {
-    public class SideBarController : Controller
+    public class ExpenseController : Controller
     {
-        // GET: SideBar
+        // GET: ReconcileExpenses
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult Overview()
+        public ActionResult DetectedIssues()
         {
             return View();
         }
 
-        public ActionResult SingleGarage()
+        public ActionResult UploadHistory()
         {
             return View();
         }
+
+        public ActionResult Base()
+        {
+            return View();
+        }
+
 
     }
 }

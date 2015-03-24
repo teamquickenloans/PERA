@@ -17,7 +17,7 @@
         'ui.router',
         'angularFileUpload',
         //'mm.foundation',
-        'ct.ui.router.extras',
+        //'ct.ui.router.extras',
         'angular-datepicker',
         'bzm-date-picker'
         ])
@@ -30,8 +30,8 @@
           'ui.router',
           'ngRoute',
           'ngResource',
-          'ngSanitize',
-          'ct.ui.router.extras'
+          //'ngSanitize',
+          //'ct.ui.router.extras'
       ])
 
 

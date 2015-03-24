@@ -1,25 +1,25 @@
-﻿using System;
+﻿using PERA.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 
 namespace PERA.Controllers
 {
-    public class GarageMapController : Controller
+    public class FormController : Controller
     {
-        // GET: GarageMap
+        // GET: InvoiceUpload
         public ActionResult Index()
         {
             return View();
         }
-
-        public ActionResult GarageMap()
+        public ActionResult Invoice()
         {
             return View();
         }
-
-        public ActionResult GarageInfo()
+        public ActionResult ParkerReport()
         {
             return View();
         }

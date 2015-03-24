@@ -82,7 +82,7 @@
 
         function garagesErrorFn(data, status, headers, config, response) {
             last_request_failed = true;
-            //Snackbar.error(data.data.error);
+            Snackbar.error("Error retrieving garages");
             return $q.reject(response);
         }
 

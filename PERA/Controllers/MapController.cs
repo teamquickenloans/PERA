@@ -6,23 +6,27 @@ using System.Web.Mvc;
 
 namespace PERA.Controllers
 {
-    public class ReconcileExpensesController : Controller
+    public class MapController : Controller
     {
-        // GET: ReconcileExpenses
+        // GET: GarageMap
         public ActionResult Index()
         {
             return View();
         }
-        public ActionResult DetectedIssues()
+
+        public ActionResult Base()
         {
             return View();
         }
 
-        public ActionResult UploadHistory()
+        public ActionResult Map()
         {
             return View();
         }
 
-
+        public ActionResult GarageInfo()
+        {
+            return View();
+        }
     }
 }
