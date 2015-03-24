@@ -295,6 +295,7 @@
       @name pera-app
       @desc AngularJS application
     -->
+    <Content Include="Scripts\js\angular-google-maps.js" />
     <Content Include="Scripts\js\bootstrap.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
     <Content Include="Scripts\css\bzm-date-picker.css" />
