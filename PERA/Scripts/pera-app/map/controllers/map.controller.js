@@ -21,43 +21,46 @@
         vm.garageMarkers = [];
         vm.initialized = false; //tracks if the maps has already been initialized
 
-        //vm.styleArray = styleArray;
+        vm.styleArray = styleArray;
 
         //initialize the map
         console.log('map ctrl');
         vm.initialize = initialize;
-        //if(!initialized)
-        //    initialize();
+
 
         function initialize() {
+            if (vm.initialized)
+                return;
 
-              var mapOptions = {
-                  center: { lat: 42.33242, lng: -83.04646 },
-                  zoom: 16,
-                  styles: styleArray,
-                  panControl: false,
-                  zoomControl: true,
-                  mapTypeControl: true,
-                  scaleControl: false,
-                  streetViewControl: false,
-                  overviewMapControl: false
-              };
-              console.log("initalize");
+            var mapOptions = {
+                center: { lat: 42.33242, lng: -83.04646 },
+                zoom: 16,
+                styles: styleArray,
+                panControl: false,
+                zoomControl: true,
+                mapTypeControl: true,
+                scaleControl: false,
+                streetViewControl: false,
+                overviewMapControl: false
+            };
+            console.log("initalize");
 
-              vm.map = Initializer.mapsInitialized
-                  .then(function () {
-                      console.log('create map');
+            vm.map = Initializer.mapsInitialized
+                .then(function () {
+                    console.log('create map');
 
-                      vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-                      //Add key to map
-                      var element = document.createElement("script");
-                      element.setAttribute("type", "text/javascript");
-                      element.setAttribute("src", "~/Scripts/js/ELabels3.js");
+                    vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
 
-                      vm.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('mapKey'));
-                      Garages.all().then(garagesSuccessFn, garagesErrorFn);
-                      //    <script type="text/javascript" src="~/Scripts/js/ELabels3.js"></script>
-                  });
+                    //Add Elabel
+                    //var element = document.createElement("script");
+                    //element.setAttribute("type", "text/javascript");
+                    //element.setAttribute("src", "~/Scripts/js/ELabels3.js");
+
+                    //Add key to map
+                    vm.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('mapKey'));
+                    Garages.all().then(garagesSuccessFn, garagesErrorFn);
+                    //    <script type="text/javascript" src="~/Scripts/js/ELabels3.js"></script>
+                });
 
               //vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
               console.log(vm.garages);
@@ -65,13 +68,6 @@
               vm.initialized = true;
           } //end intialize function
 
-
-        /*
-          $scope.$on('receiveGarages', function () {
-              vm.garages = Garages.garages;
-              PlaceMarkers(vm.map, vm.garages, vm.garageMarkers);
-          });
-          */
           function garagesSuccessFn(data, status, headers, config) {
               vm.garages = data.data;         //this will depend on what the API returns, it may have to change
               PlaceMarkers(vm.map, vm.garages, vm.garageMarkers);
