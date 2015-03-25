@@ -37,7 +37,7 @@ namespace PERA.Controllers
         public int HID_CORP1K_ID { set; get; }
     }
 
-    public class ParkerReportUploadController : ApiController
+    public class ParkerReportParserController : ApiController
     {
 
         private PERAContext db = new PERAContext();

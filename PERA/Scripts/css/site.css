@@ -26,6 +26,7 @@
 
 #map-canvas {
     height: 100%;
+    z-index: 1;
 }
 
 #expenseMain {
@@ -194,6 +195,7 @@ tr.tableRow.selected {
     position: absolute;
     left: 25px;
     bottom: 10px;
+    z-index: 99;
 }
 
 .keyText {
