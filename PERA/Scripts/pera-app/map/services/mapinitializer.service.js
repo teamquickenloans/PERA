@@ -31,7 +31,7 @@
             document.body.appendChild(script);
         };
         //Start loading google maps
-        asyncLoad(asyncUrl, 'googleMapsInitialized');
+        //asyncLoad(asyncUrl, 'googleMapsInitialized');
 
         //Usage: Initializer.mapsInitialized.then(callback)
         return {

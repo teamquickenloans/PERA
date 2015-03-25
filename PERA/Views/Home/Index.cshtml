@@ -34,10 +34,12 @@
     <!-- ====================== Angular ui-router =========================== -->
     <script type="text/javascript" src="~/Scripts/js/angular-ui-router.js"></script>
 
-    <!--<script type="text/javascript" src="~/Scripts/js/ui-router-extras/ct-ui-router-extras.js"></script>
+    <!--
+    <script type="text/javascript" src="~/Scripts/js/ui-router-extras/ct-ui-router-extras.js"></script>
     <script type="text/javascript" src="~/Scripts/js/ui-router-extras/ct-ui-router-extras.core.js"></script>
     <script type="text/javascript" src="~/Scripts/js/ui-router-extras/ct-ui-router-extras.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/js/ui-router-extras/modular/ct-ui-router-extras.sticky.min.js"></script>-->
+    <script type="text/javascript" src="~/Scripts/js/ui-router-extras/modular/ct-ui-router-extras.sticky.min.js"></script>
+         -->
 
     <!--====================== Foundation ============================ -->
     <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/css/foundation.min.css" />
@@ -50,9 +52,7 @@
     <script src="~/Scripts/js/angular-datepicker.js"></script>
 
     <!--
-        
           <script src="~/Scripts/js/.js"></script>
-
     -->
 
     <!-- ===========angular foundation date-picker============== -->
@@ -65,12 +65,12 @@
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 
     <!--====================== Google Maps API ============================ -->
-    <!--<script type="text/javascript"
-            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM">-->
-    <!--</script>-->
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM">
+    </script>
     @*Map Labels*@
     <script type="text/javascript" src="~/Scripts/js/ELabels3.js"></script>
-
+        
     <!--=======================Underscore.js =============================== -->
     <script type="text/javascript" src="http://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.4.4/underscore-min.js"></script>
 
@@ -179,7 +179,7 @@
             </li>
             <li class="divider"></li>
             <li ng-controller="MapController as map">
-                <a ng-click="map.initialize()" ui-sref="map.map">Garage Map</a>
+                <a ng-click="map.initialize()">Garage Map</a> <!-- ng-controller="MapController as map"  ng-controller="MapController as map" -->
             </li>
             <li class="divider"></li>
             <li>
@@ -191,9 +191,39 @@
 </nav>
 
 <div ui-view></div>
+         
+<div id="map-canvas">
+    <div id="garageMapContent" ng-controller="MapController as map">
 
-    <!-- <div id="map-canvas"></div>-->
+        @*<div id="map-canvas" ui-view class="columns small-9"></div>*@
+        @*<div id="map-canvas"></div>*@
+        <div id="mapKey">
+            <h5>&nbsp;&nbsp;Spots Available&nbsp;&nbsp;&nbsp;</h5>
+            <div id="greenBox"></div>
+            <div class="keyText">100+ Spots</div>
+            <br />
+            <div id="yellowBox"></div>
+            <div class="keyText">50 - 100 Spots</div>
+            <br />
+            <div id="redBox"></div>
+            <div class="keyText">0 - 50 Spots</div>
+            <br />
+            <div id="blackBox"></div>
+            <div class="keyText">Garage Full</div>
+        </div>
+        <div class="row">
+            <div ui-view="sidebartop" class="columns small-3">
 
+            </div>
+        </div>
+        <div class="row">
+            <div ui-view="sidebarbottom" class="columns small-3">
+
+            </div>
+        </div>
+    </div>
+
+</div>
 
 
     <!--

@@ -27,9 +27,11 @@
         console.log('map ctrl');
         vm.initialize = initialize;
 
+        //window.onload = initialize;
+        //initialize();
 
         function initialize() {
-            if (vm.initialized)
+            if (vm.initialized == true)
                 return;
 
             var mapOptions = {
@@ -45,7 +47,7 @@
             };
             console.log("initalize");
 
-            vm.map = Initializer.mapsInitialized
+            /*Initializer.mapsInitialized
                 .then(function () {
                     console.log('create map');
 
@@ -55,12 +57,20 @@
                     //var element = document.createElement("script");
                     //element.setAttribute("type", "text/javascript");
                     //element.setAttribute("src", "~/Scripts/js/ELabels3.js");
+                    */
+            vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            //Add Elabel
+            //var element = document.createElement("script");
+            //element.setAttribute("type", "text/javascript");
+            //element.src = "~/Scripts/js/ELabels3.js";
+            //document.body.appendChild(element);
 
                     //Add key to map
-                    vm.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('mapKey'));
+            vm.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('mapKey'));
+
                     Garages.all().then(garagesSuccessFn, garagesErrorFn);
                     //    <script type="text/javascript" src="~/Scripts/js/ELabels3.js"></script>
-                });
+                //});
 
               //vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
               console.log(vm.garages);
