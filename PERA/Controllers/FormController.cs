@@ -23,5 +23,10 @@ namespace PERA.Controllers
         {
             return View();
         }
+
+        public ActionResult Discrepancies()
+        {
+            return View();
+        }
     }
 }

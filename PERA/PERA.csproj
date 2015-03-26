@@ -196,6 +196,7 @@
     <!--
       @name ASP.NET MVC Controllers
     -->
+    <Compile Include="Controllers\DiscrepanciesController.cs" />
     <Compile Include="Controllers\MapController.cs" />
     <Compile Include="Controllers\ParkerReportTeamMembersController.cs" />
     <Compile Include="Controllers\ParkerReportParserController.cs" />
@@ -456,6 +457,8 @@
     <Content Include="Views\Expense\Base.cshtml" />
     <Content Include="Views\Navigation\TopBar.cshtml" />
     <Content Include="Views\Map\Base.cshtml" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Form\Discrepancies.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
