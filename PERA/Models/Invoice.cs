@@ -24,6 +24,11 @@ namespace PERA.Models
 
         public ICollection<InvoiceActiveParkerReport> InvoiceActiveParkerReports { get; set; }
 
+        protected Invoice()
+        {
+            InvoiceActiveParkerReports = new List<InvoiceActiveParkerReport>();
+        }
+
 
     }
 }

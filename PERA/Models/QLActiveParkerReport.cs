@@ -9,5 +9,10 @@ namespace PERA.Models
     {
         public virtual ICollection<QLTeamMember> TeamMembers { get; set; }
         public int? AllocatedSpots { get; set; }
+
+        protected QLActiveParkerReport()
+        {
+            TeamMembers = new List<QLTeamMember>();
+        }
     }
 }

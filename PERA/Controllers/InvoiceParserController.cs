@@ -124,22 +124,40 @@ namespace PERA.Controllers
                 var uploadedFileInfo = new FileInfo(file.LocalFileName);
                 int garageID = Convert.ToInt32(result.FormData.GetValues("garageID").First());
             
-                InvoiceActiveParkerReport APR = new InvoiceActiveParkerReport();
+                InvoiceActiveParkerReport APR =  db.InvoiceActiveParkerReports.Create();
                 APR.GarageID = garageID;
-                APR.DateUploaded = DateTime.Now;
+                APR.DateUploaded = invoice.DateUploaded;
+                APR.DateReceived = invoice.DateReceived;
+                APR.MonthYear = invoice.MonthYear;
                 APR.Invoice = invoice;
                 //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
                 List<ParkerReportTeamMember> teamMembers = 
                     ExcelParser(file.LocalFileName, originalFileName, invoice, garageID);
                 foreach (ParkerReportTeamMember teamMember in teamMembers)
                 {
-                    //APR.TeamMembers.Add(teamMember);
+                    if(teamMember == null)
+                    {
+                        continue;
+                    }
+                    Trace.WriteLine(teamMember.ParkerReportTeamMemberID);
+                    Trace.WriteLine(teamMember.FirstName);
+                    Trace.WriteLine(teamMember.LastName);
+                    Trace.WriteLine(APR.TeamMembers);
+                    APR.TeamMembers.Add(teamMember);
                 }
+                db.InvoiceActiveParkerReports.Add(APR);
+                db.SaveChanges();
+                invoice.InvoiceActiveParkerReports.Add(APR);
+                db.SaveChanges();
                 i++;
             }
+            db.SaveChanges();
+
+
         }
         
-        private List<ParkerReportTeamMember> ExcelParser(string path, string name, Invoice invoice, int garageID)
+        private List<ParkerReportTeamMember> ExcelParser(string path, string name, Invoice invoice, 
+            int garageID)
         {
             System.Diagnostics.Debug.WriteLine("begin excel parser");
             IExcelDataReader reader = null;
@@ -180,8 +198,8 @@ namespace PERA.Controllers
                         System.Diagnostics.Debug.WriteLine(row[0]);
                         continue;
                     }
-                   
-                    ParkerReportTeamMember teamMember = new ParkerReportTeamMember();
+
+                    ParkerReportTeamMember teamMember = db.ParkerReportTeamMembers.Create();
                     string firstName, lastName;
                     if(garageID == 2)
                     {
@@ -190,10 +208,10 @@ namespace PERA.Controllers
                         if(first == null){
                             firstName = "";
                         }
-                        else if(last == null)
-                        {
-                            lastName = "";
-                        }
+                        //else if(last == null)
+                        //{
+                        //    lastName = "";
+                        //}
                         firstName = (string)first;
                         lastName = (string)last;
 
@@ -224,13 +242,18 @@ namespace PERA.Controllers
 
                     if(cardNumberV != DBNull.Value)
                     {
-                        cardNumberD = (System.Double)cardNumberV;
-                        cardNumber = Convert.ToInt32(cardNumberD);
-                        teamMember.BadgeID = cardNumber;
-                    }
-                    else 
-                    {
-                        //teamMember.BadgeID = null;
+                        try
+                        {
+                            cardNumberD = (System.Double)cardNumberV;
+                            cardNumber = Convert.ToInt32(cardNumberD);
+                            teamMember.BadgeID = cardNumber;
+                        }
+                        catch (InvalidCastException e)
+                        {
+                            // Perform some action here, and then throw a new exception.
+                            //teamMember.BadgeID = null;
+                        }
+
                     }
 
                     teamMember.FirstName = firstName;
@@ -239,9 +262,9 @@ namespace PERA.Controllers
 
                     teamMembers.Add(teamMember);
 
-                    db.ParkerReportTeamMembers.Add(teamMember);
+                    //db.ParkerReportTeamMembers.Add(teamMember);
                     db.SaveChanges();
-
+                    Trace.WriteLine(teamMember.ParkerReportTeamMemberID);
                       /*
                     foreach (DataColumn column in table.Columns)
                     {

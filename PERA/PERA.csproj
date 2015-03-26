@@ -327,6 +327,8 @@
     <Content Include="Scripts\js\modernizr-2.6.2.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\parkerreport.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\directives\double.directive.js" />
+    <Content Include="Scripts\pera-app\fileupload\controllers\discrepancies.controller.js" />
+    <Content Include="Scripts\pera-app\fileupload\services\discrepancies.service.js" />
     <Content Include="Scripts\pera-app\fileupload\services\upload.service.js" />
     <Content Include="Scripts\pera-app\fileupload\services\uploadreport.service.js" />
     <Content Include="Scripts\pera-app\invoiceTeamMembers\invoiceTeamMembers.module.js" />
@@ -457,7 +459,6 @@
     <Content Include="Views\Expense\Base.cshtml" />
     <Content Include="Views\Navigation\TopBar.cshtml" />
     <Content Include="Views\Map\Base.cshtml" />
-    <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Form\Discrepancies.cshtml" />
   </ItemGroup>
   <ItemGroup>

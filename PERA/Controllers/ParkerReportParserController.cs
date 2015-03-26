@@ -57,11 +57,11 @@ namespace PERA.Controllers
         {
             { 5,  new Token{ID_CODE_26W = 5, HID_CORP1K_ID = 6}}, //!TODO: Change this
             { 6,  new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}},
-            { 3,  new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}},
+            { 3,  new Token{ID_CODE_26W = 11, HID_CORP1K_ID = 12}},
             { 11, new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}},
             { 12, new Token{ID_CODE_26W = 3, HID_CORP1K_ID = 4}}, //!TODO: Change this
-            { 13, new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}},
-            { 14, new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}},
+            { 13, new Token{ID_CODE_26W = 11, HID_CORP1K_ID = 12}},
+            { 14, new Token{ID_CODE_26W = 11, HID_CORP1K_ID = 12}},
             { 15, new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}},
             { 16, new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}}
             //  5   5,6
@@ -119,9 +119,11 @@ namespace PERA.Controllers
 
             //string invoice = result.FormData.GetValues(0).FirstOrDefault();
             //Invoice newInvoice = JsonConvert.DeserializeObject<Invoice>(fileUploadObj);
-            ActiveParkerReport apr = GetFormData(result);
+            QLActiveParkerReport apr = GetFormData(result);
             Trace.WriteLine("apr.MonthYear: " + apr.MonthYear);
             Trace.WriteLine("apr.DateReceived: " + apr.DateReceived);
+            Trace.WriteLine("apr.DateUploaded: " + apr.DateUploaded);
+
 
             FileHandler(result, apr);
 
@@ -133,7 +135,7 @@ namespace PERA.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, new { returnData });
         }
 
-        private void FileHandler(MultipartFormDataStreamProvider result, ActiveParkerReport apr)
+        private void FileHandler(MultipartFormDataStreamProvider result, QLActiveParkerReport APR)
         {
             foreach (var file in result.FileData)
             {
@@ -143,33 +145,33 @@ namespace PERA.Controllers
                 var uploadedFileInfo = new FileInfo(file.LocalFileName);
                 int garageID = Convert.ToInt32(result.FormData.GetValues("garageID").First());
 
-                QLActiveParkerReport APR = new QLActiveParkerReport();
+
                 APR.GarageID = garageID;
-                APR.DateUploaded = DateTime.Now;
                 
                 //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
                 List<QLTeamMember> teamMembers =
-                    ExcelParser(file.LocalFileName, originalFileName, apr, garageID);
+                    ExcelParser(file.LocalFileName, originalFileName, APR, garageID);
                 foreach (QLTeamMember teamMember in teamMembers)
                 {
+                    Trace.WriteLine(teamMember.ParkerReportTeamMemberID);
+                    Trace.WriteLine(teamMember.FirstName);
+                    Trace.WriteLine(teamMember.LastName);
+
                     APR.TeamMembers.Add(teamMember);
+                    db.SaveChanges();
                 }
+                db.QLActiveParkerReports.Add(APR);
+                db.SaveChanges();
             }
         }
 
-        private List<QLTeamMember> ExcelParser(string path, string name, ActiveParkerReport apr, int garageID)
+        private List<QLTeamMember> ExcelParser(string path, string name, QLActiveParkerReport apr, int garageID)
         {
             System.Diagnostics.Debug.WriteLine("begin excel parser");
             IExcelDataReader reader = null;
             //Trace.WriteLine(garageID);
             var excelData = new ExcelData(path);
             reader = excelData.getExcelReader(name);
-            //Trace.WriteLine(invoice.InvoiceID);
-
-            /*if (reader == null)
-            {
-                System.Diagnostics.Debug.WriteLine("excel reader null");
-            }*/
 
             // Create column names from first row
             reader.IsFirstRowAsColumnNames = true;
@@ -190,6 +192,8 @@ namespace PERA.Controllers
                     System.Diagnostics.Debug.WriteLine("loop");
                     if(i == 0)
                     {
+                        Trace.WriteLine("continue");
+                        i++;
                         continue;
                     }
                     else if (row == null)
@@ -203,7 +207,7 @@ namespace PERA.Controllers
                         Trace.WriteLine("Skipping first row..");
                         continue;
                     }
-                    i++;
+
 
                     string firstName, lastName;
                     if (splitNameColumns.ContainsKey(garageID))
@@ -245,7 +249,7 @@ namespace PERA.Controllers
                     }
 
                     double tokenAd, tokenBd;
-                    QLTeamMember teamMember = new QLTeamMember();
+                    QLTeamMember teamMember = db.QLTeamMembers.Create();
                     int itokenA, itokenB = 0;
                     if(splitTokenColumns.ContainsKey(garageID))
                     {
@@ -269,8 +273,14 @@ namespace PERA.Controllers
 
                     if (tokenAv != DBNull.Value)
                     {
-                        tokenAd = (System.Double)tokenAv;
-                        teamMember.BadgeID = Convert.ToInt32(tokenAd);
+                        try { 
+                            tokenAd = (System.Double)tokenAv;
+                            teamMember.BadgeID = Convert.ToInt32(tokenAd);
+                            }
+                        catch (InvalidCastException e)
+                        {
+
+                        }
                     }
 
                     else
@@ -279,9 +289,16 @@ namespace PERA.Controllers
                     }
                     if (tokenBv != DBNull.Value)
                     {
-                        tokenBd = (System.Double)tokenBv;
-                        teamMember.TokenID = Convert.ToInt32(tokenBd);
+                        try {
+                            tokenBd = (System.Double)tokenBv;
+                            teamMember.TokenID = Convert.ToInt32(tokenBd);
+                        }
+                        catch (InvalidCastException e)
+                        {
+
+                        }
                     }
+
 
                     teamMember.FirstName = firstName;
                     teamMember.LastName = lastName;
@@ -312,7 +329,7 @@ namespace PERA.Controllers
         }
 
         // Extracts Request FormatData as a strongly typed model
-        private ActiveParkerReport GetFormData(MultipartFormDataStreamProvider result)
+        private QLActiveParkerReport GetFormData(MultipartFormDataStreamProvider result)
         {
             if (result.FormData.HasKeys())
             {
@@ -323,7 +340,7 @@ namespace PERA.Controllers
 
                 if (!String.IsNullOrEmpty(unescapedFormData))
                 {
-                    return JsonConvert.DeserializeObject<ActiveParkerReport>(unescapedFormData,
+                    return JsonConvert.DeserializeObject<QLActiveParkerReport>(unescapedFormData,
                          new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-dd" });
                 }
             }

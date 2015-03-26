@@ -10,6 +10,12 @@ namespace PERA.Models
         public int InvoiceID { get; set; }
         public Invoice Invoice { get; set; }
         public virtual ICollection<ParkerReportTeamMember> TeamMembers { get; set; }
+        
+        protected InvoiceActiveParkerReport()
+        {
+            TeamMembers = new List<ParkerReportTeamMember>();
+        }
+         
         public int? LeasedSpots { get; set; }
 
     }

@@ -191,8 +191,16 @@
         }
         $stateProvider.state(parkerReport);
 
-
-        //$stateProvider.state(uploadHistory_invoice);
+        var discrepancies = {
+            name: 'expense.discrepancies',
+            views: {
+                '': {
+                    templateUrl: 'Form/Discrepancies',
+                    controller: 'DiscrepanciesController as controller'
+                }
+        }
+        }
+        $stateProvider.state(discrepancies);
 
 
     }
