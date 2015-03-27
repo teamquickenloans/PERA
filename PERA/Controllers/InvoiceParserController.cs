@@ -269,7 +269,7 @@ namespace PERA.Controllers
                     teamMembers.Add(teamMember);
 
                     //db.ParkerReportTeamMembers.Add(teamMember);
-                    db.SaveChanges();
+                    //db.SaveChanges();
                     Trace.WriteLine(teamMember.ParkerReportTeamMemberID);
                       /*
                     foreach (DataColumn column in table.Columns)

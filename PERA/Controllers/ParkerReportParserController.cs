@@ -149,10 +149,11 @@ namespace PERA.Controllers
 
                 APR.GarageID = garageID;
                 
-                //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
                 List<QLTeamMember> teamMembers =
                     ExcelParser(file.LocalFileName, originalFileName, APR, garageID);
                 
+                Trace.WriteLine("teamMembers.Count: " + teamMembers.Count);
+
                 Save(APR, teamMembers);
             }
         }
@@ -335,10 +336,10 @@ namespace PERA.Controllers
                     teamMember.FirstName = firstName;
                     teamMember.LastName = lastName;
 
-                    //db.teamMembers.Add(teamMember);
+                    teamMembers.Add(teamMember);
 
-                    db.QLTeamMembers.Add(teamMember);
-                    db.SaveChanges();
+                    //db.QLTeamMembers.Add(teamMember);
+                    //db.SaveChanges();
 
                     //Trace.WriteLine(teamMember.FirstName + teamMember.LastName + teamMember.BadgeID);
                 } // end for columns

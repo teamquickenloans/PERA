@@ -8,7 +8,8 @@
 
     angular
       .module('pera.expenses', [
-        'pera.expenses.controllers'
+        'pera.expenses.controllers',
+        'pera.expenses.services'
       ]);
 
     angular
