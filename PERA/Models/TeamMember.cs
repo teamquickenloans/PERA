@@ -21,27 +21,29 @@ namespace PERA.Models
     {
         O, C, R
     }
+
+
     public class TeamMember
     {
         [Key]
-        public int BadgeID { get; set; }  // pk
+        public int primaryKey { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public int CommonID { get; set; }
-        public int? GarageID { get; set; }
+        //public int? GarageID { get; set; }
+        //public int BadgeID { get; set; }
+        public int? BusinessHoursTokenID { get; set; }
+        public int? AfterHoursTokenID { get; set; }
+        public int? GarageBadgeID { get; set; }
+        public int? BadgeID { get; set; }
+        public int? PuckBadgeID { get; set; }
+        public int? HangTagID { get; set; }
 		public EmploymentStatus? EmploymentStatus { get; set; }
-        public DateTime TerminationDate { get; set; }
+        public DateTime? TerminationDate { get; set; }
         public ParkingStatus? ParkingStatus { get; set; }
-        public DateTime EnrollmentDate { get; set; }
-        public ICollection<Invoice> PreviousInvoices { get; set; }
-
+        public DateTime? EnrollmentDate { get; set; }
+        public bool QLPerspective { get; set; }
 		public Garage Garage{ get; set; }
-        public ICollection<Invoice> Invoices { get; set; } 
-
-        public TeamMember()
-        {
-            Invoices = new HashSet<Invoice>();
-        }
 
     }
 }

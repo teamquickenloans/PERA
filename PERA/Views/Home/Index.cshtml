@@ -46,6 +46,12 @@
     <script type="text/javascript" src="~/Scripts/Angular/garages/garages.module.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/garages/services/garages.service.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/garages/controllers/garages.controller.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/teammembers/teammembers.module.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/teammembers/services/teammembers.service.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/teammembers/controllers/teammembers.controller.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/invoiceTeamMembers/invoiceTeamMembers.module.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/invoiceTeamMembers/services/invoiceTeamMembers.service.js"></script>
+    <script type="text/javascript" src="~/Scripts/Angular/invoiceTeamMembers/controllers/invoiceTeamMembers.controller.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/utils/utils.module.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/utils/services/snackbar.service.js"></script>
     <script type="text/javascript" src="~/Scripts/Angular/tabs/tabs.module.js"></script>
@@ -59,7 +65,7 @@
     <link rel="stylesheet" href="~/Scripts/css/site.css" />
 
 </head>
-<body>
+<body ng-controller="MapController as map">
     <div id="wrapper" ng-controller="TabController as tab">
 
         <!-- ======================== Nav Bar ============================ -->
@@ -87,7 +93,7 @@
                     <!-- Single Garage Dropdown -->
                     <li ng-class="{active:!tab.sideIsSet(-1)}" class="has-dropdown">
                         <a href="#">Single Garage</a>
-                        <ul class="dropdown" ng-controller="MapController as map">
+                        <ul class="dropdown">
                             <li ng-controller="GaragesController as garageCtrl">
                                 <ul ng-repeat="garage in garageCtrl.garages">
                                     <li ng-class="{active:tab.sideIsSet($index)}"><a href="#" ng-click="tab.setSideTab($index)">{{garage.name}}</a></li>
@@ -98,23 +104,33 @@
                 </ul>
 
                 <!-- Left Nav Section -->
-                <ul class="left" ng-controller="MapController as map">
+                <ul class="left">
                     <li class="divider"></li>
 
-                    <li ng-class="{active:tab.isSet(1)}">
-                        <a href="#" ng-click="tab.setTab(1)">Expense Reconcilliation</a>
-                    </li>
-
-                    <li class="divider"></li>
-
-                    <li ng-class="{active:tab.isSet(2)}">
-                        <a href="#" ng-click="tab.setTab(2); map.initialized || map.initialize();">Garage Map</a>
+                    <li ng-class="{active:tab.isSet(1) || tab.isSet(2)}" class="has-dropdown">
+                        <a href="#">Expense Reconcilliation</a>
+                        <ul class="dropdown">
+                            <li>
+                                <ul>
+                                    <li ng-class="{active:tab.isSet(1)}"><a href="#" ng-click="tab.setTab(1)">Detected Issues</a></li>
+                                </ul>
+                                <ul>
+                                    <li ng-class="{active:tab.isSet(2)}"><a href="#" ng-click="tab.setTab(2)">Upload History</a></li>
+                                </ul>
+                            </li>
+                        </ul>
                     </li>
 
                     <li class="divider"></li>
 
                     <li ng-class="{active:tab.isSet(3)}">
-                        <a href="#" ng-click="tab.setTab(3)">Notifications</a>
+                        <a href="#" ng-click="tab.setTab(3); map.initialized || map.initialize();">Garage Map</a>
+                    </li>
+
+                    <li class="divider"></li>
+
+                    <li ng-class="{active:tab.isSet(4)}">
+                        <a href="#" ng-click="tab.setTab(4)">Notifications</a>
                     </li>
 
                     <li class="divider"></li>
@@ -126,46 +142,84 @@
 
 
 
-        <!-- ======================== Expense Reconciliation Content ============================ -->
-        <div id="expenseContent" class="row" ng-controller="ExpenseController as expenseCtrl" ng-show="tab.isSet(1)">
+        <!-- ======================== Detected Issues Content ============================ -->
+        <div id="issuesContent" ng-controller="ExpenseController as expenseCtrl" ng-show="tab.isSet(1)">
             <div id="issueTableWrapper" class="columns small-8">
 
-
-                <!-- Invoice Upload -->
-                <a href="/#/invoiceForm" data-reveal-id="uploadInvoiceModal" class="radius button">Upload Invoice</a>
-                <div id="uploadInvoiceModal" class="reveal-modal" data-reveal>
-                    <div ng-view></div>
-                    <a class="close-reveal-modal">&#215;</a>
-                </div>
-
-
-                <table id="issueTableHeader">
+                <table id="issueTableHead">
                     <tr>
-                        <th class="garageCol">Garages</th>
-                        <th class="issueCol">Issue</th>
-                        <th class="dateCol">Date</th>
+                        <th class="garageColIssueTable">Garages</th>
+                        <th class="nameColIssueTable">Name</th>
+                        <th class="commonIDColIssueTable">Common ID</th>
+                        <th class="issueColIssueTable">Issue</th>
+                        <th class="badgeID"></th>
+                        <th class="dateColIssueTable">Date</th>
                     </tr>
                 </table>
 
-                <table id="issueTableContent" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
-                    <tr class="issueRow" ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
-                        <td>{{issue.garage}}</td>
-                        <td>{{issue.issue}}</td>
-                        <td>{{issue.date | date:'MM/dd/yyyy'}}</td>
-                    </tr>
-                </table>
- 
+                <div id="issueTableBodyWrapper">
+                    <table id="issueTableBody" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+                        <tr class="tableRow" ng-repeat="issue in expenseCtrl.issues" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                            <td class="garageColIssueTable">{{issue.garage}}</td>
+                            <td class="nameColIssueTable">{{issue.name}}</td>
+                            <td class="commonIDColIssueTable">{{issue.commonID}}</td>
+                            <td class="issueColIssueTable">{{issue.issue}}</td>
+                            <td class="dateColIssueTable">{{issue.date | date:'MM/dd/yyyy'}}</td>
+                        </tr>
+                    </table>
+                </div>
 
             </div>
 
-            <div class="columns small-4" ng-controller="GaragesController as garageCtrl">
 
-                    <!-- Single Garage -->
-                    <table id="garageTable" ng-show="!tab.sideIsSet(-1)">
+
+            <div class="sideBar columns small-4" ng-controller="GaragesController as garageCtrl">
+
+                <!-- Overview -->
+                <div ng-show="tab.sideIsSet(-1)">
+                    <div id="garageTableHeader">
+                        Overview
+                    </div>
+
+                    <table id="garageTable">
                         <tr>
-                            <td>Name: </td>
-                            <td>{{garageCtrl.garages[tab.sideTab].name}}</td>
+                            <td>Cost Per Month: </td>
+                            <td>{{garageCtrl.totalCost | currency}}</td>
                         </tr>
+                        <tr>
+                            <td>Capacity: </td>
+                            <td>{{garageCtrl.totalCapacity}}</td>
+                        </tr>
+                        <tr>
+                            <td>Leased Spaces: </td>
+                            <td>{{garageCtrl.totalLeasedSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Team-Member Spaces: </td>
+                            <td>{{garageCtrl.totalTeamMemberSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Required Buffer Size: </td>
+                            <td>{{garageCtrl.totalRequiredBufferSize}}</td>
+                        </tr>
+                        <tr>
+                            <td>Average Cost Per Space: </td>
+                            <td>{{garageCtrl.averageCostPerSpace | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Average Transient Sale Price: </td>
+                            <td>{{garageCtrl.averageTransientSalePrice | currency}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <!-- Single Garage -->
+                <div ng-show="!tab.sideIsSet(-1)">
+                    <div id="garageTableHeader">
+                        {{garageCtrl.garages[tab.sideTab].name}}
+                    </div>
+
+                    <table id="garageTable">
                         <tr>
                             <td>Cost Per Month: </td>
                             <td>{{garageCtrl.costs[tab.sideTab] | currency}}</td>
@@ -211,9 +265,88 @@
                             <td>{{garageCtrl.garages[tab.sideTab].garageManagerID}}</td>
                         </tr>
                     </table>
+                </div>
 
-                    <!-- Overview -->
-                    <table id="garageTable" ng-show="tab.sideIsSet(-1)">
+            </div>
+
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+        <!-- ======================== Upload History Content ============================ -->
+        <div id="uploadHistoryContent" ng-controller="ExpenseController as expenseCtrl" ng-show="tab.isSet(2)">
+            <div id="uploadTableWrapper" class="columns small-8">
+
+                <table id="uploadTableHead">
+                    <tr>
+                        <th class="garageColUploadTable">Garage</th>
+                        <th class="typeColUploadTable">Type</th>
+                        <th class="dateColUploadTable">Date</th>
+                    </tr>
+                </table>
+
+                <div id="uploadTableBodyWrapper">
+                    <table id="uploadTableBody" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+                        <tr class="tableRow" ng-repeat="upload in expenseCtrl.uploads" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                            <td class="garageColUploadTable">{{upload.garage}}</td>
+                            <td class="typeColUploadTable">{{upload.type}}</td>
+                            <td class="dateColUploadTable">{{upload.date | date:'MM/dd/yyyy'}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+
+
+
+                <!-- CLEAN UP LATER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+                <div id="itmTableWrapper">
+
+                    <table id="uploadTableHead">
+                        <tr>
+                            <th class="nameColITMTable">Name</th>
+                            <th class="tokenIDColITMTable">Token ID</th>
+                        </tr>
+                    </table>
+
+                    <div id="uploadTableBodyWrapper">
+                        <table id="uploadTableBody" ng-controller="InvoiceTeamMembersController as ITMCtrl">
+                            <tr class="tableRow" ng-repeat="itm in ITMCtrl.invoiceTeamMembers">
+                                <td class="nameColITMTable">{{itm.firstName}} {{itm.lastName}}</td>
+                                <td class="tokenIDColITMTable">{{itm.tokenID}}</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+                <!-- CLEAN UP LATER <<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<<< -->
+
+
+
+
+            </div>
+
+
+
+            
+
+
+            <div class="sideBar columns small-4" ng-controller="GaragesController as garageCtrl">
+
+                <!-- Overview -->
+                <div ng-show="tab.sideIsSet(-1)">
+                    <div id="garageTableHeader">
+                        Overview
+                    </div>
+
+                    <table id="garageTable">
                         <tr>
                             <td>Cost Per Month: </td>
                             <td>{{garageCtrl.totalCost | currency}}</td>
@@ -243,15 +376,87 @@
                             <td>{{garageCtrl.averageTransientSalePrice | currency}}</td>
                         </tr>
                     </table>
-          
+                </div>
+
+                <!-- Single Garage -->
+                <div ng-show="!tab.sideIsSet(-1)">
+                    <div id="garageTableHeader">
+                        {{garageCtrl.garages[tab.sideTab].name}}
+                    </div>
+
+                    <table id="garageTable">
+                        <tr>
+                            <td>Cost Per Month: </td>
+                            <td>{{garageCtrl.costs[tab.sideTab] | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Capacity: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].capacity}}</td>
+                        </tr>
+                        <tr>
+                            <td>Leased Spaces: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].numberOfLeasedSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Team-Member Spaces: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].numberOfTeamMemberSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Required Buffer Size: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].minimumNumberOfBufferSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Cost Per Space: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].spaceCost | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Transient Sale Price: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].transientSalePrice | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Owner: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].owner}}</td>
+                        </tr>
+                        <tr>
+                            <td>Billing Party: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].billingParty}}</td>
+                        </tr>
+                        <tr>
+                            <td>Garage Manager ID: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].garageManagerID}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+
+
+                <!-- Invoice Upload -->
+                <a id="uploadInvoiceButton" href="/#/invoiceForm" data-reveal-id="uploadInvoiceModal" class="radius button">Upload Invoice</a>
+                <div id="uploadInvoiceModal" class="reveal-modal" data-reveal>
+                    <div ng-view></div>
+                    <a class="close-reveal-modal">&#215;</a>
+                </div>
+
             </div>
 
         </div>
 
 
 
+
+
+
+
+
+
+
+
         <!-- ======================== Garage Map Content ============================ -->
-        <div id="garageMapContent" ng-show="tab.isSet(2)">
+        <div id="garageMapContent" ng-show="tab.isSet(3)">
 
             <div id="map-canvas" class="columns small-9"></div>
             <div id="mapKey">
@@ -259,26 +464,26 @@
                 <div id="greenBox"></div>
                 <div class="keyText">100+ Spots</div>
                 <br />
-                <div id="yellowBox"></div> 
+                <div id="yellowBox"></div>
                 <div class="keyText">50 - 100 Spots</div>
                 <br />
-                <div id="redBox"></div> 
+                <div id="redBox"></div>
                 <div class="keyText">0 - 50 Spots</div>
                 <br />
-                <div id="blackBox"></div> 
+                <div id="blackBox"></div>
                 <div class="keyText">Garage Full</div>
             </div>
 
 
 
-            <div id="sideBar" class="columns small-3">
+            <div class="sideBar columns small-3" ng-controller="GaragesController as garageCtrl">
                 <!-- Overview -->
-                <div id="garageTableHeader">
-                    Overview
-                </div>
+                <div ng-show="tab.sideIsSet(-1)">
+                    <div id="garageTableHeader">
+                        Overview
+                    </div>
 
-                <div ng-controller="GaragesController as garageCtrl">
-                    <table id="garageTable" ng-show="tab.sideIsSet(-1)">
+                    <table id="garageTable">
                         <tr>
                             <td>Cost Per Month: </td>
                             <td>{{garageCtrl.totalCost | currency}}</td>
@@ -307,9 +512,63 @@
                             <td>Average Transient Sale Price: </td>
                             <td>{{garageCtrl.averageTransientSalePrice | currency}}</td>
                         </tr>
-                    </table>
+                    </table>   
                 </div>
 
+
+                <!-- Single Garage -->
+                <div ng-show="!tab.sideIsSet(-1)">
+                    <div id="garageTableHeader">
+                        {{garageCtrl.garages[tab.sideTab].name}}
+                    </div>
+
+                    <table id="garageTable">
+                        <tr>
+                            <td>Cost Per Month: </td>
+                            <td>{{garageCtrl.costs[tab.sideTab] | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Address: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].address}}</td>
+                        </tr>
+                        <tr>
+                            <td>Capacity: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].capacity}}</td>
+                        </tr>
+                        <tr>
+                            <td>Leased Spaces: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].numberOfLeasedSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Team-Member Spaces: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].numberOfTeamMemberSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Required Buffer Size: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].minimumNumberOfBufferSpaces}}</td>
+                        </tr>
+                        <tr>
+                            <td>Cost Per Space: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].spaceCost | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Transient Sale Price: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].transientSalePrice | currency}}</td>
+                        </tr>
+                        <tr>
+                            <td>Owner: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].owner}}</td>
+                        </tr>
+                        <tr>
+                            <td>Billing Party: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].billingParty}}</td>
+                        </tr>
+                        <tr>
+                            <td>Garage Manager ID: </td>
+                            <td>{{garageCtrl.garages[tab.sideTab].garageManagerID}}</td>
+                        </tr>
+                    </table>
+                </div>
 
 
 
@@ -317,188 +576,37 @@
                     Parking Usage
                 </div>
 
-                <table id="usageTable" ng-controller="GaragesController as garageCtrl" ng-show="tab.sideIsSet(-1)">
-                    <thead id="usageTableHead">
+                <div id="usageTableWrapper">
+
+                    <table id="usageTableHead">
                         <tr>
-                            <th>Name</th>
-                            <th>Usage</th>
+                            <th class="nameColUsageTable">Name</th>
+                            <th class="usageColUsageTable">Usage</th>
                         </tr>
-                    </thead>
-                    <tbody id="usageTableBody">
-                        <tr>
-                            <td>Jesse Lacey</td>
-                            <td>0/31</td>
-                        </tr>
-                        <tr>
-                            <td>Vin Accardi</td>
-                            <td>0/31</td>
-                        </tr>
-                        <tr>
-                            <td>Quellin Quinn</td>
-                            <td>0/31</td>
-                        </tr>
-                        <tr>
-                            <td>Haley Williams</td>
-                            <td>1/31</td>
-                        </tr>
-                        <tr>
-                            <td>Josh Farro</td>
-                            <td>2/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jose Gonzalez</td>
-                            <td>2/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ben Howard</td>
-                            <td>2/31</td>
-                        </tr>
-                        <tr>
-                            <td>Justin Vernon</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Matt Tuck</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Birdy Sephon</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jamison Parker</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Andrew McMahon</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ben Folds</td>
-                            <td>3/31</td>
-                        </tr>
-                        <tr>
-                            <td>Tyler Reinhart</td>
-                            <td>4/31</td>
-                        </tr>
-                        <tr>
-                            <td>Vin Mistborn</td>
-                            <td>4/31</td>
-                        </tr>
-                        <tr>
-                            <td>Elend Venture</td>
-                            <td>4/31</td>
-                        </tr>
-                        <tr>
-                            <td>Sazed Clemins</td>
-                            <td>4/31</td>
-                        </tr>
-                        <tr>
-                            <td>Joe Hertler</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Rebecca Holzer</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Emily Rehaert</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Paul Kisvardy</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Leighton Long</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Andy Hull</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jack White</td>
-                            <td>5/31</td>
-                        <tr>
-                            <td>John Smith</td>
-                            <td>5/31</td>
-                        <tr>
-                            <td>Lauren Snyder</td>
-                            <td>5/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ben Gibbard</td>
-                            <td>6/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ray Myers</td>
-                            <td>7/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jeremy Mayville</td>
-                            <td>9/31</td>
-                        </tr>
-                        <tr>
-                            <td>Brooke Kohlhoff</td>
-                            <td>9/31</td>
-                        </tr>
-                        <tr>
-                            <td>Chelsea Filarski</td>
-                            <td>9/31</td>
-                        </tr>
-                        <tr>
-                            <td>Azurah Sweers</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Katie Werner</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Ruby Griggs</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Michael Moore</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Jeff Higgins</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Nelson Piper</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Garret Stier</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Steve Irwin</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Edward Grylls</td>
-                            <td>10/31</td>
-                        </tr>
-                        <tr>
-                            <td>Albert Ramirez</td>
-                            <td>11/31</td>
-                        </tr>
-                    </tbody>
-                </table>
-          
-            </div>
-          
+                    </table>
+                    
+                    <div id="usageTableBodyWrapper">
+                        <table id="usageTableBody" ng-controller="TeamMembersController as teamCtrl">
+                            <tr class="tableRow" ng-repeat="teammember in teamCtrl.teammembers">
+                                <td class="nameColUsageTable">{{teammember.firstName}} {{teammember.lastName}}</td>
+                                <td class="usageColUsageTable">0/31</td>
+                            </tr>
+                        </table>
+                    </div>
+                    
+                </div> <!-- usageTableWrapper end -->
+
+                
+
+            </div> <!-- sideBar end -->
+
 
         </div>
 
 
 
         <!-- ======================== Notifications Content ============================ -->
-        <div id="notificationsContent" class="row" ng-show="tab.isSet(3)">
+        <div id="notificationsContent" class="row" ng-show="tab.isSet(4)">
             <!-- TODO: this -->
         </div>
 
