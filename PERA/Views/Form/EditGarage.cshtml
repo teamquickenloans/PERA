@@ -1,0 +1,39 @@
+﻿
+<h3>Edit a Garage</h3>
+
+<form novalidate ng-submit="controller.submit()">
+    <div class="small-12 column">
+        <h4>Garage</h4>
+
+        <div class="small-4 column">
+            <label for="garageID">Garage</label>
+            <select ng-model="current" ng-options="garage as garage.name for garage in garages" id="garageID">
+                <option value="">-- select a garage --</option>
+            </select>
+        </div>
+
+        <div class="small-5 column">
+
+            <label for="name">Garage Name</label>
+            <input type="text"
+                   ng-model="new.name"
+                   ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)" />
+
+            <label for="address">Garage Address</label>
+            <input type="text"
+                   ng-model="new.address"
+                   ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)" />
+
+
+            <div class="row">
+                <button class="radius button" type="submit">Identify Points of Contention</button>
+            </div>
+        </div>
+    </div>
+    <br />
+
+
+</form>
+

@@ -1,5 +1,5 @@
 ﻿/**
-* Dashboard module
+* Expenses Module
 * @namespace pera.expenses
 */
 
@@ -14,4 +14,6 @@
     angular
       .module('pera.expenses.controllers', []);
 
+    angular
+        .module('pera.expenses.services', []);
 })();

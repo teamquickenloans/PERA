@@ -6,10 +6,10 @@
     'use strict';
 
     angular
-      .module('pera.fileupload.services')
+      .module('pera.expenses.services')
       .factory('FormSubmit', FormSubmit);
 
-    Submit.$inject = ['$http'];
+    FormSubmit.$inject = ['$http'];
 
 
     function FormSubmit($http) {

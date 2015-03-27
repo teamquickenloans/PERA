@@ -197,7 +197,7 @@
       @name ASP.NET MVC Controllers
     -->
     <Compile Include="Controllers\DiscrepanciesController.cs" />
-    <Compile Include="Controllers\MapController.cs" />
+    <Compile Include="Controllers\GarageController.cs" />
     <Compile Include="Controllers\ParkerReportTeamMembersController.cs" />
     <Compile Include="Controllers\ParkerReportParserController.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
@@ -327,10 +327,10 @@
     <Content Include="Scripts\js\modernizr-2.6.2.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\parkerreport.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\directives\double.directive.js" />
-    <Content Include="Scripts\pera-app\fileupload\controllers\discrepancies.controller.js" />
-    <Content Include="Scripts\pera-app\fileupload\services\discrepancies.service.js" />
+    <Content Include="Scripts\pera-app\expenses\controllers\discrepancies.controller.js" />
+    <Content Include="Scripts\pera-app\expenses\services\discrepancies.service.js" />
     <Content Include="Scripts\pera-app\fileupload\services\upload.service.js" />
-    <Content Include="Scripts\pera-app\fileupload\services\uploadreport.service.js" />
+    <Content Include="Scripts\pera-app\garages\controllers\editgarage.controller.js" />
     <Content Include="Scripts\pera-app\invoiceTeamMembers\invoiceTeamMembers.module.js" />
     <Content Include="Scripts\pera-app\map\map.module.js" />
     <Content Include="Scripts\pera-app\map\services\mapinitializer.service.js" />
@@ -346,10 +346,8 @@
     <Content Include="Scripts\pera-app\expenses\expenses.module.js" />
     <Content Include="Scripts\pera-app\map\controllers\map.controller.js" />
     <Content Include="Scripts\pera-app\map\map.module.js" />
-    <Content Include="Scripts\pera-app\fileupload\controllers\fileupload.controller.js" />
-    <Content Include="Scripts\pera-app\fileupload\controllers\invoiceform.controller.js" />
+    <Content Include="Scripts\pera-app\fileupload\controllers\invoice.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\fileupload.module.js" />
-    <Content Include="Scripts\pera-app\fileupload\services\invoiceform.service.js" />
     <Content Include="Scripts\pera-app\garages\controllers\garages.controller.js" />
     <Content Include="Scripts\pera-app\garages\services\garages.service.js" />
     <Content Include="Scripts\pera-app\garages\garages.module.js" />
@@ -446,9 +444,9 @@
     <Content Include="Views\TeamMember\Details.cshtml" />
     <Content Include="Views\TeamMember\Edit.cshtml" />
     <Content Include="Views\TeamMember\Index.cshtml" />
-    <Content Include="Views\Map\Map.cshtml" />
+    <Content Include="Views\Garage\Map.cshtml" />
     <Content Include="Views\Expense\DetectedIssues.cshtml" />
-    <Content Include="Views\Map\GarageInfo.cshtml" />
+    <Content Include="Views\Garage\GarageInfo.cshtml" />
     <Content Include="Scripts\pera-app\sidebar\controllers\sidebar.controller.js" />
     <Content Include="Views\Navigation\Overview.cshtml" />
     <Content Include="Views\Navigation\Garage.cshtml" />
@@ -458,8 +456,9 @@
     <Content Include="Views\Form\ParkerReport.cshtml" />
     <Content Include="Views\Expense\Base.cshtml" />
     <Content Include="Views\Navigation\TopBar.cshtml" />
-    <Content Include="Views\Map\Base.cshtml" />
+    <Content Include="Views\Garage\Base.cshtml" />
     <Content Include="Views\Form\Discrepancies.cshtml" />
+    <Content Include="Views\Form\EditGarage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

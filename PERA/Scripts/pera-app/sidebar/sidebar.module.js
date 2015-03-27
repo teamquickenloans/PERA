@@ -1,5 +1,5 @@
 ﻿/**
-* \ module
+* SideBar module
 * @namespace pera.sidebar
 */
 
