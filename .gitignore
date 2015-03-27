@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
+PERA/App_Data/Tmp/FileUploads/
 
 # Build results
 [Dd]ebug/
