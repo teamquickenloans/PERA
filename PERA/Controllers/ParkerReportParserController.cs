@@ -22,6 +22,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using PERA.HelperClasses;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
+using System.Globalization;
 
 namespace PERA.Controllers
 {
@@ -151,20 +152,44 @@ namespace PERA.Controllers
                 //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
                 List<QLTeamMember> teamMembers =
                     ExcelParser(file.LocalFileName, originalFileName, APR, garageID);
-                foreach (QLTeamMember teamMember in teamMembers)
-                {
-                    Trace.WriteLine(teamMember.ParkerReportTeamMemberID);
-                    Trace.WriteLine(teamMember.FirstName);
-                    Trace.WriteLine(teamMember.LastName);
-
-                    APR.TeamMembers.Add(teamMember);
-                    db.SaveChanges();
-                }
-                db.QLActiveParkerReports.Add(APR);
-                db.SaveChanges();
+                
+                Save(APR, teamMembers);
             }
         }
 
+        private void Save(QLActiveParkerReport APR, List<QLTeamMember> teamMembers)
+        {
+            foreach (QLTeamMember teamMember in teamMembers)
+            {
+                //Trace.WriteLine(teamMember.ParkerReportTeamMemberID);
+                //Trace.WriteLine(teamMember.FirstName);
+                //Trace.WriteLine(teamMember.LastName);
+
+                APR.TeamMembers.Add(teamMember);
+                db.SaveChanges();
+            }
+
+            //check if report exists in db
+            QLActiveParkerReport report = db.QLActiveParkerReports.FirstOrDefault(
+                  x => x.MonthYear.Month == APR.MonthYear.Month
+                  && x.MonthYear.Year == APR.MonthYear.Year
+                  && x.GarageID == APR.GarageID);
+            if(report != null)
+            {
+                report.DateUploaded = APR.DateUploaded;
+                report.DateReceived = APR.DateReceived;
+                report.TeamMembers = APR.TeamMembers;
+                db.SaveChanges();
+
+            }
+            else //report doesn't exist yet, add it
+            {
+                db.QLActiveParkerReports.Add(APR);
+            }
+
+            db.SaveChanges();
+
+        }
         private List<QLTeamMember> ExcelParser(string path, string name, QLActiveParkerReport apr, int garageID)
         {
             System.Diagnostics.Debug.WriteLine("begin excel parser");
@@ -248,6 +273,13 @@ namespace PERA.Controllers
                         throw new System.ArgumentException("Invalid GarageID");
                     }
 
+                    //Convert names to Title Case 
+                    TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+                    firstName = textInfo.ToTitleCase(firstName.ToLower()); 
+                    lastName = textInfo.ToTitleCase(lastName.ToLower());
+                    Trace.WriteLine(firstName);
+                    Trace.WriteLine(lastName);
+
                     double tokenAd, tokenBd;
                     QLTeamMember teamMember = db.QLTeamMembers.Create();
                     int itokenA, itokenB = 0;
@@ -303,13 +335,12 @@ namespace PERA.Controllers
                     teamMember.FirstName = firstName;
                     teamMember.LastName = lastName;
 
-
-                    teamMembers.Add(teamMember);
+                    //db.teamMembers.Add(teamMember);
 
                     db.QLTeamMembers.Add(teamMember);
                     db.SaveChanges();
 
-                    Trace.WriteLine(teamMember.FirstName + teamMember.LastName + teamMember.BadgeID);
+                    //Trace.WriteLine(teamMember.FirstName + teamMember.LastName + teamMember.BadgeID);
                 } // end for columns
            // }  // end for tables
             return teamMembers;

@@ -40,28 +40,48 @@ namespace PERA.Controllers
             Trace.WriteLine("hello@!");
             Trace.WriteLine(report.MonthYear);
 
-            var InvoiceAPRs = db.InvoiceActiveParkerReports.Where(
+
+            var InvoiceReport = db.InvoiceActiveParkerReports.Where(
                 x => x.MonthYear.Month == report.MonthYear.Month 
                   && x.MonthYear.Year == report.MonthYear.Year 
-                  && x.GarageID == report.GarageID);
-            Trace.WriteLine(InvoiceAPRs.First().MonthYear);
-
-            var QLAPRs = db.QLActiveParkerReports.Where(
+                  && x.GarageID == report.GarageID)
+                .First(); //.ToList();
+            var QLReport = db.QLActiveParkerReports.Where(
                 x => x.MonthYear.Month == report.MonthYear.Month
                   && x.MonthYear.Year == report.MonthYear.Year
-                  && x.GarageID == report.GarageID);
-            Dictionary<InvoiceActiveParkerReport, QLActiveParkerReport> APRs = new Dictionary<InvoiceActiveParkerReport,QLActiveParkerReport>();
+                  && x.GarageID == report.GarageID)
+                .First(); //.ToList();
 
-            foreach (var invoice in InvoiceAPRs)
-            {
-                foreach (var qlAPR in QLAPRs)
-                {
+            var InvoiceReports = db.InvoiceActiveParkerReports.Where(
+                x => x.MonthYear.Month == report.MonthYear.Month
+                  && x.MonthYear.Year == report.MonthYear.Year)
+                  .ToList();
 
-                }
-            }
+            IdentifyDuplicates(InvoiceReport, QLReport, InvoiceReports);
+
+            
 
             return View();
             
+        }
+
+        public void IdentifyDuplicates(InvoiceActiveParkerReport InvoiceReport, QLActiveParkerReport QLReport, 
+            List<InvoiceActiveParkerReport> InvoiceReports)
+        {
+            Dictionary<ParkerReportTeamMember, QLTeamMember> Matches
+                = new Dictionary<ParkerReportTeamMember, QLTeamMember>();
+
+            foreach (ParkerReportTeamMember invoiceTM in InvoiceAPR.TeamMembers)
+            {
+                foreach (QLTeamMember qlTM in QLAPR.TeamMembers)
+                {
+
+                    if (invoiceTM.FirstName == qlTM.FirstName
+                        && invoiceTM.LastName == qlTM.LastName)
+                        Matches[invoiceTM] = qlTM;
+
+                }
+            }
         }
     }
 }

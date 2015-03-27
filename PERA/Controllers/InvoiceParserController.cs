@@ -22,6 +22,7 @@ using DocumentFormat.OpenXml.Spreadsheet;
 using PERA.HelperClasses;
 using System.Runtime.Serialization;
 using Newtonsoft.Json.Converters;
+using System.Globalization;
 
 
 
@@ -233,6 +234,11 @@ namespace PERA.Controllers
                             lastName = names[0];
                         }
                     }
+
+                    //Convert names to Title Case 
+                    TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
+                    firstName = textInfo.ToTitleCase(firstName.ToLower());
+                    lastName = textInfo.ToTitleCase(lastName.ToLower());
 
                     int index = tokenColumns[garageID];
                     var cardNumberV = row[index];
