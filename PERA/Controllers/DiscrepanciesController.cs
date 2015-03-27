@@ -68,17 +68,30 @@ namespace PERA.Controllers
         public void IdentifyDuplicates(InvoiceActiveParkerReport InvoiceReport, QLActiveParkerReport QLReport, 
             List<InvoiceActiveParkerReport> InvoiceReports)
         {
-            Dictionary<ParkerReportTeamMember, QLTeamMember> Matches
-                = new Dictionary<ParkerReportTeamMember, QLTeamMember>();
+            Dictionary<string, string> Matches
+                = new Dictionary<string, string>();
 
-            foreach (ParkerReportTeamMember invoiceTM in InvoiceAPR.TeamMembers)
+            Trace.WriteLine(InvoiceReport.TeamMembers.First());
+
+            foreach (ParkerReportTeamMember invoiceTM in InvoiceReport.TeamMembers)
             {
-                foreach (QLTeamMember qlTM in QLAPR.TeamMembers)
+                Trace.WriteLine("loop");
+                foreach (QLTeamMember qlTM in QLReport.TeamMembers)
                 {
-
+                    Trace.WriteLine("loop");
                     if (invoiceTM.FirstName == qlTM.FirstName
                         && invoiceTM.LastName == qlTM.LastName)
-                        Matches[invoiceTM] = qlTM;
+                    {
+                        if(Matches.ContainsKey(invoiceTM.FirstName + invoiceTM.LastName))
+                        {
+                            Trace.WriteLine("duplicate");
+                        }
+                        else
+                        {
+                            Trace.WriteLine("new");
+                            Matches[invoiceTM.FirstName + invoiceTM.LastName] = qlTM.FirstName + qlTM.LastName;
+                        }
+                    }
 
                 }
             }
