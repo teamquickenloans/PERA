@@ -55,7 +55,7 @@
                     console.log(vm.reports[i].file[0].name)
                     vm.files.push(vm.reports[i].file[0])
                 }
-                Upload.upload(vm.files, vm.form, vm.reports, "./api/parkerreportparser/upload");
+                Upload.upload(vm.files, vm.form, vm.reports, "./api/badgescanparser/upload");
             }
 
         }

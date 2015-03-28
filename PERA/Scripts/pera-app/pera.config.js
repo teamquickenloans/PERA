@@ -235,7 +235,7 @@
             views: {
                 '': {
                     templateUrl: 'Form/BadgeScan',
-                    controller: 'ParkerReportController as fileCtrl'
+                    controller: 'BadgeScanController as fileCtrl'
                 }
             }
         }
