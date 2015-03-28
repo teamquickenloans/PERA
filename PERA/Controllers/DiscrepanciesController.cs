@@ -82,6 +82,8 @@ namespace PERA.Controllers
             {
                 Trace.WriteLine("invoice loop");
                 Trace.WriteLine(QLReport.TeamMembers.Count);
+
+
                 /*foreach (QLTeamMember qlTM in QLReport.TeamMembers)
                 {
                     Trace.WriteLine("ql loop");

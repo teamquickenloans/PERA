@@ -239,7 +239,7 @@
                 }
             }
         }
-        $stateProvider.state(parkerReport);
+        $stateProvider.state(badgeScan);
 
 
     }
