@@ -227,6 +227,20 @@
         }
         $stateProvider.state(discrepancies);
 
+        /////////////////////////////////
+        //        Expense > Badge Scan //
+        /////////////////////////////////
+        var badgeScan = {
+            name: 'expense.badgeScan',
+            views: {
+                '': {
+                    templateUrl: 'Form/BadgeScan',
+                    controller: 'ParkerReportController as fileCtrl'
+                }
+            }
+        }
+        $stateProvider.state(parkerReport);
+
 
     }
 })();

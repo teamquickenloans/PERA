@@ -1,5 +1,5 @@
 ﻿/**
-* ParkerReport controller
+* Badge Scan controller
 * @namespace pera.fileupload.controllers
 */
 (function () {
@@ -7,14 +7,14 @@
 
     angular
       .module('pera.fileupload.controllers')
-      .controller('ParkerReportController', ParkerReportController);
+      .controller('BadgeScanController', BadgeScanController);
 
-    ParkerReportController.$inject = ['$scope', '$upload', 'Upload', 'Garages', 'Snackbar', '$filter']; //Here 'Garages' is the Garages Service (pera.garages.service)
+    BadgeScanController.$inject = ['$scope', '$upload', 'Upload', 'Garages', 'Snackbar', '$filter']; //Here 'Garages' is the Garages Service (pera.garages.service)
 
     /**
-    * @namespace ParkerReportController
+    * @namespace BadgeScanController
     */
-    function ParkerReportController($scope, $upload, Upload, Garages, Snackbar, $filter) {
+    function BadgeScanController($scope, $upload, Upload, Garages, Snackbar, $filter) {
 
         var vm = this;
         vm.files = [];
@@ -45,7 +45,7 @@
                 form.dateReceived = null;
             }
 
-            //invoice.monthYear = '01-' + invoice.monthYear 
+            
             console.log("Upload all");
             console.log("uploadAll monthYear:" + vm.form.monthYear);
             console.log("uploadAll dateReceived:" + vm.form.dateReceived);

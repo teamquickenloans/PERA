@@ -167,53 +167,39 @@ namespace PERA.Controllers
                 firstName = textInfo.ToTitleCase(firstName.ToLower());
                 lastName = textInfo.ToTitleCase(lastName.ToLower());
 
+                badgeScan.FirstName = firstName;
+                badgeScan.LastName = lastName;
+
 
                 DateTime datetime = (DateTime)row[0];
                 badgeScan.ScanDateTime = datetime;
 
 
-                //TODO: we need access to HR database so we can have one place where we can find additional info on all QL Team Members
+                //TODO: we need access to HR database so we can have one place where we can find additional info on all QL Team Members  \\MAYBE, but not for this
                 //TODO: ask Megan for a list of how the garages are referred to in the badge scan excel files so we can parse a GarageID out.
                 //TODO: only add one entry per person per day into the database.
 
-               /* PARSE GARAGEID (this code might help with that?)
-               // int index = tokenColumns[garageID];
-                //var cardNumberV = row[index];
-                //Trace.WriteLine(cardNumberV.GetType());
-                double cardNumberD;
-                int cardNumber;
-                
-                //if (cardNumberV != DBNull.Value)
-               // {
-                    try
-                    {
-                        cardNumberD = (System.Double)cardNumberV;
-                        cardNumber = Convert.ToInt32(cardNumberD);
-                 //       teamMember.BadgeID = cardNumber;
-                    }
-                    catch (InvalidCastException e)
-                    {
-                        // Perform some action here, and then throw a new exception.
-                        //teamMember.BadgeID = null;
-                    }
 
-                //}
-                */
+                var garage = row[1];
 
-                badgeScan.FirstName = firstName;
-                badgeScan.LastName = lastName;
-
-
-                db.BadgeScans.Add(badgeScan);
-
-                //db.ParkerReportTeamMembers.Add(teamMember);
-                db.SaveChanges();
-               // Trace.WriteLine(teamMember.ParkerReportTeamMemberID);
-                /*
-                foreach (DataColumn column in table.Columns)
+                if (garage != DBNull.Value)
                 {
-                    System.Diagnostics.Debug.WriteLine(row[column]);
-                }*/
+                    //TODO: parse out garage name and look up that garage in the garages table to find the garageID
+                    badgeScan.GarageID = 1;
+
+                    //Check if the database already holds a report of a person with the same name checking into the same garage on the same day already. 
+                    //If so, don't add another entry into the database.
+                    BadgeScan bs = db.BadgeScans.FirstOrDefault(
+                          x => x.FirstName == badgeScan.FirstName
+                          && x.LastName == badgeScan.LastName
+                          && x.GarageID == badgeScan.GarageID
+                          && x.ScanDateTime.Date == badgeScan.ScanDateTime.Date);
+                    if (bs == null)
+                    {
+                        db.BadgeScans.Add(badgeScan);
+                        db.SaveChanges();
+                    }  
+                }
 
             } // end for rows
         }

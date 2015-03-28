@@ -263,6 +263,10 @@
     <Compile Include="Migrations\201503280152274_BadgeScan.Designer.cs">
       <DependentUpon>201503280152274_BadgeScan.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503282224039_BadgeScan1.cs" />
+    <Compile Include="Migrations\201503282224039_BadgeScan1.Designer.cs">
+      <DependentUpon>201503282224039_BadgeScan1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
@@ -330,6 +334,7 @@
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.js" />
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.min.js" />
     <Content Include="Scripts\js\modernizr-2.6.2.js" />
+    <Content Include="Scripts\pera-app\fileupload\controllers\badgeScan.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\parkerreport.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\directives\double.directive.js" />
     <Content Include="Scripts\pera-app\expenses\controllers\discrepancies.controller.js" />
@@ -399,6 +404,9 @@
     <EmbeddedResource Include="Migrations\201503280152274_BadgeScan.resx">
       <DependentUpon>201503280152274_BadgeScan.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503282224039_BadgeScan1.resx">
+      <DependentUpon>201503282224039_BadgeScan1.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
     <Content Include="Scripts\css\snackbar.min.css" />
@@ -467,6 +475,7 @@
     <Content Include="Views\Garage\Base.cshtml" />
     <Content Include="Views\Form\Discrepancies.cshtml" />
     <Content Include="Views\Form\EditGarage.cshtml" />
+    <Content Include="Views\Form\BadgeScan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
