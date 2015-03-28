@@ -196,6 +196,7 @@
     <!--
       @name ASP.NET MVC Controllers
     -->
+    <Compile Include="Controllers\BadgeScanParserController.cs" />
     <Compile Include="Controllers\DiscrepanciesController.cs" />
     <Compile Include="Controllers\GarageController.cs" />
     <Compile Include="Controllers\ParkerReportTeamMembersController.cs" />
@@ -257,6 +258,10 @@
     <Compile Include="Migrations\201503231133449_update.cs" />
     <Compile Include="Migrations\201503231133449_update.Designer.cs">
       <DependentUpon>201503231133449_update.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503280152274_BadgeScan.cs" />
+    <Compile Include="Migrations\201503280152274_BadgeScan.Designer.cs">
+      <DependentUpon>201503280152274_BadgeScan.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActiveParkerReport.cs" />
@@ -390,6 +395,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201503231133449_update.resx">
       <DependentUpon>201503231133449_update.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503280152274_BadgeScan.resx">
+      <DependentUpon>201503280152274_BadgeScan.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
