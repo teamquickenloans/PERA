@@ -1,4 +1,9 @@
-﻿(function () {
+﻿/**
+* FileUpload module
+* @namespace pera.fileupload
+*/
+
+(function () {
     'use strict';
 
     angular

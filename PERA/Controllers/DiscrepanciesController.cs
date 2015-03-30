@@ -38,7 +38,12 @@ namespace PERA.Controllers
                 Trace.WriteLine(garageID);
             }
             Trace.WriteLine("hello@!");
-            Trace.WriteLine(report.MonthYear);
+
+            Trace.WriteLine(report.MonthYear.Month);
+
+            Trace.WriteLine(report.MonthYear.Year);
+
+            Trace.WriteLine(report.GarageID);
 
 
             var InvoiceReport = db.InvoiceActiveParkerReports.Where(
@@ -75,10 +80,15 @@ namespace PERA.Controllers
 
             foreach (ParkerReportTeamMember invoiceTM in InvoiceReport.TeamMembers)
             {
-                Trace.WriteLine("loop");
-                foreach (QLTeamMember qlTM in QLReport.TeamMembers)
+                Trace.WriteLine("invoice loop");
+                Trace.WriteLine(QLReport.TeamMembers.Count);
+                /*foreach (QLTeamMember qlTM in QLReport.TeamMembers)
                 {
-                    Trace.WriteLine("loop");
+                    Trace.WriteLine("ql loop");
+                    Trace.WriteLine("invoiceTM.FirstName" + invoiceTM.FirstName);
+                    Trace.WriteLine("qlTM.FirstName" + qlTM.FirstName);
+                    Trace.WriteLine("invoiceTM.LastName" + invoiceTM.LastName);
+                    Trace.WriteLine("qlTM.LastName" + qlTM.LastName);
                     if (invoiceTM.FirstName == qlTM.FirstName
                         && invoiceTM.LastName == qlTM.LastName)
                     {
@@ -93,7 +103,7 @@ namespace PERA.Controllers
                         }
                     }
 
-                }
+                }*/
             }
         }
     }

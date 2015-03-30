@@ -6,7 +6,7 @@
     'use strict';
 
     angular
-      .module('pera.fileupload.controllers')
+      .module('pera.expenses.controllers')
       .controller('DiscrepanciesController', DiscrepanciesController);
 
     DiscrepanciesController.$inject = ['$scope', 'FormSubmit', 'Garages', 'Snackbar', '$filter']; //Here 'Garages' is the Garages Service (pera.garages.service)

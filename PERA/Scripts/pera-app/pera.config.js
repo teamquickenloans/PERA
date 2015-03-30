@@ -51,25 +51,25 @@
 
 
           ///////////////////
-         //           Map //
+         //        Garage //
         ///////////////////
-        var map = {
-            name: 'map',
+        var garage = {
+            name: 'garage',
             abstract: true,
-            url: '/map',
-            templateUrl: 'Map/Base'
+            url: '/garage',
+            templateUrl: 'Garage/Base'
         }
-        $stateProvider.state(map);
+        $stateProvider.state(garage);
 
           //////////////////////
-         //        Map > Map //
+         //     Garage > Map //
         //////////////////////
         var mapView = {
-            name: 'map.map',
+            name: 'garage.map',
             url: '',
             views: {
                 '': {
-                    templateUrl: 'Map/Map',
+                    templateUrl: 'Garage/Map',
                     controller: 'MapController as map'
                 },
                 'right-nav@': {
@@ -77,13 +77,38 @@
                     controller: 'SideBarController as sidebar'
                 },
                 //view@state -> this targets the "sidebar" view inside the expense template: Expense/Base
-                'sidebar@expense': {
-                    templateUrl: 'Map/GarageInfo',
+                'sidebar@garage': {
+                    templateUrl: 'Garage/GarageInfo',
                     controller: ''
                 }
             }
         }
         $stateProvider.state(mapView);
+
+          //////////////////////
+         //    Garage > Edit //
+        //////////////////////
+        var garageEdit = {
+            name: 'garage.edit',
+            url: '',
+            views: {
+                '': {
+                    templateUrl: 'Form/EditGarage',
+                    controller: 'EditGarageController as controller'
+                },
+                'right-nav@': {
+                    templateUrl: 'Navigation/TopBar',
+                    controller: 'SideBarController as sidebar'
+                },
+                //view@state -> this targets the "sidebar" view inside the expense template: Expense/Base
+                'sidebar@expense': {
+                    templateUrl: 'Garage/GarageInfo',
+                    controller: ''
+                }
+            }
+        }
+        $stateProvider.state(garageEdit);
+
 
           //////////////////////
          //          Expense //
@@ -171,7 +196,7 @@
             views: {
                 '' : {
                     templateUrl: 'Form/Invoice',
-                    controller: 'FileUploadController as fileCtrl'
+                    controller: 'InvoiceController as fileCtrl'
                 }
             }
         }

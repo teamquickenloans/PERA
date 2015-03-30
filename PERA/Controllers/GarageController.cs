@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace PERA.Controllers
 {
-    public class MapController : Controller
+    public class GarageController : Controller
     {
         // GET: GarageMap
         public ActionResult Index()

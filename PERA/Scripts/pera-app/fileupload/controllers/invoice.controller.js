@@ -1,5 +1,5 @@
 ﻿/**
-* FileUpload controller
+* Invoice controller
 * @namespace pera.fileupload.controllers
 */
 (function () {
@@ -7,14 +7,14 @@
 
     angular
       .module('pera.fileupload.controllers')
-      .controller('FileUploadController', FileUploadController);
+      .controller('InvoiceController', InvoiceController);
 
-    FileUploadController.$inject = ['$scope', '$upload', 'Upload', 'Garages', 'Snackbar', '$filter']; //Here 'Garages' is the Garages Service (pera.garages.service)
+    InvoiceController.$inject = ['$scope', '$upload', 'Upload', 'Garages', 'Snackbar', '$filter']; //Here 'Garages' is the Garages Service (pera.garages.service)
 
     /**
-    * @namespace FileUploadController
+    * @namespace InvoiceController
     */
-    function FileUploadController($scope, $upload, Upload, Garages, Snackbar, $filter) {
+    function InvoiceController($scope, $upload, Upload, Garages, Snackbar, $filter) {
   
         var vm = this;
         vm.files = [];

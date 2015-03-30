@@ -20,7 +20,9 @@
         var vm = this;
         vm.garages = [];
         var last_request_failed = false;
-        var promise = undefined;
+        var last_garage_failed = false;
+        var allPromise = undefined;
+        var garagePromise = undefined;
         vm.costs = []; //the total cost of leased spaces for each garage
         vm.totalCost = 0; //the total cost for all garages
         vm.totalCapacity = 0;
@@ -56,22 +58,31 @@
         * @memberOf pera.garages.services.Garages
         */
         function all() {
-            if (!promise || last_request_failed) {
+            if (!allPromise || last_request_failed) {
                 console.log("querying database");
-                promise = $http.get('/api/garages/');
-                promise.then(garagesSuccessFn, garagesErrorFn);
+                allPromise = $http.get('/api/garages/');
+                allPromise.then(garagesSuccess, garagesError);
             }
-            return promise
+            return allPromise;
+        }
+
+        function get(garageID) 
+        {
+            if (!garagePromise[garageID] || last_garage_failed[garageID]) {
+                garagePromise[garageID] = $http.get('/api/garages/' + garageID);
+                console.log("getting one garage");
+                garagePromise.then(garageSuccess, garageError);
+            }
         }
 
         /**
-         * @name garagesSuccessFn
+         * @name garagesSuccess
          * @desc Sets the garages variable to the list of garages
          * @param {string} badgeID The badgeID to get Garages for
          * @returns {Promise}
          * @memberOf thinkster.garages.services.Garages
          */
-        function garagesSuccessFn(data, status, headers, config, response) {
+        function garagesSuccess(data, status, headers, config, response) {
             last_request_failed = false;
             vm.garages = data.data;
             console.log("service success ", vm.garages);
@@ -80,7 +91,7 @@
             //share();
         }
 
-        function garagesErrorFn(data, status, headers, config, response) {
+        function garagesError(data, status, headers, config, response) {
             last_request_failed = true;
             Snackbar.error("Error retrieving garages");
             return $q.reject(response);
@@ -127,7 +138,7 @@
          * @returns {Promise}
          * @memberOf thinkster.garages.services.Garages
          */
-        function get(badgeID) {
+        function getBadge(badgeID) {
             return $http.get('/api/' + badgeID + '/garages/');
         }
 
