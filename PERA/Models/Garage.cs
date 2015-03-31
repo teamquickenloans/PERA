@@ -44,6 +44,17 @@ namespace PERA.Models
         public double? ValidationCost { get; set; }
         public int? NumberOfValidations { get; set; }
         public int? GarageManagerID { get; set; }
+        public int? InvoiceNameColumn { get; set; }
+        public int? InvoiceFirstNameColumn { get; set; }
+        public int? InvoiceLastNameColumn { get; set; }
+        public int? InvoiceTokenColumn { get; set; }
+        public int? QLFirstNameColumn { get; set; }
+        public int? QLLastNameColumn { get; set; }
+        public int? QLNameColumn { get; set; }
+        public int? QLTokenColumn { get; set; }
+        public int? QLTokenAColumn { get; set; } //ID CODE 26W
+        public int? QLTokenBColumn { get; set; } //HID CORP1K ID
+
         [JsonIgnore]
         public virtual GarageManager GarageManager { get; set; }
 	}

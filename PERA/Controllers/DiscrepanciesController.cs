@@ -45,22 +45,28 @@ namespace PERA.Controllers
 
             Trace.WriteLine(report.GarageID);
 
-
+            // invoice report for this garage only
             var InvoiceReport = db.InvoiceActiveParkerReports.Where(
                 x => x.MonthYear.Month == report.MonthYear.Month 
                   && x.MonthYear.Year == report.MonthYear.Year 
                   && x.GarageID == report.GarageID)
                 .First(); //.ToList();
+
+            // QL report for this garage
             var QLReport = db.QLActiveParkerReports.Where(
                 x => x.MonthYear.Month == report.MonthYear.Month
                   && x.MonthYear.Year == report.MonthYear.Year
                   && x.GarageID == report.GarageID)
                 .First(); //.ToList();
 
+            // parker reports for all other garages
             var InvoiceReports = db.InvoiceActiveParkerReports.Where(
                 x => x.MonthYear.Month == report.MonthYear.Month
-                  && x.MonthYear.Year == report.MonthYear.Year)
+                  && x.MonthYear.Year == report.MonthYear.Year
+                  && x.GarageID != report.GarageID)
                   .ToList();
+
+
 
             IdentifyDuplicates(InvoiceReport, QLReport, InvoiceReports);
 
@@ -73,37 +79,61 @@ namespace PERA.Controllers
         public void IdentifyDuplicates(InvoiceActiveParkerReport InvoiceReport, QLActiveParkerReport QLReport, 
             List<InvoiceActiveParkerReport> InvoiceReports)
         {
-            Dictionary<string, string> Matches
-                = new Dictionary<string, string>();
+            Dictionary<string, string> Matches = new Dictionary<string, string>();
+            List<ParkerReportTeamMember> Duplicates = new List<ParkerReportTeamMember>();
 
             Trace.WriteLine(InvoiceReport.TeamMembers.First());
 
-            foreach (ParkerReportTeamMember invoiceTM in InvoiceReport.TeamMembers)
+            foreach (QLTeamMember qlTM in QLReport.TeamMembers) //for each TM in the invoice
             {
-                Trace.WriteLine("invoice loop");
-                Trace.WriteLine(QLReport.TeamMembers.Count);
-                /*foreach (QLTeamMember qlTM in QLReport.TeamMembers)
-                {
-                    Trace.WriteLine("ql loop");
-                    Trace.WriteLine("invoiceTM.FirstName" + invoiceTM.FirstName);
-                    Trace.WriteLine("qlTM.FirstName" + qlTM.FirstName);
-                    Trace.WriteLine("invoiceTM.LastName" + invoiceTM.LastName);
-                    Trace.WriteLine("qlTM.LastName" + qlTM.LastName);
-                    if (invoiceTM.FirstName == qlTM.FirstName
-                        && invoiceTM.LastName == qlTM.LastName)
-                    {
-                        if(Matches.ContainsKey(invoiceTM.FirstName + invoiceTM.LastName))
-                        {
-                            Trace.WriteLine("duplicate");
-                        }
-                        else
-                        {
-                            Trace.WriteLine("new");
-                            Matches[invoiceTM.FirstName + invoiceTM.LastName] = qlTM.FirstName + qlTM.LastName;
-                        }
-                    }
 
-                }*/
+                //First find duplicates within this garage
+                var InvoiceTeamMembers = db.ParkerReportTeamMembers.Where(             //grab the matching Invoice TM
+                    x => x.InvoiceActiveParkerReportID == InvoiceReport.ID
+                      && x.FirstName == qlTM.FirstName
+                      && x.LastName == qlTM.LastName).ToList();
+                Trace.WriteLine(qlTM.FirstName + " " + qlTM.LastName + QLReport.ID);
+                switch (InvoiceTeamMembers.Count)
+                {
+                    case 0:
+                        continue;
+                    case 1:
+                        ParkerReportTeamMember PRTM = InvoiceTeamMembers.First();
+                        break;
+                    default: //more than two matches
+                        Duplicates.Add(qlTM);
+                        Trace.WriteLine("Duplicate");
+                        foreach (ParkerReportTeamMember tm in InvoiceTeamMembers) {
+                            Duplicates.Add(tm);
+                        }
+                        break;
+                }
+                // Next find duplicates within the garage network
+                foreach (InvoiceActiveParkerReport invoiceReport in InvoiceReports)
+                {
+                    // team members within another garage's InvoiceActiveParkerReport for the same month
+                    var InvoiceTMs = db.ParkerReportTeamMembers.Where(
+                        x => x.InvoiceActiveParkerReportID == InvoiceReport.ID
+                          && x.FirstName == qlTM.FirstName
+                          && x.LastName == qlTM.LastName).ToList();
+                    switch (InvoiceTMs.Count)
+                    {
+                        case 0:
+                            continue;
+                        default:
+                            Trace.WriteLine("Duplicate found");
+                            Duplicates.Add(qlTM);
+                            foreach (ParkerReportTeamMember tm in InvoiceTMs)
+                            {
+                                Duplicates.Add(tm);
+                            }
+                            break;
+                    }
+                        
+                }
+            }
+            foreach (var duplicate in Duplicates) {
+                Trace.WriteLine("Duplicate: " + duplicate.FirstName + " " + duplicate.LastName);
             }
         }
     }

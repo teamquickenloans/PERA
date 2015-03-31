@@ -276,8 +276,8 @@ namespace PERA.Controllers
 
                     //Convert names to Title Case 
                     TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-                    firstName = textInfo.ToTitleCase(firstName.ToLower()); 
-                    lastName = textInfo.ToTitleCase(lastName.ToLower());
+                    firstName = textInfo.ToTitleCase(firstName.ToLower().Trim()); 
+                    lastName = textInfo.ToTitleCase(lastName.ToLower().Trim());
                     Trace.WriteLine(firstName);
                     Trace.WriteLine(lastName);
 
@@ -335,6 +335,7 @@ namespace PERA.Controllers
 
                     teamMember.FirstName = firstName;
                     teamMember.LastName = lastName;
+                    teamMember.QLActiveParkerReportID = apr.ID;
 
                     teamMembers.Add(teamMember);
 
