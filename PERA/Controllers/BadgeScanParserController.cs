@@ -171,7 +171,15 @@ namespace PERA.Controllers
                 badgeScan.LastName = lastName;
 
 
-                DateTime datetime = (DateTime)row[0];
+                if(row[0] == DBNull.Value)
+                {
+                    System.Diagnostics.Debug.WriteLine("row[0] is null");
+                    continue;
+                }
+
+                System.Diagnostics.Debug.WriteLine(row[0].GetType());
+
+                DateTime datetime = reader.GetDateTime(0);
                 badgeScan.ScanDateTime = datetime;
 
 

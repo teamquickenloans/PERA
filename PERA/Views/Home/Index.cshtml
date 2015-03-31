@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>Parking Dashboard</title>
      
-      <!-- ====================== jQuery ============================== -->
+    <!-- ====================== jQuery ============================== -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
     @Scripts.Render("~/bundles/jquery")
 
@@ -186,11 +186,11 @@
                 </ul>
             </li>
             <li class="divider"></li>
-            <li class="has-dropdown" ng-controller="MapController as map">
+            <li class="has-dropdown">
                 <a href="#">Garages</a>
                 <ul class="dropdown">
                     <li>
-                        <a ng-click="map.initialize()">Garage Map</a> <!-- ng-controller="MapController as map"  ng-controller="MapController as map" -->
+                        <a ui-sref="garage.map">Garage Map</a> <!-- ng-controller="MapController as map"  ng-controller="MapController as map" -->
                     </li>
                     <li>
                         <a ui-sref="garage.edit">Edit Garage</a>
@@ -208,7 +208,7 @@
 </nav>
 
 <div ui-view></div>
-         
+<!--
 <div id="map-canvas">
     <div id="garageMapContent" ng-controller="MapController as map">
 
@@ -241,7 +241,7 @@
     </div>
 
 </div>
-
+--> 
 
     <!--
     <div id="uploadInvoiceModal" class="reveal-modal" data-reveal>

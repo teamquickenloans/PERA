@@ -259,13 +259,9 @@
     <Compile Include="Migrations\201503231133449_update.Designer.cs">
       <DependentUpon>201503231133449_update.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201503280152274_BadgeScan.cs" />
-    <Compile Include="Migrations\201503280152274_BadgeScan.Designer.cs">
-      <DependentUpon>201503280152274_BadgeScan.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503282224039_BadgeScan1.cs" />
-    <Compile Include="Migrations\201503282224039_BadgeScan1.Designer.cs">
-      <DependentUpon>201503282224039_BadgeScan1.cs</DependentUpon>
+    <Compile Include="Migrations\201503301739348_BadgeScan.cs" />
+    <Compile Include="Migrations\201503301739348_BadgeScan.Designer.cs">
+      <DependentUpon>201503301739348_BadgeScan.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActiveParkerReport.cs" />
@@ -401,11 +397,8 @@
     <EmbeddedResource Include="Migrations\201503231133449_update.resx">
       <DependentUpon>201503231133449_update.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503280152274_BadgeScan.resx">
-      <DependentUpon>201503280152274_BadgeScan.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503282224039_BadgeScan1.resx">
-      <DependentUpon>201503282224039_BadgeScan1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201503301739348_BadgeScan.resx">
+      <DependentUpon>201503301739348_BadgeScan.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
