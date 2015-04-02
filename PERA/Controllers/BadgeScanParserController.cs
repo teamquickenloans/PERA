@@ -33,39 +33,40 @@ namespace PERA.Controllers
     {
 
         private PERAContext db = new PERAContext();
-        /*
-        // key: garageID, value: column index # of token ID (badge, hangtag, puck)
-        Dictionary<int, int> tokenColumns = new Dictionary<int, int>()
+        
+
+        public struct Scanner
         {
-            {5,3},
-            {6,3},
-            {3,3},
-            {4,3},
-            {13,3},
-            {11,3},
-            {15,3},
-            {14,3},
-            {1,0},
-            {2,1},
-            {16,3}
+            public int garageID;
+            public string scannerName;
         };
 
-        //These have the format row[2] = Lastname, Firstname
-        Dictionary<int, int> nameColumns = new Dictionary<int, int>()
+        List<Scanner> garageScanners = new List<Scanner> //TODO: finish data-entry (one way or another)
         {
-            {5,2},
-            {6,2},
-            {3,2},
-            {4,2},
-            {13,2},
-            {11,2},
-            {15,2},
-            {14,2},
-            {1,2},
-            {2,2},
-            {16,2}
+            //1001 Woodward
+            new Scanner { garageID = 2, scannerName = ""},
+
+            //2 Detroit
+            new Scanner { garageID = 5, scannerName = ""},
+
+            //Financial District (FDG/DIME)
+            new Scanner { garageID = 10, scannerName = ""},
+
+            //Brush St / Greektown
+            new Scanner { garageID = 12, scannerName = ""},
+
+            //Fort St / Greektown
+            new Scanner { garageID = 13, scannerName = ""},
+
+            //First National (FNG)
+            new Scanner { garageID = 14, scannerName = "FNB Garage - Entrance Lane 1 55.1.1.1"},
+            new Scanner { garageID = 14, scannerName = "FNB Garage - Entrance Lane 2 55.1.1.2"},
+            new Scanner { garageID = 14, scannerName = "FNB Garage - Exit Lane 1 55.1.2.1"},
+            new Scanner { garageID = 14, scannerName = "FNB Garage - Exit Lane 2 55.1.2.2"},
+
+            //The Z
+            new Scanner { garageID = 15, scannerName = ""}
         };
-        */
 
 
 
@@ -148,6 +149,7 @@ namespace PERA.Controllers
                 
                 string fullName = (string)row[2];
                 string[] names = fullName.Split(',');   //split the name
+                string[] firstnames = names[1].Split(' ');
 
                 if (names.Length < 2)
                 {
@@ -157,7 +159,7 @@ namespace PERA.Controllers
 
                 else
                 {
-                    firstName = names[1];
+                    firstName = firstnames[1];
                     lastName = names[0];
                 }
                 
@@ -177,39 +179,48 @@ namespace PERA.Controllers
                     continue;
                 }
 
-                System.Diagnostics.Debug.WriteLine(row[0].GetType());
 
-                DateTime datetime = reader.GetDateTime(0);
-                badgeScan.ScanDateTime = datetime;
-
+                //Parse the DateTime
+                badgeScan.ScanDateTime = ExcelDateToDateTime( (double)row[0] );
+                System.Diagnostics.Debug.WriteLine("DateTime: " + badgeScan.ScanDateTime);
 
                 //TODO: we need access to HR database so we can have one place where we can find additional info on all QL Team Members  \\MAYBE, but not for this
                 //TODO: ask Megan for a list of how the garages are referred to in the badge scan excel files so we can parse a GarageID out.
                 //TODO: only add one entry per person per day into the database.
 
 
-                var garage = row[1];
-
-                if (garage != DBNull.Value)
+                
+                //look up what garage the scanner is in and find the corresponding garageID. If the scanner is not for garage entrance/exit disregard the badge scan?
+                badgeScan.GarageID = -1; //to check if the actual GarageID was found
+                for (int i = 0; i < garageScanners.Count(); i++)
                 {
-                    //TODO: parse out garage name and look up that garage in the garages table to find the garageID
-                    badgeScan.GarageID = 1;
-
-                    //Check if the database already holds a report of a person with the same name checking into the same garage on the same day already. 
-                    //If so, don't add another entry into the database.
-                    BadgeScan bs = db.BadgeScans.FirstOrDefault(
-                          x => x.FirstName == badgeScan.FirstName
-                          && x.LastName == badgeScan.LastName
-                          && x.GarageID == badgeScan.GarageID
-                          && x.ScanDateTime.Date == badgeScan.ScanDateTime.Date);
-                    if (bs == null)
+                    if(row[1].ToString() == garageScanners[i].scannerName)
                     {
-                        db.BadgeScans.Add(badgeScan);
-                        db.SaveChanges();
-                    }  
+                        badgeScan.GarageID = garageScanners[i].garageID;
+                    }
                 }
 
+                if(badgeScan.GarageID == -1) //if the GarageID was not found
+                {
+                    continue; //don't add this row to the database
+                }
+                    
+
+                //Check if the database already holds a report of a person with the same name checking into the same garage on the same day already. 
+                //If so, don't add another entry into the database.
+                BadgeScan bs = db.BadgeScans.FirstOrDefault(
+                        x => x.FirstName == badgeScan.FirstName
+                        && x.LastName == badgeScan.LastName
+                        && x.GarageID == badgeScan.GarageID
+                        && x.ScanDateTime == badgeScan.ScanDateTime);
+                if (bs == null)
+                {
+                    db.BadgeScans.Add(badgeScan);
+                    db.SaveChanges();
+                }  
+
             } // end for rows
+            System.Diagnostics.Debug.WriteLine("Parsing Completed!");
         }
 
 
@@ -236,6 +247,23 @@ namespace PERA.Controllers
         public string GetFileName(MultipartFileData fileData)
         {
             return fileData.Headers.ContentDisposition.FileName;
+        }
+
+
+
+        /* This function converts from an Excel Date to a DateTime which we insert into the database
+         * 
+         * 86400 = Seconds in a day
+         * 25569 = Days between 1970/01/01 and 1900/01/01 (min date in Windows Excel)
+        */
+        public DateTime ExcelDateToDateTime(double excelDate)
+        {
+            //Excel Date -> Unix TimeStamp
+            double unixTimeStamp = (excelDate - 25569) * 86400;
+
+            //Unix TimeStamp -> DateTime
+            DateTime datetime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
+            return datetime.AddSeconds(unixTimeStamp);
         }
     }
 }
