@@ -257,6 +257,22 @@
     <Compile Include="Migrations\201503231133449_update.Designer.cs">
       <DependentUpon>201503231133449_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503301321051_APR.cs" />
+    <Compile Include="Migrations\201503301321051_APR.Designer.cs">
+      <DependentUpon>201503301321051_APR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503301336571_PRTM_QLAPR.cs" />
+    <Compile Include="Migrations\201503301336571_PRTM_QLAPR.Designer.cs">
+      <DependentUpon>201503301336571_PRTM_QLAPR.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503301543048_PRTM_IAPRid.cs" />
+    <Compile Include="Migrations\201503301543048_PRTM_IAPRid.Designer.cs">
+      <DependentUpon>201503301543048_PRTM_IAPRid.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201503310529345_garage.cs" />
+    <Compile Include="Migrations\201503310529345_garage.Designer.cs">
+      <DependentUpon>201503310529345_garage.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
@@ -390,6 +406,19 @@
     <EmbeddedResource Include="Migrations\201503231133449_update.resx">
       <DependentUpon>201503231133449_update.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503301321051_APR.resx">
+      <DependentUpon>201503301321051_APR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503301336571_PRTM_QLAPR.resx">
+      <DependentUpon>201503301336571_PRTM_QLAPR.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503301543048_PRTM_IAPRid.resx">
+      <DependentUpon>201503301543048_PRTM_IAPRid.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201503310529345_garage.resx">
+      <DependentUpon>201503310529345_garage.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="DAL\garages_new.csv" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
     <Content Include="Scripts\css\snackbar.min.css" />

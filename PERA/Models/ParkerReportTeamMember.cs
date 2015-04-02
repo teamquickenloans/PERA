@@ -28,6 +28,7 @@ namespace PERA.Models
         public BadgeType? AfterHoursTokenID { get; set; }
         public int? BadgeID { get; set; }
         public int? TokenID { get; set; }
+        public int? InvoiceActiveParkerReportID { get; set; }
 
     }
 }

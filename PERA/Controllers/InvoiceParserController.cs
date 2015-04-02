@@ -133,11 +133,12 @@ namespace PERA.Controllers
                 APR.Invoice = invoice;
                 //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
                 List<ParkerReportTeamMember> teamMembers = 
-                    ExcelParser(file.LocalFileName, originalFileName, invoice, garageID);
+                    ExcelParser(file.LocalFileName, originalFileName, invoice, APR, garageID);
                 foreach (ParkerReportTeamMember teamMember in teamMembers)
                 {
                     if(teamMember == null)
                     {
+                        Trace.WriteLine("null team member");
                         continue;
                     }
                     Trace.WriteLine(teamMember.ParkerReportTeamMemberID);
@@ -153,24 +154,16 @@ namespace PERA.Controllers
                 i++;
             }
             db.SaveChanges();
-
-
         }
         
         private List<ParkerReportTeamMember> ExcelParser(string path, string name, Invoice invoice, 
-            int garageID)
+            InvoiceActiveParkerReport APR, int garageID)
         {
             System.Diagnostics.Debug.WriteLine("begin excel parser");
             IExcelDataReader reader = null;
             //Trace.WriteLine(garageID);
             var excelData = new ExcelData(path);
             reader = excelData.getExcelReader(name);
-            //Trace.WriteLine(invoice.InvoiceID);
-
-            /*if (reader == null)
-            {
-                System.Diagnostics.Debug.WriteLine("excel reader null");
-            }*/
 
             // Create column names from first row
             reader.IsFirstRowAsColumnNames = true;
@@ -187,7 +180,7 @@ namespace PERA.Controllers
                 foreach (DataRow row in table.Rows)
                 {
                     // if this row is the headings, skip this row
-                    System.Diagnostics.Debug.WriteLine("loop");
+                    System.Diagnostics.Debug.WriteLine("row");
                     if(row == null )
                     {
                         System.Diagnostics.Debug.WriteLine("null");
@@ -219,30 +212,38 @@ namespace PERA.Controllers
                     }
                     else
                     {
-                        string fullName = (string)row[nameColumns[garageID]];
-                        string[] names = fullName.Split(',');   //split the name
-                        
-                        if (names.Length < 2)
+                        var fullname = row[nameColumns[garageID]];
+                        if (fullname != DBNull.Value)
                         {
-                            firstName = names[0];
-                            lastName = "";
-                        }
+                            string fullName = (string)fullname;
+                            string[] names = fullName.Split(',');   //split the name
 
-                        else
-                        {
-                            firstName = names[1];
-                            lastName = names[0];
+                            if (names.Length < 2)
+                            {
+                                firstName = names[0];
+                                lastName = "";
+                            }
+
+                            else
+                            {
+                                firstName = names[1];
+                                lastName = names[0];
+                            }
                         }
+                        else
+                            break;
+                        
                     }
 
                     //Convert names to Title Case 
                     TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
-                    firstName = textInfo.ToTitleCase(firstName.ToLower());
-                    lastName = textInfo.ToTitleCase(lastName.ToLower());
-
+                    firstName = textInfo.ToTitleCase(firstName.ToLower().Trim());
+                    lastName = textInfo.ToTitleCase(lastName.ToLower().Trim());
+                    Trace.WriteLine(firstName + " " + lastName);
+                    
                     int index = tokenColumns[garageID];
                     var cardNumberV = row[index];
-                    Trace.WriteLine(cardNumberV.GetType());
+                    //Trace.WriteLine(cardNumberV.GetType());
                     double cardNumberD;
                     int cardNumber;
 
@@ -264,18 +265,14 @@ namespace PERA.Controllers
 
                     teamMember.FirstName = firstName;
                     teamMember.LastName = lastName;
-
+                    teamMember.InvoiceActiveParkerReportID = APR.ID;
 
                     teamMembers.Add(teamMember);
 
                     //db.ParkerReportTeamMembers.Add(teamMember);
                     //db.SaveChanges();
                     Trace.WriteLine(teamMember.ParkerReportTeamMemberID);
-                      /*
-                    foreach (DataColumn column in table.Columns)
-                    {
-                        System.Diagnostics.Debug.WriteLine(row[column]);
-                    }*/
+
                                        
                 } // end for columns
             }  // end for tables
