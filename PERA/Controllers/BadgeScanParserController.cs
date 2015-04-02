@@ -145,20 +145,26 @@ namespace PERA.Controllers
                 }
 
                 BadgeScan badgeScan = db.BadgeScans.Create();
+
+                if (row[2] == DBNull.Value)
+                {
+                    System.Diagnostics.Debug.WriteLine("row[2] is null");
+                    continue;
+                }
                 string firstName, lastName;
                 
-                string fullName = (string)row[2];
+                string fullName = row[2].ToString();
                 string[] names = fullName.Split(',');   //split the name
-                string[] firstnames = names[1].Split(' ');
 
                 if (names.Length < 2)
                 {
+                    System.Diagnostics.Debug.WriteLine("No Last Name Detected: " + row[2].ToString());
                     firstName = names[0];
                     lastName = "";
                 }
-
                 else
                 {
+                    string[] firstnames = names[1].Split(' ');
                     firstName = firstnames[1];
                     lastName = names[0];
                 }
@@ -173,7 +179,7 @@ namespace PERA.Controllers
                 badgeScan.LastName = lastName;
 
 
-                if(row[0] == DBNull.Value)
+                if (row[0] == DBNull.Value)
                 {
                     System.Diagnostics.Debug.WriteLine("row[0] is null");
                     continue;
@@ -212,7 +218,9 @@ namespace PERA.Controllers
                         x => x.FirstName == badgeScan.FirstName
                         && x.LastName == badgeScan.LastName
                         && x.GarageID == badgeScan.GarageID
-                        && x.ScanDateTime == badgeScan.ScanDateTime);
+                        && x.ScanDateTime.Year == badgeScan.ScanDateTime.Year
+                        && x.ScanDateTime.Month == badgeScan.ScanDateTime.Month
+                        && x.ScanDateTime.Day == badgeScan.ScanDateTime.Day);
                 if (bs == null)
                 {
                     db.BadgeScans.Add(badgeScan);
