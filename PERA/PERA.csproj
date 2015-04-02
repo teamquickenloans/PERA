@@ -501,6 +501,7 @@
     <Content Include="Views\Garage\Base.cshtml" />
     <Content Include="Views\Form\Discrepancies.cshtml" />
     <Content Include="Views\Form\EditGarage.cshtml" />
+    <Content Include="Views\Navigation\Expense.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

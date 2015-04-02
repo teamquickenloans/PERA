@@ -251,8 +251,19 @@ namespace PERA.Controllers
                     {
                         try
                         {
-                            cardNumberD = (System.Double)cardNumberV;
-                            cardNumber = Convert.ToInt32(cardNumberD);
+                            //Trace.WriteLine(cardNumberV.GetType());
+                            if (cardNumberV.GetType() == typeof(String)) 
+                            { 
+                                String cn = (String)cardNumberV;
+                                cardNumber = Int32.Parse(cn.Replace("-", ""));
+                                Trace.WriteLine(cardNumber);
+                            }
+                            else
+                            {
+                                cardNumberD = (System.Double)cardNumberV;
+                                cardNumber = Convert.ToInt32(cardNumberD);
+                            }
+
                             teamMember.BadgeID = cardNumber;
                         }
                         catch (InvalidCastException e)
