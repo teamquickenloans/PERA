@@ -35,6 +35,7 @@
         var Garages = {
             all: all,
             create: create,
+            update: update,
             get: get,
             share: share,
             costs: getCosts,
@@ -126,9 +127,19 @@
         * @memberOf thinkster.garages.services.Garages
         */
         function create(content) {
-            return $http.post('/api/garages/', {
-                content: content
-            });
+            return $http.post('/api/garages/', content);
+        }
+        /**
+         * @name update
+         * @desc Update a garage
+         * @param {string} content The content of the new garage
+         * @param {int} garageID The garageID
+         * @returns {Promise}
+         * @memberOf thinkster.garages.services.Garages
+         */
+        function update(Garage, garageID) {
+            console.log(garageID + " " + Garage.garageID);
+            return $http.put('/api/garages/' + garageID, Garage);
         }
 
         /**
