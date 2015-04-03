@@ -2,13 +2,15 @@
     console.log("hello!");
 </script>
 
+
 <ui-gmap-google-map center='map.center' zoom='map.zoom' styles='map.styles'></ui-gmap-google-map>
-<!--
+
 <div id="garageMapContent" ng-controller="MapController as map">
+
 
     @*<div id="map-canvas" ui-view class="columns small-9"></div>*@
     <div id="map-canvas"></div>
-    <div id="mapKey">
+    <div id="mapKey" onload="map.initialize()">
         <h5>&nbsp;&nbsp;Spots Available&nbsp;&nbsp;&nbsp;</h5>
         <div id="greenBox"></div>
         <div class="keyText">100+ Spots</div>
@@ -32,5 +34,6 @@
 
         </div>
     </div>
-</div>-->
+</div>
+
 

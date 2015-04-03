@@ -235,6 +235,7 @@ tr.tableRow.selected {
   transform: translateY(-50%);
 }
 
+<<<<<<< HEAD
 .green {
     color: #859900 ;
 }
@@ -276,3 +277,10 @@ tr.tableRow.selected {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out; }
 
 #date{}
+=======
+.row {
+    margin: 0px;
+    padding: 20px;
+    max-width: none;
+}
+>>>>>>> origin/develop

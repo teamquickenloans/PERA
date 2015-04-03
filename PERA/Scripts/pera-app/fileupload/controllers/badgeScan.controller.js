@@ -1,5 +1,5 @@
 ﻿/**
-* ParkerReport controller
+* Badge Scan controller
 * @namespace pera.fileupload.controllers
 */
 (function () {
@@ -7,43 +7,33 @@
 
     angular
       .module('pera.fileupload.controllers')
-      .controller('ParkerReportController', ParkerReportController);
+      .controller('BadgeScanController', BadgeScanController);
 
-    ParkerReportController.$inject = ['$scope', '$upload', 'Upload', 'Garages', 'Snackbar', '$filter']; //Here 'Garages' is the Garages Service (pera.garages.service)
+    BadgeScanController.$inject = ['$scope', '$upload', 'Upload', 'Garages', 'Snackbar', '$filter']; //Here 'Garages' is the Garages Service (pera.garages.service)
 
     /**
-    * @namespace ParkerReportController
+    * @namespace BadgeScanController
     */
-    function ParkerReportController($scope, $upload, Upload, Garages, Snackbar, $filter) {
+    function BadgeScanController($scope, $upload, Upload, Garages, Snackbar, $filter) {
 
         var vm = this;
         vm.files = [];
-        vm.defaultReport = [{ garageID: 0 }];
-        vm.reports = angular.copy(vm.defaultReport);
+        vm.reports = [{ garageID: 0 }];
         $scope.garages = [];
 
         vm.uploadAll = uploadAll;
-        vm.clearForm = clearForm;
-        vm.addReport = addReport;
-        vm.removeReport = removeReport;
 
-        vm.defaultForm = {
+        vm.form = {
             dateReceived: '',
             dateUploaded: Date.now(),
             monthYear: '',
-        };
-        vm.form = angular.copy(vm.defaultForm);
+        }
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
 
         function addReport() {
             vm.counter++;
             vm.reports.push({ garageID: 0 });
-        }
-
-        function removeReport() {
-            vm.counter = vm.counter - 1;
-            vm.reports.pop();
         }
 
         function uploadAll() {
@@ -55,7 +45,7 @@
                 form.dateReceived = null;
             }
 
-            //invoice.monthYear = '01-' + invoice.monthYear 
+            
             console.log("Upload all");
             console.log("uploadAll monthYear:" + vm.form.monthYear);
             console.log("uploadAll dateReceived:" + vm.form.dateReceived);
@@ -65,31 +55,11 @@
                     console.log(vm.reports[i].file[0].name)
                     vm.files.push(vm.reports[i].file[0])
                 }
-                var files = angular.copy(vm.files);
-                var form = angular.copy(vm.form);
-                var reports = angular.copy(vm.reports);
-                //clearForm();
-                Upload.upload(vm.files, vm.form, vm.reports, "./api/parkerreportparser/upload")
-                    .then(uploadSuccess,uploadFail);
+                Upload.upload(vm.files, vm.form, vm.reports, "./api/badgescanparser/upload");
             }
 
         }
-        function uploadSuccess() {
-            Snackbar.show("Invoice Uploaded Successfully");
-            clearForm();
-        }
 
-        function clearForm() {
-            vm.form = angular.copy(vm.defaultForm);
-            $scope.parkerReportForm.$setPristine();
-            vm.files = [];
-            vm.reports = angular.copy(vm.defaultReport);
-            console.log("clear form");
-        }
-        function uploadFail() {
-            Snackbar.error("Invoice upload failed.  Please recheck the formatting of the excel file.");
-            clearForm();
-        }
         function garagesSuccessFn(data, status, headers, config) {
             $scope.garages = data.data;         //this will depend on what the API returns, it may have to change
             //console.log("fileupload Contoller garages success", $scope.garages);

@@ -33,5 +33,10 @@ namespace PERA.Controllers
         {
             return View();
         }
+
+        public ActionResult BadgeScan()
+        {
+            return View();
+        }
     }
 }
