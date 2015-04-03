@@ -1,5 +1,5 @@
 ﻿/**
-* ParkerReport controller
+* Badge Scan controller
 * @namespace pera.fileupload.controllers
 */
 (function () {
@@ -7,14 +7,14 @@
 
     angular
       .module('pera.fileupload.controllers')
-      .controller('ParkerReportController', ParkerReportController);
+      .controller('BadgeScanController', BadgeScanController);
 
-    ParkerReportController.$inject = ['$scope', '$upload', 'Upload', 'Garages', 'Snackbar', '$filter']; //Here 'Garages' is the Garages Service (pera.garages.service)
+    BadgeScanController.$inject = ['$scope', '$upload', 'Upload', 'Garages', 'Snackbar', '$filter']; //Here 'Garages' is the Garages Service (pera.garages.service)
 
     /**
-    * @namespace ParkerReportController
+    * @namespace BadgeScanController
     */
-    function ParkerReportController($scope, $upload, Upload, Garages, Snackbar, $filter) {
+    function BadgeScanController($scope, $upload, Upload, Garages, Snackbar, $filter) {
 
         var vm = this;
         vm.files = [];
@@ -22,14 +22,12 @@
         $scope.garages = [];
 
         vm.uploadAll = uploadAll;
-        vm.clearForm = clearForm;
 
-        defaultForm = {
+        vm.form = {
             dateReceived: '',
             dateUploaded: Date.now(),
             monthYear: '',
         }
-        vm.form = angular.copy(defaultForm);
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
 
@@ -47,7 +45,7 @@
                 form.dateReceived = null;
             }
 
-            //invoice.monthYear = '01-' + invoice.monthYear 
+            
             console.log("Upload all");
             console.log("uploadAll monthYear:" + vm.form.monthYear);
             console.log("uploadAll dateReceived:" + vm.form.dateReceived);
@@ -57,13 +55,9 @@
                     console.log(vm.reports[i].file[0].name)
                     vm.files.push(vm.reports[i].file[0])
                 }
-                Upload.upload(vm.files, vm.form, vm.reports, "./api/parkerreportparser/upload");
+                Upload.upload(vm.files, vm.form, vm.reports, "./api/badgescanparser/upload");
             }
 
-        }
-
-        function clearForm() {
-            vm.form = angular.copy(defaultForm);
         }
 
         function garagesSuccessFn(data, status, headers, config) {

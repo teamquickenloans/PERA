@@ -93,7 +93,6 @@ namespace PERA.Controllers
 
             foreach (QLTeamMember qlTM in QLReport.TeamMembers) //for each TM in the qlReport
             {
-
                 //First find duplicates within this garage
                 var InvoiceTeamMembers = db.ParkerReportTeamMembers.Where(             //grab the matching Invoice TM
                     x => x.InvoiceActiveParkerReportID == InvoiceReport.ID

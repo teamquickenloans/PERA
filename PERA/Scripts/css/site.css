@@ -233,3 +233,9 @@ tr.tableRow.selected {
   top: 50%;
   transform: translateY(-50%);
 }
+
+.row {
+    margin: 0px;
+    padding: 20px;
+    max-width: none;
+}
