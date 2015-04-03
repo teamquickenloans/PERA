@@ -7,10 +7,10 @@
 
 
 </p>
-<form novalidate ng-submit="fileCtrl.uploadAll()">
-    <div class="small-12 column">
-        <h4> Reports</h4>
-    <div class="small-5 column">
+<form novalidate name="parkerReportForm" ng-submit="fileCtrl.uploadAll()">
+
+        <h4>Date</h4>
+    <div class="large-6 column">
 
 
 
@@ -31,33 +31,29 @@
                      format="dd MMM yyyy" placeholder="optional" today="Today Not Tomorrow"
                      ng-model="fileCtrl.form.dateReceived"></date-picker>
 
-    </div>
 
-    <div class="small-10 column">
         <h4> Active Parker Reports</h4>
         <!--<input type="file" class="fileInput" ng-file-select ng-model="files" ng-multiple="false" />-->
         <div class="row" ng-repeat="report in fileCtrl.reports">
 
-            <div class="small-4 column">
+            <div class="small-6 column">
                 <label for="garageID">Garage:</label>
                 <select ng-model="report.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID">
                     <option value="">-- select a garage --</option>
                 </select>
             </div>
-            <div class="small-3 column">
+            <div class="small-6 column">
                 <a href="#" class="radius button" ng-file-select ng-model="report.file">Select a file</a>
             </div>
-            <div class="small-5 column">
-                <br />
+            <div class="small-12 column">
                 {{ report.file[0].name }}
             </div>
         </div>
         <div class="row">
             <a ng-click="fileCtrl.addReport()">+ Add a report</a><br />
             <button class="radius button" type="submit">Upload</button>
-
+            <a class="radius button" ng-click="fileCtrl.clearForm()">Clear Form</a>
         </div>
-    </div>
     <br />
 
 

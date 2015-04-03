@@ -86,8 +86,11 @@ namespace PERA.Controllers
         {
             Dictionary<string, string> Matches = new Dictionary<string, string>();
             List<ParkerReportTeamMember> Duplicates = new List<ParkerReportTeamMember>();
+            //team members in the QL report that were not in the invoice
             List<QLTeamMember> Missing = new List<QLTeamMember>();
-            ICollection<ParkerReportTeamMember> Extra = InvoiceReport.TeamMembers; //team members in the invoice
+            //team members in the invoice that were not in the QL report
+            ICollection<ParkerReportTeamMember> Extra = InvoiceReport.TeamMembers; 
+
 
             Trace.WriteLine(InvoiceReport.TeamMembers.First());
 
@@ -107,8 +110,8 @@ namespace PERA.Controllers
                         Missing.Add(qlTM);
                         continue;
                     case 1:
-                        ParkerReportTeamMember PRTM = InvoiceTeamMembers.First();
-                        Extra.Remove(qlTM);
+                        ParkerReportTeamMember PRTM = InvoiceTeamMembers.First(); //
+                        Extra.Remove(PRTM);
                         break;
                     default: //more than two matches
                         Duplicates.Add(qlTM);

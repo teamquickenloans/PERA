@@ -28,6 +28,12 @@
             FormSubmit.submit(vm.garageID, vm.monthYear);
         }
 
+        function clearForm() {
+            $scope.discrepanciesForm.$setPristine();
+            vm.monthYear = '';
+            vm.garageID = 0;
+        }
+
         function garagesSuccessFn(data, status, headers, config) {
             $scope.garages = data.data;
         }

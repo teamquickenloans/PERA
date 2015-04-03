@@ -79,8 +79,6 @@
 
         function uploadSuccess(){
             Snackbar.show("Invoice Uploaded Successfully");
-            $scope.invoiceForm.$setPristine();
-            vm.invoice = angular.copy(defaultInvoice);
             clearForm();
         }
         function clearForm() {
@@ -91,7 +89,8 @@
             console.log("clean form");
         }
         function uploadFail() {
-            Snackbar.error("Invoice upload failed");
+            Snackbar.error("Invoice upload failed. Please recheck the formatting of the excel file.");
+            clearForm();
         }
         function garagesSuccessFn(data, status, headers, config) {
             $scope.garages = data.data;         //this will depend on what the API returns, it may have to change

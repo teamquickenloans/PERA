@@ -11,7 +11,13 @@
     * @name config
     * @desc Enable HTML5 routing
     */
-    function config($stateProvider, $routeProvider, $urlRouterProvider) {
+    function config($stateProvider, $routeProvider, $urlRouterProvider, uiGmapGoogleMapApiProvider) {
+
+        uiGmapGoogleMapApiProvider.configure({
+            key: 'AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM',
+            v: '3.17',
+            libraries: 'weather,geometry,visualization'
+        });
 
         var home = {
             name: 'home',

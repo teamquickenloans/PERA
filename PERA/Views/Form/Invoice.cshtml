@@ -40,7 +40,7 @@
             @*<input type="date" ng-model="fileCtrl.invoice.dateReceived" id="dateReceived" ng-datepicker="{}" placeholder="optional" />*@
             @*<input type="date" ng-model="fileCtrl.invoice.dateReceived" id="dateReceived" pick-a-date="date" placeholder="optional" />*@
             <date-picker id="dateReceived" 
-                         format="dd MMM yyyy" placeholder="optional" today="Today Not Tomorrow"
+                         format="dd MMM yyyy" placeholder="optional"
                          ng-model="fileCtrl.invoice.dateReceived"></date-picker>
         
                 </div>
@@ -59,15 +59,14 @@
                 <div class="small-6 column">
                     <a href="#" class="radius button" ng-file-select ng-model="report.file">Select a file</a>
                 </div>
-                <div class="small-10 column">
-                    <br />
+                <div class="small-12 column">
                     {{ report.file[0].name }}
                 </div>
             </div>
             <div class="row">
                 <a ng-click="fileCtrl.addReport()">+ Add a report</a><br />
                 <button class="radius button" type="submit">Upload</button>
-                <a class="radius button" ng-click="fileCtrl.clearForm()">Clear Form</a>
+                <a class="radius button" ng-click="fileCtrl.clearForm()">Clear</a>
             </div>
         </div>
         <br />
