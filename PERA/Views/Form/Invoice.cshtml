@@ -4,16 +4,18 @@
    
     
     </p>
-    <form novalidate ng-submit="fileCtrl.uploadAll()">
-        <div class="small-12 column">
-            <h4> Invoice Meta-Data</h4>
+    <form novalidate name="invoiceForm" method="post" ng-submit="fileCtrl.uploadAll()">
+        <h4> Invoice Meta-Data</h4>
+        <div class="small-6 column">
             <label for="invoiceID">Invoice Number:</label>
             <input type="number" ng-model="fileCtrl.invoice.invoiceID" id="invoiceID" required />
-
+        </div>
+        <div class="small-6 column">
             <label for="totalAmountBilled">Amount Billed:</label>
             <input type="number" step="any" min="0" ng-model="fileCtrl.invoice.totalAmountBilled" id="totalAmountBilled" />
         </div>
-        <div class="small-5 column">
+
+        <div class="small-6 column">
 
             <span data-tooltip aria-haspopup="true" class="has-tip" title="tooltip">
                 <label for="numberOfLeasedSpots">Number of Leased Spots:</label>
@@ -23,13 +25,13 @@
 
             <label for="monthYear">Month/Year of Billing</label>
 
-                <date-picker id="monthYear" format="MMM yyyy" placeholder=""
+                <date-picker id="monthYear" format="MMM yyyy" placeholder="required"
                              ng-model="fileCtrl.invoice.monthYear">
                 </date-picker>
 
             @*<input type="text" ng-model="fileCtrl.invoice.monthYear" id="monthYear" ng-datepicker="{}" required />*@
         </div>
-        <div class="small-5 column">
+        <div class="small-6 column">
 
             <label for="numberOfValidations">Number of Validations:</label>
             <input type="number" ng-model="fileCtrl.invoice.validations" placeholder="optional" />
@@ -42,22 +44,22 @@
                          ng-model="fileCtrl.invoice.dateReceived"></date-picker>
         
                 </div>
-
-        <div class="small-10 column">
+        <br /><br />
+        <div class="small-12 column">
             <h4> Active Parker Reports</h4>
             <!--<input type="file" class="fileInput" ng-file-select ng-model="files" ng-multiple="false" />-->
             <div class="row" ng-repeat="report in fileCtrl.reports">
 
-                <div class="small-4 column">
+                <div class="large-6 column">
                     <label for="garageID">Garage:</label>
                     <select ng-model="report.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID">
                         <option value="">-- select a garage --</option>
                     </select>
                 </div>
-                <div class="small-3 column">
+                <div class="small-6 column">
                     <a href="#" class="radius button" ng-file-select ng-model="report.file">Select a file</a>
                 </div>
-                <div class="small-5 column">
+                <div class="small-10 column">
                     <br />
                     {{ report.file[0].name }}
                 </div>
@@ -65,13 +67,14 @@
             <div class="row">
                 <a ng-click="fileCtrl.addReport()">+ Add a report</a><br />
                 <button class="radius button" type="submit">Upload</button>
-
+                <a class="radius button" ng-click="fileCtrl.clearForm()">Clear Form</a>
             </div>
         </div>
         <br />
 
 
     </form>
+
 
 
 

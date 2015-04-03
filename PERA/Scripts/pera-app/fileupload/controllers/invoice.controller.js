@@ -19,17 +19,18 @@
         var vm = this;
         vm.files = [];
         vm.counter = 0;
-        vm.reports = [{ garageID: 0 }];
+        vm.defaultReport = [{ garageID: 0 }];
+        vm.reports = angular.copy(vm.defaultReport);
 
         $scope.garages = [];
         $scope.data = 'none'; //the file
 
         vm.addReport = addReport;
         vm.uploadAll = uploadAll;
+        vm.clearForm = clearForm;
 
         //$scope.file = [];
-
-        vm.invoice = {
+        vm.defaultInvoice = {
             invoiceID: '',
             totalAmountBilled: '',
             dateReceived: '',
@@ -38,6 +39,7 @@
             validations: '',
             monthYear: ''
         }
+        vm.invoice = angular.copy(vm.defaultInvoice);
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
 
@@ -70,11 +72,27 @@
                     console.log(vm.reports[i].file[0].name)
                     vm.files.push(vm.reports[i].file[0])
                 }
-                Upload.upload(vm.files, vm.invoice, vm.reports, "./api/invoiceparser/upload");
+                Upload.upload(vm.files, vm.invoice, vm.reports, "./api/invoiceparser/upload").then(uploadSuccess, uploadFail);
             }
 
         }
 
+        function uploadSuccess(){
+            Snackbar.show("Invoice Uploaded Successfully");
+            $scope.invoiceForm.$setPristine();
+            vm.invoice = angular.copy(defaultInvoice);
+            clearForm();
+        }
+        function clearForm() {
+            $scope.invoiceForm.$setPristine();
+            vm.invoice = angular.copy(vm.defaultInvoice);
+            vm.files = [];
+            vm.reports = angular.copy(vm.defaultReport);
+            console.log("clean form");
+        }
+        function uploadFail() {
+            Snackbar.error("Invoice upload failed");
+        }
         function garagesSuccessFn(data, status, headers, config) {
             $scope.garages = data.data;         //this will depend on what the API returns, it may have to change
             //console.log("fileupload Contoller garages success", $scope.garages);

@@ -22,12 +22,14 @@
         $scope.garages = [];
 
         vm.uploadAll = uploadAll;
+        vm.clearForm = clearForm;
 
-        vm.form = {
+        defaultForm = {
             dateReceived: '',
             dateUploaded: Date.now(),
             monthYear: '',
         }
+        vm.form = angular.copy(defaultForm);
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
 
@@ -58,6 +60,10 @@
                 Upload.upload(vm.files, vm.form, vm.reports, "./api/parkerreportparser/upload");
             }
 
+        }
+
+        function clearForm() {
+            vm.form = angular.copy(defaultForm);
         }
 
         function garagesSuccessFn(data, status, headers, config) {
