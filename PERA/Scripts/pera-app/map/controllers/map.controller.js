@@ -9,12 +9,12 @@
       .module('pera.map.controllers')
       .controller('MapController', MapController);
 
-    MapController.$inject = ['$scope','Garages', 'Snackbar', 'Initializer'];
+    MapController.$inject = ['$scope','Garages', 'Snackbar', 'Initializer', 'SideBar'];
 
     /**
     * @namespace MapController
     */
-    function MapController($scope, Garages, Snackbar, Initializer) {
+    function MapController($scope, Garages, Snackbar, Initializer, SideBar) {
         var vm = this;
         vm.map;
         vm.garages = [];
@@ -86,7 +86,15 @@
           function garagesErrorFn(data, status, headers, config) {
               //Snackbar.error(data.data.error);
           }
-          
+          function attachGarage(marker, garage) {
+                  google.maps.event.addListener(marker, 'click', function () {
+                      SideBar.setCurrent(marker.garage);
+                      console.log(marker.garage.name);
+                      //TODO: set state garage.map.garage
+                      alert("Congratulations, you've clicked on a garage!");
+                      //TODO: tab.setSideTab(i); //This is what I want to do
+                  });
+          }
           function PlaceMarkers(map, garages, garageMarkers) {
               for (var i = 0; i < garages.length; i++) {
                   var position = new google.maps.LatLng(garages[i].latitude, garages[i].longitude);
@@ -94,19 +102,17 @@
                   //create marker
                   var marker = new google.maps.Marker({
                       map: map,
-                      position: position
+                      position: position,
+                      garage: garages[i]
                   });
 
                   //add label
                   var styleString = '<div style="font-size:14px; color: #4F4F4F; text-shadow: 1px 1px 0 #FFF, -1px 1px 0 #FFF, 1px -1px 0 #FFF, -1px -1px #FFF;">';
                   var label = new ELabel(map, position, styleString + garages[i].name + '</div>', null, new google.maps.Size(-20, -32), false);
                   label.setMap(map);
-
+                  var garage = garages[i];
                   //add click event
-                  google.maps.event.addListener(marker, 'click', function () {
-                      alert("Congratulations, you've clicked on a garage!");
-                      //TODO: tab.setSideTab(i); //This is what I want to do
-                  });
+                  attachGarage(marker, garage);
 
                   //add marker image
                   var load = parseFloat(garages[i].numberOfLeasedSpaces) - parseFloat(garages[i].numberOfTeamMemberSpaces);
@@ -122,6 +128,7 @@
                   else if (load == 0) {
                       marker.setIcon('../../Content/Images/parking_black.png');
                   }
+
                   vm.garageMarkers.push(marker);
               }
           }

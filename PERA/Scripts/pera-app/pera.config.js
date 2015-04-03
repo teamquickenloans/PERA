@@ -163,8 +163,8 @@
         }
         $stateProvider.state(detectedIssuesOverview);
 
-        ///////////////////////////////////////////
-        //   Expense > Detected Issues > Garage //
+          //////////////////////////////////////////
+         //   Expense > Detected Issues > Garage //
         //////////////////////////////////////////
         var detectedIssuesGarage = {
             name: 'expense.detectedIssues.garage',
@@ -245,8 +245,8 @@
         }
         $stateProvider.state(discrepancies);
 
-        /////////////////////////////////
-        //        Expense > Badge Scan //
+          /////////////////////////////////
+         //        Expense > Badge Scan //
         /////////////////////////////////
         var badgeScan = {
             name: 'expense.badgeScan',
@@ -254,6 +254,9 @@
                 '': {
                     templateUrl: 'Form/BadgeScan',
                     controller: 'BadgeScanController as fileCtrl'
+                },
+                'sidebar-left@expense': {
+                    templateUrl: 'Navigation/Expense'
                 }
             }
         }
