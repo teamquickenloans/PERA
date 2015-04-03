@@ -141,6 +141,9 @@
                 'sidebar@expense': {
                     templateUrl: 'Navigation/Overview',
                     controller: 'SideBarController as sidebar'
+                },
+                'sidebar-left@expense': {
+                    templateUrl: 'Navigation/Expense'
                 }
             }
         }
@@ -169,6 +172,9 @@
                 'sidebar@expense': {
                     templateUrl: 'Navigation/Garage',
                     controller: 'SideBarController as sidebar'
+                },
+                'sidebar-left@expense': {
+                    templateUrl: 'Navigation/Expense'
                 }
             }
         }
@@ -183,6 +189,9 @@
                 '': {
                     templateUrl: 'Expense/UploadHistory',
                     controller: 'ExpensesController as expenseCtrl'
+                },
+                'sidebar-left@expense': {
+                    templateUrl: 'Navigation/Expense'
                 }
             }
         }
@@ -197,6 +206,9 @@
                 '' : {
                     templateUrl: 'Form/Invoice',
                     controller: 'InvoiceController as fileCtrl'
+                },
+                'sidebar-left@expense' : {
+                    templateUrl: 'Navigation/Expense'
                 }
             }
         }
@@ -211,6 +223,9 @@
                 '': {
                     templateUrl: 'Form/ParkerReport',
                     controller: 'ParkerReportController as fileCtrl'
+                },
+                'sidebar-left@expense': {
+                    templateUrl: 'Navigation/Expense'
                 }
             }
         }
@@ -222,6 +237,9 @@
                 '': {
                     templateUrl: 'Form/Discrepancies',
                     controller: 'DiscrepanciesController as controller'
+                },
+                'sidebar-left@expense': {
+                    templateUrl: 'Navigation/Expense'
                 }
         }
         }

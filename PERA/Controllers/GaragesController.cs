@@ -9,6 +9,7 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
 using PERA.Models;
+using System.Diagnostics;
 
 namespace PERA.Controllers
 {
@@ -39,13 +40,17 @@ namespace PERA.Controllers
         [ResponseType(typeof(void))]
         public IHttpActionResult PutGarage(int id, Garage garage)
         {
+            Trace.WriteLine("Put garage");
             if (!ModelState.IsValid)
             {
+                Trace.WriteLine("model state invalid");
                 return BadRequest(ModelState);
             }
-
+            Trace.WriteLine(id);
+            Trace.WriteLine(garage.GarageID);
             if (id != garage.GarageID)
             {
+                Trace.WriteLine("garageID invalid");
                 return BadRequest();
             }
 

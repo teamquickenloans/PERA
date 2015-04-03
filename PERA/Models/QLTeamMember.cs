@@ -11,6 +11,6 @@ namespace PERA.Models
         public int? ID_CODE_26W { set; get; }
         public int? FACILITY_CODE_26W { set; get; }
         public int? HID_CORP1K_ID { set; get; }
-
+        public int QLActiveParkerReportID { set; get; }
     }
 }

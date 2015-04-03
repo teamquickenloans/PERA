@@ -42,6 +42,7 @@
                             file: file
                         }, uploadProgressFn, uploadSuccessFn)
                     })(i);
+                    return vm.uploads[0];
                 }
             }
         };

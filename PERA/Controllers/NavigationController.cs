@@ -27,6 +27,10 @@ namespace PERA.Controllers
         {
             return View();
         }
+        public ActionResult Expense()
+        {
+            return View();
+        }
 
     }
 }
