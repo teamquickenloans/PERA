@@ -7,13 +7,13 @@ namespace PERA.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class PRTM_IAPRid : IMigrationMetadata
+    public sealed partial class redo : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(PRTM_IAPRid));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(redo));
         
         string IMigrationMetadata.Id
         {
-            get { return "201503301543048_PRTM_IAPRid"; }
+            get { return "201504031939378_redo"; }
         }
         
         string IMigrationMetadata.Source
