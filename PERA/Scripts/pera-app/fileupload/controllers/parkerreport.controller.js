@@ -24,7 +24,7 @@
         vm.uploadAll = uploadAll;
         vm.clearForm = clearForm;
 
-        defaultForm = {
+        vm.defaultForm = {
             dateReceived: '',
             dateUploaded: Date.now(),
             monthYear: '',
