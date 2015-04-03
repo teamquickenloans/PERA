@@ -9,12 +9,12 @@
       .module('pera.map.controllers')
       .controller('MapController', MapController);
 
-    MapController.$inject = ['$scope','Garages', 'Snackbar', 'Initializer'];
+    MapController.$inject = ['$scope','Garages', 'Snackbar', 'Initializer', 'uiGmapGoogleMapApi'];
 
     /**
     * @namespace MapController
     */
-    function MapController($scope, Garages, Snackbar, Initializer) {
+    function MapController($scope, Garages, Snackbar, Initializer, GoogleMapApi) {
         var vm = this;
         vm.map;
         vm.garages = [];
@@ -29,6 +29,7 @@
 
         //window.onload = initialize;
         //initialize();
+        GoogleMapApi.then(function(maps) {
 
         function initialize() {
             if (vm.initialized == true)
