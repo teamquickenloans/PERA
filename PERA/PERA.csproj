@@ -185,12 +185,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <!--
       @name ASP.NET MVC Controllers
@@ -273,7 +269,6 @@
     <Compile Include="Models\QLTeamMember.cs" />
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\Garage.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="DAL\PERAContext.cs" />
@@ -299,6 +294,7 @@
       @name pera-app
       @desc AngularJS application
     -->
+    <Content Include="Grant.sql" />
     <Content Include="Scripts\css\app.css" />
     <Content Include="Scripts\css\foundation-icons.css" />
     <Content Include="Scripts\css\foundation.css" />
@@ -404,6 +400,7 @@
     <EmbeddedResource Include="Migrations\201504031939378_redo.resx">
       <DependentUpon>201504031939378_redo.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
     <Content Include="Scripts\css\snackbar.min.css" />
@@ -473,6 +470,9 @@
     <Content Include="Views\Form\Discrepancies.cshtml" />
     <Content Include="Views\Form\EditGarage.cshtml" />
     <Content Include="Views\Navigation\Expense.cshtml" />
+    <None Include="Web.Test.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
