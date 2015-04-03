@@ -43,8 +43,10 @@
          -->
 
     <!--====================== Foundation ============================ -->
-    <link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/css/foundation.min.css" />
+    @*<link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/css/foundation.min.css" />*@
+    <link rel="stylesheet" href="~/Scripts/css/foundation.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/js/foundation.min.js"></script>
+    <link rel="stylesheet" href="~/Scripts/css/app.css">
 
     <!-- Load Awesome Fonts CSS -->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -63,6 +65,7 @@
     <!--=======================Foundation Date Picker================== -->
     <script src="~/Scripts/js/foundation-datepicker.js"></script>
     <link href="~/Scripts/css/foundation-datepicker.css" rel="stylesheet" />
+    <link href="~/Scripts/css/foundation-icons.css" rel="stylesheet" />
     <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
 
     <!--====================== Google Maps API ============================ -->
@@ -183,7 +186,7 @@
                 </ul>
             </li>
             <li class="divider"></li>
-            <li class="has-dropdown" ng-controller="MapController as map">
+            <li class="has-dropdown">
                 <a href="#">Garages</a>
                 <ul class="dropdown">
                     <li>
@@ -204,40 +207,36 @@
     </section>
 </nav>
 
-<div ui-view class="columns large-12"></div>
-         
-<div id="map-canvas">
-    <div id="garageMapContent" ng-controller="MapController as map">
+<div ui-view class="row"></div>
+        
+    @*<div id="garageMapContent" ng-controller="MapController as map">
 
-        @*<div id="map-canvas" ui-view class="columns small-9"></div>*@
-        @*<div id="map-canvas"></div>*@
-        <div id="mapKey">
-            <h5>&nbsp;&nbsp;Spots Available&nbsp;&nbsp;&nbsp;</h5>
-            <div id="greenBox"></div>
-            <div class="keyText">100+ Spots</div>
-            <br />
-            <div id="yellowBox"></div>
-            <div class="keyText">50 - 100 Spots</div>
-            <br />
-            <div id="redBox"></div>
-            <div class="keyText">0 - 50 Spots</div>
-            <br />
-            <div id="blackBox"></div>
-            <div class="keyText">Garage Full</div>
-        </div>
-        <div class="row">
-            <div ui-view="sidebartop" class="columns small-3">
-
+            <div id="map-canvas" ui-view class="columns small-9"></div>
+            <div id="map-canvas"></div>
+            <div id="mapKey">
+                <h5>&nbsp;&nbsp;Spots Available&nbsp;&nbsp;&nbsp;</h5>
+                <div id="greenBox"></div>
+                <div class="keyText">100+ Spots</div>
+                <br />
+                <div id="yellowBox"></div>
+                <div class="keyText">50 - 100 Spots</div>
+                <br />
+                <div id="redBox"></div>
+                <div class="keyText">0 - 50 Spots</div>
+                <br />
+                <div id="blackBox"></div>
+                <div class="keyText">Garage Full</div>
+            </div>
+            <div class="row">
+                <div ui-view="sidebartop" class="columns small-3">
+                </div>
+            </div>
+            <div class="row">
+                <div ui-view="sidebarbottom" class="columns small-3">
+                </div>
             </div>
         </div>
-        <div class="row">
-            <div ui-view="sidebarbottom" class="columns small-3">
-
-            </div>
-        </div>
-    </div>
-
-</div>
+    </div>*@
 
 
     <!--

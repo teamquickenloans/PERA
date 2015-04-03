@@ -26,6 +26,7 @@
         $scope.data = 'none'; //the file
 
         vm.addReport = addReport;
+        vm.removeReport = removeReport;
         vm.uploadAll = uploadAll;
         vm.clearForm = clearForm;
 
@@ -47,6 +48,11 @@
             vm.counter++;
             console.log("add file");
             vm.reports.push({ garageID: 0 });
+        }
+
+        function removeReport() {
+            vm.counter = vm.counter - 1;
+            vm.reports.pop();
         }
 
         function uploadAll()

@@ -32,7 +32,17 @@
                      ng-model="fileCtrl.form.dateReceived"></date-picker>
 
 
-        <h4> Active Parker Reports</h4>
+   
+    <h4>Active Parker Reports
+        <a ng-click="fileCtrl.addReport()">
+            <i class="fi-plus green px24"></i>
+        </a>
+        <a ng-click="fileCtrl.removeReport()">
+            <i class="fi-minus orange px24"></i>
+        </a><br />
+    </h4>
+
+
         <!--<input type="file" class="fileInput" ng-file-select ng-model="files" ng-multiple="false" />-->
         <div class="row" ng-repeat="report in fileCtrl.reports">
 
@@ -50,11 +60,11 @@
             </div>
         </div>
         <div class="row">
-            <a ng-click="fileCtrl.addReport()">+ Add a report</a><br />
+
             <button class="radius button" type="submit">Upload</button>
             <a class="radius button" ng-click="fileCtrl.clearForm()">Clear Form</a>
         </div>
-    <br />
+        <br />
 
 
 </form>

@@ -9,12 +9,12 @@
       .module('pera.map.controllers')
       .controller('MapController', MapController);
 
-    MapController.$inject = ['$scope','Garages', 'Snackbar', 'Initializer', 'uiGmapGoogleMapApi'];
+    MapController.$inject = ['$scope','Garages', 'Snackbar', 'Initializer'];
 
     /**
     * @namespace MapController
     */
-    function MapController($scope, Garages, Snackbar, Initializer, GoogleMapApi) {
+    function MapController($scope, Garages, Snackbar, Initializer) {
         var vm = this;
         vm.map;
         vm.garages = [];
@@ -26,10 +26,9 @@
         //initialize the map
         console.log('map ctrl');
         vm.initialize = initialize;
-
+        initialize();
         //window.onload = initialize;
         //initialize();
-        GoogleMapApi.then(function(maps) {
 
         function initialize() {
             if (vm.initialized == true)
@@ -52,13 +51,8 @@
                 .then(function () {
                     console.log('create map');
 
-                    vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+                    vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);*/
 
-                    //Add Elabel
-                    //var element = document.createElement("script");
-                    //element.setAttribute("type", "text/javascript");
-                    //element.setAttribute("src", "~/Scripts/js/ELabels3.js");
-                    */
             vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
             //Add Elabel
             //var element = document.createElement("script");
@@ -66,17 +60,11 @@
             //element.src = "~/Scripts/js/ELabels3.js";
             //document.body.appendChild(element);
 
-                    //Add key to map
+            //Add key to map
             vm.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('mapKey'));
-
-                    Garages.all().then(garagesSuccessFn, garagesErrorFn);
-                    //    <script type="text/javascript" src="~/Scripts/js/ELabels3.js"></script>
-                //});
-
-              //vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-              console.log(vm.garages);
-
-              vm.initialized = true;
+            Garages.all().then(garagesSuccessFn, garagesErrorFn);
+            console.log(vm.garages);
+            vm.initialized = true;
           } //end intialize function
 
           function garagesSuccessFn(data, status, headers, config) {

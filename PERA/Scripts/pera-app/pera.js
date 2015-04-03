@@ -31,8 +31,8 @@
           'ui.router',
           'ngRoute',
           'ngResource',
-          'uiGmapgoogle-maps',
-          'uiGmapGoogleMapApiProvider'
+          //'uiGmapgoogle-maps',
+          //'uiGmapGoogleMapApiProvider'
           //'ngSanitize',
           //'ct.ui.router.extras'
       ])

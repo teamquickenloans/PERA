@@ -287,51 +287,30 @@ namespace PERA.Controllers
                     if(splitTokenColumns.ContainsKey(garageID))
                     {
                         Token tokens = splitTokenColumns[garageID];
-                        itokenA = tokens.ID_CODE_26W;
-                        itokenB = tokens.HID_CORP1K_ID;
-
+                        var tokenAv = row[tokens.ID_CODE_26W];
+                        var tokenBv = row[tokens.HID_CORP1K_ID];
+                        if(tokenAv != DBNull.Value ){
+                            tokenAd = (System.Double)tokenAv;
+                            teamMember.BadgeID = Convert.ToInt32(tokenAd);
+                        }
+                        if (tokenBv != DBNull.Value) {
+                            tokenBd = (System.Double)tokenBv;
+                            teamMember.TokenID = Convert.ToInt32(tokenBd);
+                        }
                     }
                     else if(tokenColumns.ContainsKey(garageID))
                     {
-                        itokenA = tokenColumns[garageID];
+                        var tokenAv = row[tokenColumns[garageID]];
+                        if(tokenAv != DBNull.Value ){
+                            tokenAd = (System.Double)tokenAv;
+                            teamMember.BadgeID = Convert.ToInt32(tokenAd);
+                        }
+
                     }
                     else{
                         throw new System.ArgumentException("Invalid GarageID");
                     }
-
-
-                    var tokenAv = row[itokenA];
-                    var tokenBv = row[itokenB];
-
-
-                    if (tokenAv != DBNull.Value)
-                    {
-                        try { 
-                            tokenAd = (System.Double)tokenAv;
-                            teamMember.BadgeID = Convert.ToInt32(tokenAd);
-                            }
-                        catch (InvalidCastException e)
-                        {
-
-                        }
-                    }
-
-                    else
-                    {
-                        teamMember.BadgeID = null;
-                    }
-                    if (tokenBv != DBNull.Value)
-                    {
-                        try {
-                            tokenBd = (System.Double)tokenBv;
-                            teamMember.TokenID = Convert.ToInt32(tokenBd);
-                        }
-                        catch (InvalidCastException e)
-                        {
-
-                        }
-                    }
-
+                 
 
                     teamMember.FirstName = firstName;
                     teamMember.LastName = lastName;

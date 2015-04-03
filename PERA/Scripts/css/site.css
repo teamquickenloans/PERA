@@ -1,4 +1,5 @@
-﻿html, body, #wrapper {
+﻿
+html, body, #wrapper {
     height: 100%;
     width: 100%;
     padding: 0;
@@ -234,6 +235,25 @@ tr.tableRow.selected {
   transform: translateY(-50%);
 }
 
+.green {
+    color: #859900 ;
+}
+
+.orange {
+    color: #FF8300 ;
+}
+
+.yellow {
+    color: #FFB400 ;
+}
+
+.red {
+    color: #DC322F ;
+}
+
+.px24 {
+    font-size: 24px;
+}
 .date-input{
   -webkit-appearance: none;
   border-radius: 0;

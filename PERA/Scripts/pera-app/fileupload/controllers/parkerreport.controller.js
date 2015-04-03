@@ -25,6 +25,7 @@
         vm.uploadAll = uploadAll;
         vm.clearForm = clearForm;
         vm.addReport = addReport;
+        vm.removeReport = removeReport;
 
         vm.defaultForm = {
             dateReceived: '',
@@ -38,6 +39,11 @@
         function addReport() {
             vm.counter++;
             vm.reports.push({ garageID: 0 });
+        }
+
+        function removeReport() {
+            vm.counter = vm.counter - 1;
+            vm.reports.pop();
         }
 
         function uploadAll() {
@@ -59,6 +65,10 @@
                     console.log(vm.reports[i].file[0].name)
                     vm.files.push(vm.reports[i].file[0])
                 }
+                var files = angular.copy(vm.files);
+                var form = angular.copy(vm.form);
+                var reports = angular.copy(vm.reports);
+                //clearForm();
                 Upload.upload(vm.files, vm.form, vm.reports, "./api/parkerreportparser/upload")
                     .then(uploadSuccess,uploadFail);
             }
