@@ -197,6 +197,7 @@
     -->
     <Compile Include="Controllers\BadgeScanParserController.cs" />
     <Compile Include="Controllers\DiscrepanciesController.cs" />
+    <Compile Include="Controllers\ExportReportController.cs" />
     <Compile Include="Controllers\GarageController.cs" />
     <Compile Include="Controllers\ParkerReportTeamMembersController.cs" />
     <Compile Include="Controllers\ParkerReportParserController.cs" />
@@ -473,6 +474,7 @@
     <Content Include="Views\Form\Discrepancies.cshtml" />
     <Content Include="Views\Form\EditGarage.cshtml" />
     <Content Include="Views\Navigation\Expense.cshtml" />
+    <Content Include="Views\Form\BadgeScan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
