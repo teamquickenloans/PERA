@@ -99,8 +99,10 @@
             console.log("submit");
             // Here you will post a garage to the API
             //  using the $http angular service
-
-            Garages.update($scope.new, $scope.new.garageID).then(clearForm);
+            if ($scope.mode === "true")
+                Garages.update($scope.new, $scope.new.garageID).then(clearForm);
+            else if ($scope.mode === "false")
+                Garages.create($scope.new).then(clearForm);
         }
 
         /**
