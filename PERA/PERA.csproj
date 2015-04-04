@@ -254,9 +254,17 @@
     <Compile Include="Migrations\201503231133449_update.Designer.cs">
       <DependentUpon>201503231133449_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503301739348_BadgeScan.cs" />
+    <Compile Include="Migrations\201503301739348_BadgeScan.Designer.cs">
+      <DependentUpon>201503301739348_BadgeScan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201504031939378_redo.cs" />
     <Compile Include="Migrations\201504031939378_redo.Designer.cs">
       <DependentUpon>201504031939378_redo.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504041446049_migration23.cs" />
+    <Compile Include="Migrations\201504041446049_migration23.Designer.cs">
+      <DependentUpon>201504041446049_migration23.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActiveParkerReport.cs" />
@@ -397,8 +405,14 @@
       <DependentUpon>201503231133449_update.cs</DependentUpon>
     </EmbeddedResource>
     <Content Include="DAL\garages_new.csv" />
+    <EmbeddedResource Include="Migrations\201503301739348_BadgeScan.resx">
+      <DependentUpon>201503301739348_BadgeScan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504031939378_redo.resx">
       <DependentUpon>201504031939378_redo.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504041446049_migration23.resx">
+      <DependentUpon>201504041446049_migration23.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />

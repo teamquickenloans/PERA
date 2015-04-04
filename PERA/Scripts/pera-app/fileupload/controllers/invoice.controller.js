@@ -96,7 +96,6 @@
         }
         function uploadFail() {
             Snackbar.error("Invoice upload failed. Please recheck the formatting of the excel file.");
-            clearForm();
         }
         function garagesSuccessFn(data, status, headers, config) {
             $scope.garages = data.data;         //this will depend on what the API returns, it may have to change

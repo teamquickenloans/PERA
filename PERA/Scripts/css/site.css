@@ -152,6 +152,7 @@ tr.tableRow.selected {
     color: white;
     font-weight: normal;
     background-color: #444444;
+    padding: 5px;
 }
 
 #usageTableWrapper {
@@ -235,7 +236,6 @@ tr.tableRow.selected {
   transform: translateY(-50%);
 }
 
-<<<<<<< HEAD
 .green {
     color: #859900 ;
 }
@@ -277,10 +277,15 @@ tr.tableRow.selected {
   transition: box-shadow 0.45s, border-color 0.45s ease-in-out; }
 
 #date{}
-=======
+
 .row {
-    margin: 0px;
-    padding: 20px;
-    max-width: none;
+  margin: 0px;
+  padding: 2px;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 0;
+  margin-bottom: 0;
+  max-width: 100rem; 
+
 }
->>>>>>> origin/develop

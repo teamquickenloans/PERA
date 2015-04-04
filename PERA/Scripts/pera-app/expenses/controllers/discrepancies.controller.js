@@ -37,7 +37,7 @@
         function submitFail()
         {
             Snackbar.show('Error identifying discrepancies')
-            clearForm();
+            //clearForm();
         }
 
         function clearForm() {

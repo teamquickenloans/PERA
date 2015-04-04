@@ -23,13 +23,27 @@
             garageID: '',
 
         }
+
+        
+        $scope.mode = "false";
         vm.submit = submit;
 
+        $scope.watch('mode', switchMode);
         $scope.$watch('current', update)
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
         //vm.garages = EditGarage.all();
         //console.log(vm.garages);
+
+        // switches modes and saves result in variable
+        function switchMode()
+        {
+            if( mode === "true")
+            {
+                // we are switching from add to edit
+                $scope.current = 
+            }
+        }
 
         function update()
         {

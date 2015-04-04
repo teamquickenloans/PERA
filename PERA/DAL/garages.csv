@@ -1,5 +1,5 @@
 "GarageID","Name","Address","Owner","GarageManagerID","Capacity","NumberOfLeasedSpaces","NumberOfTeamMemberSpaces","SpaceCost","ChangeCost","AccessTokenCost","BillingParty","ValidationCost","Latitude","Longitude"
-"1","Compuware (OCM)","1188 Farmer St Detroit MI 48226","Bedrock","1","3085","1825","1657","175","0","50","UPM","10","42.3333543","-83.04649310000002","AccessToken.B","AccessToken.P"
+"1","One Campus Martius(OCM)","1188 Farmer St Detroit MI 48226","Bedrock","1","3085","1825","1657","175","0","50","UPM","10","42.3333543","-83.04649310000002","AccessToken.B","AccessToken.P"
 "2","Premier","1206 Woodward Ave Detroit MI 48226","City of Detroit","7","1195","925","899","75","20","0","City of Detroit","5","42.3337978","-83.0480407","AccessToken.B"
 "3","1001 Woodward","1001 Woodward Ave Detroit MI 48226","Bedrock","1","732","226","226","135","0","0","UPM","10","42.3320291","-83.04760010000001","AccessToken.B","AccessToken.H"
 "4","Book Cadillac","150 Michigan Ave Detroit MI 48226","Book Cadillac","2","0","18","18","130","0","30","UPM","0","42.331956","-83.04931999999997","AccessToken.G"

@@ -194,7 +194,11 @@
                 <a href="#">Garages</a>
                 <ul class="dropdown">
                     <li>
+<<<<<<< Updated upstream
                         <a ui-sref="garage.map">Garage Map</a> <!-- ng-controller="MapController as map"  ng-controller="MapController as map" -->
+=======
+                        <a ui-sref="garage.map">Garage Map</a>
+>>>>>>> Stashed changes
                     </li>
                     <li>
                         <a ui-sref="garage.edit">Edit Garage</a>
@@ -212,9 +216,17 @@
 </nav>
 
 
+    <div class="row">
+        <div ui-view></div>
+        <div id="map-canvas"></div>
 
+<<<<<<< Updated upstream
 <div ui-view></div>
 <!---->
+=======
+    </div>
+<!--
+>>>>>>> Stashed changes
 <div id="map-canvas">
     <div id="garageMapContent" ng-controller="MapController as map">
 

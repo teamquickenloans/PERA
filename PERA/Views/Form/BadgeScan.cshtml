@@ -5,7 +5,6 @@
 </p>
 <form novalidate ng-submit="fileCtrl.uploadAll()">
 
-    <div class="small-10 column">
         <h4> Badge Scan Reports</h4>
         
         <div class="row" ng-repeat="report in fileCtrl.reports">
@@ -13,7 +12,7 @@
             <div class="small-3 column">
                 <a href="#" class="radius button" ng-file-select ng-model="report.file">Select a file</a>
             </div>
-            <div class="small-5 column">
+            <div class="small-8 column">
                 <br />
                 {{ report.file[0].name }}
             </div>
@@ -23,7 +22,6 @@
             <button class="radius button" type="submit">Upload</button>
 
         </div>
-    </div>
     <br />
 
 </form>

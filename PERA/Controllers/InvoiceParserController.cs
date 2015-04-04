@@ -46,7 +46,6 @@ namespace PERA.Controllers
             {15,3},
             {14,3},
             {1,0},
-            {2,1},
             {16,3}
         };
 
@@ -61,8 +60,7 @@ namespace PERA.Controllers
             {11,2},
             {15,2},
             {14,2},
-            {1,2},
-            {2,2},
+            {1,1},
             {16,2}
         };
 
@@ -231,8 +229,10 @@ namespace PERA.Controllers
                             }
                         }
                         else
-                            break;
-                        
+                        {
+                            Trace.WriteLine("null name");
+                            continue;
+                        }
                     }
 
                     //Convert names to Title Case 
@@ -277,7 +277,7 @@ namespace PERA.Controllers
                     teamMember.FirstName = firstName;
                     teamMember.LastName = lastName;
                     teamMember.InvoiceActiveParkerReportID = APR.ID;
-
+                    Trace.WriteLine(teamMember.FirstName);
                     teamMembers.Add(teamMember);
 
                     //db.ParkerReportTeamMembers.Add(teamMember);
