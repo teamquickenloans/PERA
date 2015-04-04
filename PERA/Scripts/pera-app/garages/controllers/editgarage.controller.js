@@ -18,17 +18,38 @@
         var vm = this;
         $scope.garages = []; //the list of garages to be returned
         $scope.current;
-        $scope.new = {
-            name: '',
-            garageID: '',
 
-        }
+        var defaultForm = {
+            garageID: '',
+            name: '',
+            address: '',
+            latitude: '',
+            longitude: '',
+            capacity: '',
+            numberOfLeasedSpaces: '',
+            numberOfTeamMemberSpaces: '',
+            minimumNumberOfBufferSpaces: '',
+            spaceCost: '',
+            transientSalePrice: '',
+            owner: '',
+            billingParty: '',
+            reportType: '',
+            accessToken: '',
+            accessTokenOptional: '',
+            accessTokenCost: '',
+            changeCost: '',
+            validationCost: '',
+            numberOfValidations: '',
+            garageManager: ''
+        };
+        $scope.new = defaultForm;
 
         $scope.edit;
         $scope.add;
 
         
         $scope.mode = "false";
+
         vm.submit = submit;
 
         $scope.watch('mode', switchMode);
@@ -54,8 +75,8 @@
         {
             $scope.new = $scope.current;
             console.log($scope.new.name);
-
         }
+        
 
         function garagesSuccessFn(data, status, headers, config) {
             $scope.garages = data.data;         //this will depend on what the API returns, it may have to change
@@ -70,10 +91,20 @@
             console.log("submit");
             // Here you will post a garage to the API
             //  using the $http angular service
-            Garages.update($scope.new,$scope.new.garageID);
+
+            Garages.update($scope.new, $scope.new.garageID).then(clearForm);
         }
 
-
+        /**
+        * clears the edit garage form
+        */
+        function clearForm() {
+            Snackbar.show("Garage updated successfully");
+            //clears the form
+            $scope.editGarageForm.$setPristine();
+            $scope.new = defaultForm;
+            $scope.current = defaultForm;
+        }
 
     }
 })();
