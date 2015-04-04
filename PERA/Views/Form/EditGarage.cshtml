@@ -9,9 +9,9 @@
         <input type="radio" ng-model="mode" name="mode" value="false" id="add">
             <label for="add">Add</label>
     </div>
-    <div class="column small-8" ng-show="mode" ng-hide="mode == 'false'">
+    <div class="column small-8" > <!--ng-show="mode" ng-hide="mode == 'false'"-->
         <label for="garageID">Garage</label>
-        <select ng-model="current" ng-options="garage as garage.name for garage in garages" id="garageID">
+        <select ng-model="current" ng-disabled="mode == 'false'" ng-options="garage as garage.name for garage in garages" id="garageID">
             <option value="">-- select a garage --</option>
         </select>
     </div>

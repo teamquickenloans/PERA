@@ -18,6 +18,7 @@
         var vm = this;
         $scope.garages = []; //the list of garages to be returned
         $scope.current;
+        $scope.mode = "false";
 
         var defaultForm = {
             garageID: '',
@@ -42,17 +43,16 @@
             numberOfValidations: '',
             garageManager: ''
         };
-        $scope.new = defaultForm;
+        $scope.current = angular.copy(defaultForm);
 
-        $scope.edit;
-        $scope.add;
+        $scope.edit = angular.copy(defaultForm);
+        $scope.add = angular.copy(defaultForm);
 
         
-        $scope.mode = "false";
 
         vm.submit = submit;
 
-        $scope.watch('mode', switchMode);
+        $scope.$watch('mode', switchMode);
         $scope.$watch('current', update)
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
@@ -62,11 +62,19 @@
         // switches modes and saves result in variable
         function switchMode()
         {
-            if( mode === "true")
+            if ($scope.mode === "true")
             {
                 // we are switching from add to edit
-                $scope.current = $scope.edit;
-                $scope.add = $scope.current;
+                $scope.add = $scope.current; //store the current values
+                $scope.current = $scope.edit;//grab the old values
+
+            }
+            else if ($scope.mode === "false")
+            {
+                //we are switching from edit to add
+                $scope.edit = $scope.current; //store the current values
+                $scope.current = $scope.add;  //grab the old values
+
             }
 
         }
