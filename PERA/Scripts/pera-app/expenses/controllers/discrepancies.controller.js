@@ -19,13 +19,31 @@
         vm.monthYear = '';
         vm.garageID = 0;
         vm.submit = submit;
+        vm.clearForm = clearForm;
 
         $scope.garages = [];
 
         Garages.all().then(garagesSuccessFn);
 
         function submit() {
-            FormSubmit.submit(vm.garageID, vm.monthYear);
+            FormSubmit.submit(vm.garageID, vm.monthYear).then(submitSuccess, submitFail);
+        }
+
+        function submitSuccess() {
+            Snackbar.show('Succesfully identified discrepancies');
+            clearForm();
+        }
+
+        function submitFail()
+        {
+            Snackbar.show('Error identifying discrepancies')
+            clearForm();
+        }
+
+        function clearForm() {
+            $scope.discrepanciesForm.$setPristine();
+            vm.monthYear = '';
+            vm.garageID = 0;
         }
 
         function garagesSuccessFn(data, status, headers, config) {

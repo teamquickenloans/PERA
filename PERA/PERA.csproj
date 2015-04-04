@@ -185,12 +185,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <!--
       @name ASP.NET MVC Controllers
@@ -258,33 +254,9 @@
     <Compile Include="Migrations\201503231133449_update.Designer.cs">
       <DependentUpon>201503231133449_update.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201503301321051_APR.cs" />
-    <Compile Include="Migrations\201503301321051_APR.Designer.cs">
-      <DependentUpon>201503301321051_APR.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503301336571_PRTM_QLAPR.cs" />
-    <Compile Include="Migrations\201503301336571_PRTM_QLAPR.Designer.cs">
-      <DependentUpon>201503301336571_PRTM_QLAPR.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503301543048_PRTM_IAPRid.cs" />
-    <Compile Include="Migrations\201503301543048_PRTM_IAPRid.Designer.cs">
-      <DependentUpon>201503301543048_PRTM_IAPRid.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503310529345_garage.cs" />
-    <Compile Include="Migrations\201503310529345_garage.Designer.cs">
-      <DependentUpon>201503310529345_garage.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504021743245_ignore.cs" />
-    <Compile Include="Migrations\201504021743245_ignore.Designer.cs">
-      <DependentUpon>201504021743245_ignore.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504022158185_ignore2.cs" />
-    <Compile Include="Migrations\201504022158185_ignore2.Designer.cs">
-      <DependentUpon>201504022158185_ignore2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504031824133_howdyhiho.cs" />
-    <Compile Include="Migrations\201504031824133_howdyhiho.Designer.cs">
-      <DependentUpon>201504031824133_howdyhiho.cs</DependentUpon>
+    <Compile Include="Migrations\201504031939378_redo.cs" />
+    <Compile Include="Migrations\201504031939378_redo.Designer.cs">
+      <DependentUpon>201504031939378_redo.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\ActiveParkerReport.cs" />
@@ -297,7 +269,6 @@
     <Compile Include="Models\QLTeamMember.cs" />
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\Garage.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoice.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="DAL\PERAContext.cs" />
@@ -323,6 +294,11 @@
       @name pera-app
       @desc AngularJS application
     -->
+    <Content Include="Grant.sql" />
+    <Content Include="Scripts\css\app.css" />
+    <Content Include="Scripts\css\foundation-icons.css" />
+    <Content Include="Scripts\css\foundation.css" />
+    <Content Include="Scripts\css\foundation.min.css" />
     <Content Include="Scripts\js\angular-google-maps.js" />
     <Content Include="Scripts\js\bootstrap.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
@@ -420,28 +396,11 @@
     <EmbeddedResource Include="Migrations\201503231133449_update.resx">
       <DependentUpon>201503231133449_update.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503301321051_APR.resx">
-      <DependentUpon>201503301321051_APR.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503301336571_PRTM_QLAPR.resx">
-      <DependentUpon>201503301336571_PRTM_QLAPR.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503301543048_PRTM_IAPRid.resx">
-      <DependentUpon>201503301543048_PRTM_IAPRid.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503310529345_garage.resx">
-      <DependentUpon>201503310529345_garage.cs</DependentUpon>
-    </EmbeddedResource>
     <Content Include="DAL\garages_new.csv" />
-    <EmbeddedResource Include="Migrations\201504021743245_ignore.resx">
-      <DependentUpon>201504021743245_ignore.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504031939378_redo.resx">
+      <DependentUpon>201504031939378_redo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504022158185_ignore2.resx">
-      <DependentUpon>201504022158185_ignore2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504031824133_howdyhiho.resx">
-      <DependentUpon>201504031824133_howdyhiho.cs</DependentUpon>
-    </EmbeddedResource>
+    <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
     <Content Include="Scripts\css\snackbar.min.css" />
@@ -512,9 +471,13 @@
     <Content Include="Views\Form\EditGarage.cshtml" />
     <Content Include="Views\Navigation\Expense.cshtml" />
     <Content Include="Views\Form\BadgeScan.cshtml" />
+    <None Include="Web.Test.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Scripts\font\" />
     <Folder Include="Views\ActiveParkerReport\" />
     <Folder Include="Views\ParkerReportParser\" />
     <Folder Include="Views\QLActiveParkerReport\" />

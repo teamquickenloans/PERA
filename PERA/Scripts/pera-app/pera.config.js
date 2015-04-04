@@ -13,6 +13,12 @@
     */
     function config($stateProvider, $routeProvider, $urlRouterProvider) {
 
+        /*uiGmapGoogleMapApiProvider.configure({
+            key: 'AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM',
+            v: '3.17',
+            libraries: 'weather,geometry,visualization'
+        });*/
+
         var home = {
             name: 'home',
             url: '/',
@@ -68,10 +74,10 @@
             name: 'garage.map',
             url: '',
             views: {
-                '': {
+                /*'': {
                     templateUrl: 'Garage/Map',
                     controller: 'MapController as map'
-                },
+                },*/
                 'right-nav@': {
                     templateUrl: 'Navigation/TopBar',
                     controller: 'SideBarController as sidebar'
