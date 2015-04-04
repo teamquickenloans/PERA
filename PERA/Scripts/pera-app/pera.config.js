@@ -137,7 +137,7 @@
                 // targets the unnamed ui-view in parent template
                 '': {
                     templateUrl: 'Expense/DetectedIssues',
-                    controller: 'ExpensesController as expenseCtrl'
+                    controller: 'UploadHistoryController as expenseCtrl'
                 },
                 // targets the ui-view='right-nav' in index.html
                 'right-nav@': {
@@ -169,8 +169,8 @@
         }
         $stateProvider.state(detectedIssuesOverview);
 
-        ///////////////////////////////////////////
-        //   Expense > Detected Issues > Garage //
+          //////////////////////////////////////////
+         //   Expense > Detected Issues > Garage //
         //////////////////////////////////////////
         var detectedIssuesGarage = {
             name: 'expense.detectedIssues.garage',
@@ -194,7 +194,7 @@
             views: {
                 '': {
                     templateUrl: 'Expense/UploadHistory',
-                    controller: 'ExpensesController as expenseCtrl'
+                    controller: 'UploadHistoryController as controller'
                 },
                 'sidebar-left@expense': {
                     templateUrl: 'Navigation/Expense'
@@ -251,8 +251,8 @@
         }
         $stateProvider.state(discrepancies);
 
-        /////////////////////////////////
-        //        Expense > Badge Scan //
+          /////////////////////////////////
+         //        Expense > Badge Scan //
         /////////////////////////////////
         var badgeScan = {
             name: 'expense.badgeScan',
@@ -260,6 +260,9 @@
                 '': {
                     templateUrl: 'Form/BadgeScan',
                     controller: 'BadgeScanController as fileCtrl'
+                },
+                'sidebar-left@expense': {
+                    templateUrl: 'Navigation/Expense'
                 }
             }
         }

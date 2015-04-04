@@ -7,12 +7,24 @@
 
     angular
       .module('pera.expenses.controllers')
-      .controller('ExpensesController', ExpensesController);
+      .controller('UploadHistoryController', UploadHistoryController);
+    UploadHistoryController.$inject = ['Invoices', '$scope']
 
-    function ExpensesController() {
+    function UploadHistoryController(Invoices, $scope) {
         var vm = this;
+        $scope.invoices = [];
+
         vm.issues = issues;
         vm.uploads = uploads;
+
+        Invoices.all().then(invoicesSuccess, invoicesError);
+
+        function invoicesSuccess(data, status, headers, config) {
+            $scope.invoices = data.data;         //this will depend on what the API returns, it may have to change
+        }
+
+        function invoicesError(data, status, headers, config) {
+        }
     };
     
 

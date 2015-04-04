@@ -92,7 +92,7 @@ html, body, #wrapper {
 }
 
 .tableRow {
-    background-color: #ddd; /* Currently just overwrites Foundation CSS on every other row to product desired effect. Janky */
+    background-color: #EFEFEF; /* Currently just overwrites Foundation CSS on every other row to product desired effect. Janky */
 }
 
 tr.tableRow.selected {

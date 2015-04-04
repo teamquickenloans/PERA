@@ -24,6 +24,9 @@
 
         }
 
+        $scope.edit;
+        $scope.add;
+
         
         $scope.mode = "false";
         vm.submit = submit;
@@ -41,8 +44,10 @@
             if( mode === "true")
             {
                 // we are switching from add to edit
-                $scope.current = 
+                $scope.current = $scope.edit;
+                $scope.add = $scope.current;
             }
+
         }
 
         function update()

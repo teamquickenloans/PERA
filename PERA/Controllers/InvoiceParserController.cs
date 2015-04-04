@@ -46,7 +46,8 @@ namespace PERA.Controllers
             {15,3},
             {14,3},
             {1,0},
-            {16,3}
+            {16,3},
+            {2,1}
         };
 
         //These have the format row[2] = Lastname, Firstname
@@ -101,9 +102,7 @@ namespace PERA.Controllers
             Trace.WriteLine("invoice.InvoiceID: " + invoice.InvoiceID);
             Trace.WriteLine("invoice.MonthYear: " + invoice.MonthYear);
             Trace.WriteLine("invoice.TotalAmountBilled: " + invoice.TotalAmountBilled);
-
             FileHandler(result, invoice);
-
 
             // Through the request response you can return an object to the Angular controller
             // You will be able to access this in the .success callback through its data attribute
@@ -128,7 +127,7 @@ namespace PERA.Controllers
                 APR.DateUploaded = invoice.DateUploaded;
                 APR.DateReceived = invoice.DateReceived;
                 APR.MonthYear = invoice.MonthYear;
-                APR.Invoice = invoice;
+                //APR.Invoice = invoice;
                 //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
                 List<ParkerReportTeamMember> teamMembers = 
                     ExcelParser(file.LocalFileName, originalFileName, invoice, APR, garageID);
@@ -151,6 +150,8 @@ namespace PERA.Controllers
                 db.SaveChanges();
                 i++;
             }
+            invoice.ID = invoice.InvoiceID;
+            db.Invoices.Add(invoice);
             db.SaveChanges();
         }
         
@@ -173,9 +174,9 @@ namespace PERA.Controllers
             
             System.Diagnostics.Debug.WriteLine("begin for loop");
 
-            foreach (DataTable table in result.Tables)
+            foreach (DataTable table in result.Tables) // each sheet
             { 
-                foreach (DataRow row in table.Rows)
+                foreach (DataRow row in table.Rows) // each row
                 {
                     // if this row is the headings, skip this row
                     System.Diagnostics.Debug.WriteLine("row");
@@ -184,8 +185,7 @@ namespace PERA.Controllers
                         System.Diagnostics.Debug.WriteLine("null");
                         continue;
                     }
-
-                    if(row[0] is String)
+                    else if(row[0] is String)
                     {
                         System.Diagnostics.Debug.WriteLine(row[0]);
                         continue;
@@ -197,16 +197,16 @@ namespace PERA.Controllers
                     {
                         var first = row[splitNameColumns[garageID].first];
                         var last = row[splitNameColumns[garageID].last];
-                        if(first == null){
-                            firstName = "";
-                        }
-                        //else if(last == null)
-                        //{
-                        //    lastName = "";
-                        //}
-                        firstName = (string)first;
-                        lastName = (string)last;
 
+                        if (first == DBNull.Value)
+                            continue;//firstName = "";
+                        else
+                            firstName = (string)first;
+
+                        if(last == DBNull.Value)
+                            continue; //lastName = "";
+                        else
+                            lastName = (string)last;
                     }
                     else
                     {
@@ -251,7 +251,6 @@ namespace PERA.Controllers
                     {
                         try
                         {
-                            //Trace.WriteLine(cardNumberV.GetType());
                             if (cardNumberV.GetType() == typeof(String)) 
                             { 
                                 String cn = (String)cardNumberV;
@@ -277,12 +276,10 @@ namespace PERA.Controllers
                     teamMember.FirstName = firstName;
                     teamMember.LastName = lastName;
                     teamMember.InvoiceActiveParkerReportID = APR.ID;
-                    Trace.WriteLine(teamMember.FirstName);
                     teamMembers.Add(teamMember);
 
                     //db.ParkerReportTeamMembers.Add(teamMember);
                     //db.SaveChanges();
-                    Trace.WriteLine(teamMember.ParkerReportTeamMemberID);
 
                                        
                 } // end for columns

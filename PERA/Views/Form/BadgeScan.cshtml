@@ -3,13 +3,13 @@
 <p>
     This form allows you to upload a badge scan report.
 </p>
-<form novalidate ng-submit="fileCtrl.uploadAll()">
+<form novalidate name="form" ng-submit="fileCtrl.uploadAll()">
 
         <h4> Badge Scan Reports</h4>
         
         <div class="row" ng-repeat="report in fileCtrl.reports">
 
-            <div class="small-3 column">
+            <div class="small-4 column">
                 <a href="#" class="radius button" ng-file-select ng-model="report.file">Select a file</a>
             </div>
             <div class="small-8 column">

@@ -1,42 +1,43 @@
 ﻿
 <div id="uploadHistoryContent">
     <div id="uploadTableWrapper" class="columns">
-        <table id="uploadTableHead">
-            <tr>
-                <th class="garageColUploadTable">Garage</th>
-                <th class="typeColUploadTable">Type</th>
-                <th class="dateColUploadTable">Date</th>
-            </tr>
-        </table>
-
-        <div id="uploadTableBodyWrapper">
-            <table id="uploadTableBody" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
-                <tr class="tableRow" ng-repeat="upload in expenseCtrl.uploads" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
-                    <td class="garageColUploadTable">{{upload.garage}}</td>
-                    <td class="typeColUploadTable">{{upload.type}}</td>
-                    <td class="dateColUploadTable">{{upload.date | date:'MM/dd/yyyy'}}</td>
-                </tr>
-            </table>
-        </div>
-
-        <div id="itmTableWrapper">
-            <table id="uploadTableHead">
+        <h3>Upload History</h3>
+        <table ng-controller ="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+            <thead id="uploadTableHead">
                 <tr>
-                    <th class="nameColITMTable">Name</th>
-                    <th class="tokenIDColITMTable">Token ID</th>
+                    <th>Invoice ID</th>
+                    <th>Date</th>
+                    <th>Amount Billed</th>
                 </tr>
-            </table>
+            </thead>
 
-            <div id="uploadTableBodyWrapper">
-                <table id="uploadTableBody" ng-controller="ParkerReportTeamMembersController as ITMCtrl">
-                    <tr class="tableRow" ng-repeat="itm in ITMCtrl.invoiceTeamMembers">
-                        <td class="nameColITMTable">{{itm.firstName}} {{itm.lastName}}</td>
-                        <td class="tokenIDColITMTable">{{itm.tokenID}}</td>
+        <tbody id="uploadTableBody">
+            <tr class="tableRow" ng-repeat="invoice in invoices" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                <td>{{invoice.id}}</td>
+                <td>{{invoice.monthYear | date:'MMMM yyyy'}}</td>
+                <td>${{invoice.totalAmountBilled}}</td>
+            </tr>
+        </tbody>
+
+
+            <div id="itmTableWrapper">
+                <table id="uploadTableHead">
+                    <tr>
+                        <th class="nameColITMTable">Name</th>
+                        <th class="tokenIDColITMTable">Token ID</th>
                     </tr>
                 </table>
-            </div>
 
-        </div>
-    </div>
+                <div id="uploadTableBodyWrapper">
+                    <table id="uploadTableBody" ng-controller="ParkerReportTeamMembersController as ITMCtrl">
+                        <tr class="tableRow" ng-repeat="itm in ITMCtrl.invoiceTeamMembers">
+                            <td class="nameColITMTable">{{itm.firstName}} {{itm.lastName}}</td>
+                            <td class="tokenIDColITMTable">{{itm.badgeID}}</td>
+                        </tr>
+                    </table>
+                </div>
+
+            </div>
+</div>
 
     </div>
