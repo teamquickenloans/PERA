@@ -360,6 +360,7 @@
     <Content Include="Scripts\pera-app\fileupload\services\upload.service.js" />
     <Content Include="Scripts\pera-app\garages\controllers\editgarage.controller.js" />
     <Content Include="Scripts\pera-app\garages\controllers\addgarage.controller.js" />
+    <Content Include="Scripts\pera-app\garages\services\garageManagers.service.js" />
     <Content Include="Scripts\pera-app\invoiceTeamMembers\invoiceTeamMembers.module.js" />
     <Content Include="Scripts\pera-app\map\map.module.js" />
     <Content Include="Scripts\pera-app\map\services\mapinitializer.service.js" />
