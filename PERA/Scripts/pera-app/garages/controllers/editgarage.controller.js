@@ -72,9 +72,29 @@
             console.log("submit");
             // Here you will post a garage to the API
             //  using the $http angular service
-
-            Garages.update($scope.new, $scope.new.garageID).then(clearForm);
+            if ($scope.editGarageForm.garagesubmit == "add") {
+                console.log("add garage");
+                Garages.create($scope.new, $scope.new.garageID).then(clearForm);    
+            }
+            else if ($scope.editGarageForm.garagesubmit == "edit") {
+                console.log("edit garage");
+                Garages.update($scope.new, $scope.new.garageID).then(clearForm);
+            }
+            
         }
+
+       /** function next()
+        {
+            if ($scope.addOrEditGarageForm.garagevalue == "add") {
+                //Garages.create($scope.new, $scope.new.garageID).then(clearForm);
+                console.log("add garage");
+            }
+            else if ($scope.addOrEditGarageForm.garagevalue == "edit"){
+                //submit();
+                console.log("edit garage");
+            }
+            
+        }*/
 
         /**
         * clears the edit garage form

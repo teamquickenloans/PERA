@@ -1,5 +1,13 @@
 ﻿
-<h3>Edit a Garage</h3>
+<h3>Add/Edit a Garage</h3>
+<!--<form name="addOrEditGarageForm" novalidate ng-submit="controller.next()">
+    <input type="radio" name="garagevalue" value="add" checked>Add Garage
+    <br>
+    <input type="radio" name="garagevalue" value="edit">Edit Garage
+    <div class="row">
+        <button class="radius button" type="submit">Submit</button>
+    </div>
+</form>-->
 
 <form name="editGarageForm" novalidate ng-submit="controller.submit()">
     <div class="small-12 column">
@@ -139,7 +147,8 @@
                    ng-keyup="cancel($event)" />
 
             <div class="row">
-                <button class="radius button" type="submit">Submit</button>
+                <button class="radius button" name="garagesubmit" value ="add"type="submit">Add Garage</button>
+                <button class="radius button" name="garagesubmit" value="edit" type="submit">Edit Garage</button>
             </div>
 
     </div>
