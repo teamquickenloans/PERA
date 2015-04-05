@@ -19,7 +19,8 @@
         $scope.garages = []; //the list of garages to be returned
         $scope.managers = [];
         $scope.current;
-        $scope.mode = "false";
+        $scope.mode = true;
+        $scope.title = "Edit a Garage";
 
         var defaultForm = {
             garageID: '',
@@ -64,18 +65,20 @@
         // switches modes and saves result in variable
         function switchMode()
         {
-            if ($scope.mode === "true")
+            if ($scope.mode === true)
             {
                 // we are switching from add to edit
                 $scope.add = $scope.current; //store the current values
                 $scope.current = $scope.edit;//grab the old values
+                $scope.title = "Edit a Garage";
 
             }
-            else if ($scope.mode === "false")
+            else if ($scope.mode === false)
             {
                 //we are switching from edit to add
                 $scope.edit = $scope.current; //store the current values
                 $scope.current = $scope.add;  //grab the old values
+                $scope.title = "Add a Garage";
 
             }
 
