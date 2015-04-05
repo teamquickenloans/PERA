@@ -2,7 +2,11 @@
     console.log("hello!");
 </script>
 
-<div id="garageMapContent">
+
+<ui-gmap-google-map center='map.center' zoom='map.zoom' styles='map.styles'></ui-gmap-google-map>
+
+<div id="garageMapContent" ng-controller="MapController as map">
+
 
     @*<div id="map-canvas" ui-view class="columns small-9"></div>*@
     <div id="map-canvas"></div>

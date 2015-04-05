@@ -19,7 +19,8 @@
         //'mm.foundation',
         //'ct.ui.router.extras',
         'angular-datepicker',
-        'bzm-date-picker'
+        'bzm-date-picker',
+        'uiGmapgoogle-maps'
         ])
     
     //angular
@@ -30,6 +31,8 @@
           'ui.router',
           'ngRoute',
           'ngResource',
+          //'uiGmapgoogle-maps',
+          //'uiGmapGoogleMapApiProvider'
           //'ngSanitize',
           //'ct.ui.router.extras'
       ])

@@ -18,6 +18,7 @@
         var vm = this;
         $scope.garages = []; //the list of garages to be returned
         $scope.current;
+        $scope.mode = "false";
 
         var defaultForm = {
             garageID: '',
@@ -42,15 +43,41 @@
             numberOfValidations: '',
             garageManager: ''
         };
-        $scope.new = defaultForm;
+        $scope.current = angular.copy(defaultForm);
+
+        $scope.edit = angular.copy(defaultForm);
+        $scope.add = angular.copy(defaultForm);
+
+        
 
         vm.submit = submit;
 
+        $scope.$watch('mode', switchMode);
         $scope.$watch('current', update)
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
         //vm.garages = EditGarage.all();
         //console.log(vm.garages);
+
+        // switches modes and saves result in variable
+        function switchMode()
+        {
+            if ($scope.mode === "true")
+            {
+                // we are switching from add to edit
+                $scope.add = $scope.current; //store the current values
+                $scope.current = $scope.edit;//grab the old values
+
+            }
+            else if ($scope.mode === "false")
+            {
+                //we are switching from edit to add
+                $scope.edit = $scope.current; //store the current values
+                $scope.current = $scope.add;  //grab the old values
+
+            }
+
+        }
 
         function update()
         {
@@ -72,29 +99,11 @@
             console.log("submit");
             // Here you will post a garage to the API
             //  using the $http angular service
-            if ($scope.editGarageForm.garagesubmit == "add") {
-                console.log("add garage");
-                Garages.create($scope.new, $scope.new.garageID).then(clearForm);    
-            }
-            else if ($scope.editGarageForm.garagesubmit == "edit") {
-                console.log("edit garage");
+            if ($scope.mode === "true")
                 Garages.update($scope.new, $scope.new.garageID).then(clearForm);
-            }
-            
+            else if ($scope.mode === "false")
+                Garages.create($scope.new).then(clearForm);
         }
-
-       /** function next()
-        {
-            if ($scope.addOrEditGarageForm.garagevalue == "add") {
-                //Garages.create($scope.new, $scope.new.garageID).then(clearForm);
-                console.log("add garage");
-            }
-            else if ($scope.addOrEditGarageForm.garagevalue == "edit"){
-                //submit();
-                console.log("edit garage");
-            }
-            
-        }*/
 
         /**
         * clears the edit garage form

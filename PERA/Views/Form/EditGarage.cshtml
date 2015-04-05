@@ -1,157 +1,152 @@
 ﻿
-<h3>Add/Edit a Garage</h3>
-<!--<form name="addOrEditGarageForm" novalidate ng-submit="controller.next()">
-    <input type="radio" name="garagevalue" value="add" checked>Add Garage
-    <br>
-    <input type="radio" name="garagevalue" value="edit">Edit Garage
-    <div class="row">
-        <button class="radius button" type="submit">Submit</button>
-    </div>
-</form>-->
+<h3>Edit a Garage</h3>
+
 
 <form name="editGarageForm" novalidate ng-submit="controller.submit()">
-    <div class="small-12 column">
-        <h4>Garage</h4>
-
-        <div class="small-4 column">
-            <label for="garageID">Garage</label>
-            <select ng-model="current" ng-options="garage as garage.name for garage in garages" id="garageID">
-                <option value="">-- select a garage --</option>
-            </select>
-        </div>
-        <br />
-
-            <label for="name">Garage Name</label>
-            <input type="text"
-                   ng-model="new.name"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="address">Garage Address</label>
-            <input type="text"
-                   ng-model="new.address"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-            
-            <label for="latitude">Garage Latitude</label>
-            <input type="number"
-                   ng-model="new.latitude"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="longitude">Garage Latitude</label>
-            <input type="number"
-                   ng-model="new.longitude"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="capacity">Capacity</label>
-            <input type="number"
-                   ng-model="new.capacity"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="numberofleasedspaces">Number of Leased Spaces</label>
-            <input type="number"
-                   ng-model="new.numberOfLeasedSpaces"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="numberofteammemberspaces">Number of Team Member Spaces</label>
-            <input type="number"
-                   ng-model="new.numberOfTeamMemberSpaces"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="minimumnumberofbufferspaces">Minimum Number of Buffer Spaces</label>
-            <input type="number"
-                   ng-model="new.minimumNumberOfBufferSpaces"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="spacecost">Space Cost</label>
-            <input type="number"
-                   ng-model="new.spaceCost"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="transientsaleprice">Transient Sale Price</label>
-            <input type="number"
-                   ng-model="new.transientSalePrice"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="owner">Owner</label>
-            <input type="text"
-                   ng-model="new.owner"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="billingparty">Billing Party</label>
-            <input type="text"
-                   ng-model="new.billingParty"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="reporttype">Report Type</label>
-            <input type="text"
-                   ng-model="new.reportType"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="accesstoken">Access Token</label>
-            <input type="text"
-                   ng-model="new.accessToken"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="accesstokenoptional">Access Token Optional</label>
-            <input type="text"
-                   ng-model="new.accessTokenOptional"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="accesstokencost">Access Token Cost</label>
-            <input type="number"
-                   ng-model="new.accessTokenCost"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="changecost">Change Cost</label>
-            <input type="number"
-                   ng-model="new.changeCost"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="validationcost">Validation Cost</label>
-            <input type="number"
-                   ng-model="new.validationCost"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="numberofvalidations">Number of Validations</label>
-            <input type="number"
-                   ng-model="new.numberOfValidations"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <label for="garagemanager">Garage Manager</label>
-            <input type="text"
-                   ng-model="new.garageManager"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)"/>
-
-            <label for="badgescannername">Badge Scanner Name</label>
-            <input type="text"
-                   ng-model-options="{ updateOn: 'blur' }"
-                   ng-keyup="cancel($event)" />
-
-            <div class="row">
-                <button class="radius button" name="garagesubmit" value ="add"type="submit">Add Garage</button>
-                <button class="radius button" name="garagesubmit" value="edit" type="submit">Edit Garage</button>
-            </div>
-
+    <div class="column small-6">
+        <input type="radio" ng-model="mode" name="mode" value="true" id="edit">
+            <label for="edit">Edit</label>
+        <input type="radio" ng-model="mode" name="mode" value="false" id="add">
+            <label for="add">Add</label>
     </div>
+    <div class="column small-8" > <!--ng-show="mode" ng-hide="mode == 'false'"-->
+        <label for="garageID">Garage</label>
+        <select ng-model="current" ng-disabled="mode == 'false'" ng-options="garage as garage.name for garage in garages" id="garageID">
+            <option value="">-- select a garage --</option>
+        </select>
+    </div>
+        <br />
+    <div class="column">
+        <label for="name">Garage Name</label>
+        <input type="text"
+               ng-model="new.name"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="address">Garage Address</label>
+        <input type="text"
+               ng-model="new.address"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="latitude">Garage Latitude</label>
+        <input type="number"
+               ng-model="new.latitude"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="longitude">Garage Latitude</label>
+        <input type="number"
+               ng-model="new.longitude"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="capacity">Capacity</label>
+        <input type="number"
+               ng-model="new.capacity"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="numberofleasedspaces">Number of Leased Spaces</label>
+        <input type="number"
+               ng-model="new.numberOfLeasedSpaces"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="numberofteammemberspaces">Number of Team Member Spaces</label>
+        <input type="number"
+               ng-model="new.numberOfTeamMemberSpaces"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="minimumnumberofbufferspaces">Minimum Number of Buffer Spaces</label>
+        <input type="number"
+               ng-model="new.minimumNumberOfBufferSpaces"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="spacecost">Space Cost</label>
+        <input type="number"
+               ng-model="new.spaceCost"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="transientsaleprice">Transient Sale Price</label>
+        <input type="number"
+               ng-model="new.transientSalePrice"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="owner">Owner</label>
+        <input type="text"
+               ng-model="new.owner"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="billingparty">Billing Party</label>
+        <input type="text"
+               ng-model="new.billingParty"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="reporttype">Report Type</label>
+        <input type="text"
+               ng-model="new.reportType"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="accesstoken">Access Token</label>
+        <input type="text"
+               ng-model="new.accessToken"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="accesstokenoptional">Access Token Optional</label>
+        <input type="text"
+               ng-model="new.accessTokenOptional"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="accesstokencost">Access Token Cost</label>
+        <input type="number"
+               ng-model="new.accessTokenCost"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="changecost">Change Cost</label>
+        <input type="number"
+               ng-model="new.changeCost"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="validationcost">Validation Cost</label>
+        <input type="number"
+               ng-model="new.validationCost"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="numberofvalidations">Number of Validations</label>
+        <input type="number"
+               ng-model="new.numberOfValidations"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="garagemanager">Garage Manager</label>
+        <input type="text"
+               ng-model="new.garageManager"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <label for="badgescannername">Badge Scanner Name</label>
+        <input type="text"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
+        <div class="row">
+            <button class="radius button" type="submit">Submit</button>
+        </div>
+    </div>
+
     <br />
 
 

@@ -76,7 +76,6 @@ namespace PERA.Controllers
             IdentifyDuplicates(InvoiceReport, QLReport, InvoiceReports);
 
             
-
             return View();
             
         }
@@ -86,8 +85,11 @@ namespace PERA.Controllers
         {
             Dictionary<string, string> Matches = new Dictionary<string, string>();
             List<ParkerReportTeamMember> Duplicates = new List<ParkerReportTeamMember>();
+            //team members in the QL report that were not in the invoice
             List<QLTeamMember> Missing = new List<QLTeamMember>();
-            ICollection<ParkerReportTeamMember> Extra = InvoiceReport.TeamMembers; //team members in the invoice
+            //team members in the invoice that were not in the QL report
+            ICollection<ParkerReportTeamMember> Extra = InvoiceReport.TeamMembers; 
+
 
             Trace.WriteLine(InvoiceReport.TeamMembers.First());
 
@@ -103,11 +105,22 @@ namespace PERA.Controllers
                 {
                     case 0:
                         //couldn't find the team member in the invoice list
+                        var Match = db.ParkerReportTeamMembers.Where(             //grab the matching Invoice TM
+                                    x => x.InvoiceActiveParkerReportID == InvoiceReport.ID
+                                      && x.FirstName == qlTM.FirstName
+                                      && x.BadgeID == qlTM.BadgeID).ToList();
+                        if (Match.Count > 0)
+                            //potential match, different last name
                         Missing.Add(qlTM);
                         continue;
                     case 1:
-                        ParkerReportTeamMember PRTM = InvoiceTeamMembers.First();
-                        Extra.Remove(qlTM);
+                        ParkerReportTeamMember PRTM = InvoiceTeamMembers.First(); //
+                        if (PRTM.BadgeID != null)
+                        { if (PRTM.BadgeID == qlTM.BadgeID) { 
+                            //report this error as well
+                            } 
+                        }
+                        Extra.Remove(PRTM);
                         break;
                     default: //more than two matches
                         Duplicates.Add(qlTM);
@@ -144,14 +157,24 @@ namespace PERA.Controllers
             }
             foreach (var duplicate in Duplicates) {
                 Trace.Write("Duplicate: " + duplicate.FirstName + " " + duplicate.LastName);
-                if (duplicate.InvoiceActiveParkerReportID != null)
+                if (duplicate.InvoiceActiveParkerReportID != null){
                     Trace.Write(duplicate.InvoiceActiveParkerReportID);
+                    Trace.WriteLine("");
+                }
+
                 else{
                     QLTeamMember ql = (QLTeamMember)duplicate;
                     Trace.Write(ql.QLActiveParkerReportID);
                     Trace.WriteLine("");
                 }
-
+            }
+            foreach (var missing in Missing)
+            {
+                Trace.WriteLine("Missing: " + missing.FirstName + " " + missing.LastName + " " + missing.QLActiveParkerReportID);
+            }
+            foreach (var extra in Extra)
+            {
+                Trace.WriteLine("Extra: " + extra.FirstName + " " + extra.LastName + " " + extra.InvoiceActiveParkerReportID);
             }
         }
     }

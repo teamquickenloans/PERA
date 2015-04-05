@@ -26,6 +26,7 @@
         $scope.data = 'none'; //the file
 
         vm.addReport = addReport;
+        vm.removeReport = removeReport;
         vm.uploadAll = uploadAll;
         vm.clearForm = clearForm;
 
@@ -47,6 +48,11 @@
             vm.counter++;
             console.log("add file");
             vm.reports.push({ garageID: 0 });
+        }
+
+        function removeReport() {
+            vm.counter = vm.counter - 1;
+            vm.reports.pop();
         }
 
         function uploadAll()
@@ -79,8 +85,6 @@
 
         function uploadSuccess(){
             Snackbar.show("Invoice Uploaded Successfully");
-            $scope.invoiceForm.$setPristine();
-            vm.invoice = angular.copy(defaultInvoice);
             clearForm();
         }
         function clearForm() {
@@ -91,7 +95,7 @@
             console.log("clean form");
         }
         function uploadFail() {
-            Snackbar.error("Invoice upload failed");
+            Snackbar.error("Invoice upload failed. Please recheck the formatting of the excel file.");
         }
         function garagesSuccessFn(data, status, headers, config) {
             $scope.garages = data.data;         //this will depend on what the API returns, it may have to change
