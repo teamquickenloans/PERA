@@ -17,6 +17,13 @@
     </div>
         <br />
     <div class="column">
+        <label for="name">GarageID</label>
+        <input type="number"
+               ng-model="new.garageID"
+               ng-disabled="mode == 'true'"
+               ng-model-options="{ updateOn: 'blur' }"
+               ng-keyup="cancel($event)" />
+
         <label for="name">Garage Name</label>
         <input type="text"
                ng-model="new.name"

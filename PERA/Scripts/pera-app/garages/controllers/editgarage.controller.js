@@ -83,8 +83,7 @@
         {
             $scope.new = $scope.current;
             console.log($scope.new.name);
-        }
-        
+        }       
 
         function garagesSuccessFn(data, status, headers, config) {
             $scope.garages = data.data;         //this will depend on what the API returns, it may have to change
