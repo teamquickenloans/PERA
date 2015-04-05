@@ -282,6 +282,10 @@
     <Compile Include="Migrations\201504042058330_invoiceID.Designer.cs">
       <DependentUpon>201504042058330_invoiceID.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504051628542_addlinenumber.cs" />
+    <Compile Include="Migrations\201504051628542_addlinenumber.Designer.cs">
+      <DependentUpon>201504051628542_addlinenumber.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
     <Compile Include="Models\CarpoolGroup.cs" />
@@ -442,6 +446,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504042058330_invoiceID.resx">
       <DependentUpon>201504042058330_invoiceID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504051628542_addlinenumber.resx">
+      <DependentUpon>201504051628542_addlinenumber.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />

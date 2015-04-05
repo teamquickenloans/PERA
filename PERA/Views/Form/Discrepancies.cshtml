@@ -10,12 +10,12 @@
 <form novalidate name="discrepanciesForm" ng-submit="controller.submit()">
     <div class="column small-4">
 
-        <label for="monthYear">Month/Year of Report</label>
+        <label for="monthYear">Month/Year</label>
 
         <date-picker id="date" class="input" id="monthYear" format="MMM yyyy" placeholder="." ng-model="controller.monthYear">
         </date-picker>
     </div>
-    <div class="column small-4">
+    <div class="column small-8">
         <label for="garageID">Garage:</label>
         <select ng-model="controller.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID">
             <option value="">-- select a garage --</option>
@@ -23,7 +23,7 @@
 
     </div>
     <br /><br />
-    <div class="column small-6">
+    <div class="column small-12">
         <button class="radius button" type="submit">Identify Errors</button>
         <a class="radius button" ng-click="controller.clearForm()">Clear</a>
     </div>
