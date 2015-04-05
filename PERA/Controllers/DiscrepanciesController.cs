@@ -86,7 +86,7 @@ namespace PERA.Controllers
             //team members in the QL report that were not in the invoice
             List<QLTeamMember> Missing = new List<QLTeamMember>();
             //team members in the invoice that were not in the QL report
-            ICollection<ParkerReportTeamMember> Extra = InvoiceReport.TeamMembers; 
+            ICollection<ParkerReportTeamMember> Extra = InvoiceReport.TeamMembers;
 
 
             Trace.WriteLine(InvoiceReport.TeamMembers.First());
@@ -99,6 +99,30 @@ namespace PERA.Controllers
                       && x.FirstName == qlTM.FirstName
                       && x.LastName == qlTM.LastName).ToList();
                 Trace.WriteLine(qlTM.FirstName + " " + qlTM.LastName + QLReport.ID);
+
+                if(qlTM.TokenID == null)
+                {
+                    var InvoiceTeamMember = db.ParkerReportTeamMembers.Where(             //grab the matching Invoice TM
+                        x => x.InvoiceActiveParkerReportID == InvoiceReport.ID
+                          && x.FirstName == qlTM.FirstName
+                          && x.LastName == qlTM.LastName
+                          && x.TokenID == qlTM.BadgeID).ToList();
+                    switch (InvoiceTeamMember.Count)
+                    {
+
+                    }
+                }
+                else
+                {
+                    var InvoiceTeamMember = db.ParkerReportTeamMembers.Where(             //grab the matching Invoice TM
+                        x => x.InvoiceActiveParkerReportID == InvoiceReport.ID
+                          && x.FirstName == qlTM.FirstName
+                          && x.LastName == qlTM.LastName
+                          && x.TokenID == qlTM.BadgeID).ToList();
+                }
+
+                Trace.WriteLine(qlTM.FirstName + " " + qlTM.LastName + QLReport.ID);
+
                 switch (InvoiceTeamMembers.Count)
                 {
                     case 0:
