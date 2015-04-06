@@ -471,6 +471,8 @@
     <Content Include="Views\Form\EditGarage.cshtml" />
     <Content Include="Views\Navigation\Expense.cshtml" />
     <Content Include="Views\Form\BadgeScan.cshtml" />
+    <Content Include="Views\Navigation\MapGarage.cshtml" />
+    <Content Include="Views\Navigation\MapTopBar.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

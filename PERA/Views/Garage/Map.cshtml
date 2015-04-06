@@ -1,15 +1,12 @@
 ﻿<script type="text/javascript">
-    console.log("hello!");
+    console.log("HERE WE ARE MR. PENYWYNKLE!");
 </script>
 
 
 <ui-gmap-google-map center='map.center' zoom='map.zoom' styles='map.styles'></ui-gmap-google-map>
 
 <div id="garageMapContent" ng-controller="MapController as map">
-
-
-    @*<div id="map-canvas" ui-view class="columns small-9"></div>*@
-    <div id="map-canvas"></div>
+    
     <div id="mapKey" onload="map.initialize()">
         <h5>&nbsp;&nbsp;Spots Available&nbsp;&nbsp;&nbsp;</h5>
         <div id="greenBox"></div>
@@ -24,16 +21,7 @@
         <div id="blackBox"></div>
         <div class="keyText">Garage Full</div>
     </div>
-    <div class="row">
-        <div ui-view="sidebartop" class="columns small-3">
-
-        </div>
-    </div>
-    <div class="row">
-        <div ui-view="sidebarbottom" class="columns small-3">
-
-        </div>
-    </div>
+    
 </div>
 
 

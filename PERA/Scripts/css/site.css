@@ -25,6 +25,10 @@ html, body, #wrapper {
     margin: 0;
 }
 
+.column, .columns {
+    padding: 0;
+}
+
 #map-canvas {
     height: 100%;
     z-index: 1;
@@ -89,10 +93,6 @@ html, body, #wrapper {
     height: 100%;
     padding: 0;
     margin: 0;
-}
-
-.tableRow {
-    background-color: #ddd; /* Currently just overwrites Foundation CSS on every other row to product desired effect. Janky */
 }
 
 tr.tableRow.selected {

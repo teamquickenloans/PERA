@@ -74,22 +74,36 @@
             name: 'garage.map',
             url: '',
             views: {
-                /*'': {
+                '': {
                     templateUrl: 'Garage/Map',
                     controller: 'MapController as map'
-                },*/
+                },
                 'right-nav@': {
-                    templateUrl: 'Navigation/TopBar',
+                    templateUrl: 'Navigation/MapTopBar',
                     controller: 'SideBarController as sidebar'
                 },
                 //view@state -> this targets the "sidebar" view inside the expense template: Expense/Base
                 'sidebar@garage': {
                     templateUrl: 'Garage/GarageInfo',
-                    controller: ''
+                    controller: 'SideBarController as sidebar'
                 }
             }
         }
         $stateProvider.state(mapView);
+
+          /////////////////////////////
+         //  Expense > Map > Garage //
+        /////////////////////////////
+        var mapGarage = {
+            name: 'garage.map.garage',
+            views: {
+                'sidebartop@garage': {
+                    templateUrl: 'Navigation/MapGarage',
+                    controller: 'SideBarController as sidebar'
+                }
+            }
+        }
+        $stateProvider.state(mapGarage);
 
           //////////////////////
          //    Garage > Edit //
@@ -114,7 +128,6 @@
             }
         }
         $stateProvider.state(garageEdit);
-
 
           //////////////////////
          //          Expense //
@@ -147,9 +160,6 @@
                 'sidebar@expense': {
                     templateUrl: 'Navigation/Overview',
                     controller: 'SideBarController as sidebar'
-                },
-                'sidebar-left@expense': {
-                    templateUrl: 'Navigation/Expense'
                 }
             }
         }
@@ -237,17 +247,17 @@
         }
         $stateProvider.state(parkerReport);
 
+          /////////////////////////////////
+         //     Expense > Discrepancies //
+        /////////////////////////////////
         var discrepancies = {
             name: 'expense.discrepancies',
             views: {
                 '': {
                     templateUrl: 'Form/Discrepancies',
                     controller: 'DiscrepanciesController as controller'
-                },
-                'sidebar-left@expense': {
-                    templateUrl: 'Navigation/Expense'
                 }
-        }
+            }
         }
         $stateProvider.state(discrepancies);
 
