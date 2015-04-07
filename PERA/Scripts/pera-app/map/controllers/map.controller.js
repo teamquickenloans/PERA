@@ -9,12 +9,12 @@
       .module('pera.map.controllers')
       .controller('MapController', MapController);
 
-    MapController.$inject = ['$scope','Garages', 'Snackbar', 'Initializer', 'SideBar'];
+    MapController.$inject = ['$scope','Garages', 'Snackbar', 'Initializer', 'SideBar', '$state'];
 
     /**
     * @namespace MapController
     */
-    function MapController($scope, Garages, Snackbar, Initializer, SideBar) {
+    function MapController($scope, Garages, Snackbar, Initializer, SideBar, $state) {
 
         var styleArray = [
               {
@@ -346,13 +346,13 @@
               //Snackbar.error(data.data.error);
           }
           function attachGarage(marker, garage) {
-                  google.maps.event.addListener(marker, 'click', function () {
-                      SideBar.setCurrent(marker.garage);
-                      console.log(marker.garage.name);
-                      //TODO: set state garage.map.garage
-                      alert("Congratulations, you've clicked on a garage!");
-                      //TODO: tab.setSideTab(i); //This is what I want to do
-                  });
+              google.maps.event.addListener(marker, 'click', function () {
+                  var promise = $state.go('garage.map.garage').then(
+                      function () {
+                          SideBar.setCurrent(marker.garage);
+                          //console.log(marker.garage.name);
+                      });
+              });
           }
           function PlaceMarkers(map, garages, garageMarkers) {
               for (var i = 0; i < garages.length; i++) {

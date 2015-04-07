@@ -6,8 +6,8 @@
     <ul class="dropdown">
         <li ng-repeat="garage in sidebar.garages">
             <ul>
-                <li ng-class="{active:tabCtrl.sideIsSet($index)}">
-                    <a ui-sref=".garage" ng-click="sidebar.setCurrent(garage); tabCtrl.setSideTab($index);">{{garage.name}}</a>
+                <li ng-class="{active:tabCtrl.sideIsSet(garage.garageID)}">
+                    <a ui-sref=".garage" ng-click="sidebar.setCurrent(garage); tabCtrl.setSideTab(garage.garageID);">{{garage.name}}</a>
                 </li>
             </ul>
         </li>
