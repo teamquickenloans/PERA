@@ -1,28 +1,35 @@
 ﻿
-<h3>Edit a Garage</h3>
+<h3>Add/Edit a Garage</h3>
 
 
 <form name="editGarageForm" novalidate ng-submit="controller.submit()">
     <div class="column small-6">
         <input type="radio" ng-model="mode" name="mode" value="true" id="edit">
-            <label for="edit">Edit</label>
+        <label for="edit">Edit</label>
         <input type="radio" ng-model="mode" name="mode" value="false" id="add">
-            <label for="add">Add</label>
+        <label for="add">Add</label>
     </div>
-    <div class="column small-8" > <!--ng-show="mode" ng-hide="mode == 'false'"-->
+    <div class="column small-8">
+        <!--ng-show="mode" ng-hide="mode == 'false'"-->
         <label for="garageID">Garage</label>
-        <select ng-model="current" ng-disabled="mode == 'false'" ng-options="garage as garage.name for garage in garages" id="garageID">
+        <select ng-model="current" ng-disabled="mode == 'false'" class="form-control" ng-options="garage as garage.name for garage in garages" id="garageID" required>
             <option value="">-- select a garage --</option>
         </select>
     </div>
-        <br />
+    <br />
     <div class="column">
-        <label for="name">GarageID</label>
-        <input type="number"
-               ng-model="new.garageID"
-               ng-disabled="mode == 'true'"
-               ng-model-options="{ updateOn: 'blur' }"
-               ng-keyup="cancel($event)" />
+        <div class="form-group" ng-class="{ 'has-error' : editGarageForm.garageID.$invalid && !editGarageForm.garageID.$pristine }">
+            <label for="garageID">GarageID</label>
+            <input type="number"
+                   ng-model="new.garageID"
+                   ng-disabled="mode == 'true'"
+                   ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)"
+                   class="form-control"
+                   required />
+            <p ng-show="editGarageForm.garageID.$invalid && !editGarageForm.garageID.$pristine"
+               class="help-block">ID of the Garage is required.</p>
+        </div>
 
         <label for="name">Garage Name</label>
         <input type="text"
@@ -36,35 +43,64 @@
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)" />
 
-        <label for="latitude">Garage Latitude</label>
-        <input type="number"
-               ng-model="new.latitude"
-               ng-model-options="{ updateOn: 'blur' }"
-               ng-keyup="cancel($event)" />
+        <div class="form-group" ng-class="{ 'has-error' : editGarageForm.latitude.$invalid && !editGarageForm.latitude.$pristine }">
+            <label for="latitude">Garage Latitude</label>
+            <input type="number"
+                   ng-model="new.latitude"
+                   ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)"
+                   class="form-control"
+                   required />
+            <p ng-show="editGarageForm.latitude.$invalid && !editGarageForm.latitude.$pristine"
+               class="help-block">Latitude of the Garage is required.</p>
+        </div>
 
-        <label for="longitude">Garage Latitude</label>
-        <input type="number"
-               ng-model="new.longitude"
-               ng-model-options="{ updateOn: 'blur' }"
-               ng-keyup="cancel($event)" />
+        <div class="form-group" ng-class="{ 'has-error' : editGarageForm.longitude.$invalid && !editGarageForm.longitude.$pristine }">
+            <label for="longitude">Garage Longitude</label>
+            <input type="number"
+                   ng-model="new.longitude"
+                   ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)"
+                   class="form-control"
+                   required />
+            <p ng-show="editGarageForm.longitude.$invalid && !editGarageForm.longitude.$pristine"
+               class="help-block">Longitude of the Garage is required.</p>
+        </div>
 
-        <label for="capacity">Capacity</label>
-        <input type="number"
-               ng-model="new.capacity"
-               ng-model-options="{ updateOn: 'blur' }"
-               ng-keyup="cancel($event)" />
+        <div class="form-group" ng-class="{ 'has-error' : editGarageForm.capacity.$invalid && !editGarageForm.capacity.$pristine }">
+            <label for="capacity">Capacity</label>
+            <input type="number"
+                   ng-model="new.capacity"
+                   ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)"
+                   class="form-control"
+                   required />
+            <p ng-show="editGarageForm.capacity.$invalid && !editGarageForm.capacity.$pristine"
+               class="help-block">Total capacity of Garage is required.</p>
+        </div>
 
-        <label for="numberofleasedspaces">Number of Leased Spaces</label>
-        <input type="number"
-               ng-model="new.numberOfLeasedSpaces"
-               ng-model-options="{ updateOn: 'blur' }"
-               ng-keyup="cancel($event)" />
+        <div class="form-group" ng-class="{ 'has-error' : editGarageForm.numberOfLeasedSpaces.$invalid && !editGarageForm.numberOfLeasedSpaces.$pristine }">
+            <label for="numberofleasedspaces">Number of Leased Spaces</label>
+            <input type="number"
+                   ng-model="new.numberOfLeasedSpaces"
+                   ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)"
+                   class="form-control"
+                   required />
+            <p ng-show="editGarageForm.numberOfLeasedSpaces.$invalid && !editGarageForm.numberOfLeasedSpaces.$pristine"
+               class="help-block">Total number of leased spaces in the Garage is required.</p>
+        </div>
 
-        <label for="numberofteammemberspaces">Number of Team Member Spaces</label>
-        <input type="number"
-               ng-model="new.numberOfTeamMemberSpaces"
-               ng-model-options="{ updateOn: 'blur' }"
-               ng-keyup="cancel($event)" />
+        <div class="form-group" ng-class="{ 'has-error' : editGarageForm.numberOfTeamMemberSpaces.$invalid && !editGarageForm.numberOfTeamMemberSpaces.$pristine }">
+            <label for="numberofteammemberspaces">Number of Team Member Spaces</label>
+            <input type="number"
+                   ng-model="new.numberOfTeamMemberSpaces"
+                   ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)"
+                   required />
+            <p ng-show="editGarageForm.numberOfTeamMemberSpaces.$invalid && !editGarageForm.numberOfTeamMemberSpaces.$pristine"
+               class="help-block">Total number of spaces for Team Members in the Garage is required.</p>
+        </div>
 
         <label for="minimumnumberofbufferspaces">Minimum Number of Buffer Spaces</label>
         <input type="number"
@@ -72,11 +108,17 @@
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)" />
 
-        <label for="spacecost">Space Cost</label>
-        <input type="number"
-               ng-model="new.spaceCost"
-               ng-model-options="{ updateOn: 'blur' }"
-               ng-keyup="cancel($event)" />
+        <div class="form-group" ng-class="{ 'has-error' : editGarageForm.spaceCost.$invalid && !editGarageForm.spaceCost.$pristine }">
+            <label for="spacecost">Space Cost</label>
+            <input type="number"
+                   ng-model="new.spaceCost"
+                   ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)"
+                   class="form-control"
+                   required />
+            <p ng-show="editGarageForm.spaceCost.$invalid && !editGarageForm.spaceCost.$pristine"
+               class="help-block">Total capacity of Garage is required.</p>
+        </div>
 
         <label for="transientsaleprice">Transient Sale Price</label>
         <input type="number"
@@ -95,36 +137,60 @@
                ng-model="new.billingParty"
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)" />
+        
+        <div class="form-group" ng-class="{ 'has-error' : editGarageForm.reportType.$invalid && !editGarageForm.reportType.$pristine }">
+            <label for="reporttype">Report Type</label>
+            <input type="number"
+                   ng-model="new.reportType"
+                   ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)"
+                   class="form-control"
+                   required />
+            <p ng-show="editGarageForm.reportType.$invalid && !editGarageForm.reportType.$pristine"
+               class="help-block">Type of report for the Garage is required.</p>
+        </div>
 
-        <label for="reporttype">Report Type</label>
-        <input type="text"
-               ng-model="new.reportType"
-               ng-model-options="{ updateOn: 'blur' }"
-               ng-keyup="cancel($event)" />
-
-        <label for="accesstoken">Access Token</label>
-        <input type="text"
-               ng-model="new.accessToken"
-               ng-model-options="{ updateOn: 'blur' }"
-               ng-keyup="cancel($event)" />
+        <div class="form-group" ng-class="{ 'has-error' : editGarageForm.accessToken.$invalid && !editGarageForm.accessToken.$pristine }">
+            <label for="accesstoken">Access Token</label>
+            <input type="number"
+                   ng-model="new.accessToken"
+                   ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)"
+                   class="form-control"
+                   required />
+            <p ng-show="editGarageForm.accessToken.$invalid && !editGarageForm.accessToken.$pristine"
+               class="help-block">Type of access token for the Garage is required.</p>
+        </div>
 
         <label for="accesstokenoptional">Access Token Optional</label>
-        <input type="text"
+        <input type="number"
                ng-model="new.accessTokenOptional"
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)" />
 
-        <label for="accesstokencost">Access Token Cost</label>
-        <input type="number"
-               ng-model="new.accessTokenCost"
-               ng-model-options="{ updateOn: 'blur' }"
-               ng-keyup="cancel($event)" />
+        <div class="form-group" ng-class="{ 'has-error' : editGarageForm.accessTokenCost.$invalid && !editGarageForm.accessTokenCost.$pristine }">
+            <label for="accesstokencost">Access Token Cost</label>
+            <input type="number"
+                   ng-model="new.accessTokenCost"
+                   ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)"
+                   class="form-control"
+                   required />
+            <p ng-show="editGarageForm.accessTokenCost.$invalid && !editGarageForm.accessTokenCost.$pristine"
+               class="help-block">Cost of access token for the Garage is required.</p>
+        </div>
 
-        <label for="changecost">Change Cost</label>
-        <input type="number"
-               ng-model="new.changeCost"
-               ng-model-options="{ updateOn: 'blur' }"
-               ng-keyup="cancel($event)" />
+        <div class="form-group" ng-class="{ 'has-error' : editGarageForm.changeCost.$invalid && !editGarageForm.changeCost.$pristine }">
+            <label for="changecost">Change Cost</label>
+            <input type="number"
+                   ng-model="new.changeCost"
+                   ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)"
+                   class="form-control"
+                   required />
+            <p ng-show="editGarageForm.changeCost.$invalid && !editGarageForm.changeCost.$pristine"
+               class="help-block">Cost of changing a parker in the Garage is required.</p>
+        </div>
 
         <label for="validationcost">Validation Cost</label>
         <input type="number"
@@ -150,7 +216,7 @@
                ng-keyup="cancel($event)" />
 
         <div class="row">
-            <button class="radius button" type="submit">Submit</button>
+            <button class="radius button" type="submit" ng-disabled="editGarageForm.$invalid">Submit</button>
         </div>
     </div>
 

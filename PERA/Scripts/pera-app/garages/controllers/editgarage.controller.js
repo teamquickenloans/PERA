@@ -48,7 +48,7 @@
         $scope.edit = angular.copy(defaultForm);
         $scope.add = angular.copy(defaultForm);
 
-        
+        var validationApp = angular.module('validationApp', []);
 
         vm.submit = submit;
 
@@ -93,7 +93,21 @@
             //Snackbar.error("Failed to retrieve garages");
         }
 
-        function submit()
+        function submit() {
+
+            // check to make sure the form is completely valid
+            if ($scope.editGarageForm.$valid) {
+                console.log("submit");
+                // Here you will post a garage to the API
+                //  using the $http angular service
+                if ($scope.mode === "true")
+                    Garages.update($scope.new, $scope.new.garageID).then(clearForm);
+                else if ($scope.mode === "false")
+                    Garages.create($scope.new).then(clearForm);
+            }
+
+        };
+        /*function submit()
         {
             console.log("submit");
             // Here you will post a garage to the API
@@ -102,7 +116,7 @@
                 Garages.update($scope.new, $scope.new.garageID).then(clearForm);
             else if ($scope.mode === "false")
                 Garages.create($scope.new).then(clearForm);
-        }
+        }*/
 
         /**
         * clears the edit garage form
