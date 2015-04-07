@@ -173,7 +173,7 @@ namespace PERA.Controllers
             List<ParkerReportTeamMember> teamMembers = new List<ParkerReportTeamMember>();
             
             System.Diagnostics.Debug.WriteLine("begin for loop");
-
+            int i = 0;
             foreach (DataTable table in result.Tables) // each sheet
             { 
                 foreach (DataRow row in table.Rows) // each row
@@ -230,6 +230,9 @@ namespace PERA.Controllers
                         }
                         else
                         {
+                            if (i > 2)
+                                break;
+                            i++;
                             Trace.WriteLine("null name");
                             continue;
                         }
