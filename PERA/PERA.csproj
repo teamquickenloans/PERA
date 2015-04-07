@@ -29,6 +29,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -334,6 +337,8 @@
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.js" />
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.min.js" />
     <Content Include="Scripts\js\modernizr-2.6.2.js" />
+    <Content Include="Scripts\pera-app\export\controllers\exportReport.controller.js" />
+    <Content Include="Scripts\pera-app\export\export.module.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\badgeScan.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\parkerreport.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\directives\double.directive.js" />
@@ -405,6 +410,7 @@
     <EmbeddedResource Include="Migrations\201504031939378_redo.resx">
       <DependentUpon>201504031939378_redo.cs</DependentUpon>
     </EmbeddedResource>
+    <Content Include="Controllers\book.xlsx" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
     <Content Include="Scripts\css\snackbar.min.css" />

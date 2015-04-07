@@ -7,8 +7,6 @@ using System.Web.Http;
 using DocumentFormat.OpenXml;
 using DocumentFormat.OpenXml.Packaging;
 using DocumentFormat.OpenXml.Spreadsheet;
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -22,15 +20,18 @@ namespace PERA.Controllers
 {
     public class ExportReportController : ApiController
     {
-        static void Main(string[] args)
+        public void Main(string[] args)//Discrepancy disc)
         {
+            //File.Copy("PERA.Controllers.book.xlsx", "output.xlsx", true);
+            //File.Create("book.xlsx");
             File.Copy("book.xlsx", "output.xlsx", true);
+            Trace.Write(File.Exists("output.xlsx"));
             string Json = "{ 'Issues': [{'garage': 'The Z', 'name': 'Matt', 'commonID': 23532,  'issue': 'Duplicate','date': '12/25/13'}, {'garage': 'OCM', 'name': 'Tim', 'commonID': 24000,  'issue': 'Duplicate','date': '12/25/14'}]}";
             JObject jsonobj = JObject.Parse(Json);
             WriteRandomValuesDOM("output.xlsx", jsonobj["Issues"].Count(), jsonobj["Issues"][0].Count(), jsonobj);
         }
 
-        static void WriteRandomValuesDOM(string filename, int numRows, int numCols, JObject json)
+        public void WriteRandomValuesDOM(string filename, int numRows, int numCols, JObject json)
         {
             using (SpreadsheetDocument myDoc = SpreadsheetDocument.Open(filename, true))
             {
@@ -55,7 +56,8 @@ namespace PERA.Controllers
                 {
                     Row r = new Row();
                     //r.Append(names[0]);
-                    
+                    //r.Append(Discrepancy.FirstName);
+                    //r.Append(Discrepancy.LastName);
                     for (int col = 0; col < numCols; col++)
                     {
                         if (col == 0)
