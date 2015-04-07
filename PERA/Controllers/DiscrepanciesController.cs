@@ -28,7 +28,7 @@ namespace PERA.Controllers
         }
 
         [HttpPost]
-        public ActionResult Post(ActiveParkerReport report)
+        public JsonResult Post(ActiveParkerReport report)
         {
 
             NameValueCollection nvc = Request.Form;
@@ -73,14 +73,12 @@ namespace PERA.Controllers
                 Trace.WriteLine("invoiceReport " + invoiceReport.GarageID);
             }
 
-            IdentifyDuplicates(InvoiceReport, QLReport, InvoiceReports);
+            var duplicates = IdentifyDuplicates(InvoiceReport, QLReport, InvoiceReports);
 
-            
-            return View();
-            
+            return Json(duplicates, JsonRequestBehavior.AllowGet);
         }
 
-        public void IdentifyDuplicates(InvoiceActiveParkerReport InvoiceReport, QLActiveParkerReport QLReport, 
+        public List<ParkerReportTeamMember> IdentifyDuplicates(InvoiceActiveParkerReport InvoiceReport, QLActiveParkerReport QLReport, 
             List<InvoiceActiveParkerReport> InvoiceReports)
         {
             Dictionary<string, string> Matches = new Dictionary<string, string>();
@@ -88,7 +86,7 @@ namespace PERA.Controllers
             //team members in the QL report that were not in the invoice
             List<QLTeamMember> Missing = new List<QLTeamMember>();
             //team members in the invoice that were not in the QL report
-            ICollection<ParkerReportTeamMember> Extra = InvoiceReport.TeamMembers; 
+            ICollection<ParkerReportTeamMember> Extra = InvoiceReport.TeamMembers;
 
 
             Trace.WriteLine(InvoiceReport.TeamMembers.First());
@@ -101,6 +99,30 @@ namespace PERA.Controllers
                       && x.FirstName == qlTM.FirstName
                       && x.LastName == qlTM.LastName).ToList();
                 Trace.WriteLine(qlTM.FirstName + " " + qlTM.LastName + QLReport.ID);
+
+                if(qlTM.TokenID == null)
+                {
+                    var InvoiceTeamMember = db.ParkerReportTeamMembers.Where(             //grab the matching Invoice TM
+                        x => x.InvoiceActiveParkerReportID == InvoiceReport.ID
+                          && x.FirstName == qlTM.FirstName
+                          && x.LastName == qlTM.LastName
+                          && x.TokenID == qlTM.BadgeID).ToList();
+                    switch (InvoiceTeamMember.Count)
+                    {
+
+                    }
+                }
+                else
+                {
+                    var InvoiceTeamMember = db.ParkerReportTeamMembers.Where(             //grab the matching Invoice TM
+                        x => x.InvoiceActiveParkerReportID == InvoiceReport.ID
+                          && x.FirstName == qlTM.FirstName
+                          && x.LastName == qlTM.LastName
+                          && x.TokenID == qlTM.BadgeID).ToList();
+                }
+
+                Trace.WriteLine(qlTM.FirstName + " " + qlTM.LastName + QLReport.ID);
+
                 switch (InvoiceTeamMembers.Count)
                 {
                     case 0:
@@ -110,7 +132,8 @@ namespace PERA.Controllers
                                       && x.FirstName == qlTM.FirstName
                                       && x.BadgeID == qlTM.BadgeID).ToList();
                         if (Match.Count > 0)
-                            //potential match, different last name
+
+                            //potential match, different last name same badgeID
                         Missing.Add(qlTM);
                         continue;
                     case 1:
@@ -176,6 +199,7 @@ namespace PERA.Controllers
             {
                 Trace.WriteLine("Extra: " + extra.FirstName + " " + extra.LastName + " " + extra.InvoiceActiveParkerReportID);
             }
+            return Duplicates;
         }
     }
 }

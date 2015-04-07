@@ -5,8 +5,10 @@
 </li>
 <li class="divider"></li>
 @*Single Garage Dropdown*@ 
+
 <li ng-class="{active:!tabCtrl.sideIsSet(-1)}" ng-controller="SideBarController as sidebar" class="has-dropdown">
     <a href="#">Garage</a><a ng-if="sidebar.currentGarage != null" href="#">: {{ sidebar.currentGarage.name }}</a>
+
     <ul class="dropdown">
         <li ng-repeat="garage in sidebar.garages">
             <ul>

@@ -283,7 +283,6 @@ namespace PERA.Controllers
 
                     double tokenAd, tokenBd;
                     QLTeamMember teamMember = db.QLTeamMembers.Create();
-                    int itokenA, itokenB = 0;
                     if(splitTokenColumns.ContainsKey(garageID))
                     {
                         Token tokens = splitTokenColumns[garageID];
@@ -292,10 +291,17 @@ namespace PERA.Controllers
                         if(tokenAv != DBNull.Value ){
                             tokenAd = (System.Double)tokenAv;
                             teamMember.BadgeID = Convert.ToInt32(tokenAd);
+
                         }
                         if (tokenBv != DBNull.Value) {
                             tokenBd = (System.Double)tokenBv;
-                            teamMember.TokenID = Convert.ToInt32(tokenBd);
+
+                            if (garageID == 6)
+                            {
+                                teamMember.TokenID = Convert.ToInt32(tokenBd);
+                            }
+                            else
+                                teamMember.BadgeID = Convert.ToInt32(tokenBd);
                         }
                     }
                     else if(tokenColumns.ContainsKey(garageID))

@@ -254,11 +254,38 @@
     <Compile Include="Migrations\201503231133449_update.Designer.cs">
       <DependentUpon>201503231133449_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503301739348_BadgeScan.cs" />
+    <Compile Include="Migrations\201503301739348_BadgeScan.Designer.cs">
+      <DependentUpon>201503301739348_BadgeScan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201504031939378_redo.cs" />
     <Compile Include="Migrations\201504031939378_redo.Designer.cs">
       <DependentUpon>201504031939378_redo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Migrations\201504041446049_migration23.cs" />
+    <Compile Include="Migrations\201504041446049_migration23.Designer.cs">
+      <DependentUpon>201504041446049_migration23.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504041845334_RecreateInvoice.cs" />
+    <Compile Include="Migrations\201504041845334_RecreateInvoice.Designer.cs">
+      <DependentUpon>201504041845334_RecreateInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504041909501_IdentityInsertInvoice.cs" />
+    <Compile Include="Migrations\201504041909501_IdentityInsertInvoice.Designer.cs">
+      <DependentUpon>201504041909501_IdentityInsertInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504042029464_CreateInvoice.cs" />
+    <Compile Include="Migrations\201504042029464_CreateInvoice.Designer.cs">
+      <DependentUpon>201504042029464_CreateInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504042058330_invoiceID.cs" />
+    <Compile Include="Migrations\201504042058330_invoiceID.Designer.cs">
+      <DependentUpon>201504042058330_invoiceID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504051628542_addlinenumber.cs" />
+    <Compile Include="Migrations\201504051628542_addlinenumber.Designer.cs">
+      <DependentUpon>201504051628542_addlinenumber.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
     <Compile Include="Models\CarpoolGroup.cs" />
@@ -270,7 +297,6 @@
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\Garage.cs" />
     <Compile Include="Models\Invoice.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="DAL\PERAContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs">
@@ -329,6 +355,7 @@
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.js" />
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.min.js" />
     <Content Include="Scripts\js\modernizr-2.6.2.js" />
+    <Content Include="Scripts\pera-app\expenses\services\invoices.service.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\badgeScan.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\parkerreport.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\directives\double.directive.js" />
@@ -336,6 +363,8 @@
     <Content Include="Scripts\pera-app\expenses\services\discrepancies.service.js" />
     <Content Include="Scripts\pera-app\fileupload\services\upload.service.js" />
     <Content Include="Scripts\pera-app\garages\controllers\editgarage.controller.js" />
+    <Content Include="Scripts\pera-app\garages\controllers\addgarage.controller.js" />
+    <Content Include="Scripts\pera-app\garages\services\garageManagers.service.js" />
     <Content Include="Scripts\pera-app\invoiceTeamMembers\invoiceTeamMembers.module.js" />
     <Content Include="Scripts\pera-app\map\map.module.js" />
     <Content Include="Scripts\pera-app\map\services\mapinitializer.service.js" />
@@ -347,7 +376,7 @@
     <Content Include="Scripts\pera-app\teammembers\services\teammembers.service.js" />
     <Content Include="Scripts\pera-app\teammembers\teammembers.module.js" />
     <Content Include="Scripts\pera-app\fileupload\directives\ngfile.directive.js" />
-    <Content Include="Scripts\pera-app\expenses\controllers\expenses.controller.js" />
+    <Content Include="Scripts\pera-app\expenses\controllers\uploadhistory.controller.js" />
     <Content Include="Scripts\pera-app\expenses\expenses.module.js" />
     <Content Include="Scripts\pera-app\map\controllers\map.controller.js" />
     <Content Include="Scripts\pera-app\map\map.module.js" />
@@ -396,10 +425,31 @@
     <EmbeddedResource Include="Migrations\201503231133449_update.resx">
       <DependentUpon>201503231133449_update.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="DAL\garages_new.csv" />
+    <EmbeddedResource Include="Migrations\201503301739348_BadgeScan.resx">
+      <DependentUpon>201503301739348_BadgeScan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504031939378_redo.resx">
       <DependentUpon>201504031939378_redo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504041446049_migration23.resx">
+      <DependentUpon>201504041446049_migration23.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504041845334_RecreateInvoice.resx">
+      <DependentUpon>201504041845334_RecreateInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504041909501_IdentityInsertInvoice.resx">
+      <DependentUpon>201504041909501_IdentityInsertInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504042029464_CreateInvoice.resx">
+      <DependentUpon>201504042029464_CreateInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504042058330_invoiceID.resx">
+      <DependentUpon>201504042058330_invoiceID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504051628542_addlinenumber.resx">
+      <DependentUpon>201504051628542_addlinenumber.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="DAL\garages.csv" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
@@ -419,7 +469,7 @@
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload.min.js" />
     <Content Include="Scripts\js\angular-file-upload\ng-file-upload-all.js" />
     <Content Include="Scripts\js\angular-file-upload\ng-file-upload-all.min.js" />
-    <EmbeddedResource Include="DAL\garages.csv" />
+    <EmbeddedResource Include="DAL\garages_old.csv" />
     <!--
       @ name CSS Stylesheets
     -->

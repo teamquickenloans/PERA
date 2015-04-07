@@ -18,16 +18,20 @@
 
         var vm = this;
         vm.files = [];
-        vm.reports = [{ garageID: 0 }];
+        vm.defaultReport = [{ garageID: 0 }];
+        vm.reports = angular.copy(vm.defaultReport);
         $scope.garages = [];
 
+        vm.clearForm = clearForm;
         vm.uploadAll = uploadAll;
 
-        vm.form = {
+        vm.defaultForm = {
             dateReceived: '',
             dateUploaded: Date.now(),
             monthYear: '',
         }
+
+        vm.form = angular.copy(vm.defaultForm);
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
 
@@ -60,7 +64,7 @@
                     console.log(vm.reports[i].file[0].name)
                     vm.files.push(vm.reports[i].file[0])
                 }
-                Upload.upload(vm.files, vm.form, vm.reports, "./api/badgescanparser/upload");
+                Upload.upload(vm.files, vm.form, vm.reports, "./api/badgescanparser/upload").then(uploadSuccess, uploadFail);
             }
 
         }

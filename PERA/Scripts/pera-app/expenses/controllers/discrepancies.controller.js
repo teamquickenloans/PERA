@@ -20,24 +20,32 @@
         vm.garageID = 0;
         vm.submit = submit;
         vm.clearForm = clearForm;
-
+        vm.promise;
         $scope.garages = [];
+        $scope.discrepancies = [];
 
         Garages.all().then(garagesSuccessFn);
 
         function submit() {
-            FormSubmit.submit(vm.garageID, vm.monthYear).then(submitSuccess, submitFail);
+            vm.promise = FormSubmit.submit(vm.garageID, vm.monthYear)
+            vm.promise.then(submitSuccess, submitFail);
         }
 
-        function submitSuccess() {
+        function submitSuccess(response) {
             Snackbar.show('Succesfully identified discrepancies');
             clearForm();
+            $scope.discrepancies = response.data;
+            console.log("Submit success: " + response.data);
+            var i = 0;
+            angular.forEach(response.data, function (value, key) {
+                console.log(value);
+            });
         }
 
         function submitFail()
         {
             Snackbar.show('Error identifying discrepancies')
-            clearForm();
+            //clearForm();
         }
 
         function clearForm() {
