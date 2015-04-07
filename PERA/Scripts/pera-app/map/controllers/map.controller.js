@@ -351,9 +351,6 @@
                       function () {
                           SideBar.setCurrent(marker.garage);
                           //console.log(marker.garage.name);
-                          //TODO: set state garage.map.garage
-                          //alert("Congratulations, you've clicked on a garage!");
-                          //TODO: tab.setSideTab(i); //This is what I want to do
                       });
               });
           }
