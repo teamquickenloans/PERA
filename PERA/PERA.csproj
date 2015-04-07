@@ -274,10 +274,6 @@
     <Compile Include="Migrations\201504041909501_IdentityInsertInvoice.Designer.cs">
       <DependentUpon>201504041909501_IdentityInsertInvoice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201504042029464_CreateInvoice.cs" />
-    <Compile Include="Migrations\201504042029464_CreateInvoice.Designer.cs">
-      <DependentUpon>201504042029464_CreateInvoice.cs</DependentUpon>
-    </Compile>
     <Compile Include="Migrations\201504042058330_invoiceID.cs" />
     <Compile Include="Migrations\201504042058330_invoiceID.Designer.cs">
       <DependentUpon>201504042058330_invoiceID.cs</DependentUpon>
@@ -440,16 +436,14 @@
     <EmbeddedResource Include="Migrations\201504041909501_IdentityInsertInvoice.resx">
       <DependentUpon>201504041909501_IdentityInsertInvoice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504042029464_CreateInvoice.resx">
-      <DependentUpon>201504042029464_CreateInvoice.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504042058330_invoiceID.resx">
       <DependentUpon>201504042058330_invoiceID.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504051628542_addlinenumber.resx">
       <DependentUpon>201504051628542_addlinenumber.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="DAL\garages.csv" />
+    <Content Include="DAL\garages_new.csv" />
+    <EmbeddedResource Include="DAL\garages.csv" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
@@ -469,7 +463,6 @@
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload.min.js" />
     <Content Include="Scripts\js\angular-file-upload\ng-file-upload-all.js" />
     <Content Include="Scripts\js\angular-file-upload\ng-file-upload-all.min.js" />
-    <EmbeddedResource Include="DAL\garages_old.csv" />
     <!--
       @ name CSS Stylesheets
     -->

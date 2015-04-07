@@ -107,10 +107,10 @@ namespace PERA.Controllers
                           && x.FirstName == qlTM.FirstName
                           && x.LastName == qlTM.LastName
                           && x.TokenID == qlTM.BadgeID).ToList();
-                    switch (InvoiceTeamMember.Count)
+                    /*switch (InvoiceTeamMember.Count)
                     {
 
-                    }
+                    }*/
                 }
                 else
                 {
