@@ -35,12 +35,6 @@
     <!-- ====================== Angular ui-router =========================== -->
     <script type="text/javascript" src="~/Scripts/js/angular-ui-router.js"></script>
 
-    <!--
-    <script type="text/javascript" src="~/Scripts/js/ui-router-extras/ct-ui-router-extras.js"></script>
-    <script type="text/javascript" src="~/Scripts/js/ui-router-extras/ct-ui-router-extras.core.js"></script>
-    <script type="text/javascript" src="~/Scripts/js/ui-router-extras/ct-ui-router-extras.min.js"></script>
-    <script type="text/javascript" src="~/Scripts/js/ui-router-extras/modular/ct-ui-router-extras.sticky.min.js"></script>
-         -->
 
     <!--====================== Foundation ============================ -->
     @*<link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/css/foundation.min.css" />*@
@@ -62,11 +56,11 @@
     <link rel="stylesheet" href="~/Scripts/css/bzm-date-picker.css" />
     <script src="~/Scripts/js/bzm-date-picker.min.js"></script>
 
-    <!--=======================Foundation Date Picker================== -->
+    <!--=======================Foundation Date Picker================== --><!--
     <script src="~/Scripts/js/foundation-datepicker.js"></script>
     <link href="~/Scripts/css/foundation-datepicker.css" rel="stylesheet" />
     <link href="~/Scripts/css/foundation-icons.css" rel="stylesheet" />
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/3.0.2/css/font-awesome.css" rel="stylesheet">-->
 
     <!--====================== Google Maps API ============================ -->
     <script type="text/javascript"
@@ -84,8 +78,8 @@
     <link href="~/Scripts/css/material.css" rel="stylesheet" />
 
     <!--====================== pera-app ======================== -->
-    @Styles.Render("~/bundles/pera-app")
-
+    @*@Scripts.Render("~/bundles/pera-app")*@
+    
     <script type="text/javascript" src="~/Scripts/pera-app/pera.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/pera.config.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/expenses/expenses.module.js"></script>
@@ -122,7 +116,7 @@
     <script type="text/javascript" src="~/Scripts/pera-app/sidebar/sidebar.module.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/sidebar/services/sidebar.service.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/sidebar/controllers/sidebar.controller.js"></script>
-
+    
     <!-- ====================== CSS ================================= -->
     <link rel="stylesheet" href="~/Scripts/css/site.css" />
 
@@ -186,16 +180,10 @@
     </section>
 </nav>
 
-
-
     <div class="column small-8 medium-9 large-10" id="map-canvas" ng-show="tabCtrl.isSet(1)"></div>
-    
+    <div ui-view></div>    
 
-    @*ng-show="$state.includes('garage.map')"*@
-
-        <div ui-view></div>
-
-
+@*ng-show="$state.includes('garage.map')"*@
 
 
     <!-- Makes Foundation Stuff Work -->

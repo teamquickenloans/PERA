@@ -15,7 +15,7 @@
 
     ngFile.$inject = ['$scope', '$http']; //Here 'Garages' is the Garages Service (pera.garages.service)
 
-    /**aaaaaaaaaaaaaaa
+    /*
     * @namespace InvoiceFormController
     */
     function ngFile(){
