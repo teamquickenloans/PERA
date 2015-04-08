@@ -48,7 +48,6 @@
         $scope.edit = angular.copy(defaultForm);
         $scope.add = angular.copy(defaultForm);
 
-        var validationApp = angular.module('validationApp', []);
 
         vm.submit = submit;
 
