@@ -15,6 +15,7 @@
 
         this.setTab = function (val) {
             this.tab = val;
+            console.log("tab has been set to " + val);
         };
 
         this.isSet = function (val) {
@@ -24,7 +25,7 @@
 
 
         //for nav bar side tabs ----------------------
-        this.sideTab = 0;
+        this.sideTab = -1;
 
         this.setSideTab = function (val) {
             this.sideTab = val;

@@ -27,6 +27,8 @@ namespace PERA.Models
 
         public System.Data.Entity.DbSet<PERA.Models.QLTeamMember> QLTeamMembers { get; set; }
 
+        public System.Data.Entity.DbSet<PERA.Models.Discrepancy> Discrepancies { get; set; }
+
         public System.Data.Entity.DbSet<PERA.Models.Garage> Garages { get; set; }
 
         public System.Data.Entity.DbSet<PERA.Models.GarageManager> GarageManagers { get; set; }

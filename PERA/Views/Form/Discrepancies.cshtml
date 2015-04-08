@@ -1,6 +1,7 @@
 ﻿
+<<<<<<< HEAD
 
-<h3>Identify Discrepancies</h3>
+<h3><b>Identify Discrepancies</b></h3>
 <p>
     This page identifies errors in invoices for a Garage.  Here you will select a Garage along with the Month and Year
     to check for errors.
@@ -8,33 +9,102 @@
 
 </p>
 <form novalidate name="discrepanciesForm" ng-submit="controller.submit()">
-    <div class="column small-4">
 
-        <label for="monthYear">Month/Year of Report</label>
+
+            
+    <div class="column small-4">
+        <label for="monthYear">Month/Year</label>
 
         <date-picker id="date" class="input" id="monthYear" format="MMM yyyy" placeholder="." ng-model="controller.monthYear">
         </date-picker>
+
     </div>
-    <div class="column small-4">
+    <div class="column small-8">
         <label for="garageID">Garage:</label>
-        <select ng-model="controller.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID">
+        <select ng-model="garage" ng-options="garage as garage.name for garage in garages" id="garageID">
             <option value="">-- select a garage --</option>
         </select>
 
     </div>
     <br /><br />
-    <div class="column small-6">
+    <div class="column small-12">
         <button class="radius button" type="submit">Identify Errors</button>
         <a class="radius button" ng-click="controller.clearForm()">Clear</a>
+        <div class="column small-1"></div>
+        <img id="spinner" src="~/Content/Images/spinner.png" ng-show="spinner" style="display:none;">
     </div>
 
 
     <br />
-
-
 </form>
+
+
+<div id="issuesContent" ng-show="loaded">
+    <h3><b>Detected Issues for {{ garage.name }} Garage</b></h3>
+    <div id="issueTableWrapper">
+        <table id="issueTableHead">
+            <tr>
+                <!--<th class="garageColIssueTable">Garages</th>-->
+                <th class="nameColIssueTable">Name</th>
+                <th class="commonIDColIssueTable">BadgeID</th>
+                <th class="issueColIssueTable">Action</th>
+                <th class="badgeID"></th>
+                <th class="dateColIssueTable">Date</th>
+            </tr>
+        </table>
+
+        <div id="issueTableBodyWrapper">
+            <table id="issueTableBody" ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+                <tr class="tableRow" ng-repeat="issue in duplicate" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                    <td class="nameColIssueTable">{{issue.FirstName}} {{issue.LastName}}</td>
+                    <td class="commonIDColIssueTable">{{issue.TokenID}}</td>
+                    <td class="issueColIssueTable">{{issue.Action}}</td>
+                    <td class="dateColIssueTable"></td>
+                </tr>
+            </table>
+        </div>
+
+    </div>
+</div>
 
 <script>
     console.log("hello");
 
 </script>
+=======
+<div class="column small-2"></div>
+<div class="column small-10">
+    <h3>Identify Discrepancies</h3>
+    <p>
+        This page identifies errors in invoices for a Garage.  Here you will select a Garage along with the Month and Year
+        to check for errors.
+        The system will check the database for errors and generate a report to use.
+
+    </p>
+    <form novalidate name="discrepanciesForm" ng-submit="controller.submit()">
+        <div class="column small-4">
+
+            <label for="monthYear">Month/Year</label>
+
+            <date-picker id="date" class="input" id="monthYear" format="MMM yyyy" placeholder="." ng-model="controller.monthYear">
+            </date-picker>
+        </div>
+        <div class="column small-8">
+            <label for="garageID">Garage:</label>
+            <select ng-model="controller.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID">
+                <option value="">-- select a garage --</option>
+            </select>
+
+        </div>
+        <br /><br />
+
+        <div class="column small-6">
+            <button class="radius button" type="submit">Identify Discrepancies</button>
+            <a class="radius button" ng-click="controller.clearForm()">Clear</a>
+        </div>
+
+        <br />
+
+    </form>
+</div>
+>>>>>>> origin/develop

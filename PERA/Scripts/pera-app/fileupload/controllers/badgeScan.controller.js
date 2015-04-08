@@ -40,6 +40,11 @@
             vm.reports.push({ garageID: 0 });
         }
 
+        function removeReport() {
+            vm.counter = vm.counter - 1;
+            vm.reports.pop();
+        }
+
         function uploadAll() {
             console.log("uploadAll");
             var form = vm.form;
@@ -64,21 +69,21 @@
 
         }
 
-        function clearForm() {
-            $scope.form.$setPristine();
-            vm.form = angular.copy(vm.defaultForm);
-            vm.files = [];
-            vm.reports = angular.copy(vm.defaultReport);
-        }
-
-        //executes after the upload completes successfully
         function uploadSuccess() {
-            Snackbar.show("Invoice Uploaded Successfully");
+            Snackbar.show("Card Activity Report Uploaded Successfully");
             clearForm();
         }
 
+        function clearForm() {
+            vm.form = angular.copy(vm.defaultForm);
+            $scope.badgeScanForm.$setPristine();
+            vm.files = [];
+            vm.reports = angular.copy(vm.defaultReport);
+            console.log("clear form");
+        }
         function uploadFail() {
-            Snackbar.error("Invoice upload failed. Please recheck the formatting of the excel file.");
+            Snackbar.error("Card Activity Report upload failed.  Please recheck the formatting of the excel file.");
+            clearForm();
         }
 
         function garagesSuccessFn(data, status, headers, config) {

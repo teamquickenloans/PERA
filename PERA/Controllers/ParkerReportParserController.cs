@@ -49,6 +49,7 @@ namespace PERA.Controllers
             { 1, 4 },
             { 2, 2 },
             { 4, 3 },
+            { 5, 6 },
             { 7, 5 },
             { 8, 5 },
             { 9, 5 }
@@ -56,7 +57,7 @@ namespace PERA.Controllers
 
         Dictionary<int, Token> splitTokenColumns = new Dictionary<int, Token>()
         {
-            { 5,  new Token{ID_CODE_26W = 5, HID_CORP1K_ID = 6}}, //!TODO: Change this
+            //{ 5,  new Token{ID_CODE_26W = 5, HID_CORP1K_ID = 6}}, //!TODO: Change this
             { 6,  new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}},
             { 3,  new Token{ID_CODE_26W = 11, HID_CORP1K_ID = 12}},
             { 11, new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}},
@@ -283,7 +284,6 @@ namespace PERA.Controllers
 
                     double tokenAd, tokenBd;
                     QLTeamMember teamMember = db.QLTeamMembers.Create();
-                    int itokenA, itokenB = 0;
                     if(splitTokenColumns.ContainsKey(garageID))
                     {
                         Token tokens = splitTokenColumns[garageID];
@@ -292,10 +292,17 @@ namespace PERA.Controllers
                         if(tokenAv != DBNull.Value ){
                             tokenAd = (System.Double)tokenAv;
                             teamMember.BadgeID = Convert.ToInt32(tokenAd);
+
                         }
                         if (tokenBv != DBNull.Value) {
                             tokenBd = (System.Double)tokenBv;
-                            teamMember.TokenID = Convert.ToInt32(tokenBd);
+
+                            /*if (garageID == 6)
+                            {
+                                teamMember.TokenID = Convert.ToInt32(tokenBd);
+                            }
+                            else*/
+                                teamMember.BadgeID = Convert.ToInt32(tokenBd);
                         }
                     }
                     else if(tokenColumns.ContainsKey(garageID))

@@ -127,7 +127,7 @@ namespace PERA.Controllers
                 APR.DateUploaded = invoice.DateUploaded;
                 APR.DateReceived = invoice.DateReceived;
                 APR.MonthYear = invoice.MonthYear;
-                //APR.Invoice = invoice;
+                APR.InvoiceID = invoice.InvoiceID;
                 //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
                 List<ParkerReportTeamMember> teamMembers = 
                     ExcelParser(file.LocalFileName, originalFileName, invoice, APR, garageID);
@@ -173,7 +173,7 @@ namespace PERA.Controllers
             List<ParkerReportTeamMember> teamMembers = new List<ParkerReportTeamMember>();
             
             System.Diagnostics.Debug.WriteLine("begin for loop");
-
+            int i = 0;
             foreach (DataTable table in result.Tables) // each sheet
             { 
                 foreach (DataRow row in table.Rows) // each row
@@ -211,6 +211,7 @@ namespace PERA.Controllers
                     else
                     {
                         var fullname = row[nameColumns[garageID]];
+
                         if (fullname != DBNull.Value)
                         {
                             string fullName = (string)fullname;
@@ -230,7 +231,13 @@ namespace PERA.Controllers
                         }
                         else
                         {
+                            if (i > 2)
+                                break;
+                            i++;
                             Trace.WriteLine("null name");
+                            if (i > 2)
+                                break;
+                            i++;
                             continue;
                         }
                     }

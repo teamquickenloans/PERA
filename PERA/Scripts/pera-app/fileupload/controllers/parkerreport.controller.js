@@ -75,7 +75,7 @@
 
         }
         function uploadSuccess() {
-            Snackbar.show("Invoice Uploaded Successfully");
+            Snackbar.show("Parker Report Uploaded Successfully");
             clearForm();
         }
 
