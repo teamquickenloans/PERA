@@ -358,7 +358,6 @@
     <Content Include="Scripts\pera-app\expenses\services\invoices.service.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\badgeScan.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\parkerreport.controller.js" />
-    <Content Include="Scripts\pera-app\fileupload\directives\double.directive.js" />
     <Content Include="Scripts\pera-app\expenses\controllers\discrepancies.controller.js" />
     <Content Include="Scripts\pera-app\expenses\services\discrepancies.service.js" />
     <Content Include="Scripts\pera-app\fileupload\services\upload.service.js" />
@@ -372,9 +371,9 @@
     <Content Include="Scripts\pera-app\pera.config.js" />
     <Content Include="Scripts\pera-app\sidebar\services\sidebar.service.js" />
     <Content Include="Scripts\pera-app\sidebar\sidebar.module.js" />
-    <Content Include="Scripts\pera-app\teammembers\controllers\teammembers.controller.js" />
-    <Content Include="Scripts\pera-app\teammembers\services\teammembers.service.js" />
-    <Content Include="Scripts\pera-app\teammembers\teammembers.module.js" />
+    <Content Include="Scripts\pera-app\teamMembers\controllers\teamMembers.controller.js" />
+    <Content Include="Scripts\pera-app\teamMembers\services\teamMembers.service.js" />
+    <Content Include="Scripts\pera-app\teamMembers\teamMembers.module.js" />
     <Content Include="Scripts\pera-app\fileupload\directives\ngfile.directive.js" />
     <Content Include="Scripts\pera-app\expenses\controllers\uploadhistory.controller.js" />
     <Content Include="Scripts\pera-app\expenses\expenses.module.js" />

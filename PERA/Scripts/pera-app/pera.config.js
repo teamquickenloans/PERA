@@ -5,7 +5,8 @@
       .module('pera.config')
       .config(config);
 
-    //config.$inject = ['ui.router'];
+    //config.$inject = ['ui.routerProvider','ngRoute','ngResource'];
+    //config.$inject = ['$routeProvider', '$urlRouterProvider', '$stateProvider', ];
 
     /**
     * @name config
