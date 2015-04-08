@@ -5,7 +5,8 @@
       .module('pera.config')
       .config(config);
 
-    //config.$inject = ['ui.router'];
+    //config.$inject = ['ui.routerProvider','ngRoute','ngResource'];
+    //config.$inject = ['$routeProvider', '$urlRouterProvider', '$stateProvider', ];
 
     /**
     * @name config
@@ -56,6 +57,15 @@
         $stateProvider.state(singleGarage);
 
 
+
+
+
+
+
+
+        // ====================== Garage ==============================
+
+
           ///////////////////
          //        Garage //
         ///////////////////
@@ -92,7 +102,7 @@
         $stateProvider.state(mapView);
 
           /////////////////////////////
-         //  Expense > Map > Garage //
+         //   Garage > Map > Garage //
         /////////////////////////////
         var mapGarage = {
             name: 'garage.map.garage',
@@ -129,8 +139,112 @@
         }
         $stateProvider.state(garageEdit);
 
+
+
+
+
+
+
+
+
+        // ====================== Upload ==============================
+
+
           //////////////////////
-         //          Expense //
+         //           Upload //
+        //////////////////////
+        var upload = {
+            name: 'upload',
+            abstract: true,
+            url: '/upload',
+            templateUrl: 'Upload/Base',
+        }
+        $stateProvider.state(upload);
+
+          /////////////////////////////////
+         //     Upload > Upload History //
+        /////////////////////////////////
+        var uploadHistory = {
+            name: 'upload.uploadHistory',
+            views: {
+                '': {
+                    templateUrl: 'Upload/UploadHistory',
+                    controller: 'UploadHistoryController as controller'
+                },
+                'sidebar-left@upload': {
+                    templateUrl: 'Navigation/Upload'
+                }
+            }
+        }
+        $stateProvider.state(uploadHistory);
+
+          /////////////////////////////////
+         //            Upload > Invoice //
+        /////////////////////////////////
+        var invoice = {
+            name: 'upload.invoice',
+            views: {
+                '' : {
+                    templateUrl: 'Form/Invoice',
+                    controller: 'InvoiceController as fileCtrl'
+                },
+                'sidebar-left@upload': {
+                    templateUrl: 'Navigation/Upload'
+                }
+            }
+        }
+        $stateProvider.state(invoice);
+
+          /////////////////////////////////
+         //      Upload > Parker Report //
+        /////////////////////////////////
+        var parkerReport = {
+            name: 'upload.parkerReport',
+            views: {
+                '': {
+                    templateUrl: 'Form/ParkerReport',
+                    controller: 'ParkerReportController as fileCtrl'
+                },
+                'sidebar-left@upload': {
+                    templateUrl: 'Navigation/Upload'
+                }
+            }
+        }
+        $stateProvider.state(parkerReport);
+
+          /////////////////////////////////
+         //         Upload > Badge Scan //
+        /////////////////////////////////
+        var badgeScan = {
+            name: 'upload.badgeScan',
+            views: {
+                '': {
+                    templateUrl: 'Form/BadgeScan',
+                    controller: 'BadgeScanController as fileCtrl'
+                },
+                'sidebar-left@upload': {
+                    templateUrl: 'Navigation/Upload'
+                }
+            }
+        }
+        $stateProvider.state(badgeScan);
+
+
+
+
+
+
+
+
+
+
+
+
+        // ====================== Expense ==============================
+
+
+        //////////////////////
+        //          Expense //
         //////////////////////
         var expense = {
             name: 'expense',
@@ -141,18 +255,15 @@
         $stateProvider.state(expense);
 
           /////////////////////////////////
-         //   Expense > Detected Issues //
+         //     Expense > Discrepancies //
         /////////////////////////////////
-        var detectedIssues = {
-            name: 'expense.detectedIssues',
-            url: '',
+        var discrepancies = {
+            name: 'expense.discrepancies',
             views: {
-                // targets the unnamed ui-view in parent template
                 '': {
-                    templateUrl: 'Expense/DetectedIssues',
-                    controller: 'UploadHistoryController as expenseCtrl'
+                    templateUrl: 'Form/Discrepancies',
+                    controller: 'DiscrepanciesController as controller'
                 },
-                // targets the ui-view='right-nav' in index.html
                 'right-nav@': {
                     templateUrl: 'Navigation/TopBar',
                     controller: 'SideBarController as sidebar'
@@ -163,13 +274,13 @@
                 }
             }
         }
-        $stateProvider.state(detectedIssues);
-        
+        $stateProvider.state(discrepancies);
+
           ////////////////////////////////////////////
-         //   Expense > Detected Issues > Overview //
+         //     Expense > Discrepancies > Overview //
         ////////////////////////////////////////////
-        var detectedIssuesOverview = {
-            name: 'expense.detectedIssues.overview',
+        var discrepanciesOverview = {
+            name: 'expense.discrepancies.overview',
             views: {
                 'sidebar@expense': {
                     templateUrl: 'Navigation/Overview',
@@ -177,106 +288,22 @@
                 }
             }
         }
-        $stateProvider.state(detectedIssuesOverview);
+        $stateProvider.state(discrepanciesOverview);
 
           //////////////////////////////////////////
-         //   Expense > Detected Issues > Garage //
+         //     Expense > Discrepancies > Garage //
         //////////////////////////////////////////
-        var detectedIssuesGarage = {
-            name: 'expense.detectedIssues.garage',
+        var discrepanciesGarage = {
+            name: 'expense.discrepancies.garage',
             views: {
                 'sidebar@expense': {
                     templateUrl: 'Navigation/Garage',
                     controller: 'SideBarController as sidebar'
-                },
-                'sidebar-left@expense': {
-                    templateUrl: 'Navigation/Expense'
                 }
             }
         }
-        $stateProvider.state(detectedIssuesGarage);
+        $stateProvider.state(discrepanciesGarage);
 
-          /////////////////////////////////
-         //    Expense > Upload History //
-        /////////////////////////////////
-        var uploadHistory = {
-            name: 'expense.uploadHistory',
-            views: {
-                '': {
-                    templateUrl: 'Expense/UploadHistory',
-                    controller: 'UploadHistoryController as controller'
-                },
-                'sidebar-left@expense': {
-                    templateUrl: 'Navigation/Expense'
-                }
-            }
-        }
-        $stateProvider.state(uploadHistory);
-
-          /////////////////////////////////
-         //           Expense > Invoice //
-        /////////////////////////////////
-        var invoice = {
-            name: 'expense.invoice',
-            views: {
-                '' : {
-                    templateUrl: 'Form/Invoice',
-                    controller: 'InvoiceController as fileCtrl'
-                },
-                'sidebar-left@expense' : {
-                    templateUrl: 'Navigation/Expense'
-                }
-            }
-        }
-        $stateProvider.state(invoice);
-
-          /////////////////////////////////
-         //     Expense > Parker Report //
-        /////////////////////////////////
-        var parkerReport = {
-            name: 'expense.parkerReport',
-            views: {
-                '': {
-                    templateUrl: 'Form/ParkerReport',
-                    controller: 'ParkerReportController as fileCtrl'
-                },
-                'sidebar-left@expense': {
-                    templateUrl: 'Navigation/Expense'
-                }
-            }
-        }
-        $stateProvider.state(parkerReport);
-
-          /////////////////////////////////
-         //     Expense > Discrepancies //
-        /////////////////////////////////
-        var discrepancies = {
-            name: 'expense.discrepancies',
-            views: {
-                '': {
-                    templateUrl: 'Form/Discrepancies',
-                    controller: 'DiscrepanciesController as controller'
-                }
-            }
-        }
-        $stateProvider.state(discrepancies);
-
-          /////////////////////////////////
-         //        Expense > Badge Scan //
-        /////////////////////////////////
-        var badgeScan = {
-            name: 'expense.badgeScan',
-            views: {
-                '': {
-                    templateUrl: 'Form/BadgeScan',
-                    controller: 'BadgeScanController as fileCtrl'
-                },
-                'sidebar-left@expense': {
-                    templateUrl: 'Navigation/Expense'
-                }
-            }
-        }
-        $stateProvider.state(badgeScan);
 
 
     }

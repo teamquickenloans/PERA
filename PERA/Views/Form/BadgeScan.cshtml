@@ -6,7 +6,6 @@
 
 <form novalidate name="badgeScanForm" ng-submit="fileCtrl.uploadAll()">
 
-    <div class="small-10 column">
         <h4>
             Card Activity Reports
             <a ng-click="fileCtrl.addReport()">
@@ -20,13 +19,8 @@
 
         <!--<input type="file" class="fileInput" ng-file-select ng-model="files" ng-multiple="false" />-->
         <div class="row" ng-repeat="report in fileCtrl.reports">
-
-
-            <div class="small-6 column">
                 <a href="#" class="radius button" ng-file-select ng-model="report.file">Select a file</a>
-            </div>
             <div class="small-12 column">
-
                 {{ report.file[0].name }}
             </div>
         </div>
@@ -36,7 +30,6 @@
         </div>
 
         <br />
-    </div>
 
     <br />
 
