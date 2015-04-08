@@ -9,12 +9,12 @@
       .module('pera.map.controllers')
       .controller('MapController', MapController);
 
-    MapController.$inject = ['$scope','Garages', 'Snackbar', 'Initializer', 'SideBar', '$state'];
+    MapController.$inject = ['$scope','Garages', 'Snackbar', 'Initializer', 'SideBar', '$state', '$rootScope'];
 
     /**
     * @namespace MapController
     */
-    function MapController($scope, Garages, Snackbar, Initializer, SideBar, $state) {
+    function MapController($scope, Garages, Snackbar, Initializer, SideBar, $state, $rootScope) {
 
         var styleArray = [
               {
@@ -290,6 +290,7 @@
         vm.garages = [];
         vm.garageMarkers = [];
         vm.initialized = false; //tracks if the maps has already been initialized
+        $rootScope.$state = $state;
 
         vm.styleArray = styleArray;
 

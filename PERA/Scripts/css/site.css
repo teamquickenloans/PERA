@@ -178,11 +178,11 @@ tr.tableRow.selected {
 }
 
 .nameColUsageTable {
-    width: 50%;
+    width: 75%;
 }
 
 .usageColUsageTable {
-    width: 50%;
+    width: 25%;
 }
 
 #mapKey {
@@ -291,4 +291,8 @@ h4 {
 
 .padTop {
     padding-top: 20px;
+}
+
+.sideBar .ng-scope {
+    padding: 0;
 }

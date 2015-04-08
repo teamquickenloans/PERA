@@ -468,7 +468,6 @@
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload.min.js" />
     <Content Include="Scripts\js\angular-file-upload\ng-file-upload-all.js" />
     <Content Include="Scripts\js\angular-file-upload\ng-file-upload-all.min.js" />
-    <EmbeddedResource Include="DAL\garages.csv" />
     <!--
       @ name CSS Stylesheets
     -->

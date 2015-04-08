@@ -187,9 +187,12 @@
 </nav>
 
 
-    <div ng-show="tabCtrl.isSet(1)">
-<div class="column small-8 medium-9 large-10" id="map-canvas" ng-show="tabCtrl.isSet(1)"></div>
-    </div>
+
+    <div class="column small-8 medium-9 large-10" id="map-canvas" ng-show="tabCtrl.isSet(1)"></div>
+    
+
+    @*ng-show="$state.includes('garage.map')"*@
+
         <div ui-view></div>
 
 
