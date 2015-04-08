@@ -280,11 +280,9 @@ tr.tableRow.selected {
 
 .row {
   margin: 0px;
-  padding: 2px;
-  width: 100%;
-  margin-left: auto;
-  margin-right: auto;
-  margin-top: 0;
-  margin-bottom: 0;
-  max-width: none; 
+  max-width: none;
+}
+
+.padTop {
+    padding-top: 20px;
 }

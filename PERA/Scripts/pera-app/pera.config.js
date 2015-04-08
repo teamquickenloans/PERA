@@ -278,6 +278,5 @@
         }
         $stateProvider.state(badgeScan);
 
-
     }
 })();
