@@ -143,52 +143,35 @@
 
         <!--Right Nav Section -->
         <ul class="right" ui-view="right-nav">
-            <!--
-        <li class="divider"></li>
-        <li>
-            <a ui-sref=".overview">Overview</a>
-        </li>
-        <li class="divider"></li>
-        @*Single Garage Dropdown*@
-        <li ng-class="{active:!tab.sideIsSet(-1)}" ng-controller="SideBarController as sidebar" class="has-dropdown">
-            <a href="#">Single Garage</a><a ng-if="sidebar.currentGarage != null" href="#">: {{ sidebar.currentGarage.name }}</a>
-            <ul class="dropdown">
-                <li ng-repeat="garage in sidebar.garages">
-                    <ul>
-                        <li ng-class="{active:tab.sideIsSet($index)}">
-                            <a ui-sref=".singleGarage" ng-click="sidebar.setCurrent(garage)">{{garage.name}}</a>
-                        </li>
-                    </ul>
-                </li>
-            </ul>
-        </li>
-            -->
         </ul>
 
         <!-- Left Nav Section -->
         <ul class="left">
             <li class="divider"></li>
-            <li class="has-dropdown" ng-class="{active: tabCtrl.isSet(3) || tabCtrl.isSet(4)}">
+            <li class="has-dropdown" ui-sref-active="active">       <!--ng-class="{active: tabCtrl.isSet(3) || tabCtrl.isSet(4)}">-->
                 <a href="#">Expenses</a>
                 <ul class="dropdown">
-                    <li ng-class="{active: tabCtrl.isSet(3)}">
+                    <li ui-sref-active="active">                    <!--ng-class="{active: tabCtrl.isSet(3)}"-->
                         <a ui-sref="expense.discrepancies" ng-click="tabCtrl.setTab(3);">Identify Discrepancies</a>
                     </li>
-                    <li ng-class="{active: tabCtrl.isSet(4)}">
+                    <li ui-sref-active="active">                    <!--ng-class="{active: tabCtrl.isSet(4)}">-->
                         <a ui-sref="expense.uploadHistory" ng-click="tabCtrl.setTab(4);">Uploads</a>
                     </li>
                 </ul>
             </li>
             <li class="divider"></li>
-            <li class="has-dropdown" ng-class="{active: tabCtrl.isSet(1) || tabCtrl.isSet(2)}">
+            <li class="has-dropdown" ui-sref-active="active">
+                <!--ng-class="{active: tabCtrl.isSet(1) || tabCtrl.isSet(2)}">-->
                 <a href="#">Garages</a>
                 <ul class="dropdown" ng-controller="MapController as map">
 
-                    <li ng-class="{active: tabCtrl.isSet(1)}">
+                    <li ui-sref-active="active">
+                        @*ng-class="{active: tabCtrl.isSet(1)}">*@
                         <a ui-sref="garage.map" ng-click="tabCtrl.setTab(1);">Garage Map</a>
 
                     </li>
-                    <li ng-class="{active: tabCtrl.isSet(2)}">
+                    <li ui-sref-active="active">
+                        @*ng-class="{active: tabCtrl.isSet(2)}">*@
                         <a ui-sref="garage.edit" ng-click="tabCtrl.setTab(2);">Edit Garage</a>
                     </li>
                 </ul>
@@ -204,10 +187,12 @@
 </nav>
 
 
+    <div ng-show="tabCtrl.isSet(1)">
+        <div class="column small-8 medium-9 large-10" id="map-canvas" ng-show="tabCtrl.isSet(1)"></div>
+    </div>
+        <div ui-view></div>
 
-<div class="column small-8 medium-9 large-10" id="map-canvas" ng-show="tabCtrl.isSet(1)"></div>
 
-<div ui-view></div>
 
 
     <!-- Makes Foundation Stuff Work -->

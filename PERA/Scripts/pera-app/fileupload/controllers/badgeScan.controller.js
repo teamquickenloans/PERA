@@ -24,6 +24,9 @@
 
         vm.clearForm = clearForm;
         vm.uploadAll = uploadAll;
+        vm.addReport = addReport;
+        vm.removeReport = removeReport;
+
 
         vm.defaultForm = {
             dateReceived: '',

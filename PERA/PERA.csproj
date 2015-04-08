@@ -453,7 +453,6 @@
       <DependentUpon>201504052119437_discrepancy.cs</DependentUpon>
     </EmbeddedResource>
     <Content Include="DAL\garages_new.csv" />
-    <EmbeddedResource Include="DAL\garages.csv" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
