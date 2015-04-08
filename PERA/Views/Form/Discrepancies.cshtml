@@ -1,4 +1,5 @@
 ﻿
+<<<<<<< HEAD
 
 <h3><b>Identify Discrepancies</b></h3>
 <p>
@@ -70,3 +71,40 @@
     console.log("hello");
 
 </script>
+=======
+<div class="column small-2"></div>
+<div class="column small-10">
+    <h3>Identify Discrepancies</h3>
+    <p>
+        This page identifies errors in invoices for a Garage.  Here you will select a Garage along with the Month and Year
+        to check for errors.
+        The system will check the database for errors and generate a report to use.
+
+    </p>
+    <form novalidate name="discrepanciesForm" ng-submit="controller.submit()">
+        <div class="column small-4">
+
+            <label for="monthYear">Month/Year</label>
+
+            <date-picker id="date" class="input" id="monthYear" format="MMM yyyy" placeholder="." ng-model="controller.monthYear">
+            </date-picker>
+        </div>
+        <div class="column small-8">
+            <label for="garageID">Garage:</label>
+            <select ng-model="controller.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID">
+                <option value="">-- select a garage --</option>
+            </select>
+
+        </div>
+        <br /><br />
+
+        <div class="column small-6">
+            <button class="radius button" type="submit">Identify Discrepancies</button>
+            <a class="radius button" ng-click="controller.clearForm()">Clear</a>
+        </div>
+
+        <br />
+
+    </form>
+</div>
+>>>>>>> origin/develop

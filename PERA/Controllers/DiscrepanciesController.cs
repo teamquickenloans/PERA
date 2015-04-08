@@ -78,7 +78,7 @@ namespace PERA.Controllers
             return Json(duplicates, JsonRequestBehavior.AllowGet);
         }
 
-        public List<List<Discrepancy>> IdentifyDuplicates(InvoiceActiveParkerReport InvoiceReport, QLActiveParkerReport QLReport, 
+        public List<List<Discrepancy>> IdentifyDuplicates(InvoiceActiveParkerReport InvoiceReport, QLActiveParkerReport QLReport,
             List<InvoiceActiveParkerReport> InvoiceReports)
         {
             List<List<Discrepancy>> issues = new List<List<Discrepancy>>();
@@ -139,13 +139,13 @@ namespace PERA.Controllers
                                 Extra.Remove(InvoiceTeamMember);
                             }
                             break;
-                    }
+                }
 
                 Trace.WriteLine(qlTM.FirstName + " " + qlTM.LastName + QLReport.ID);
                 var InvoiceTeamMembers = new List<ParkerReportTeamMember>();
                 /*InvoiceTeamMembers = db.ParkerReportTeamMembers.Where(             //grab the matching Invoice TM
-                    x => x.InvoiceActiveParkerReportID == InvoiceReport.ID
-                      && x.FirstName == qlTM.FirstName
+                        x => x.InvoiceActiveParkerReportID == InvoiceReport.ID
+                          && x.FirstName == qlTM.FirstName
                       && x.LastName == qlTM.LastName)
                       .ToList();*/
 
@@ -157,7 +157,7 @@ namespace PERA.Controllers
                         && q.LastName == qlTM.LastName
                         && q.BadgeID != qlTM.BadgeID)
                         .ToList();
-                   
+
                 if(InvoiceTeamMembers.Count() > 0)
                 {
                     foreach(var itm in InvoiceTeamMembers){
@@ -167,7 +167,7 @@ namespace PERA.Controllers
                         discrepancy.TokenID = itm.BadgeID;
                         discrepancy.Action = "Remove";
                         Duplicates.Add(discrepancy);
-                    }
+                        }
                 }
                 // Next find duplicates within the garage network
                 /*foreach (InvoiceActiveParkerReport invoiceReport in InvoiceReports)
@@ -191,7 +191,7 @@ namespace PERA.Controllers
                             }
                             break;
                     }
-                        
+
                 }*/
             } //end loop of qlTM
             foreach (var duplicate in Duplicates) {

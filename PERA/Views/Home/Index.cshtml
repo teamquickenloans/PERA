@@ -123,11 +123,11 @@
     <script type="text/javascript" src="~/Scripts/pera-app/sidebar/services/sidebar.service.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/sidebar/controllers/sidebar.controller.js"></script>
 
-    <!--====================== CSS ================================= -->
+    <!-- ====================== CSS ================================= -->
     <link rel="stylesheet" href="~/Scripts/css/site.css" />
 
 </head>
-<body ng-app="pera">
+<body ng-app="pera" ng-controller="TabController as tabCtrl">
 
 <!--======================== Nav Bar ============================ -->
 <nav class="top-bar" data-topbar role="navigation" data-options="is_hover:false">
@@ -168,49 +168,35 @@
         <!-- Left Nav Section -->
         <ul class="left">
             <li class="divider"></li>
-            <li class="has-dropdown">
+            <li class="has-dropdown" ng-class="{active: tabCtrl.isSet(3) || tabCtrl.isSet(4)}">
                 <a href="#">Expenses</a>
                 <ul class="dropdown">
-                            <li>
-                                <a ui-sref="expense.detectedIssues">Detected Issues</a>
-                            </li>
-                            <li>
-                                <a ui-sref="expense.uploadHistory">File History</a>
-                            </li>
-                            <li>
-                                <a ui-sref="expense.invoice">Upload Invoices</a>
-                            </li>
-                            <li>
-                                <a ui-sref="expense.parkerReport">Upload Parker Reports</a>
-                            </li>
-                            <li>
-                                <a ui-sref="expense.badgeScan">Upload Badge Scan Reports</a>
-                            </li>
-                            <li>
-                                <a ui-sref="expense.discrepancies">Points of Contention</a>
-                            </li>
+                    <li ng-class="{active: tabCtrl.isSet(3)}">
+                        <a ui-sref="expense.discrepancies" ng-click="tabCtrl.setTab(3);">Identify Discrepancies</a>
+                    </li>
+                    <li ng-class="{active: tabCtrl.isSet(4)}">
+                        <a ui-sref="expense.uploadHistory" ng-click="tabCtrl.setTab(4);">Uploads</a>
+                    </li>
                 </ul>
             </li>
             <li class="divider"></li>
-            <li class="has-dropdown">
+            <li class="has-dropdown" ng-class="{active: tabCtrl.isSet(1) || tabCtrl.isSet(2)}">
                 <a href="#">Garages</a>
                 <ul class="dropdown" ng-controller="MapController as map">
-                    <li>
 
-                        <a ui-sref="garage.map">Garage Map</a>
-
-                        @*<a ng-click="map.initialize()">Garage Map</a>*@
+                    <li ng-class="{active: tabCtrl.isSet(1)}">
+                        <a ui-sref="garage.map" ng-click="tabCtrl.setTab(1);">Garage Map</a>
 
                     </li>
-                    <li>
-                        <a ui-sref="garage.edit">Edit Garage</a>
+                    <li ng-class="{active: tabCtrl.isSet(2)}">
+                        <a ui-sref="garage.edit" ng-click="tabCtrl.setTab(2);">Edit Garage</a>
                     </li>
                 </ul>
 
             </li>
             <li class="divider"></li>
-            <li>
-                <a href="#">Notifications</a>
+            <li ng-class="{active: tabCtrl.isSet(5)}">
+                <a href="#" ng-click="tabCtrl.setTab(5);">Notifications</a>
             </li>
             <li class="divider"></li>
         </ul>
@@ -218,55 +204,13 @@
 </nav>
 
 
-    <div class="row">
-        <div ui-view></div>
-        <div id="map-canvas"></div>
-    </div>
-<!--
 
-<div id="map-canvas">
-    <div id="garageMapContent" ng-controller="MapController as map">
+<div class="column small-8 medium-9 large-10" id="map-canvas" ng-show="tabCtrl.isSet(1)"></div>
 
-        @*<div id="map-canvas" ui-view class="columns small-9"></div>*@
-        @*<div id="map-canvas"></div>*@
-        <div id="mapKey">
-            <h5>&nbsp;&nbsp;Spots Available&nbsp;&nbsp;&nbsp;</h5>
-            <div id="greenBox"></div>
-            <div class="keyText">100+ Spots</div>
-            <br />
-            <div id="yellowBox"></div>
-            <div class="keyText">50 - 100 Spots</div>
-            <br />
-            <div id="redBox"></div>
-            <div class="keyText">0 - 50 Spots</div>
-            <br />
-            <div id="blackBox"></div>
-            <div class="keyText">Garage Full</div>
-        </div>
-        <div class="row">
-            <div ui-view="sidebartop" class="columns small-3">
+<div ui-view></div>
 
 
-            </div>
-            <div class="row">
-                <div ui-view="sidebartop" class="columns small-3">
-                </div>
-            </div>
-            <div class="row">
-                <div ui-view="sidebarbottom" class="columns small-3">
-                </div>
-            </div>
-        </div>
--->
-
-    <!--
-    <div id="uploadInvoiceModal" class="reveal-modal" data-reveal>
-        <div ui-view="modal"></div>
-        <a class="close-reveal-modal">&#215;</a> <!-- the x which closes the modal -->
-    <!--</div>-->
-
-
-      <!-- Makes Foundation Stuff Work -->
+    <!-- Makes Foundation Stuff Work -->
     <script type="text/javascript">
         $(document).foundation();
     </script>

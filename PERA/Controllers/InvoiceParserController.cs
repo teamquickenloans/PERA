@@ -127,7 +127,7 @@ namespace PERA.Controllers
                 APR.DateUploaded = invoice.DateUploaded;
                 APR.DateReceived = invoice.DateReceived;
                 APR.MonthYear = invoice.MonthYear;
-                //APR.Invoice = invoice;
+                APR.InvoiceID = invoice.InvoiceID;
                 //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
                 List<ParkerReportTeamMember> teamMembers = 
                     ExcelParser(file.LocalFileName, originalFileName, invoice, APR, garageID);
@@ -231,6 +231,9 @@ namespace PERA.Controllers
                         }
                         else
                         {
+                            if (i > 2)
+                                break;
+                            i++;
                             Trace.WriteLine("null name");
                             if (i > 2)
                                 break;

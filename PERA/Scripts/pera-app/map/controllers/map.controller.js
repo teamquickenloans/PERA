@@ -9,119 +9,14 @@
       .module('pera.map.controllers')
       .controller('MapController', MapController);
 
-    MapController.$inject = ['$scope','Garages', 'Snackbar', 'Initializer', 'SideBar'];
+    MapController.$inject = ['$scope','Garages', 'Snackbar', 'Initializer', 'SideBar', '$state'];
 
     /**
     * @namespace MapController
     */
-    function MapController($scope, Garages, Snackbar, Initializer, SideBar) {
-        var vm = this;
-        vm.map;
-        vm.garages = [];
-        vm.garageMarkers = [];
-        vm.initialized = false; //tracks if the maps has already been initialized
+    function MapController($scope, Garages, Snackbar, Initializer, SideBar, $state) {
 
-        vm.styleArray = styleArray;
-
-        //initialize the map
-        console.log('map ctrl');
-        vm.initialize = initialize;
-        //initialize();
-        window.onload = initialize();
-        //initialize();
-
-        function initialize() {
-            if (vm.initialized == true)
-                return;
-
-            var mapOptions = {
-                center: { lat: 42.33242, lng: -83.04646 },
-                zoom: 16,
-                styles: styleArray,
-                panControl: false,
-                zoomControl: true,
-                mapTypeControl: true,
-                scaleControl: false,
-                streetViewControl: false,
-                overviewMapControl: false
-            };
-            console.log("initalize");
-
-            /*Initializer.mapsInitialized
-                .then(function () {
-                    console.log('create map');
-
-                    vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);*/
-
-            vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-            //Add Elabel
-            //var element = document.createElement("script");
-            //element.setAttribute("type", "text/javascript");
-            //element.src = "~/Scripts/js/ELabels3.js";
-            //document.body.appendChild(element);
-
-            //Add key to map
-            vm.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('mapKey'));
-            Garages.all().then(garagesSuccessFn, garagesErrorFn);
-            console.log(vm.garages);
-            vm.initialized = true;
-          } //end intialize function
-
-          function garagesSuccessFn(data, status, headers, config) {
-              vm.garages = data.data;         //this will depend on what the API returns, it may have to change
-              PlaceMarkers(vm.map, vm.garages, vm.garageMarkers);
-          }
-          
-          function garagesErrorFn(data, status, headers, config) {
-              //Snackbar.error(data.data.error);
-          }
-          function attachGarage(marker, garage) {
-                  google.maps.event.addListener(marker, 'click', function () {
-                      SideBar.setCurrent(marker.garage);
-                      console.log(marker.garage.name);
-                      //TODO: set state garage.map.garage
-                      alert("Congratulations, you've clicked on a garage!");
-                      //TODO: tab.setSideTab(i); //This is what I want to do
-                  });
-          }
-          function PlaceMarkers(map, garages, garageMarkers) {
-              for (var i = 0; i < garages.length; i++) {
-                  var position = new google.maps.LatLng(garages[i].latitude, garages[i].longitude);
-
-                  //create marker
-                  var marker = new google.maps.Marker({
-                      map: map,
-                      position: position,
-                      garage: garages[i]
-                  });
-
-                  //add label
-                  var styleString = '<div style="font-size:14px; color: #4F4F4F; text-shadow: 1px 1px 0 #FFF, -1px 1px 0 #FFF, 1px -1px 0 #FFF, -1px -1px #FFF;">';
-                  var label = new ELabel(map, position, styleString + garages[i].name + '</div>', null, new google.maps.Size(-20, -32), false);
-                  label.setMap(map);
-                  var garage = garages[i];
-                  //add click event
-                  attachGarage(marker, garage);
-
-                  //add marker image
-                  var load = parseFloat(garages[i].numberOfLeasedSpaces) - parseFloat(garages[i].numberOfTeamMemberSpaces);
-                  if (load > 100) {
-                      marker.setIcon('../../Content/Images/parking_green.png'); //TODO: Fix click zone
-                  }
-                  else if ( load > 50 && load <= 100) {
-                      marker.setIcon('../../Content/Images/parking_yellow.png');
-                  }
-                  else if (load <= 50 && load > 0) {
-                      marker.setIcon('../../Content/Images/parking_red.png');
-                  }
-                  else if (load == 0) {
-                      marker.setIcon('../../Content/Images/parking_black.png');
-                  }
-
-                  vm.garageMarkers.push(marker);
-              }
-          }
-          var styleArray = [
+        var styleArray = [
               {
                   "featureType": "all",
                   "elementType": "geometry",
@@ -387,6 +282,114 @@
                   }
                   ]
               }
-      ];
+        ];
+
+
+        var vm = this;
+        vm.map;
+        vm.garages = [];
+        vm.garageMarkers = [];
+        vm.initialized = false; //tracks if the maps has already been initialized
+
+        vm.styleArray = styleArray;
+
+        //initialize the map
+        console.log('map ctrl');
+        vm.initialize = initialize;
+        initialize();
+        //window.onload = initialize;
+        //initialize();
+
+        function initialize() {
+            if (vm.initialized == true)
+                return;
+
+            var mapOptions = {
+                center: { lat: 42.33242, lng: -83.04646 },
+                zoom: 16,
+                styles: styleArray,
+                panControl: false,
+                zoomControl: true,
+                mapTypeControl: true,
+                scaleControl: false,
+                streetViewControl: false,
+                overviewMapControl: false
+            };
+            console.log("initalize");
+
+            /*Initializer.mapsInitialized
+                .then(function () {
+                    console.log('create map');
+
+                    vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);*/
+
+            vm.map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
+            //Add Elabel
+            //var element = document.createElement("script");
+            //element.setAttribute("type", "text/javascript");
+            //element.src = "~/Scripts/js/ELabels3.js";
+            //document.body.appendChild(element);
+
+            //Add key to map
+            vm.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('mapKey'));
+            Garages.all().then(garagesSuccessFn, garagesErrorFn);
+            console.log(vm.garages);
+            vm.initialized = true;
+          } //end intialize function
+
+          function garagesSuccessFn(data, status, headers, config) {
+              vm.garages = data.data;         //this will depend on what the API returns, it may have to change
+              PlaceMarkers(vm.map, vm.garages, vm.garageMarkers);
+          }
+          
+          function garagesErrorFn(data, status, headers, config) {
+              //Snackbar.error(data.data.error);
+          }
+          function attachGarage(marker, garage) {
+              google.maps.event.addListener(marker, 'click', function () {
+                  var promise = $state.go('garage.map.garage').then(
+                      function () {
+                          SideBar.setCurrent(marker.garage);
+                          //console.log(marker.garage.name);
+                      });
+              });
+          }
+          function PlaceMarkers(map, garages, garageMarkers) {
+              for (var i = 0; i < garages.length; i++) {
+                  var position = new google.maps.LatLng(garages[i].latitude, garages[i].longitude);
+
+                  //create marker
+                  var marker = new google.maps.Marker({
+                      map: map,
+                      position: position,
+                      garage: garages[i]
+                  });
+
+                  //add label
+                  var styleString = '<div style="font-size:14px; color: #4F4F4F; text-shadow: 1px 1px 0 #FFF, -1px 1px 0 #FFF, 1px -1px 0 #FFF, -1px -1px #FFF;">';
+                  var label = new ELabel(map, position, styleString + garages[i].name + '</div>', null, new google.maps.Size(-20, -32), false);
+                  label.setMap(map);
+                  var garage = garages[i];
+                  //add click event
+                  attachGarage(marker, garage);
+
+                  //add marker image
+                  var load = parseFloat(garages[i].numberOfLeasedSpaces) - parseFloat(garages[i].numberOfTeamMemberSpaces);
+                  if (load > 100) {
+                      marker.setIcon('../../Content/Images/parking_green.png'); //TODO: Fix click zone
+                  }
+                  else if ( load > 50 && load <= 100) {
+                      marker.setIcon('../../Content/Images/parking_yellow.png');
+                  }
+                  else if (load <= 50 && load > 0) {
+                      marker.setIcon('../../Content/Images/parking_red.png');
+                  }
+                  else if (load == 0) {
+                      marker.setIcon('../../Content/Images/parking_black.png');
+                  }
+
+                  vm.garageMarkers.push(marker);
+              }
+          }
     } //End MapController
 })();

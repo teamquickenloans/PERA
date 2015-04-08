@@ -7,6 +7,7 @@ namespace PERA.Migrations
     {
         public override void Up()
         {
+            DropTable("dbo.Invoices");
             CreateTable(
                 "dbo.Invoices",
                 c => new
