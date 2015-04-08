@@ -39,6 +39,10 @@ namespace PERA.Controllers
         {
             return View();
         }
+        public ActionResult Upload()
+        {
+            return View();
+        }
 
     }
 }

@@ -1,7 +1,7 @@
 ﻿
 <li class="divider"></li>
-<li> 
-    <a ui-sref=".overview">Overview</a> 
+<li ng-class="{active:tabCtrl.sideIsSet(-1)}">
+    <a ui-sref=".overview" ng-click="tabCtrl.setSideTab(-1);">Overview</a>
 </li>
 <li class="divider"></li>
 @*Single Garage Dropdown*@ 

@@ -193,10 +193,11 @@
     -->
     <Compile Include="Controllers\BadgeScanParserController.cs" />
     <Compile Include="Controllers\DiscrepanciesController.cs" />
+    <Compile Include="Controllers\ExpenseController.cs" />
+    <Compile Include="Controllers\ExportReportController.cs" />
     <Compile Include="Controllers\GarageController.cs" />
     <Compile Include="Controllers\ParkerReportTeamMembersController.cs" />
     <Compile Include="Controllers\ParkerReportParserController.cs" />
-    <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\FormController.cs" />
     <!--
@@ -211,6 +212,7 @@
     <Compile Include="Controllers\InvoicesController.cs" />
     <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="DAL\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -274,13 +276,9 @@
     <Compile Include="Migrations\201504041909501_IdentityInsertInvoice.Designer.cs">
       <DependentUpon>201504041909501_IdentityInsertInvoice.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201504042058330_invoiceID.cs" />
-    <Compile Include="Migrations\201504042058330_invoiceID.Designer.cs">
-      <DependentUpon>201504042058330_invoiceID.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504051628542_addlinenumber.cs" />
-    <Compile Include="Migrations\201504051628542_addlinenumber.Designer.cs">
-      <DependentUpon>201504051628542_addlinenumber.cs</DependentUpon>
+    <Compile Include="Migrations\201504080134364_ERMAGAWD.cs" />
+    <Compile Include="Migrations\201504080134364_ERMAGAWD.Designer.cs">
+      <DependentUpon>201504080134364_ERMAGAWD.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
@@ -436,14 +434,11 @@
     <EmbeddedResource Include="Migrations\201504041909501_IdentityInsertInvoice.resx">
       <DependentUpon>201504041909501_IdentityInsertInvoice.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504042058330_invoiceID.resx">
-      <DependentUpon>201504042058330_invoiceID.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504051628542_addlinenumber.resx">
-      <DependentUpon>201504051628542_addlinenumber.cs</DependentUpon>
-    </EmbeddedResource>
     <Content Include="DAL\garages_new.csv" />
     <EmbeddedResource Include="DAL\garages.csv" />
+    <EmbeddedResource Include="Migrations\201504080134364_ERMAGAWD.resx">
+      <DependentUpon>201504080134364_ERMAGAWD.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
@@ -498,12 +493,11 @@
     <Content Include="Views\TeamMember\Edit.cshtml" />
     <Content Include="Views\TeamMember\Index.cshtml" />
     <Content Include="Views\Garage\Map.cshtml" />
-    <Content Include="Views\Expense\DetectedIssues.cshtml" />
     <Content Include="Views\Garage\GarageInfo.cshtml" />
     <Content Include="Scripts\pera-app\sidebar\controllers\sidebar.controller.js" />
     <Content Include="Views\Navigation\Overview.cshtml" />
     <Content Include="Views\Navigation\Garage.cshtml" />
-    <Content Include="Views\Expense\UploadHistory.cshtml" />
+    <Content Include="Views\Upload\UploadHistory.cshtml" />
     <Content Include="Scripts\js\snackbar.min.js.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Form\ParkerReport.cshtml" />
@@ -512,10 +506,11 @@
     <Content Include="Views\Garage\Base.cshtml" />
     <Content Include="Views\Form\Discrepancies.cshtml" />
     <Content Include="Views\Form\EditGarage.cshtml" />
-    <Content Include="Views\Navigation\Expense.cshtml" />
+    <Content Include="Views\Navigation\Upload.cshtml" />
     <Content Include="Views\Form\BadgeScan.cshtml" />
     <Content Include="Views\Navigation\MapGarage.cshtml" />
     <Content Include="Views\Navigation\MapTopBar.cshtml" />
+    <Content Include="Views\Upload\Base.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
