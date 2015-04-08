@@ -78,83 +78,99 @@ namespace PERA.Controllers
             return Json(duplicates, JsonRequestBehavior.AllowGet);
         }
 
-        public List<ParkerReportTeamMember> IdentifyDuplicates(InvoiceActiveParkerReport InvoiceReport, QLActiveParkerReport QLReport, 
+        public List<List<Discrepancy>> IdentifyDuplicates(InvoiceActiveParkerReport InvoiceReport, QLActiveParkerReport QLReport, 
             List<InvoiceActiveParkerReport> InvoiceReports)
         {
-            Dictionary<string, string> Matches = new Dictionary<string, string>();
-            List<ParkerReportTeamMember> Duplicates = new List<ParkerReportTeamMember>();
+            List<List<Discrepancy>> issues = new List<List<Discrepancy>>();
+            //Dictionary<string, string> Matches = new Dictionary<string, string>();
+            List<Discrepancy> Duplicates = new List<Discrepancy>();
+
             //team members in the QL report that were not in the invoice
-            List<QLTeamMember> Missing = new List<QLTeamMember>();
+            List<Discrepancy> Missing = new List<Discrepancy>();
+
             //team members in the invoice that were not in the QL report
             ICollection<ParkerReportTeamMember> Extra = InvoiceReport.TeamMembers;
+            List<Discrepancy> Extras = new List<Discrepancy>();
 
+            List<Discrepancy> Discrepancies = new List<Discrepancy>();
 
             Trace.WriteLine(InvoiceReport.TeamMembers.First());
 
             foreach (QLTeamMember qlTM in QLReport.TeamMembers) //for each TM in the qlReport
             {
                 //First find duplicates within this garage
-                var InvoiceTeamMembers = db.ParkerReportTeamMembers.Where(             //grab the matching Invoice TM
+
+                Trace.WriteLine(qlTM.FirstName + " " + qlTM.LastName + QLReport.ID);
+
+                    var Matches = db.ParkerReportTeamMembers.Where(             //grab the matching Invoice TM
+                        x => x.InvoiceActiveParkerReportID == InvoiceReport.ID
+                          && x.FirstName == qlTM.FirstName
+                          && x.LastName == qlTM.LastName
+                          && x.BadgeID == qlTM.BadgeID);
+
+                    var MatchesList = Matches.ToList();
+                    ParkerReportTeamMember InvoiceTeamMember;
+                    switch (MatchesList.Count)
+                    {
+                        case 0:
+                            //Correct information for TM missing from Invoice
+                            Discrepancy discrepancy = db.Discrepancies.Create();
+                            discrepancy.FirstName = qlTM.FirstName;
+                            discrepancy.LastName = qlTM.LastName;
+                            discrepancy.TokenID = qlTM.BadgeID;
+                            discrepancy.Action = "Add";
+                            Missing.Add(discrepancy);
+                            break;
+                        case 1:
+                            InvoiceTeamMember = MatchesList.First();
+                            Extra.Remove(InvoiceTeamMember);
+                            break;
+                        default:
+                            InvoiceTeamMember = MatchesList.First();
+                            Extra.Remove(InvoiceTeamMember);
+                            MatchesList.Remove(InvoiceTeamMember);
+                            foreach(var match in MatchesList){
+                                Discrepancy disc = db.Discrepancies.Create();
+                                disc.FirstName = match.FirstName;
+                                disc.LastName = match.LastName;
+                                disc.TokenID = match.BadgeID;
+                                disc.Action = "Remove";
+                                Duplicates.Add(disc);
+                                Extra.Remove(InvoiceTeamMember);
+                            }
+                            break;
+                    }
+
+                Trace.WriteLine(qlTM.FirstName + " " + qlTM.LastName + QLReport.ID);
+                var InvoiceTeamMembers = new List<ParkerReportTeamMember>();
+                /*InvoiceTeamMembers = db.ParkerReportTeamMembers.Where(             //grab the matching Invoice TM
                     x => x.InvoiceActiveParkerReportID == InvoiceReport.ID
                       && x.FirstName == qlTM.FirstName
-                      && x.LastName == qlTM.LastName).ToList();
-                Trace.WriteLine(qlTM.FirstName + " " + qlTM.LastName + QLReport.ID);
+                      && x.LastName == qlTM.LastName)
+                      .ToList();*/
 
-                if(qlTM.TokenID == null)
+                //List<int> tempIdList = MatchesList.Select(q => q.ParkerReportTeamMemberID ).ToList();
+                InvoiceTeamMembers = db.ParkerReportTeamMembers.Where(
+                    //q => !tempIdList.Contains(q.ParkerReportTeamMemberID)
+                      q => q.InvoiceActiveParkerReportID == InvoiceReport.ID
+                        && q.FirstName == qlTM.FirstName
+                        && q.LastName == qlTM.LastName
+                        && q.BadgeID != qlTM.BadgeID)
+                        .ToList();
+                   
+                if(InvoiceTeamMembers.Count() > 0)
                 {
-                    var InvoiceTeamMember = db.ParkerReportTeamMembers.Where(             //grab the matching Invoice TM
-                        x => x.InvoiceActiveParkerReportID == InvoiceReport.ID
-                          && x.FirstName == qlTM.FirstName
-                          && x.LastName == qlTM.LastName
-                          && x.TokenID == qlTM.BadgeID).ToList();
-                    switch (InvoiceTeamMember.Count)
-                    {
-
+                    foreach(var itm in InvoiceTeamMembers){
+                        Discrepancy discrepancy = db.Discrepancies.Create();
+                        discrepancy.FirstName = itm.FirstName;
+                        discrepancy.LastName = itm.LastName;
+                        discrepancy.TokenID = itm.BadgeID;
+                        discrepancy.Action = "Remove";
+                        Duplicates.Add(discrepancy);
                     }
                 }
-                else
-                {
-                    var InvoiceTeamMember = db.ParkerReportTeamMembers.Where(             //grab the matching Invoice TM
-                        x => x.InvoiceActiveParkerReportID == InvoiceReport.ID
-                          && x.FirstName == qlTM.FirstName
-                          && x.LastName == qlTM.LastName
-                          && x.TokenID == qlTM.BadgeID).ToList();
-                }
-
-                Trace.WriteLine(qlTM.FirstName + " " + qlTM.LastName + QLReport.ID);
-
-                switch (InvoiceTeamMembers.Count)
-                {
-                    case 0:
-                        //couldn't find the team member in the invoice list
-                        var Match = db.ParkerReportTeamMembers.Where(             //grab the matching Invoice TM
-                                    x => x.InvoiceActiveParkerReportID == InvoiceReport.ID
-                                      && x.FirstName == qlTM.FirstName
-                                      && x.BadgeID == qlTM.BadgeID).ToList();
-                        if (Match.Count > 0)
-
-                            //potential match, different last name same badgeID
-                        Missing.Add(qlTM);
-                        continue;
-                    case 1:
-                        ParkerReportTeamMember PRTM = InvoiceTeamMembers.First(); //
-                        if (PRTM.BadgeID != null)
-                        { if (PRTM.BadgeID == qlTM.BadgeID) { 
-                            //report this error as well
-                            } 
-                        }
-                        Extra.Remove(PRTM);
-                        break;
-                    default: //more than two matches
-                        Duplicates.Add(qlTM);
-                        Trace.WriteLine("Duplicate");
-                        foreach (ParkerReportTeamMember tm in InvoiceTeamMembers) {
-                            Duplicates.Add(tm);
-                        }
-                        break;
-                }
                 // Next find duplicates within the garage network
-                foreach (InvoiceActiveParkerReport invoiceReport in InvoiceReports)
+                /*foreach (InvoiceActiveParkerReport invoiceReport in InvoiceReports)
                 {
                     Trace.WriteLine(invoiceReport.GarageID);
                     // team members within another garage's InvoiceActiveParkerReport for the same month
@@ -176,30 +192,31 @@ namespace PERA.Controllers
                             break;
                     }
                         
-                }
-            }
+                }*/
+            } //end loop of qlTM
             foreach (var duplicate in Duplicates) {
-                Trace.Write("Duplicate: " + duplicate.FirstName + " " + duplicate.LastName);
-                if (duplicate.InvoiceActiveParkerReportID != null){
-                    Trace.Write(duplicate.InvoiceActiveParkerReportID);
-                    Trace.WriteLine("");
-                }
+                Trace.WriteLine("Duplicate: " + duplicate.FirstName + " " + duplicate.LastName + " " + duplicate.TokenID + " " + duplicate.Action);
 
-                else{
-                    QLTeamMember ql = (QLTeamMember)duplicate;
-                    Trace.Write(ql.QLActiveParkerReportID);
-                    Trace.WriteLine("");
-                }
             }
             foreach (var missing in Missing)
             {
-                Trace.WriteLine("Missing: " + missing.FirstName + " " + missing.LastName + " " + missing.QLActiveParkerReportID);
+                Trace.WriteLine("Missing: " + missing.FirstName + " " + missing.LastName + " " + missing.TokenID);
             }
             foreach (var extra in Extra)
             {
+                Discrepancy disc = db.Discrepancies.Create();
+                disc.FirstName = extra.FirstName;
+                disc.LastName = extra.LastName;
+                disc.TokenID = extra.BadgeID;
+                disc.Action = "Remove";
+                Extras.Add(disc);
                 Trace.WriteLine("Extra: " + extra.FirstName + " " + extra.LastName + " " + extra.InvoiceActiveParkerReportID);
             }
-            return Duplicates;
-        }
+            issues.Add(Duplicates);
+            issues.Add(Extras);
+            issues.Add(Missing);
+            issues.Add(Discrepancies);
+            return issues;
+        } //  Identify Duplicates
     }
 }

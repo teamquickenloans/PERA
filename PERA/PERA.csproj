@@ -286,9 +286,14 @@
     <Compile Include="Migrations\201504051628542_addlinenumber.Designer.cs">
       <DependentUpon>201504051628542_addlinenumber.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504052119437_discrepancy.cs" />
+    <Compile Include="Migrations\201504052119437_discrepancy.Designer.cs">
+      <DependentUpon>201504052119437_discrepancy.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
     <Compile Include="Models\CarpoolGroup.cs" />
+    <Compile Include="Models\Discrepancy.cs" />
     <Compile Include="Models\QLActiveParkerReport.cs" />
     <Compile Include="Models\InvoiceActiveParkerReport.cs" />
     <Compile Include="Models\ParkerReportTeamMember.cs" />
@@ -312,6 +317,7 @@
     <Content Include="Content\Images\parking_green.png" />
     <Content Include="Content\Images\parking_red.png" />
     <Content Include="Content\Images\parking_yellow.png" />
+    <Content Include="Content\Images\spinner.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -449,7 +455,10 @@
     <EmbeddedResource Include="Migrations\201504051628542_addlinenumber.resx">
       <DependentUpon>201504051628542_addlinenumber.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="DAL\garages.csv" />
+    <Content Include="DAL\garages_new.csv" />
+    <EmbeddedResource Include="Migrations\201504052119437_discrepancy.resx">
+      <DependentUpon>201504052119437_discrepancy.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
@@ -469,7 +478,7 @@
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload.min.js" />
     <Content Include="Scripts\js\angular-file-upload\ng-file-upload-all.js" />
     <Content Include="Scripts\js\angular-file-upload\ng-file-upload-all.min.js" />
-    <EmbeddedResource Include="DAL\garages_old.csv" />
+    <EmbeddedResource Include="DAL\garages.csv" />
     <!--
       @ name CSS Stylesheets
     -->

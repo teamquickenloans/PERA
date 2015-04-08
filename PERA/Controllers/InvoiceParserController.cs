@@ -173,7 +173,7 @@ namespace PERA.Controllers
             List<ParkerReportTeamMember> teamMembers = new List<ParkerReportTeamMember>();
             
             System.Diagnostics.Debug.WriteLine("begin for loop");
-
+            int i = 0;
             foreach (DataTable table in result.Tables) // each sheet
             { 
                 foreach (DataRow row in table.Rows) // each row
@@ -211,6 +211,7 @@ namespace PERA.Controllers
                     else
                     {
                         var fullname = row[nameColumns[garageID]];
+
                         if (fullname != DBNull.Value)
                         {
                             string fullName = (string)fullname;
@@ -231,6 +232,9 @@ namespace PERA.Controllers
                         else
                         {
                             Trace.WriteLine("null name");
+                            if (i > 2)
+                                break;
+                            i++;
                             continue;
                         }
                     }
