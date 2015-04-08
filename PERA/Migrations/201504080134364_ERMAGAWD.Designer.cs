@@ -7,13 +7,13 @@ namespace PERA.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class addlinenumber : IMigrationMetadata
+    public sealed partial class ERMAGAWD : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(addlinenumber));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(ERMAGAWD));
         
         string IMigrationMetadata.Id
         {
-            get { return "201504051628542_addlinenumber"; }
+            get { return "201504080134364_ERMAGAWD"; }
         }
         
         string IMigrationMetadata.Source
