@@ -10,7 +10,7 @@
 <form novalidate name="parkerReportForm" ng-submit="fileCtrl.uploadAll()">
 
         <h4>Date</h4>
-    <div class="large-6 column">
+    <div class="large-6 column" ng-class="{ 'has-error' : parkerReportForm.monthYear.$invalid && !parkerReportForm.monthYear.$pristine }">
 
 
 
@@ -21,16 +21,18 @@
         </date-picker>
 
         @*<input type="text" ng-model="fileCtrl.invoice.monthYear" id="monthYear" ng-datepicker="{}" required />*@
+        <small class="error" ng-show="parkerReportForm.monthYear.$invalid && !parkerReportForm.monthYear.$pristine">Month/Year of report must be in MMM yyyy format.</small>
     </div>
 
-       
+    <div ng-class="{ 'has-error' : parkerReportForm.dateReceived.$invalid && !parkerReportForm.dateReceived.$pristine }">
         <label for="dateReceived">Date Received:</label>
         @*<input type="date" ng-model="fileCtrl.invoice.dateReceived" id="dateReceived" ng-datepicker="{}" placeholder="optional" />*@
         @*<input type="date" ng-model="fileCtrl.invoice.dateReceived" id="dateReceived" pick-a-date="date" placeholder="optional" />*@
         <date-picker id="dateReceived"
                      format="dd MMM yyyy" placeholder="optional" today="Today Not Tomorrow"
                      ng-model="fileCtrl.form.dateReceived"></date-picker>
-
+        <small class="error" ng-show="parkerReportForm.dateReceived.$invalid && !parkerReportForm.dateReceived.$pristine">Date received of the report must be in dd MMM yyyy format.</small>
+    </div>
 
    
     <h4>Active Parker Reports
@@ -61,7 +63,7 @@
         </div>
         <div class="row">
 
-            <button class="radius button" type="submit">Upload</button>
+            <button class="radius button" type="submit" ng-disabled="parkerReportForm.$invalid">Upload</button>
             <a class="radius button" ng-click="fileCtrl.clearForm()">Clear Form</a>
         </div>
         <br />

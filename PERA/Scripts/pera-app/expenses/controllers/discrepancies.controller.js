@@ -32,9 +32,11 @@
         Garages.all().then(garagesSuccessFn);
 
         function submit() {
-            $scope.spinner = true;
-            vm.promise = FormSubmit.submit(vm.garageID, vm.monthYear)
-            vm.promise.then(submitSuccess, submitFail);
+            if ($scope.discrepanciesForm.$valid) {
+                $scope.spinner = true;
+                vm.promise = FormSubmit.submit(vm.garageID, vm.monthYear)
+                vm.promise.then(submitSuccess, submitFail);
+            }
         }
 
         $scope.$watch('garage', updateGarageID)

@@ -28,7 +28,7 @@
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)"
                required />
-        <small class="error" ng-show="editGarageForm.name.$invalid && !editGarageForm.name.$pristine">Garage name is invalid.</small>
+        <small class="error" ng-show="editGarageForm.name.$invalid && !editGarageForm.name.$pristine">Garage name is required.</small>
     </div>
 
     <div class="columns small-6" ng-class="{ 'has-error' : editGarageForm.address.$invalid && !editGarageForm.address.$pristine }">
@@ -112,7 +112,7 @@
                ng-keyup="cancel($event)"
                min="0"
                placeholder="optional" />
-        <small class="error" ng-show="editGarageForm.minimumNumberOfBufferSpaces.$error && !editGarageForm.minimumNumberOfBufferSpaces.$pristine" ">Minimum number of buffer spaces in the Garage must be a number.</small>
+        <small class="error" ng-show="editGarageForm.minimumNumberOfBufferSpaces.$invalid && !editGarageForm.minimumNumberOfBufferSpaces.$pristine">Minimum number of buffer spaces in the Garage must be a number.</small>
         <small class="error" ng-show="editGarageForm.minimumNumberOfBufferSpaces.$error.min">Minimum number of buffer spaces in the Garage must be at least 0.</small>
     </div>
 
@@ -138,7 +138,7 @@
                ng-keyup="cancel($event)"
                min="0"
                placeholder="optional" />
-        <small class="error" ng-show="editGarageForm.transientSalePrice.$error && !editGarageForm.transientSalePrice.$pristine">Transient sale price of each space in the Garage must be a number.</small>
+        <small class="error" ng-show="editGarageForm.transientSalePrice.invalid && !editGarageForm.transientSalePrice.$pristine">Transient sale price of each space in the Garage must be a number.</small>
         <small class="error" ng-show="editGarageForm.transientSalePrice.$error.min">Transient sale price of each space in the Garage must be at least 0.</small>
     </div>
 
