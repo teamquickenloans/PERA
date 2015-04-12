@@ -130,6 +130,7 @@ namespace PERA.Controllers
             DataTable table = result.Tables[0];
             foreach (DataRow row in table.Rows)
             {
+
                 // if this row is the headings, skip this row
                 System.Diagnostics.Debug.WriteLine("loop");
                 if (row == null)
@@ -138,7 +139,7 @@ namespace PERA.Controllers
                     continue;
                 }
 
-                if (row[0] is String)
+                if (row[0].GetType() == typeof(String) )
                 {
                     System.Diagnostics.Debug.WriteLine(row[0]);
                     continue;
@@ -181,10 +182,14 @@ namespace PERA.Controllers
 
                 if (row[0] == DBNull.Value)
                 {
-                    System.Diagnostics.Debug.WriteLine("row[0] is null");
+                    Trace.WriteLine("row[0] is null");
                     continue;
                 }
 
+                Trace.WriteLine(row[3].GetType());
+                Trace.WriteLine(row[3]);
+                var doubleBadgeID = (double)row[3];
+                badgeScan.BadgeID = Convert.ToInt32(doubleBadgeID);
 
                 //Parse the DateTime
                 badgeScan.ScanDateTime = ExcelDateToDateTime( (double)row[0] );
