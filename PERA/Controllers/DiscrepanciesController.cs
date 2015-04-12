@@ -75,14 +75,14 @@ namespace PERA.Controllers
             }
 
 
-            //RemoveDuplicatesFromSystemGalaxy();
+            //RemoveDuplicatesFromSystemGalaxy(QLReport, garageID);
             var duplicates = IdentifyDiscrepancies(InvoiceReport, QLReport, InvoiceReports);
 
             return Json(duplicates, JsonRequestBehavior.AllowGet);
         }
 
         //
-        public void RemoveDuplicatesFromSystemGalaxy(QLActiveParkerReport QLReport)
+        public void RemoveDuplicatesFromSystemGalaxy(QLActiveParkerReport QLReport, int garageID)
         {
             List<QLTeamMember> Duplicates = new List<QLTeamMember>(); 
             Dictionary <string, string> Matches = new Dictionary <string, string>();
@@ -94,7 +94,8 @@ namespace PERA.Controllers
                 PERAContext db = new PERAContext();
                 var BadgeScan = db.BadgeScans.Where(
                      x => x.FirstName == qlTM.FirstName
-                       && x.LastName == qlTM.LastName)
+                       && x.LastName == qlTM.LastName
+                       && x.GarageID == QLReport.GarageID)
                 .OrderByDescending(x => x.ScanDateTime)
                     .FirstOrDefault();
 

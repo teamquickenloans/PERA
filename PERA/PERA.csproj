@@ -284,9 +284,13 @@
     <Compile Include="Migrations\201504052119437_discrepancy.Designer.cs">
       <DependentUpon>201504052119437_discrepancy.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201504112026434_updatestate1.cs" />
-    <Compile Include="Migrations\201504112026434_updatestate1.Designer.cs">
-      <DependentUpon>201504112026434_updatestate1.cs</DependentUpon>
+    <Compile Include="Migrations\201504120327312_UpdateState1.cs" />
+    <Compile Include="Migrations\201504120327312_UpdateState1.Designer.cs">
+      <DependentUpon>201504120327312_UpdateState1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504120328449_BadgeScan_BadgeID.cs" />
+    <Compile Include="Migrations\201504120328449_BadgeScan_BadgeID.Designer.cs">
+      <DependentUpon>201504120328449_BadgeScan_BadgeID.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
@@ -453,8 +457,11 @@
     <EmbeddedResource Include="Migrations\201504080134364_ERMAGAWD.resx">
       <DependentUpon>201504080134364_ERMAGAWD.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504112026434_updatestate1.resx">
-      <DependentUpon>201504112026434_updatestate1.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504120327312_UpdateState1.resx">
+      <DependentUpon>201504120327312_UpdateState1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504120328449_BadgeScan_BadgeID.resx">
+      <DependentUpon>201504120328449_BadgeScan_BadgeID.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />

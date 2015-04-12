@@ -7,13 +7,13 @@ namespace PERA.Migrations
     using System.Resources;
     
     [GeneratedCode("EntityFramework.Migrations", "6.1.3-40302")]
-    public sealed partial class updatestate1 : IMigrationMetadata
+    public sealed partial class BadgeScan_BadgeID : IMigrationMetadata
     {
-        private readonly ResourceManager Resources = new ResourceManager(typeof(updatestate1));
+        private readonly ResourceManager Resources = new ResourceManager(typeof(BadgeScan_BadgeID));
         
         string IMigrationMetadata.Id
         {
-            get { return "201504112026434_updatestate1"; }
+            get { return "201504120328449_BadgeScan_BadgeID"; }
         }
         
         string IMigrationMetadata.Source

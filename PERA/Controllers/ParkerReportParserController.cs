@@ -151,7 +151,7 @@ namespace PERA.Controllers
                 APR.GarageID = garageID;
                 
                 List<QLTeamMember> teamMembers =
-                    ExcelParser(file.LocalFileName, originalFileName, APR, garageID);
+                                    ExcelParser(file.LocalFileName, originalFileName, APR, garageID);
                 
                 Trace.WriteLine("teamMembers.Count: " + teamMembers.Count);
 
@@ -210,6 +210,7 @@ namespace PERA.Controllers
 
             int i = 0;
             System.Diagnostics.Debug.WriteLine("begin for loop");
+            Trace.WriteLine(result.Tables.Count);
             DataTable table = result.Tables[0];
             //foreach (DataTable table in result.Tables)
             //{
@@ -217,7 +218,7 @@ namespace PERA.Controllers
                 {
                     // if this row is the headings, skip this row
                     System.Diagnostics.Debug.WriteLine("loop");
-                    if(i == 0)
+                    if(i < 5)
                     {
                         Trace.WriteLine("continue");
                         i++;
@@ -297,11 +298,11 @@ namespace PERA.Controllers
                         if (tokenBv != DBNull.Value) {
                             tokenBd = (System.Double)tokenBv;
 
-                            /*if (garageID == 6)
+                            if (garageID == 6)
                             {
                                 teamMember.TokenID = Convert.ToInt32(tokenBd);
                             }
-                            else*/
+                            else
                                 teamMember.BadgeID = Convert.ToInt32(tokenBd);
                         }
                     }
