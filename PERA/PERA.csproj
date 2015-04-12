@@ -284,10 +284,15 @@
     <Compile Include="Migrations\201504052119437_discrepancy.Designer.cs">
       <DependentUpon>201504052119437_discrepancy.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504112026434_updatestate1.cs" />
+    <Compile Include="Migrations\201504112026434_updatestate1.Designer.cs">
+      <DependentUpon>201504112026434_updatestate1.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
     <Compile Include="Models\CarpoolGroup.cs" />
     <Compile Include="Models\Discrepancy.cs" />
+    <Compile Include="Models\InvoiceTeamMember.cs" />
     <Compile Include="Models\QLActiveParkerReport.cs" />
     <Compile Include="Models\InvoiceActiveParkerReport.cs" />
     <Compile Include="Models\ParkerReportTeamMember.cs" />
@@ -447,6 +452,9 @@
     <EmbeddedResource Include="DAL\garages.csv" />
     <EmbeddedResource Include="Migrations\201504080134364_ERMAGAWD.resx">
       <DependentUpon>201504080134364_ERMAGAWD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504112026434_updatestate1.resx">
+      <DependentUpon>201504112026434_updatestate1.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
