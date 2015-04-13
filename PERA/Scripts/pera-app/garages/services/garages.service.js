@@ -62,7 +62,7 @@
         function all() {
             if (!allPromise || last_request_failed) {
                 console.log("querying database");
-                allPromise = $http.get('/api/garages/');
+                allPromise = $http.get('/api/garages/getgarages/');
                 allPromise.then(garagesSuccess, garagesError);
             }
             return allPromise;
@@ -77,9 +77,9 @@
         function get(garageID) 
         {
             if (!garagePromise[garageID] || last_garage_failed[garageID]) {
-                garagePromise[garageID] = $http.get('/api/garages/' + garageID);
+                garagePromise[garageID] = $http.get('/api/garages/get/' + garageID);
                 console.log("getting one garage");
-                garagePromise.then(garageSuccess, garageError);
+                garagePromise[garageID].then(garageSuccess, garageError);
             }
             return garagePromise;
         }

@@ -139,6 +139,7 @@ namespace PERA.Controllers
 
         private void FileHandler(MultipartFormDataStreamProvider result, QLActiveParkerReport APR)
         {
+            Trace.WriteLine("result.FileData: " + result.FileData);
             foreach (var file in result.FileData)
             {
                 // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
@@ -206,11 +207,13 @@ namespace PERA.Controllers
             // The result of each spreadsheet will be created in the result.Tables
             DataSet result = reader.AsDataSet();
 
+            Trace.WriteLine(result);
+
             List<QLTeamMember> teamMembers = new List<QLTeamMember>();
 
             int i = 0;
             System.Diagnostics.Debug.WriteLine("begin for loop");
-            Trace.WriteLine(result.Tables.Count);
+            Trace.WriteLine("result.Tables.Count: " + result.Tables.Count);
             DataTable table = result.Tables[0];
             //foreach (DataTable table in result.Tables)
             //{

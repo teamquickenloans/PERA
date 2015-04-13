@@ -77,6 +77,7 @@ namespace PERA.Controllers
 
             //RemoveDuplicatesFromSystemGalaxy(QLReport, garageID);
             var duplicates = IdentifyDiscrepancies(InvoiceReport, QLReport, InvoiceReports);
+            CalculatePrice(InvoiceReport);
 
             return Json(duplicates, JsonRequestBehavior.AllowGet);
         }
@@ -121,7 +122,11 @@ namespace PERA.Controllers
         }
 
 
+        public void CalculatePrice(InvoiceActiveParkerReport IAPR)
+        {
+            // for this invoice APR
 
+        }
         
         // Identifies discrepancies
         
