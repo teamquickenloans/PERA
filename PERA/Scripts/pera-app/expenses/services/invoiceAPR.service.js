@@ -9,10 +9,10 @@
       .module('pera.expenses.services')
       .factory('InvoiceAPRs', InvoiceAPRs);
 
-    InvoiceAPRs.$inject = ['$http'];
+    InvoiceAPRs.$inject = ['$http', '$q'];
 
 
-    function InvoiceAPRs($http) {
+    function InvoiceAPRs($http, $q) {
         var allPromise = undefined;
         var last_request_failed = false;
         var vm = this;
