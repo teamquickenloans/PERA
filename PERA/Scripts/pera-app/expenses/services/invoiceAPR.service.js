@@ -32,7 +32,7 @@
         function all() {
             if (!allPromise || last_request_failed) {
                 console.log("querying database");
-                allPromise = $http.get('/api/InvoiceActiveParkerReports/');
+                allPromise = $http.get('/api/InvoiceActiveParkerReports/getInvoiceActiveParkerReports/');
                 allPromise.then(allSuccess, allError);
             }
             return allPromise;

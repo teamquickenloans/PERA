@@ -31,7 +31,7 @@
         function all() {
             if (!allPromise || last_request_failed) {
                 console.log("querying database");
-                allPromise = $http.get('/api/invoices/');
+                allPromise = $http.get('/api/invoices/getInvoices/');
                 allPromise.then(invoiceSuccess, invoiceError);
             }
             return allPromise;

@@ -43,7 +43,7 @@
         function all() {
             if (!promise || last_request_failed) {
                 console.log("querying database");
-                promise = $http.get('/api/parkerReportTeamMembers/');
+                promise = $http.get('/api/parkerReportTeamMembers/getParkerReportTeamMembers/');
                 promise.then(invoiceTeamMembersSuccessFn, invoiceTeamMembersErrorFn);
             }
             return promise;

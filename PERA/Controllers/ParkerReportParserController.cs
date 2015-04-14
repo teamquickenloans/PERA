@@ -126,9 +126,7 @@ namespace PERA.Controllers
             Trace.WriteLine("apr.DateReceived: " + apr.DateReceived);
             Trace.WriteLine("apr.DateUploaded: " + apr.DateUploaded);
 
-
             FileHandler(result, apr);
-
 
             // Through the request response you can return an object to the Angular controller
             // You will be able to access this in the .success callback through its data attribute
