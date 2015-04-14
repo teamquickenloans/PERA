@@ -65,6 +65,12 @@
       <HintPath>..\..\..\..\Downloads\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Postal">
+      <HintPath>..\packages\Postal.Mvc5.1.2.0\lib\net45\Postal.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.4.2\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Device" />
@@ -410,7 +416,6 @@
     <EmbeddedResource Include="Migrations\201504031939378_redo.resx">
       <DependentUpon>201504031939378_redo.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="Controllers\book.xlsx" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
     <Content Include="Scripts\css\snackbar.min.css" />
@@ -481,6 +486,9 @@
     <Content Include="Views\Form\EditGarage.cshtml" />
     <Content Include="Views\Navigation\Expense.cshtml" />
     <Content Include="Views\Form\BadgeScan.cshtml" />
+    <Content Include="Views\Emails\Web.config" />
+    <Content Include="Views\Emails\_ViewStart.cshtml" />
+    <Content Include="Views\Emails\Example.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
