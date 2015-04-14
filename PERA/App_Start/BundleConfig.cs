@@ -21,16 +21,39 @@ namespace PERA
             //jqueryBundle.Include("~/Scripts/jquery-{version}.js");
             bundles.Add(jqueryBundle);
 
-  
 
-            var peraBundle = new ScriptBundle("~/bundles/pera-app");
-            peraBundle
+
+            var peraBundle = new ScriptBundle("~/bundles/pera-app")
                .Include("~/Scripts/pera-app/pera.js")
-               .Include("~/Scripts/pera-app/dashboard/dashboard.module.js")
-               .Include("~/Scripts/pera-app/fileupload/fileupload.module.js")
-                .Include("~/Scripts/pera-app/garages/garages.module.js")
-                .Include("~/Scripts/pera-app/teammembers/teammembers.module.js")
-                .Include("~/Scripts/pera-app/utils/utils.module.js")
+               .Include("~/Scripts/pera-app/pera.config.js")
+               .IncludeDirectory(ANGULAR_APP_ROOT, "*.js", searchSubdirectories: true);
+            bundles.Add(peraBundle);
+
+
+            var expenses = new ScriptBundle("~/bundles/expenses")
+                .Include("~/Scripts/pera-app/expenses/expenses.module.js")
+                .IncludeDirectory("~/Scripts/pera-app/expenses/", "*.js", searchSubdirectories: true);
+
+
+
+            var fileupload = new ScriptBundle("~/bundles/fileupload")
+                .Include("~/Scripts/pera-app/fileupload/fileupload.module.js");
+
+
+
+            var garages = new ScriptBundle("~/bundles/garages")
+                .Include("~/Scripts/pera-app/garages/garages.module.js");
+
+
+            var teamMembers = new ScriptBundle("~/bundles/teamMembers")
+                .Include("~/Scripts/pera-app/teammembers/teammembers.module.js");
+
+
+
+            var utils = new ScriptBundle("~/bundles/utils")
+                .Include("~/Scripts/pera-app/utils/utils.module.js");
+
+            var tabs = new ScriptBundle("~/bundles/tab")
                 .Include("~/Scripts/pera-app/tabs/tab.module.js")
                 .Include("~/Scripts/pera-app/fileupload/fileUpload.module.js")
                 .Include("~/Scripts/pera-app/invoiceTeamMembers/invoiceTeamMembers.module.js")
@@ -46,7 +69,7 @@ namespace PERA
                 .IncludeDirectory("~/Scripts/pera-app/fileupload/", "*.js", true)
                 .IncludeDirectory("~/Scripts/pera-app/invoiceTeamMembers/", "*.js", true);
                  */
-            bundles.Add(peraBundle);
+
                 /*
                 "~/Scripts/pera-app/dashboard/dashboard.module.js",
                 "~/Scripts/pera-app/dashboard/controllers/expense.controller.js",
@@ -70,6 +93,8 @@ namespace PERA
                 "~/Scripts/pera-app/fileupload/controllers/invoiceform.controller.js"
                  
                  */
+
+            BundleTable.EnableOptimizations = true;
           
         }
     }

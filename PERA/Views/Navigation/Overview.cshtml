@@ -6,23 +6,27 @@
 
 <table id="garageTable">
     <tr>
-        <td>Cost Per Month: </td>
+        <td>Number of Garages: </td>
+        <td>{{sidebar.garages.length}}</td>
+    </tr>
+    <tr>
+        <td>Total Cost Per Month: </td>
         <td>{{sidebar.totalCost | currency}}</td>
     </tr>
     <tr>
-        <td>Capacity: </td>
+        <td>Total Capacity: </td>
         <td>{{sidebar.totalCapacity}}</td>
     </tr>
     <tr>
-        <td>Leased Spaces: </td>
+        <td>Total Number of Leased Spaces: </td>
         <td>{{sidebar.totalLeasedSpaces}}</td>
     </tr>
     <tr>
-        <td>Team-Member Spaces: </td>
+        <td>Total Number of Team-Member Spaces: </td>
         <td>{{sidebar.totalTeamMemberSpaces}}</td>
     </tr>
     <tr>
-        <td>Required Buffer Size: </td>
+        <td>Total Required Buffer Size: </td>
         <td>{{sidebar.totalRequiredBufferSize}}</td>
     </tr>
     <tr>

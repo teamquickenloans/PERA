@@ -18,22 +18,34 @@
 
         var vm = this;
         vm.files = [];
-        vm.reports = [{ garageID: 0 }];
+        vm.defaultReport = [{ garageID: 0 }];
+        vm.reports = angular.copy(vm.defaultReport);
         $scope.garages = [];
 
+        vm.clearForm = clearForm;
         vm.uploadAll = uploadAll;
+        vm.addReport = addReport;
+        vm.removeReport = removeReport;
 
-        vm.form = {
+
+        vm.defaultForm = {
             dateReceived: '',
             dateUploaded: Date.now(),
             monthYear: '',
         }
+
+        vm.form = angular.copy(vm.defaultForm);
 
         Garages.all().then(garagesSuccessFn, garagesErrorFn);
 
         function addReport() {
             vm.counter++;
             vm.reports.push({ garageID: 0 });
+        }
+
+        function removeReport() {
+            vm.counter = vm.counter - 1;
+            vm.reports.pop();
         }
 
         function uploadAll() {
@@ -55,9 +67,26 @@
                     console.log(vm.reports[i].file[0].name)
                     vm.files.push(vm.reports[i].file[0])
                 }
-                Upload.upload(vm.files, vm.form, vm.reports, "./api/badgescanparser/upload");
+                Upload.upload(vm.files, vm.form, vm.reports, "./api/badgescanparser/upload").then(uploadSuccess, uploadFail);
             }
 
+        }
+
+        function uploadSuccess() {
+            Snackbar.show("Card Activity Report Uploaded Successfully");
+            clearForm();
+        }
+
+        function clearForm() {
+            vm.form = angular.copy(vm.defaultForm);
+            $scope.badgeScanForm.$setPristine();
+            vm.files = [];
+            vm.reports = angular.copy(vm.defaultReport);
+            console.log("clear form");
+        }
+        function uploadFail() {
+            Snackbar.error("Card Activity Report upload failed.  Please recheck the formatting of the excel file.");
+            clearForm();
         }
 
         function garagesSuccessFn(data, status, headers, config) {

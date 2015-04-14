@@ -1,39 +1,21 @@
-﻿<script type="text/javascript">
-    console.log("hello!");
-</script>
-
-
-<ui-gmap-google-map center='map.center' zoom='map.zoom' styles='map.styles'></ui-gmap-google-map>
-
-<div id="garageMapContent" ng-controller="MapController as map">
-
-
-    @*<div id="map-canvas" ui-view class="columns small-9"></div>*@
-    <div id="map-canvas"></div>
-    <div id="mapKey" onload="map.initialize()">
+﻿
+<div id="garageMapContent">
+    
+    <div id="mapKey">
         <h5>&nbsp;&nbsp;Spots Available&nbsp;&nbsp;&nbsp;</h5>
         <div id="greenBox"></div>
         <div class="keyText">100+ Spots</div>
         <br />
         <div id="yellowBox"></div>
-        <div class="keyText">50 - 100 Spots</div>
+        <div class="keyText">51 - 100 Spots</div>
         <br />
         <div id="redBox"></div>
-        <div class="keyText">0 - 50 Spots</div>
+        <div class="keyText">1 - 50 Spots</div>
         <br />
         <div id="blackBox"></div>
         <div class="keyText">Garage Full</div>
     </div>
-    <div class="row">
-        <div ui-view="sidebartop" class="columns small-3">
-
-        </div>
-    </div>
-    <div class="row">
-        <div ui-view="sidebarbottom" class="columns small-3">
-
-        </div>
-    </div>
+    
 </div>
 
 

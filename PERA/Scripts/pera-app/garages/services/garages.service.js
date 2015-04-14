@@ -19,6 +19,7 @@
         
         var vm = this;
         vm.garages = [];
+        vm.garage;
         var last_request_failed = false;
         var last_garage_failed = false;
         var allPromise = undefined;
@@ -61,28 +62,42 @@
         function all() {
             if (!allPromise || last_request_failed) {
                 console.log("querying database");
-                allPromise = $http.get('/api/garages/');
+                allPromise = $http.get('/api/garages/getgarages/');
                 allPromise.then(garagesSuccess, garagesError);
             }
             return allPromise;
         }
 
+        /**
+        * @name get
+        * @desc Get one Garage
+        * @returns {Promise}
+        * @memberOf pera.garages.services.Garages
+        */
         function get(garageID) 
         {
             if (!garagePromise[garageID] || last_garage_failed[garageID]) {
-                garagePromise[garageID] = $http.get('/api/garages/' + garageID);
+                garagePromise[garageID] = $http.get('/api/garages/get/' + garageID);
                 console.log("getting one garage");
-                garagePromise.then(garageSuccess, garageError);
+                garagePromise[garageID].then(garageSuccess, garageError);
             }
+            return garagePromise;
         }
 
-        /**
-         * @name garagesSuccess
-         * @desc Sets the garages variable to the list of garages
-         * @param {string} badgeID The badgeID to get Garages for
-         * @returns {Promise}
-         * @memberOf thinkster.garages.services.Garages
-         */
+        function garageSuccess(data, status, headers, config, response) {
+            last_garage_failed = false;
+            vm.garage = data.data;
+            console.log("service success ", vm.garage);
+            return vm.garage;
+        }
+
+        function garageError(data, status, headers, config, response) {
+            last_garage_failed = true;
+            Snackbar.error("Error retrieving garages");
+            return $q.reject(response);
+        }
+
+
         function garagesSuccess(data, status, headers, config, response) {
             last_request_failed = false;
             vm.garages = data.data;
@@ -97,7 +112,6 @@
             Snackbar.error("Error retrieving garages");
             return $q.reject(response);
         }
-
         function calculateTotals() {
             for (var i = 0; i < vm.garages.length; i++) {
                 var temp = vm.garages[i].numberOfLeasedSpaces * vm.garages[i].spaceCost;

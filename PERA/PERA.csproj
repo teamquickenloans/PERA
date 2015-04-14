@@ -42,6 +42,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="CsvHelper">
       <HintPath>..\packages\CsvHelper.2.10.0\lib\net40-client\CsvHelper.dll</HintPath>
     </Reference>
@@ -194,23 +200,20 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
-    <Compile Include="App_Start\Startup.Auth.cs">
-      <SubType>Code</SubType>
-    </Compile>
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
-    <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <!--
       @name ASP.NET MVC Controllers
     -->
     <Compile Include="Controllers\BadgeScanParserController.cs" />
     <Compile Include="Controllers\DiscrepanciesController.cs" />
+    <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\ExportReportController.cs" />
     <Compile Include="Controllers\GarageController.cs" />
+    <Compile Include="Controllers\InvoiceActiveParkerReportsController.cs" />
     <Compile Include="Controllers\ParkerReportTeamMembersController.cs" />
     <Compile Include="Controllers\ParkerReportParserController.cs" />
-    <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\FormController.cs" />
     <!--
@@ -225,6 +228,7 @@
     <Compile Include="Controllers\InvoicesController.cs" />
     <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
+    <Compile Include="Controllers\UploadController.cs" />
     <Compile Include="DAL\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -268,14 +272,48 @@
     <Compile Include="Migrations\201503231133449_update.Designer.cs">
       <DependentUpon>201503231133449_update.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201503301739348_BadgeScan.cs" />
+    <Compile Include="Migrations\201503301739348_BadgeScan.Designer.cs">
+      <DependentUpon>201503301739348_BadgeScan.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\201504031939378_redo.cs" />
     <Compile Include="Migrations\201504031939378_redo.Designer.cs">
       <DependentUpon>201504031939378_redo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Migrations\201504041446049_migration23.cs" />
+    <Compile Include="Migrations\201504041446049_migration23.Designer.cs">
+      <DependentUpon>201504041446049_migration23.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504041845334_RecreateInvoice.cs" />
+    <Compile Include="Migrations\201504041845334_RecreateInvoice.Designer.cs">
+      <DependentUpon>201504041845334_RecreateInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504041909501_IdentityInsertInvoice.cs" />
+    <Compile Include="Migrations\201504041909501_IdentityInsertInvoice.Designer.cs">
+      <DependentUpon>201504041909501_IdentityInsertInvoice.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504080134364_ERMAGAWD.cs" />
+    <Compile Include="Migrations\201504080134364_ERMAGAWD.Designer.cs">
+      <DependentUpon>201504080134364_ERMAGAWD.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504052119437_discrepancy.cs" />
+    <Compile Include="Migrations\201504052119437_discrepancy.Designer.cs">
+      <DependentUpon>201504052119437_discrepancy.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504120327312_UpdateState1.cs" />
+    <Compile Include="Migrations\201504120327312_UpdateState1.Designer.cs">
+      <DependentUpon>201504120327312_UpdateState1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504120328449_BadgeScan_BadgeID.cs" />
+    <Compile Include="Migrations\201504120328449_BadgeScan_BadgeID.Designer.cs">
+      <DependentUpon>201504120328449_BadgeScan_BadgeID.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
     <Compile Include="Models\CarpoolGroup.cs" />
+    <Compile Include="Models\Discrepancy.cs" />
+    <Compile Include="Models\InvoiceActiveParkerReportDTO.cs" />
+    <Compile Include="Models\InvoiceTeamMember.cs" />
     <Compile Include="Models\QLActiveParkerReport.cs" />
     <Compile Include="Models\InvoiceActiveParkerReport.cs" />
     <Compile Include="Models\ParkerReportTeamMember.cs" />
@@ -283,9 +321,7 @@
     <Compile Include="Models\QLTeamMember.cs" />
     <Compile Include="Models\TeamMember.cs" />
     <Compile Include="Models\Garage.cs" />
-    <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Invoice.cs" />
-    <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="DAL\PERAContext.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs">
@@ -301,7 +337,7 @@
     <Content Include="Content\Images\parking_green.png" />
     <Content Include="Content\Images\parking_red.png" />
     <Content Include="Content\Images\parking_yellow.png" />
-    <Content Include="Excel.dll" />
+    <Content Include="Content\Images\spinner.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -310,6 +346,7 @@
       @name pera-app
       @desc AngularJS application
     -->
+    <Content Include="Grant.sql" />
     <Content Include="Scripts\css\app.css" />
     <Content Include="Scripts\css\foundation-icons.css" />
     <Content Include="Scripts\css\foundation.css" />
@@ -346,13 +383,16 @@
     <Content Include="Scripts\js\modernizr-2.6.2.js" />
     <Content Include="Scripts\pera-app\export\controllers\exportReport.controller.js" />
     <Content Include="Scripts\pera-app\export\export.module.js" />
+    <Content Include="Scripts\pera-app\expenses\services\invoiceAPR.service.js" />
+    <Content Include="Scripts\pera-app\expenses\services\invoices.service.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\badgeScan.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\parkerreport.controller.js" />
-    <Content Include="Scripts\pera-app\fileupload\directives\double.directive.js" />
     <Content Include="Scripts\pera-app\expenses\controllers\discrepancies.controller.js" />
     <Content Include="Scripts\pera-app\expenses\services\discrepancies.service.js" />
     <Content Include="Scripts\pera-app\fileupload\services\upload.service.js" />
     <Content Include="Scripts\pera-app\garages\controllers\editgarage.controller.js" />
+    <Content Include="Scripts\pera-app\garages\controllers\addgarage.controller.js" />
+    <Content Include="Scripts\pera-app\garages\services\garageManagers.service.js" />
     <Content Include="Scripts\pera-app\invoiceTeamMembers\invoiceTeamMembers.module.js" />
     <Content Include="Scripts\pera-app\map\map.module.js" />
     <Content Include="Scripts\pera-app\map\services\mapinitializer.service.js" />
@@ -360,11 +400,11 @@
     <Content Include="Scripts\pera-app\pera.config.js" />
     <Content Include="Scripts\pera-app\sidebar\services\sidebar.service.js" />
     <Content Include="Scripts\pera-app\sidebar\sidebar.module.js" />
-    <Content Include="Scripts\pera-app\teammembers\controllers\teammembers.controller.js" />
-    <Content Include="Scripts\pera-app\teammembers\services\teammembers.service.js" />
-    <Content Include="Scripts\pera-app\teammembers\teammembers.module.js" />
+    <Content Include="Scripts\pera-app\teamMembers\controllers\teamMembers.controller.js" />
+    <Content Include="Scripts\pera-app\teamMembers\services\teamMembers.service.js" />
+    <Content Include="Scripts\pera-app\teamMembers\teamMembers.module.js" />
     <Content Include="Scripts\pera-app\fileupload\directives\ngfile.directive.js" />
-    <Content Include="Scripts\pera-app\expenses\controllers\expenses.controller.js" />
+    <Content Include="Scripts\pera-app\expenses\controllers\uploadhistory.controller.js" />
     <Content Include="Scripts\pera-app\expenses\expenses.module.js" />
     <Content Include="Scripts\pera-app\map\controllers\map.controller.js" />
     <Content Include="Scripts\pera-app\map\map.module.js" />
@@ -413,10 +453,37 @@
     <EmbeddedResource Include="Migrations\201503231133449_update.resx">
       <DependentUpon>201503231133449_update.cs</DependentUpon>
     </EmbeddedResource>
-    <Content Include="DAL\garages_new.csv" />
+    <EmbeddedResource Include="Migrations\201503301739348_BadgeScan.resx">
+      <DependentUpon>201503301739348_BadgeScan.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504031939378_redo.resx">
       <DependentUpon>201504031939378_redo.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504041446049_migration23.resx">
+      <DependentUpon>201504041446049_migration23.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504041845334_RecreateInvoice.resx">
+      <DependentUpon>201504041845334_RecreateInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504041909501_IdentityInsertInvoice.resx">
+      <DependentUpon>201504041909501_IdentityInsertInvoice.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="DAL\garages_new.csv" />
+    <EmbeddedResource Include="Migrations\201504052119437_discrepancy.resx">
+      <DependentUpon>201504052119437_discrepancy.cs</DependentUpon>
+    </EmbeddedResource>
+    <Content Include="DAL\garages_new.csv" />
+    <EmbeddedResource Include="DAL\garages.csv" />
+    <EmbeddedResource Include="Migrations\201504080134364_ERMAGAWD.resx">
+      <DependentUpon>201504080134364_ERMAGAWD.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504120327312_UpdateState1.resx">
+      <DependentUpon>201504120327312_UpdateState1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504120328449_BadgeScan_BadgeID.resx">
+      <DependentUpon>201504120328449_BadgeScan_BadgeID.cs</DependentUpon>
+    </EmbeddedResource>
+    <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
     <Content Include="Scripts\css\snackbar.min.css" />
@@ -435,7 +502,6 @@
     <Content Include="Scripts\js\angular-file-upload\angular-file-upload.min.js" />
     <Content Include="Scripts\js\angular-file-upload\ng-file-upload-all.js" />
     <Content Include="Scripts\js\angular-file-upload\ng-file-upload-all.min.js" />
-    <EmbeddedResource Include="DAL\garages.csv" />
     <!--
       @ name CSS Stylesheets
     -->
@@ -471,12 +537,11 @@
     <Content Include="Views\TeamMember\Edit.cshtml" />
     <Content Include="Views\TeamMember\Index.cshtml" />
     <Content Include="Views\Garage\Map.cshtml" />
-    <Content Include="Views\Expense\DetectedIssues.cshtml" />
     <Content Include="Views\Garage\GarageInfo.cshtml" />
     <Content Include="Scripts\pera-app\sidebar\controllers\sidebar.controller.js" />
     <Content Include="Views\Navigation\Overview.cshtml" />
     <Content Include="Views\Navigation\Garage.cshtml" />
-    <Content Include="Views\Expense\UploadHistory.cshtml" />
+    <Content Include="Views\Upload\UploadHistory.cshtml" />
     <Content Include="Scripts\js\snackbar.min.js.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Form\ParkerReport.cshtml" />
@@ -490,6 +555,14 @@
     <Content Include="Views\Emails\Web.config" />
     <Content Include="Views\Emails\_ViewStart.cshtml" />
     <Content Include="Views\Emails\Example.cshtml" />
+    <Content Include="Views\Navigation\Upload.cshtml" />
+    <Content Include="Views\Form\BadgeScan.cshtml" />
+    <Content Include="Views\Navigation\MapGarage.cshtml" />
+    <Content Include="Views\Navigation\MapTopBar.cshtml" />
+    <Content Include="Views\Upload\Base.cshtml" />
+    <None Include="Web.Test.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -564,6 +637,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

@@ -14,6 +14,7 @@ namespace PERA.Models
     {
         [Key]
         public int InvoiceID { get; set; }
+        public int ID {get; set;}
         public double TotalAmountBilled { get; set; }
         public DateTime? DateReceived { get; set; }
         public DateTime DateUploaded { get; set; }

@@ -37,6 +37,8 @@
           //'ngSanitize',
           //'ct.ui.router.extras'
       ])
+    
+    //angular.module('pera.config').$inject = ['ui.router', 'ngRoute', 'ngResource'];
 
 
 })();

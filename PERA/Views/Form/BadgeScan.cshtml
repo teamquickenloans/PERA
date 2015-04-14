@@ -1,29 +1,36 @@
 ﻿
-<h3>Upload a Badge Scan Report</h3>
+<h3>Upload a Card Activity Report</h3>
 <p>
-    This form allows you to upload a badge scan report.
+    This form allows you to upload a card activity report.
 </p>
-<form novalidate ng-submit="fileCtrl.uploadAll()">
 
-    <div class="small-10 column">
-        <h4> Badge Scan Reports</h4>
-        
+<form novalidate name="badgeScanForm" ng-submit="fileCtrl.uploadAll()">
+
+        <h4>
+            Card Activity Reports
+            <a ng-click="fileCtrl.addReport()">
+                <i class="fi-plus green px24"></i>
+            </a>
+            <a ng-click="fileCtrl.removeReport()">
+                <i class="fi-minus orange px24"></i>
+            </a><br />
+        </h4>
+
+
+        <!--<input type="file" class="fileInput" ng-file-select ng-model="files" ng-multiple="false" />-->
         <div class="row" ng-repeat="report in fileCtrl.reports">
-
-            <div class="small-3 column">
                 <a href="#" class="radius button" ng-file-select ng-model="report.file">Select a file</a>
-            </div>
-            <div class="small-5 column">
-                <br />
+            <div class="small-12 column">
                 {{ report.file[0].name }}
             </div>
         </div>
         <div class="row">
-            <a ng-click="fileCtrl.addReport()">+ Add a report</a><br />
             <button class="radius button" type="submit">Upload</button>
-
+            <a class="radius button" ng-click="fileCtrl.clearForm()">Clear Form</a>
         </div>
-    </div>
+
+        <br />
+
     <br />
 
 </form>

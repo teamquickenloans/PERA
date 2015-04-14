@@ -31,6 +31,18 @@ namespace PERA.Controllers
         {
             return View();
         }
+        public ActionResult MapGarage()
+        {
+            return View();
+        }
+        public ActionResult MapTopBar()
+        {
+            return View();
+        }
+        public ActionResult Upload()
+        {
+            return View();
+        }
 
     }
 }

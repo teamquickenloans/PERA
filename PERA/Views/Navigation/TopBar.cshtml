@@ -1,17 +1,19 @@
 ﻿
 <li class="divider"></li>
-<li> 
-    <a ui-sref=".overview">Overview</a> 
+<li ng-class="{active:tabCtrl.sideIsSet(-1)}">
+    <a ui-sref=".overview" ng-click="tabCtrl.setSideTab(-1);">Overview</a>
 </li>
 <li class="divider"></li>
 @*Single Garage Dropdown*@ 
-<li ng-class="{active:!tab.sideIsSet(-1)}" ng-controller="SideBarController as sidebar" class="has-dropdown">
-    <a href="#">Single Garage</a><a ng-if="sidebar.currentGarage != null" href="#">: {{ sidebar.currentGarage.name }}</a>
+
+<li ng-class="{active:!tabCtrl.sideIsSet(-1)}" ng-controller="SideBarController as sidebar" class="has-dropdown">
+    <a href="#">Garage</a><a ng-if="sidebar.currentGarage != null" href="#">: {{ sidebar.currentGarage.name }}</a>
+
     <ul class="dropdown">
         <li ng-repeat="garage in sidebar.garages">
             <ul>
-                <li ng-class="{active:tab.sideIsSet($index)}">
-                    <a ui-sref=".garage" ng-click="sidebar.setCurrent(garage)">{{garage.name}}</a>
+                <li ng-class="{active:tabCtrl.sideIsSet(garage.garageID)}">
+                    <a ui-sref=".garage" ng-click="sidebar.setCurrent(garage); tabCtrl.setSideTab(garage.garageID);">{{garage.name}}</a>
                 </li>
             </ul>
         </li>

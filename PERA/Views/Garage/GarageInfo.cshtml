@@ -1,6 +1,6 @@
 ﻿<div class="sideBar">
 
-
+    <!-- Parking Usage -->
     <div id="usageTableHeader">
         Parking Usage
     </div>
@@ -15,8 +15,8 @@
         </table>
 
         <div id="usageTableBodyWrapper">
-            <table id="usageTableBody" ng-controller="TeamMembersController as teamCtrl">
-                <tr class="tableRow" ng-repeat="teammember in teamCtrl.teammembers">
+            <table id="usageTableBody">
+                <tr class="tableRow" ng-repeat="teammember in teamCtrl.teamMembers[getCurrent().garageID]">
                     <td class="nameColUsageTable">{{teammember.firstName}} {{teammember.lastName}}</td>
                     <td class="usageColUsageTable">0/31</td>
                 </tr>

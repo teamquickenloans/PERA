@@ -1,0 +1,62 @@
+﻿
+<h3>Upload History</h3>
+<div id="uploadHistoryContent">
+        <h4>Invoices</h4>
+        <table ng-controller ="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+            <thead id="uploadTableHead">
+                <tr>
+                    <th>Invoice ID</th>
+                    <th>Date</th>
+                    <th>Amount Billed</th>
+                </tr>
+            </thead>
+
+            <tbody id="uploadTableBody">
+                <tr class="tableRow" ng-repeat="invoice in invoices" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                    <td>{{invoice.id}}</td>
+                    <td>{{invoice.monthYear | date:'MMMM yyyy'}}</td>
+                    <td>${{invoice.totalAmountBilled}}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    <table ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+        <thead id="uploadTableHead">
+            <tr>
+                <th>Garage</th>
+                <th>Date</th>
+                <th>Number of Parkers</th>
+            </tr>
+        </thead>
+
+        <tbody id="uploadTableBody">
+            <tr class="tableRow" ng-repeat="invoice in invoiceAPRs" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                <td>{{invoice.id}}</td>
+                <td>{{invoice.monthYear | date:'MMMM yyyy'}}</td>
+                <td>${{invoice.allocatedSpots}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+
+        <div id="itmTableWrapper">
+            <table id="uploadTableHead">
+                <tr>
+                    <th class="nameColITMTable">Name</th>
+                    <th class="tokenIDColITMTable">Token ID</th>
+                </tr>
+            </table>
+
+            <div id="uploadTableBodyWrapper">
+                <table id="uploadTableBody" ng-controller="ParkerReportTeamMembersController as ITMCtrl">
+                    <tr class="tableRow" ng-repeat="itm in ITMCtrl.invoiceTeamMembers">
+                        <td class="nameColITMTable">{{itm.firstName}} {{itm.lastName}}</td>
+                        <td class="tokenIDColITMTable">{{itm.badgeID}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+
+</div>

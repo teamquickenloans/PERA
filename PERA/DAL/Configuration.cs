@@ -23,6 +23,7 @@ namespace PERA.Migrations
         protected override void Seed(PERA.Models.PERAContext context)
         {
 
+           context.Database.CreateIfNotExists();
            context.Configuration.LazyLoadingEnabled = false;
            context.GarageManagers.AddOrUpdate(x => x.ID,
             new GarageManager { ID = 1, CompanyName = "Ultimate Parking Management" },
@@ -49,7 +50,8 @@ namespace PERA.Migrations
                 }
             }
 
-            
+            context.Invoices.Create();
+
             context.TeamMembers.AddOrUpdate(x => x.primaryKey,
                 new TeamMember() { BadgeID = 4041, FirstName = "Carson", LastName = "Alexander", EnrollmentDate = DateTime.Parse("2005-09-01"), CommonID = 423535, EmploymentStatus = null, TerminationDate = DateTime.Parse("2005-09-01") },
                 new TeamMember() { BadgeID = 4042, FirstName = "Meredith", LastName = "Alonso", EnrollmentDate = DateTime.Parse("2002-09-01"), CommonID = 423536, EmploymentStatus = null, TerminationDate = DateTime.Parse("2005-09-01") },

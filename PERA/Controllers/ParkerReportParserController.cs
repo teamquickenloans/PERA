@@ -49,6 +49,7 @@ namespace PERA.Controllers
             { 1, 4 },
             { 2, 2 },
             { 4, 3 },
+            { 5, 6 },
             { 7, 5 },
             { 8, 5 },
             { 9, 5 }
@@ -56,7 +57,7 @@ namespace PERA.Controllers
 
         Dictionary<int, Token> splitTokenColumns = new Dictionary<int, Token>()
         {
-            { 5,  new Token{ID_CODE_26W = 5, HID_CORP1K_ID = 6}}, //!TODO: Change this
+            //{ 5,  new Token{ID_CODE_26W = 5, HID_CORP1K_ID = 6}}, //!TODO: Change this
             { 6,  new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}},
             { 3,  new Token{ID_CODE_26W = 11, HID_CORP1K_ID = 12}},
             { 11, new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}},
@@ -125,9 +126,7 @@ namespace PERA.Controllers
             Trace.WriteLine("apr.DateReceived: " + apr.DateReceived);
             Trace.WriteLine("apr.DateUploaded: " + apr.DateUploaded);
 
-
             FileHandler(result, apr);
-
 
             // Through the request response you can return an object to the Angular controller
             // You will be able to access this in the .success callback through its data attribute
@@ -138,6 +137,7 @@ namespace PERA.Controllers
 
         private void FileHandler(MultipartFormDataStreamProvider result, QLActiveParkerReport APR)
         {
+            Trace.WriteLine("result.FileData: " + result.FileData);
             foreach (var file in result.FileData)
             {
                 // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
@@ -150,7 +150,7 @@ namespace PERA.Controllers
                 APR.GarageID = garageID;
                 
                 List<QLTeamMember> teamMembers =
-                    ExcelParser(file.LocalFileName, originalFileName, APR, garageID);
+                                    ExcelParser(file.LocalFileName, originalFileName, APR, garageID);
                 
                 Trace.WriteLine("teamMembers.Count: " + teamMembers.Count);
 
@@ -205,10 +205,13 @@ namespace PERA.Controllers
             // The result of each spreadsheet will be created in the result.Tables
             DataSet result = reader.AsDataSet();
 
+            Trace.WriteLine(result);
+
             List<QLTeamMember> teamMembers = new List<QLTeamMember>();
 
             int i = 0;
             System.Diagnostics.Debug.WriteLine("begin for loop");
+            Trace.WriteLine("result.Tables.Count: " + result.Tables.Count);
             DataTable table = result.Tables[0];
             //foreach (DataTable table in result.Tables)
             //{
@@ -216,7 +219,7 @@ namespace PERA.Controllers
                 {
                     // if this row is the headings, skip this row
                     System.Diagnostics.Debug.WriteLine("loop");
-                    if(i == 0)
+                    if(i < 5)
                     {
                         Trace.WriteLine("continue");
                         i++;
@@ -283,7 +286,6 @@ namespace PERA.Controllers
 
                     double tokenAd, tokenBd;
                     QLTeamMember teamMember = db.QLTeamMembers.Create();
-                    int itokenA, itokenB = 0;
                     if(splitTokenColumns.ContainsKey(garageID))
                     {
                         Token tokens = splitTokenColumns[garageID];
@@ -292,10 +294,17 @@ namespace PERA.Controllers
                         if(tokenAv != DBNull.Value ){
                             tokenAd = (System.Double)tokenAv;
                             teamMember.BadgeID = Convert.ToInt32(tokenAd);
+
                         }
                         if (tokenBv != DBNull.Value) {
                             tokenBd = (System.Double)tokenBv;
-                            teamMember.TokenID = Convert.ToInt32(tokenBd);
+
+                            if (garageID == 6)
+                            {
+                                teamMember.TokenID = Convert.ToInt32(tokenBd);
+                            }
+                            else
+                                teamMember.BadgeID = Convert.ToInt32(tokenBd);
                         }
                     }
                     else if(tokenColumns.ContainsKey(garageID))
