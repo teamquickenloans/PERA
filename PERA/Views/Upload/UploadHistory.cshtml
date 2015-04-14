@@ -1,7 +1,7 @@
 ﻿
 <h3>Upload History</h3>
 <div id="uploadHistoryContent">
-
+        <h4>Invoices</h4>
         <table ng-controller ="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
             <thead id="uploadTableHead">
                 <tr>
@@ -19,6 +19,26 @@
                 </tr>
             </tbody>
         </table>
+
+    <table ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+        <thead id="uploadTableHead">
+            <tr>
+                <th>Garage</th>
+                <th>Date</th>
+                <th>Number of Parkers</th>
+            </tr>
+        </thead>
+
+        <tbody id="uploadTableBody">
+            <tr class="tableRow" ng-repeat="invoice in invoiceAPRs" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                <td>{{invoice.id}}</td>
+                <td>{{invoice.monthYear | date:'MMMM yyyy'}}</td>
+                <td>${{invoice.allocatedSpots}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+
 
 
         <div id="itmTableWrapper">

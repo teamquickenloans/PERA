@@ -1,12 +1,11 @@
-﻿
+﻿<div class="small-12 medium-12 large-10">
 <h3>Upload an Active Parker Report</h3>
 <p>
     This form allows you to upload a Quicken Loans active parker report.  The report can be a System Galaxy
     excel file, but could be other formats as well. This data will be ingested into the database
     and can be used in the Expense Reconciliation Tool to identify discrepancies.
-
-
 </p>
+                                                      
 <form novalidate name="parkerReportForm" ng-submit="fileCtrl.uploadAll()">
 
         <h4>Date</h4>
@@ -35,7 +34,8 @@
     </div>
 
    
-    <h4>Active Parker Reports
+        <h4>
+            Active Parker Reports
         <a ng-click="fileCtrl.addReport()">
             <i class="fi-plus green px24"></i>
         </a>
@@ -70,6 +70,7 @@
 
 
 </form>
+</div>
 
 
 

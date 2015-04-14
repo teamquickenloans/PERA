@@ -1,5 +1,7 @@
-﻿    <h3>Upload an Invoice</h3>
-<p> This form allows you to upload an invoice along with one or more active parker reports.  This data will be ingested into the database
+﻿<div class="small-12 medium-12 large-10">
+    <h3>Upload an Invoice</h3>
+    <p>
+        This form allows you to upload an invoice along with one or more active parker reports.  This data will be ingested into the database
     and can be used in the Expense Reconciliation Tool to identify discrepancies in the active parker reports from Garage managers.
    
     
@@ -22,46 +24,47 @@
         <div class="small-6 column" >
 
             <div ng-class="{ 'has-error' : invoiceForm.totalLeasedSpots.$invalid && !invoiceForm.totalLeasedSpots.$pristine }">
-                <span data-tooltip aria-haspopup="true" class="has-tip" title="tooltip">
-                    <label for="numberOfLeasedSpots">Number of Leased Spots:</label>
+            <span data-tooltip aria-haspopup="true" class="has-tip" title="tooltip">
+                <label for="numberOfLeasedSpots">Number of Leased Spots:</label>
                     <input type="number" ng-model="fileCtrl.invoice.totalLeasedSpots" placeholder="" name="totalLeasedSpots" />
-                </span>
+            </span>
                 <small class="error" ng-show="invoiceForm.totalLeasedSpots.$invalid && !invoiceForm.totalLeasedSpots.$pristine">Total number of leased spots must be a number.</small>
             </div>
 
             <div ng-class="{ 'has-error' : invoiceForm.monthYear.$invalid && !invoiceForm.monthYear.$pristine }">
-                <label for="monthYear">Month/Year of Billing</label>
+            <label for="monthYear">Month/Year of Billing</label>
 
                 <date-picker id="monthYear" format="MMM yyyy" placeholder="required"
                              ng-model="fileCtrl.invoice.monthYear" name="monthYear">
                 </date-picker>
                 <small class="error" ng-show="invoiceForm.monthYear.$invalid && !invoiceForm.monthYear.$pristine">Billing month and year is required.</small>
 
-                @*<input type="text" ng-model="fileCtrl.invoice.monthYear" id="monthYear" ng-datepicker="{}" required />*@
-            </div>
+            @*<input type="text" ng-model="fileCtrl.invoice.monthYear" id="monthYear" ng-datepicker="{}" required />*@
+        </div>
         </div>
 
         <div class="small-6 column">
             <div ng-class="{ 'has-error' : invoiceForm.numberOfValidations.$invalid && !invoiceForm.numberOfValidations.$pristine }">
-                <label for="numberOfValidations">Number of Validations:</label>
+            <label for="numberOfValidations">Number of Validations:</label>
                 <input type="number" ng-model="fileCtrl.invoice.validations" placeholder="optional" name="numberOfValidations" min="0" />
                 <small class="error" ng-show="invoiceForm.numberOfValidations.$invalid && !invoiceForm.numberOfValidations.$pristine">Number of validations must be a number.</small>
                 <small class="error" ng-show="invoiceForm.numberOfValidations.$error.min">Number of validations must be at least 0.</small>
             </div>
 
             <div ng-class="{ 'has-error' : invoiceForm.dateReceived.$invalid && !invoiceForm.dateReceived.$pristine }">
-                <label for="dateReceived">Date Received:</label>
-                @*<input type="date" ng-model="fileCtrl.invoice.dateReceived" id="dateReceived" ng-datepicker="{}" placeholder="optional" />*@
-                @*<input type="date" ng-model="fileCtrl.invoice.dateReceived" id="dateReceived" pick-a-date="date" placeholder="optional" />*@
+            <label for="dateReceived">Date Received:</label>
+            @*<input type="date" ng-model="fileCtrl.invoice.dateReceived" id="dateReceived" ng-datepicker="{}" placeholder="optional" />*@
+            @*<input type="date" ng-model="fileCtrl.invoice.dateReceived" id="dateReceived" pick-a-date="date" placeholder="optional" />*@
                 <date-picker id="dateReceived" name="dateReceived"
-                             format="dd MMM yyyy" placeholder="optional"
-                             ng-model="fileCtrl.invoice.dateReceived"></date-picker>
+                         format="dd MMM yyyy" placeholder="optional"
+                         ng-model="fileCtrl.invoice.dateReceived"></date-picker>
                 <small class="error" ng-show="invoiceForm.dateReceived.$invalid && !invoiceForm.dateReceived.$pristine">Date received must be in the format "dd MMM yyyy.</small>
             </div>
         </div>
-
+        
         <br /><br />
-            <h4> Active Parker Reports
+        <h4>
+            Active Parker Reports
                 <a ng-click="fileCtrl.addReport()">
                     <i class="fi-plus green px24"></i>
                 </a>
@@ -94,7 +97,7 @@
 
 
     </form>
-
+</div>
 
 
 

@@ -8,22 +8,34 @@
     angular
       .module('pera.expenses.controllers')
       .controller('UploadHistoryController', UploadHistoryController);
-    UploadHistoryController.$inject = ['Invoices', '$scope']
+    UploadHistoryController.$inject = ['$scope', 'Snackbar', 'Invoices', 'InvoiceAPRs']
 
-    function UploadHistoryController(Invoices, $scope) {
+    function UploadHistoryController($scope, Snackbar, Invoices, InvoiceAPRs) {
         var vm = this;
         $scope.invoices = [];
+        $scope.invoiceAPRs = [];
 
         vm.issues = issues;
         vm.uploads = uploads;
 
         Invoices.all().then(invoicesSuccess, invoicesError);
+        InvoiceAPRs.all().then(invoiceAPRsSuccess, invoiceAPRsError);
+
 
         function invoicesSuccess(data, status, headers, config) {
-            $scope.invoices = data.data;         //this will depend on what the API returns, it may have to change
+            $scope.invoices = data.data;
         }
 
         function invoicesError(data, status, headers, config) {
+            Snackbar.error("Failed to retrieve invoices");
+        }
+
+        function invoiceAPRsSuccess(data, status, headers, config) {
+            console.log("retrieved aprs")
+            $scope.invoiceAPRs = data.data;
+        }
+
+        function invoiceAPRsError(data, status, headers, config) {
         }
     };
     
