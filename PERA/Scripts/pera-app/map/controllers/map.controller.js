@@ -308,7 +308,7 @@
             var mapOptions = {
                 center: { lat: 42.33242, lng: -83.04646 },
                 zoom: 16,
-                styles: styleArray,
+                styles: vm.styleArray,
                 panControl: false,
                 zoomControl: true,
                 mapTypeControl: true,

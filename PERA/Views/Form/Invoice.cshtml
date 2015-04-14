@@ -1,8 +1,10 @@
-﻿    <h3>Upload an Invoice</h3>
-<p> This form allows you to upload an invoice along with one or more active parker reports.  This data will be ingested into the database
-    and can be used in the Expense Reconciliation Tool to identify discrepancies in the active parker reports from Garage managers.
-   
-    
+﻿<div class="small-12 medium-12 large-10">
+    <h3>Upload an Invoice</h3>
+    <p>
+        This form allows you to upload an invoice along with one or more active parker reports.  This data will be ingested into the database
+        and can be used in the Expense Reconciliation Tool to identify discrepancies in the active parker reports from Garage managers.
+
+
     </p>
     <form novalidate name="invoiceForm" method="post" ng-submit="fileCtrl.uploadAll()">
         <h4> Invoice Meta-Data</h4>
@@ -25,9 +27,9 @@
 
             <label for="monthYear">Month/Year of Billing</label>
 
-                <date-picker id="monthYear" format="MMM yyyy" placeholder="required"
-                             ng-model="fileCtrl.invoice.monthYear">
-                </date-picker>
+            <date-picker id="monthYear" format="MMM yyyy" placeholder="required"
+                         ng-model="fileCtrl.invoice.monthYear">
+            </date-picker>
 
             @*<input type="text" ng-model="fileCtrl.invoice.monthYear" id="monthYear" ng-datepicker="{}" required />*@
         </div>
@@ -39,46 +41,47 @@
             <label for="dateReceived">Date Received:</label>
             @*<input type="date" ng-model="fileCtrl.invoice.dateReceived" id="dateReceived" ng-datepicker="{}" placeholder="optional" />*@
             @*<input type="date" ng-model="fileCtrl.invoice.dateReceived" id="dateReceived" pick-a-date="date" placeholder="optional" />*@
-            <date-picker id="dateReceived" 
+            <date-picker id="dateReceived"
                          format="dd MMM yyyy" placeholder="optional"
                          ng-model="fileCtrl.invoice.dateReceived"></date-picker>
-        
-                </div>
-        <br /><br />
-            <h4> Active Parker Reports
-                <a ng-click="fileCtrl.addReport()">
-                    <i class="fi-plus green px24"></i>
-                </a>
-                <a ng-click="fileCtrl.removeReport()">
-                    <i class="fi-minus orange px24"></i>
-                </a><br />
-            </h4>
-            <!--<input type="file" class="fileInput" ng-file-select ng-model="files" ng-multiple="false" />-->
-            <div class="row" ng-repeat="report in fileCtrl.reports">
 
-                <div class="large-6 column">
-                    <label for="garageID">Garage:</label>
-                    <select ng-model="report.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID">
-                        <option value="">-- select a garage --</option>
-                    </select>
-                </div>
-                <div class="small-6 column">
-                    <a href="#" class="radius button" ng-file-select ng-model="report.file">Select a file</a>
-                </div>
-                <div class="small-12 column">
-                    {{ report.file[0].name }}
-                </div>
+        </div>
+        <br /><br />
+        <h4>
+            Active Parker Reports
+            <a ng-click="fileCtrl.addReport()">
+                <i class="fi-plus green px24"></i>
+            </a>
+            <a ng-click="fileCtrl.removeReport()">
+                <i class="fi-minus orange px24"></i>
+            </a><br />
+        </h4>
+        <!--<input type="file" class="fileInput" ng-file-select ng-model="files" ng-multiple="false" />-->
+        <div class="row" ng-repeat="report in fileCtrl.reports">
+
+            <div class="large-6 column">
+                <label for="garageID">Garage:</label>
+                <select ng-model="report.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID">
+                    <option value="">-- select a garage --</option>
+                </select>
             </div>
-            <div class="row">
-                <button class="radius button" type="submit">Upload</button>
-                <a class="radius button" ng-click="fileCtrl.clearForm()">Clear</a>
+            <div class="small-6 column">
+                <a href="#" class="radius button" ng-file-select ng-model="report.file">Select a file</a>
             </div>
+            <div class="small-12 column">
+                {{ report.file[0].name }}
+            </div>
+        </div>
+        <div class="row">
+            <button class="radius button" type="submit">Upload</button>
+            <a class="radius button" ng-click="fileCtrl.clearForm()">Clear</a>
+        </div>
 
         <br />
 
 
     </form>
-
+</div>
 
 
 

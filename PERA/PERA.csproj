@@ -39,6 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="AutoMapper">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.dll</HintPath>
+    </Reference>
+    <Reference Include="AutoMapper.Net4">
+      <HintPath>..\packages\AutoMapper.3.3.1\lib\net40\AutoMapper.Net4.dll</HintPath>
+    </Reference>
     <Reference Include="CsvHelper">
       <HintPath>..\packages\CsvHelper.2.10.0\lib\net40-client\CsvHelper.dll</HintPath>
     </Reference>
@@ -196,6 +202,7 @@
     <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\ExportReportController.cs" />
     <Compile Include="Controllers\GarageController.cs" />
+    <Compile Include="Controllers\InvoiceActiveParkerReportsController.cs" />
     <Compile Include="Controllers\ParkerReportTeamMembersController.cs" />
     <Compile Include="Controllers\ParkerReportParserController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
@@ -288,10 +295,24 @@
     <Compile Include="Migrations\201504142022382_updatess.Designer.cs">
       <DependentUpon>201504142022382_updatess.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504120327312_UpdateState1.cs" />
+    <Compile Include="Migrations\201504120327312_UpdateState1.Designer.cs">
+      <DependentUpon>201504120327312_UpdateState1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504120328449_BadgeScan_BadgeID.cs" />
+    <Compile Include="Migrations\201504120328449_BadgeScan_BadgeID.Designer.cs">
+      <DependentUpon>201504120328449_BadgeScan_BadgeID.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504142203024_workplz.cs" />
+    <Compile Include="Migrations\201504142203024_workplz.Designer.cs">
+      <DependentUpon>201504142203024_workplz.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
     <Compile Include="Models\CarpoolGroup.cs" />
     <Compile Include="Models\Discrepancy.cs" />
+    <Compile Include="Models\InvoiceActiveParkerReportDTO.cs" />
+    <Compile Include="Models\InvoiceTeamMember.cs" />
     <Compile Include="Models\QLActiveParkerReport.cs" />
     <Compile Include="Models\InvoiceActiveParkerReport.cs" />
     <Compile Include="Models\ParkerReportTeamMember.cs" />
@@ -359,6 +380,7 @@
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.js" />
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.min.js" />
     <Content Include="Scripts\js\modernizr-2.6.2.js" />
+    <Content Include="Scripts\pera-app\expenses\services\invoiceAPR.service.js" />
     <Content Include="Scripts\pera-app\expenses\services\invoices.service.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\badgeScan.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\parkerreport.controller.js" />
@@ -454,6 +476,15 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504142022382_updatess.resx">
       <DependentUpon>201504142022382_updatess.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504120327312_UpdateState1.resx">
+      <DependentUpon>201504120327312_UpdateState1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504120328449_BadgeScan_BadgeID.resx">
+      <DependentUpon>201504120328449_BadgeScan_BadgeID.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504142203024_workplz.resx">
+      <DependentUpon>201504142203024_workplz.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
@@ -604,6 +635,7 @@
       </FlavorProperties>
     </VisualStudio>
   </ProjectExtensions>
+  <Import Project="..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets" Condition="Exists('..\packages\AutoMapper.3.3.1\tools\AutoMapper.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
