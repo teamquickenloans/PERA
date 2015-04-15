@@ -95,7 +95,7 @@
                 //view@state -> this targets the "sidebar" view inside the expense template: Expense/Base
                 'sidebar@garage': {
                     templateUrl: 'Garage/GarageInfo',
-                    controller: 'SideBarController as sidebar'
+                    controller: 'TeamMembersController as teamCtrl'
                 }
             }
         }
