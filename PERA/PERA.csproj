@@ -337,7 +337,6 @@
     <Content Include="Content\Images\parking_green.png" />
     <Content Include="Content\Images\parking_red.png" />
     <Content Include="Content\Images\parking_yellow.png" />
-    <Content Include="Content\Images\spinner.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -381,10 +380,10 @@
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.js" />
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.min.js" />
     <Content Include="Scripts\js\modernizr-2.6.2.js" />
-    <Content Include="Scripts\pera-app\export\controllers\exportReport.controller.js" />
-    <Content Include="Scripts\pera-app\export\export.module.js" />
     <Content Include="Scripts\pera-app\expenses\services\invoiceAPR.service.js" />
     <Content Include="Scripts\pera-app\expenses\services\invoices.service.js" />
+    <Content Include="Scripts\pera-app\export\controllers\exportReport.controller.js" />
+    <Content Include="Scripts\pera-app\export\export.module.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\badgeScan.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\parkerreport.controller.js" />
     <Content Include="Scripts\pera-app\expenses\controllers\discrepancies.controller.js" />
@@ -550,11 +549,6 @@
     <Content Include="Views\Garage\Base.cshtml" />
     <Content Include="Views\Form\Discrepancies.cshtml" />
     <Content Include="Views\Form\EditGarage.cshtml" />
-    <Content Include="Views\Navigation\Expense.cshtml" />
-    <Content Include="Views\Form\BadgeScan.cshtml" />
-    <Content Include="Views\Emails\Web.config" />
-    <Content Include="Views\Emails\_ViewStart.cshtml" />
-    <Content Include="Views\Emails\Example.cshtml" />
     <Content Include="Views\Navigation\Upload.cshtml" />
     <Content Include="Views\Form\BadgeScan.cshtml" />
     <Content Include="Views\Navigation\MapGarage.cshtml" />
