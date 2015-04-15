@@ -88,6 +88,14 @@ namespace PERA.Controllers
             var duplicates = IdentifyDiscrepancies(InvoiceReport, QLReport, InvoiceReports);
             CalculatePrice(InvoiceReport);
 
+            string result = JsonConvert.SerializeObject(duplicates);
+            JArray jsonobj = JArray.Parse(result);
+            Trace.WriteLine(result);
+            Trace.WriteLine("hello");
+            Trace.WriteLine(jsonobj[0][0]["TokenID"]);
+            Trace.WriteLine(duplicates.IndexOf(duplicates[0], 0));
+            Trace.WriteLine(duplicates[0][0].TokenID);
+
             return Json(duplicates, JsonRequestBehavior.AllowGet);
         }
 
