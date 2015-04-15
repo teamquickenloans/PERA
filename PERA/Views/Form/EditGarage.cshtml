@@ -15,9 +15,10 @@
     <div class="columns small-4">
         <!--ng-show="mode" ng-hide="mode == 'false'"-->
         <label for="garageID">Garage</label>
-        <select ng-model="current" ng-disabled="mode == false" ng-options="garage as garage.name for garage in garages" id="garageID">
+        <select ng-model="current" ng-disabled="mode == false" ng-options="garage as garage.name for garage in garages" id="garageID" name="garage" ng-model-options="{ updateOn: 'blur' }" required>
             <option value="">-- select a garage --</option>
         </select>
+        <small class="error" ng-show="editGarageForm.garage.$invalid && !editGarageForm.garage.$pristine">Garage is required.</small>
     </div>
 
     <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.name.$invalid && !editGarageForm.name.$pristine }">

@@ -50,9 +50,10 @@
 
             <div class="small-6 column">
                 <label for="garageID">Garage:</label>
-                <select ng-model="report.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID">
+                <select ng-model="report.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID" ng-model-options="{ updateOn: 'blur' }" name="garage">
                     <option value="">-- select a garage --</option>
                 </select>
+                <small class="error" ng-show="parkerReportForm.garage.$invalid && !parkerReportForm.garage.$pristine">Garage is required.</small>
             </div>
             <div class="small-6 column">
                 <a href="#" class="radius button" ng-file-select ng-model="report.file">Select a file</a>

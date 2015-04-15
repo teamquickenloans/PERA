@@ -8,14 +8,14 @@
         <h4> Invoice Meta-Data</h4>
         <div class="small-6 column" ng-class="{ 'has-error' : invoiceForm.invoiceID.$invalid && !invoiceForm.invoiceID.$pristine }">
             <label for="invoiceID">Invoice Number:</label>
-            <input type="number" ng-model="fileCtrl.invoice.invoiceID" id="invoiceID" name="invoiceID" min="0" required />
+            <input type="number" ng-model="fileCtrl.invoice.invoiceID" id="invoiceID" name="invoiceID" min="0" required ng-model-options="{ updateOn: 'blur' }" />
             <small class="error" ng-show="invoiceForm.invoiceID.$invalid && !invoiceForm.invoiceID.$pristine">Invoice ID is required and must be a number.</small>
         </div>
 
         <div class="small-6 column" ng-class="{ 'has-error' : invoiceForm.totalAmountBilled.$invalid && !invoiceForm.totalAmountBilled.$pristine }">
             <label for="totalAmountBilled">Amount Billed:</label>
-            <input type="number" step="any" min="0" ng-model="fileCtrl.invoice.totalAmountBilled" id="totalAmountBilled" name="totalAmountBilled"/>
-            <small class="error" ng-show="invoiceForm.totalAmountBilled.$invalid && !invoiceForm.totalAmountBilled.$pristine">Total amount billed must be a number.</small>
+            <input type="number" step="any" min="0" ng-model="fileCtrl.invoice.totalAmountBilled" id="totalAmountBilled" name="totalAmountBilled" required ng-model-options="{ updateOn: 'blur' }" />
+            <small class="error" ng-show="invoiceForm.totalAmountBilled.$invalid && !invoiceForm.totalAmountBilled.$pristine">Total amount billed is required and must be a number.</small>
             <small class="error" ng-show="invoiceForm.totalAmountBilled.$error.min">Total amount billed must be at least 0.</small>
         </div>
 
@@ -24,16 +24,16 @@
             <div ng-class="{ 'has-error' : invoiceForm.totalLeasedSpots.$invalid && !invoiceForm.totalLeasedSpots.$pristine }">
                 <span data-tooltip aria-haspopup="true" class="has-tip" title="tooltip">
                     <label for="numberOfLeasedSpots">Number of Leased Spots:</label>
-                    <input type="number" ng-model="fileCtrl.invoice.totalLeasedSpots" placeholder="" name="totalLeasedSpots" />
+                    <input type="number" ng-model="fileCtrl.invoice.totalLeasedSpots" placeholder="" name="totalLeasedSpots" required ng-model-options="{ updateOn: 'blur' }" />
                 </span>
-                <small class="error" ng-show="invoiceForm.totalLeasedSpots.$invalid && !invoiceForm.totalLeasedSpots.$pristine">Total number of leased spots must be a number.</small>
+                <small class="error" ng-show="invoiceForm.totalLeasedSpots.$invalid && !invoiceForm.totalLeasedSpots.$pristine">Total number of leased spots is required and must be a number.</small>
             </div>
 
             <div ng-class="{ 'has-error' : invoiceForm.monthYear.$invalid && !invoiceForm.monthYear.$pristine }">
                 <label for="monthYear">Month/Year of Billing</label>
 
                 <date-picker id="monthYear" format="MMM yyyy" placeholder="required"
-                             ng-model="fileCtrl.invoice.monthYear" name="monthYear">
+                             ng-model="fileCtrl.invoice.monthYear" name="monthYear" required ng-model-options="{ updateOn: 'blur' }">
                 </date-picker>
                 <small class="error" ng-show="invoiceForm.monthYear.$invalid && !invoiceForm.monthYear.$pristine">Billing month and year is required.</small>
 
@@ -44,7 +44,7 @@
         <div class="small-6 column">
             <div ng-class="{ 'has-error' : invoiceForm.numberOfValidations.$invalid && !invoiceForm.numberOfValidations.$pristine }">
                 <label for="numberOfValidations">Number of Validations:</label>
-                <input type="number" ng-model="fileCtrl.invoice.validations" placeholder="optional" name="numberOfValidations" min="0" />
+                <input type="number" ng-model="fileCtrl.invoice.validations" placeholder="optional" name="numberOfValidations" min="0" ng-model-options="{ updateOn: 'blur' }" />
                 <small class="error" ng-show="invoiceForm.numberOfValidations.$invalid && !invoiceForm.numberOfValidations.$pristine">Number of validations must be a number.</small>
                 <small class="error" ng-show="invoiceForm.numberOfValidations.$error.min">Number of validations must be at least 0.</small>
             </div>
@@ -55,7 +55,7 @@
                 @*<input type="date" ng-model="fileCtrl.invoice.dateReceived" id="dateReceived" pick-a-date="date" placeholder="optional" />*@
                 <date-picker id="dateReceived" name="dateReceived"
                              format="dd MMM yyyy" placeholder="optional"
-                             ng-model="fileCtrl.invoice.dateReceived"></date-picker>
+                             ng-model="fileCtrl.invoice.dateReceived" ng-model-options="{ updateOn: 'blur' }"></date-picker>
                 <small class="error" ng-show="invoiceForm.dateReceived.$invalid && !invoiceForm.dateReceived.$pristine">Date received must be in the format "dd MMM yyyy.</small>
             </div>
         </div>
@@ -74,9 +74,10 @@
 
                 <div class="large-6 column">
                     <label for="garageID">Garage:</label>
-                    <select ng-model="report.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID">
+                    <select ng-model="report.garageID" ng-options="garage.garageID as garage.name for garage in garages" id="garageID" name="garage" required ng-model-options="{ updateOn: 'blur' }">
                         <option value="">-- select a garage --</option>
                     </select>
+                    <small class="error" ng-show="invoiceForm.garage.$invalid && !invoiceForm.garage.$pristine">Garage is required.</small>
                 </div>
                 <div class="small-6 column">
                     <a href="#" class="radius button" ng-file-select ng-model="report.file">Select a file</a>

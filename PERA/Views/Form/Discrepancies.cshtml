@@ -14,17 +14,17 @@
     <div class="column small-4" ng-class="{ 'has-error' : discrepanciesForm.monthYear.$invalid && !discrepanciesForm.monthYear.$pristine }">
         <label for="monthYear">Month/Year</label>
 
-        <date-picker id="date" class="input" name="monthYear" format="MMM yyyy" placeholder="." ng-model="controller.monthYear">
+        <date-picker id="date" class="input" name="monthYear" format="MMM yyyy" placeholder="." ng-model="controller.monthYear" ng-model-options="{ updateOn: 'blur' }" >
         </date-picker>
         <small class="error" ng-show="discrepanciesForm.monthYear.$invalid && !discrepanciesForm.monthYear.$pristine">Month/Year of report must be in MMM yyyy format.</small>
 
     </div>
     <div class="column small-8" ng-class="{ 'has-error' : discrepanciesForm.garage.$invalid && !discrepanciesForm.garage.$pristine }">
         <label for="garageID">Garage:</label>
-        <select ng-model="garage" name="garage" ng-options="garage as garage.name for garage in garages" id="garageID">
+        <select ng-model="garage" name="garage" ng-options="garage as garage.name for garage in garages" id="garageID" ng-model-options="{ updateOn: 'blur' }" required>
             <option value="">-- select a garage --</option>
         </select>
-        <small class="error" ng-show="discrepanciesForm.garage.$invalid && !discrepanciesForm.garage.$pristine">Error with the garage.</small>
+        <small class="error" ng-show="discrepanciesForm.garage.$invalid && !discrepanciesForm.garage.$pristine">Garage is required.</small>
     </div>
     <br /><br />
     <div class="column small-12">
