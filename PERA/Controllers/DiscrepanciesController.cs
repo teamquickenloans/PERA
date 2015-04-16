@@ -93,7 +93,18 @@ namespace PERA.Controllers
             Trace.WriteLine(result);
             Trace.WriteLine("hello");
             Trace.WriteLine(jsonobj[0][0]["TokenID"]);
-            Trace.WriteLine(duplicates.IndexOf(duplicates[0], 0));
+            System.IO.File.Copy(@"C:\Users\Matt\Desktop\School\Spring2015\CSE 498\pera\book.xlsx", "output.xlsx", true);
+            Trace.Write(System.IO.File.Exists("output.xlsx"));
+            Trace.WriteLine("Exporting");
+            Trace.WriteLine(Path.GetFullPath(@"output.xlsx"), "File exported to: ");
+            Trace.WriteLine(jsonobj.Count());
+            int max_row = 0;
+            for(int i=0; i<jsonobj.Count(); i++){
+                max_row = max_row + jsonobj[i].Count();
+            }
+            Trace.WriteLine(max_row, "Excel row size: ");
+            ExportIssues("output.xlsx", max_row, jsonobj[0][0].Count(), jsonobj);
+            
             Trace.WriteLine(duplicates[0][0].TokenID);
 
             return Json(duplicates, JsonRequestBehavior.AllowGet);
@@ -310,9 +321,11 @@ namespace PERA.Controllers
             issues.Add(Extras);
             issues.Add(Missing);
             //issues.Add(Discrepancies);
+            string result2 = JsonConvert.SerializeObject(issues);
+            Trace.WriteLine(result2);
             return issues;
         }
-        public void WriteRandomValuesDOM(string filename, int numRows, int numCols, JObject json)
+        public void ExportIssues(string filename, int numRows, int numCols, JArray json)
         {
             using (SpreadsheetDocument myDoc = SpreadsheetDocument.Open(filename, true))
             {
@@ -321,67 +334,59 @@ namespace PERA.Controllers
 
                 SheetData sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
 
-                string[] names = new string[3] { "Matt", "Joanne", "Robert" };
-                string[,] siblings = new string[,] { { "Mike", "Amy" }, { "Mary", "Albert" }, { "Joe", "Rogan" } };
-
-                Random rnd = new Random();
-
-                //string someJson = "{ \"ErrorMessage\": \"\", \"ErrorDetails\": {\"ErrorID\": 111,\"Description\": {\"Short\": 0,\"Verbose\": 20}, \"ErrorDate\": \"\" }}\";
-                string someJson = "{\"ErrorMessage\": \"\",\"ErrorDetails\": {\"ErrorID\": 111,\"Description\":{\"Short\": 0,\"Verbose\": 20},\"ErrorDate\": \"\"}}";
-                //string json = JsonConvert.SerializeObject(someJson);
-
-                Trace.Write(json);
-                Trace.Write(json["Issues"][1]["commonID"].ToString());
-
-                for (int row = 0; row < numRows; row++)
+                Trace.Write(json[0][0]["FirstName"]);
+                DateTime time = DateTime.Now;              // Use current time
+                string format = "MMM ddd d HH:mm yyyy";    // Use this format
+                for (int i = 0; i < json.Count(); i++)
                 {
-                    Row r = new Row();
-                    //r.Append(names[0]);
-                    //r.Append(Discrepancy.FirstName);
-                    //r.Append(Discrepancy.LastName);
-                    for (int col = 0; col < numCols; col++)
+                    for (int row = 0; row < json[i].Count(); row++)
                     {
-                        if (col == 0)
-                        {
-                            Cell c = new Cell();
-                            CellValue x = new CellValue(json["Issues"][row]["garage"].ToString());
-                            c.Append(x);
-                            r.Append(c);
-                        }
+                        Row r = new Row();
 
-                        else if (col == 1)
+                        for (int col = 0; col < numCols; col++)
                         {
-                            Cell c = new Cell();
-                            CellValue x = new CellValue(json["Issues"][row]["name"].ToString());
-                            c.Append(x);
-                            r.Append(c);
-                        }
+                            if (col == 0)
+                            {
+                                Cell c = new Cell();
+                                CellValue x = new CellValue(json[i][row]["FirstName"].ToString());
+                                c.Append(x);
+                                r.Append(c);
+                            }
 
-                        else if (col == 2)
-                        {
-                            Cell c = new Cell();
-                            CellValue x = new CellValue(json["Issues"][row]["commonID"].ToString());
-                            c.Append(x);
-                            r.Append(c);
-                        }
+                            else if (col == 1)
+                            {
+                                Cell c = new Cell();
+                                CellValue x = new CellValue(json[i][row]["LastName"].ToString());
+                                c.Append(x);
+                                r.Append(c);
+                            }
 
-                        else if (col == 3)
-                        {
-                            Cell c = new Cell();
-                            CellValue x = new CellValue(json["Issues"][row]["issue"].ToString());
-                            c.Append(x);
-                            r.Append(c);
-                        }
+                            else if (col == 2)
+                            {
+                                Cell c = new Cell();
+                                CellValue x = new CellValue(json[i][row]["TokenID"].ToString());
+                                c.Append(x);
+                                r.Append(c);
+                            }
 
-                        else
-                        {
-                            Cell c = new Cell();
-                            CellValue x = new CellValue(json["Issues"][row]["date"].ToString());
-                            c.Append(x);
-                            r.Append(c);
+                            else if (col == 3)
+                            {
+                                Cell c = new Cell();
+                                CellValue x = new CellValue(json[i][row]["Action"].ToString());
+                                c.Append(x);
+                                r.Append(c);
+                            }
+
+                            else
+                            {
+                                Cell c = new Cell();
+                                CellValue x = new CellValue(time.ToString(format));
+                                c.Append(x);
+                                r.Append(c);
+                            }
                         }
+                        sheetData.Append(r);
                     }
-                    sheetData.Append(r);
                 }
             }
         }
