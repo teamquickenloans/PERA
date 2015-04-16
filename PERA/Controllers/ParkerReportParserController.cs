@@ -41,7 +41,7 @@ namespace PERA.Controllers
     public class ParkerReportParserController : ApiController
     {
 
-        private PERAContext db = new PERAContext();
+
 
         // key: garageID, value: column index # of token ID (badge, hangtag, puck)
         Dictionary<int, int> tokenColumns = new Dictionary<int, int>()
@@ -160,6 +160,7 @@ namespace PERA.Controllers
 
         private void Save(QLActiveParkerReport APR, List<QLTeamMember> teamMembers)
         {
+            PERAContext db = new PERAContext();
             foreach (QLTeamMember teamMember in teamMembers)
             {
                 //Trace.WriteLine(teamMember.ParkerReportTeamMemberID);
@@ -212,11 +213,13 @@ namespace PERA.Controllers
             int i = 0;
             System.Diagnostics.Debug.WriteLine("begin for loop");
             Trace.WriteLine("result.Tables.Count: " + result.Tables.Count);
+            Trace.WriteLine("result.Tables[0].Rows.Count: " + result.Tables[0].Rows.Count);
             DataTable table = result.Tables[0];
             //foreach (DataTable table in result.Tables)
             //{
                 foreach (DataRow row in table.Rows)
                 {
+                    PERAContext db = new PERAContext();
                     // if this row is the headings, skip this row
                     System.Diagnostics.Debug.WriteLine("loop");
                     if(i < 5)
@@ -236,7 +239,11 @@ namespace PERA.Controllers
                         Trace.WriteLine("Skipping first row..");
                         continue;
                     }
-
+                    else if (row[0] == DBNull.Value)
+                    {
+                        Trace.WriteLine("DBNull");
+                        continue;
+                    }
 
                     string firstName, lastName;
                     if (splitNameColumns.ContainsKey(garageID))

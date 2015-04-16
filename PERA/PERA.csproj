@@ -306,7 +306,6 @@
     <Compile Include="Models\InvoiceActiveParkerReportDTO.cs" />
     <Compile Include="Models\InvoiceTeamMember.cs" />
     <Compile Include="Models\QLActiveParkerReport.cs" />
-    <Compile Include="Models\InvoiceActiveParkerReport.cs" />
     <Compile Include="Models\ParkerReportTeamMember.cs" />
     <Compile Include="Models\GarageManager.cs" />
     <Compile Include="Models\QLTeamMember.cs" />
@@ -472,6 +471,7 @@
     <EmbeddedResource Include="Migrations\201504120328449_BadgeScan_BadgeID.resx">
       <DependentUpon>201504120328449_BadgeScan_BadgeID.cs</DependentUpon>
     </EmbeddedResource>
+    <Compile Include="Models\InvoiceActiveParkerReport.cs" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
