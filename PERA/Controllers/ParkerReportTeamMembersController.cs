@@ -53,6 +53,26 @@ namespace PERA.Controllers
             return QLReport.TeamMembers;
         }
 
+
+        // GET: api/ParkerReportTeamMembers/qlreport/5
+        [HttpGet]
+        [ActionName("QLreport")]
+        [ResponseType(typeof(ParkerReportTeamMember))]
+        public ICollection<QLTeamMember> GetParkerReportTeamMembersByReport(int id)
+        {
+            QLActiveParkerReport QLReport = db.QLActiveParkerReports.Where(
+                x => x.ID == id).FirstOrDefault();
+
+            //OrderByDescending(x => x.MonthYear).
+
+            if (QLReport == null)
+            {
+                return null;
+            }
+
+            return QLReport.TeamMembers;
+        }
+
         // PUT: api/ParkerReportTeamMembers/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutParkerReportTeamMember(string id, ParkerReportTeamMember parkerReportTeamMember)
