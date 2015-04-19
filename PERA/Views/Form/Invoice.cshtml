@@ -13,16 +13,17 @@
             <input type="number" ng-model="fileCtrl.invoice.invoiceID" id="invoiceID" required />
         </div>
         <div class="small-6 column">
-            <label for="totalAmountBilled">Amount Billed:</label>
-            <input type="number" step="any" min="0" ng-model="fileCtrl.invoice.totalAmountBilled" id="totalAmountBilled" />
+            <label for="numberOfLeasedSpots">Number of Leased Spots:</label>
+            <input type="number" ng-model="fileCtrl.invoice.totalLeasedSpots" placeholder="optional" />
         </div>
 
         <div class="small-6 column">
 
-            <span data-tooltip aria-haspopup="true" class="has-tip" title="tooltip">
-                <label for="numberOfLeasedSpots">Number of Leased Spots:</label>
-                <input type="number" ng-model="fileCtrl.invoice.totalLeasedSpots" placeholder="" />
-            </span>
+            <div class="small-6 column">
+                <label for="totalAmountBilled">Amount Billed:</label>
+                <input type="number" step="any" min="0" ng-model="fileCtrl.invoice.totalAmountBilled" id="totalAmountBilled" />
+            </div>
+
 
 
             <label for="monthYear">Month/Year of Billing</label>

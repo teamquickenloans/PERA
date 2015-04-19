@@ -70,6 +70,25 @@ namespace PERA.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
+        // GET: api/BadgeScans/getBadgeScans/5
+        //[HttpGet]
+        //[ActionName("Garage")]
+        //[ResponseType(typeof(BadgeScan))]
+        //public ICollection<BadgeScan> GetBadgeScans(string id)
+        //{
+        //    int garageid = Convert.ToInt32(id);
+        //    BadgeScan BadgeScan = db.BadgeScans.Where(
+        //        x => x.GarageID == garageid).OrderByDescending(x => x.MonthYear).FirstOrDefault();
+
+        //    if (QLReport == null)
+        //    {
+        //        return null;
+        //    }
+
+        //    return QLReport.TeamMembers;
+        //}
+
+
         // POST: api/BadgeScans
         [ResponseType(typeof(BadgeScan))]
         public IHttpActionResult PostBadgeScan(BadgeScan badgeScan)

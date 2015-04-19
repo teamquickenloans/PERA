@@ -47,9 +47,9 @@ namespace PERA.Controllers
 
             if (QLReport == null)
             {
-                //return NotFound();
+                return null;
             }
-
+            
             return QLReport.TeamMembers;
         }
 

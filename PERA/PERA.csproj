@@ -217,6 +217,7 @@
     <Compile Include="Controllers\GaragesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoicesController.cs" />
+    <Compile Include="Controllers\QLActiveParkerReportsController.cs" />
     <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
@@ -301,6 +302,7 @@
     </Compile>
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
+    <Compile Include="Models\BadgeScanReport.cs" />
     <Compile Include="Models\CarpoolGroup.cs" />
     <Compile Include="Models\Discrepancy.cs" />
     <Compile Include="Models\InvoiceActiveParkerReportDTO.cs" />
@@ -341,6 +343,7 @@
     <Content Include="Scripts\css\foundation-icons.css" />
     <Content Include="Scripts\css\foundation.css" />
     <Content Include="Scripts\css\foundation.min.css" />
+    <Content Include="Scripts\font\foundation-icons.svg" />
     <Content Include="Scripts\js\angular-google-maps.js" />
     <Content Include="Scripts\js\bootstrap.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
@@ -372,6 +375,7 @@
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.min.js" />
     <Content Include="Scripts\js\modernizr-2.6.2.js" />
     <Content Include="Scripts\pera-app\expenses\services\invoiceAPR.service.js" />
+    <Content Include="Scripts\pera-app\expenses\services\qlAPR.service.js" />
     <Content Include="Scripts\pera-app\expenses\services\invoices.service.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\badgeScan.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\parkerreport.controller.js" />
@@ -404,6 +408,7 @@
     <Content Include="Scripts\pera-app\tabs\controllers\tab.controller.js" />
     <Content Include="Scripts\pera-app\tabs\tabs.module.js" />
     <Content Include="Scripts\pera-app\utils\directives\datepicker.directive.js" />
+    <Content Include="Scripts\pera-app\utils\directives\ngRightClick.directive.js" />
     <Content Include="Scripts\pera-app\utils\services\snackbar.service.js" />
     <Content Include="Scripts\pera-app\utils\utils.module.js" />
     <Content Include="Scripts\pera-app\invoiceTeamMembers\controllers\invoiceTeamMembers.controller.js" />
@@ -473,6 +478,9 @@
     </EmbeddedResource>
     <Compile Include="Models\InvoiceActiveParkerReport.cs" />
     <None Include="Properties\PublishProfiles\Test.pubxml" />
+    <Content Include="Scripts\font\foundation-icons.eot" />
+    <Content Include="Scripts\font\foundation-icons.ttf" />
+    <Content Include="Scripts\font\foundation-icons.woff" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
     <Content Include="Scripts\css\snackbar.min.css" />
@@ -550,7 +558,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\font\" />
     <Folder Include="Views\ActiveParkerReport\" />
     <Folder Include="Views\ParkerReportParser\" />
     <Folder Include="Views\QLActiveParkerReport\" />
@@ -558,7 +565,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
     <Content Include="Views\Form\Invoice.cshtml" />
   </ItemGroup>
   <ItemGroup>

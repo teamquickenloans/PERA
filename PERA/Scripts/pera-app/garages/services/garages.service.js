@@ -61,7 +61,7 @@
         */
         function all() {
             if (!allPromise || last_request_failed) {
-                console.log("querying database");
+                //console.log("querying database");
                 allPromise = $http.get('/api/garages/getgarages/');
                 allPromise.then(garagesSuccess, garagesError);
             }
@@ -78,7 +78,7 @@
         {
             if (!garagePromise[garageID] || last_garage_failed[garageID]) {
                 garagePromise[garageID] = $http.get('/api/garages/get/' + garageID);
-                console.log("getting one garage");
+                //console.log("getting one garage");
                 garagePromise[garageID].then(garageSuccess, garageError);
             }
             return garagePromise;
@@ -87,13 +87,13 @@
         function garageSuccess(data, status, headers, config, response) {
             last_garage_failed = false;
             vm.garage = data.data;
-            console.log("service success ", vm.garage);
+            //console.log("service success ", vm.garage);
             return vm.garage;
         }
 
         function garageError(data, status, headers, config, response) {
             last_garage_failed = true;
-            Snackbar.error("Error retrieving garages");
+            //Snackbar.error("Error retrieving garages");
             return $q.reject(response);
         }
 
@@ -101,7 +101,7 @@
         function garagesSuccess(data, status, headers, config, response) {
             last_request_failed = false;
             vm.garages = data.data;
-            console.log("service success ", vm.garages);
+            //console.log("service success ", vm.garages);
             calculateTotals();
             return vm.garages;
             //share();
@@ -109,7 +109,7 @@
 
         function garagesError(data, status, headers, config, response) {
             last_request_failed = true;
-            Snackbar.error("Error retrieving garages");
+            //Snackbar.error("Error retrieving garages");
             return $q.reject(response);
         }
         function calculateTotals() {

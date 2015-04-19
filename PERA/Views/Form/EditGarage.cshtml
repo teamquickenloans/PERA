@@ -1,26 +1,26 @@
 ﻿<div class="row">
-<h3 class="padTop">{{ title }}</h3>
 
+<h3 class="padTop">{{ title }}</h3>
 
 <form name="editGarageForm" ng-submit="controller.submit()" novalidate>
     <div class="column small-12">
         <div class="switch">
-            <input id="edit" name="mode" type="checkbox" ng-model="mode">
+            <input id="edit" name="mode" type="checkbox" ng-model="mode" value="true">
             <label for="edit" onclick="">Edit</label>
             <!--<input type="radio" ng-model="mode" name="mode" value="false" id="add">
             <label for="add">Add</label>-->
         </div>
 
     </div>
+    <!--
     <div class="columns small-4">
-        <!--ng-show="mode" ng-hide="mode == 'false'"-->
         <label for="garageID">Garage</label>
         <select ng-model="current" ng-disabled="mode == false" ng-options="garage as garage.name for garage in garages" id="garageID">
             <option value="">-- select a garage --</option>
         </select>
     </div>
-
-    <div class="columns small-4">
+-->
+    <div class="columns small-5">
         <label for="name">Garage Name</label>
         <input type="text"
                ng-model="new.name"
@@ -28,7 +28,7 @@
                ng-keyup="cancel($event)" 
                required/>
     </div>
-    <div class="columns small-6">
+    <div class="columns small-7">
         <label for="address">Garage Address</label>
         <input type="text"
                ng-model="new.address"
@@ -36,7 +36,7 @@
                ng-keyup="cancel($event)"
                required />
     </div>
-    <div class="columns small-2">
+    <div class="columns small-4">
         <label for="latitude">Garage Latitude</label>
         <input type="number"
                ng-model="new.latitude"
@@ -45,7 +45,7 @@
                required/>
     </div>
 
-    <div class="columns small-2">
+    <div class="columns small-4">
         <label for="longitude">Garage Longitude</label>
         <input type="number"
                ng-model="new.longitude"
@@ -54,7 +54,7 @@
                required />
     </div>
 
-    <div class="columns small-2">
+    <div class="columns small-4">
         <label for="capacity">Capacity</label>
         <input type="number"
                ng-model="new.capacity"
@@ -63,7 +63,7 @@
                required />
     </div>
 
-    <div class="columns small-2">
+    <div class="columns small-4">
         <label for="numberofleasedspaces">Number of Leased Spaces</label>
         <input type="number"
                ng-model="new.numberOfLeasedSpaces"
@@ -72,7 +72,7 @@
                required />
     </div>
 
-    <div class="columns small-2">
+    <div class="columns small-4">
         <label for="numberofteammemberspaces">Number of Team Member Spaces</label>
         <input type="number"
                ng-model="new.numberOfTeamMemberSpaces"
@@ -80,109 +80,121 @@
                ng-keyup="cancel($event)"
                required />
     </div>
+    <div class="columns small-4">
         <label for="minimumnumberofbufferspaces">Minimum Number of Buffer Spaces</label>
         <input type="number"
                ng-model="new.minimumNumberOfBufferSpaces"
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)"
                placeholder="optional" />
-
+    </div>
+    <div class="columns small-2">
         <label for="spacecost">Space Cost</label>
         <input type="number"
                ng-model="new.spaceCost"
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)"
                required />
-
+    </div>
+    <div class="columns small-3">
         <label for="transientsaleprice">Transient Sale Price</label>
         <input type="number"
                ng-model="new.transientSalePrice"
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)"
                placeholder="optional" />
-
+    </div>
+    <div class="columns small-3">
         <label for="owner">Owner</label>
         <input type="text"
                ng-model="new.owner"
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)"
                required />
-
+    </div>
+    <div class="columns small-4">
         <label for="billingparty">Billing Party</label>
         <input type="text"
                ng-model="new.billingParty"
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)"
                required />
-
+    </div>
         @*<label for="reporttype">Report Type</label>
-        <input type="text"
-               ng-model-options="{ updateOn: 'blur' }"
-               ng-keyup="cancel($event)"
-               required />*@
-
+            <input type="text"
+                   ng-model-options="{ updateOn: 'blur' }"
+                   ng-keyup="cancel($event)"
+                   required />*@
+    <div class="columns small-4">
         <label for="accesstoken">Access Token</label>
         <input type="text"
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)"
                required />
-
+    </div>
+    <div class="columns small-4">
         <label for="accesstokenoptional">Access Token Optional</label>
         <input type="text"
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)"
                placeholder="optional" />
-
+    </div>
+    <div class="columns small-4">
         <label for="accesstokencost">Access Token Cost</label>
         <input type="number"
                ng-model="new.accessTokenCost"
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)"
                required />
-
+    </div>
+    <div class="columns small-4">
         <label for="changecost">Change Cost</label>
         <input type="number"
                ng-model="new.changeCost"
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)" required />
-
+    </div>
+    <div class="columns small-4">
         <label for="validationcost">Validation Cost</label>
         <input type="number"
                ng-model="new.validationCost"
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)"
                placeholder="optional" />
-
+    </div>
+    <div class="columns small-4">
         <label for="numberofvalidations">Number of Validations</label>
         <input type="number"
                ng-model="new.numberOfValidations"
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)"
                placeholder="optional" />
-
+    </div>
         <!--<label for="garagemanager">Garage Manager</label>
          <input type="text"
             ng-model="new.garageManager"
             ng-model-options="{ updateOn: 'blur' }"
             ng-keyup="cancel($event)"
             placeholder="optional" />-->
-
+    <div class="columns small-4">
         <label for="garageManager">Garage Manager</label>
         <select ng-model="new.garageManagerID" ng-options="manager.id as manager.companyName for manager in managers" id="garageManager">
             <option value="">-- select a garage manager --</option>
         </select>
-
+    </div>
+    <div class="columns small-4">
         <label for="badgescannername">Badge Scanner Name</label>
         <input type="text"
                ng-model-options="{ updateOn: 'blur' }"
                ng-keyup="cancel($event)"
                placeholder="optional" />
-
+    </div>
         <div class="row">
             <button class="radius button" type="submit">Submit</button>
+            <button class="radius button" type="reset" ng-click="clear()">Clear</button>
         </div>
 
-    <br />
+        <br />
 </form>
 
 </div>

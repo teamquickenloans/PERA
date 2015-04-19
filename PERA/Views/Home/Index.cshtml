@@ -41,6 +41,7 @@
     <link rel="stylesheet" href="~/Scripts/css/foundation.css" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/js/foundation.min.js"></script>
     <link rel="stylesheet" href="~/Scripts/css/app.css">
+    <link rel="stylesheet" href="~/Scripts/css/foundation-icons.css">
 
     <!-- Load Awesome Fonts CSS -->
     <link href="http://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet" />
@@ -86,6 +87,7 @@
     <script type="text/javascript" src="~/Scripts/pera-app/expenses/services/discrepancies.service.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/expenses/services/invoices.service.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/expenses/services/invoiceAPR.service.js"></script>
+    <script type="text/javascript" src="~/Scripts/pera-app/expenses/services/qlAPR.service.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/expenses/controllers/uploadhistory.controller.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/expenses/controllers/discrepancies.controller.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/map/map.module.js"></script>
@@ -98,11 +100,13 @@
     <script type="text/javascript" src="~/Scripts/pera-app/garages/services/garageManagers.service.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/garages/controllers/garages.controller.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/garages/controllers/editgarage.controller.js"></script>
+    <script type="text/javascript" src="~/Scripts/pera-app/garages/controllers/addgarage.controller.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/teamMembers/teamMembers.module.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/teamMembers/services/teamMembers.service.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/teamMembers/controllers/teamMembers.controller.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/utils/utils.module.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/utils/directives/datepicker.directive.js"></script>
+    <script type="text/javascript" src="~/Scripts/pera-app/utils/directives/ngRightClick.directive.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/utils/services/snackbar.service.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/tabs/tabs.module.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/tabs/controllers/tab.controller.js"></script>
@@ -150,28 +154,27 @@
                         <a ui-sref="expense.discrepancies" ng-click="tabCtrl.setTab(3);">Identify Discrepancies</a>
                     </li>
                     <li ui-sref-active="active">                    <!--ng-class="{active: tabCtrl.isSet(4)}">-->
-                        <a ui-sref="upload.uploadHistory" ng-click="tabCtrl.setTab(4);">Uploads</a>
+                        <a ui-sref="upload.invoice" ng-click="tabCtrl.setTab(4);">Uploads</a>
                     </li>
                 </ul>
             </li>
             <li class="divider"></li>
-            <li class="has-dropdown" ui-sref-active="active">
+            <li ui-sref-active="active" ng-controller="MapController as map">
                 <!--ng-class="{active: tabCtrl.isSet(1) || tabCtrl.isSet(2)}">-->
-                <a href="#">Garages</a>
-                <ul class="dropdown" ng-controller="MapController as map">
+                <a ui-sref="garage.map" ng-click="tabCtrl.setTab(1);">Garage Map</a>
+            </li>
+
+                @*<ul class="dropdown" ng-controller="MapController as map">
 
                     <li ui-sref-active="active">
-                        @*ng-class="{active: tabCtrl.isSet(1)}">*@
                         <a ui-sref="garage.map" ng-click="tabCtrl.setTab(1);">Garage Map</a>
 
                     </li>
                     <li ui-sref-active="active">
-                        @*ng-class="{active: tabCtrl.isSet(2)}">*@
-                        <a ui-sref="garage.edit" ng-click="tabCtrl.setTab(2);">Edit Garage</a>
+                        <a ui-sref="garage.add" ng-click="tabCtrl.setTab(2);">Add Garage</a>
                     </li>
-                </ul>
+                </ul>*@
 
-            </li>
             <li class="divider"></li>
             <li ng-class="{active: tabCtrl.isSet(5)}">
                 <a href="#" ng-click="tabCtrl.setTab(5);">Notifications</a>
@@ -183,6 +186,13 @@
 
     <div class="column small-6 medium-8 large-10" id="map-canvas" ng-show="tabCtrl.isSet(1)"></div>
     <div ui-view></div>    
+
+
+    <div id="modal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
+        <div ui-view="modalView"></div>
+        <a class="close-reveal-modal" aria-label="Close">&#215;</a>
+    </div>
+
 
 @*ng-show="$state.includes('garage.map')"*@
 

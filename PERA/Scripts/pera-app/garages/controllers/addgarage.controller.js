@@ -17,11 +17,36 @@
     function AddGarageController($scope, Garages, Snackbar) {
         var vm = this;
         $scope.garages = []; //the list of garages to be returned
-        $scope.new = {
-            name: '',
-            garageID: '',
+        $scope.title = "Add a Garage";
 
-        }
+
+        var defaultForm = {
+            garageID: '',
+            name: '',
+            address: '',
+            latitude: '',
+            longitude: '',
+            capacity: '',
+            numberOfLeasedSpaces: '',
+            numberOfTeamMemberSpaces: '',
+            minimumNumberOfBufferSpaces: '',
+            spaceCost: '',
+            transientSalePrice: '',
+            owner: '',
+            billingParty: '',
+            //reportType: '',
+            //accessToken: '',
+            //accessTokenOptional: '',
+            accessTokenCost: '',
+            changeCost: '',
+            validationCost: '',
+            numberOfValidations: '',
+            garageManagerID: ''
+        };
+
+        $scope.new = angular.copy(defaultForm);
+
+
         vm.submit = submit;
 
         //vm.garages = EditGarage.all();
@@ -40,9 +65,22 @@
             console.log("submit");
             // Here you will post a garage to the API
             //  using the $http angular service
-            Garages.create($scope.new, $scope.new.garageID);
+            Garages.create($scope.new, $scope.new.garageID).then(success);
         }
 
+        function success() {
+            Snackbar.show($scope.new.name + " has been updated");
+        }
+
+       /*
+         * @desc Clears the add garage form
+         */
+        function clearForm() {
+            //clears the form
+            $scope.editGarageForm.$setPristine();
+            $scope.new = defaultForm;
+            $scope.current = defaultForm;
+        }
 
 
     }

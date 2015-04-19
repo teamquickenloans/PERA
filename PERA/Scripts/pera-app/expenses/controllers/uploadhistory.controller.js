@@ -8,31 +8,58 @@
     angular
       .module('pera.expenses.controllers')
       .controller('UploadHistoryController', UploadHistoryController);
-    UploadHistoryController.$inject = ['$scope', 'Snackbar', 'Invoices', 'InvoiceAPRs']
+    UploadHistoryController.$inject = ['$scope', 'Snackbar', 'Invoices', 'InvoiceAPRs', 'QLAPRs', 'Garages']
 
-    function UploadHistoryController($scope, Snackbar, Invoices, InvoiceAPRs) {
+    function UploadHistoryController($scope, Snackbar, Invoices, InvoiceAPRs, QLAPRs, Garages) {
         var vm = this;
         $scope.invoices = [];
-        $scope.invoiceAPRs = [];
+        $scope.invoiceAPRs = {};
+        $scope.garages = {};
 
         vm.issues = issues;
         vm.uploads = uploads;
+        $scope.getReports = getReports;
 
         Invoices.all().then(invoicesSuccess, invoicesError);
-        InvoiceAPRs.all().then(invoiceAPRsSuccess, invoiceAPRsError);
-
+        QLAPRs.all().then(qlSuccess);
+        //InvoiceAPRs.all().then(invoiceAPRsSuccess, invoiceAPRsError);
+        Garages.all().then(garagesSuccess);
 
         function invoicesSuccess(data, status, headers, config) {
             $scope.invoices = data.data;
+            for (var i = 0; i < $scope.invoices.length; i++) {
+                var invoiceID = $scope.invoices[i].invoiceID;
+                getReports(invoiceID).then(invoiceAPRsSuccess);
+                //console.log($scope.invoiceAPRs[invoiceID]);
+            }
         }
 
         function invoicesError(data, status, headers, config) {
             Snackbar.error("Failed to retrieve invoices");
         }
 
+        function getReports(invoiceID) {
+            return InvoiceAPRs.reports(invoiceID);
+        }
+
+        function qlSuccess(data, status, headers, config) {
+            console.log(data.data)
+            $scope.qlAPRs = data.data;
+        }
+
+        function garagesSuccess(data, status, headers, config) {
+            for (var i = 0; i < data.data.length; i++) {
+                $scope.garages[data.data[i].garageID] = data.data[i];
+            }
+        }
+
         function invoiceAPRsSuccess(data, status, headers, config) {
             console.log("retrieved aprs")
-            $scope.invoiceAPRs = data.data;
+            console.log(data.data[0].invoiceID);
+
+            $scope.invoiceAPRs[data.data[0].invoiceID] = data.data;
+            console.log($scope.invoiceAPRs[data.data[0].invoiceID]);
+//            $scope.invoiceAPRs = data.data;
         }
 
         function invoiceAPRsError(data, status, headers, config) {

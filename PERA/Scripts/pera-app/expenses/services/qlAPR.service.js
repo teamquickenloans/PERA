@@ -1,5 +1,5 @@
 ﻿/**
-* Invoices
+* QLAPRs
 * @namespace pera.expenses.services
 */
 (function () {
@@ -7,22 +7,22 @@
 
     angular
       .module('pera.expenses.services')
-      .factory('Invoices', Invoices);
+      .factory('QLAPRs', QLAPRs);
 
-    Invoices.$inject = ['$http'];
+    QLAPRs.$inject = ['$http'];
 
 
-    function Invoices($http) {
+    function QLAPRs($http) {
         var allPromise = undefined;
         var last_request_failed = false;
         var vm = this;
-        vm.invoices = [];
+        vm.reports = [];
 
-        var Invoices = {
+        var QLAPRs = {
             all: all
         };
 
-        return Invoices;
+        return QLAPRs;
 
         /**
         * @name submit
@@ -31,8 +31,8 @@
         function all() {
             if (!allPromise || last_request_failed) {
                // console.log("querying database");
-                allPromise = $http.get('/api/invoices/getInvoices/');
-                allPromise.then(invoiceSuccess, invoiceError);
+                allPromise = $http.get('api/QLActiveParkerReports/getQLActiveParkerReports/');
+                allPromise.then(reportSuccess, reportError);
             }
             return allPromise;
         }
@@ -41,17 +41,17 @@
         * @name getParkerReports
         * @desc 
         */
-        function invoiceSuccess(data, status, headers, config, response) {
+        function reportSuccess(data, status, headers, config, response) {
             last_request_failed = false;
-            vm.invoices = data.data;
-            //console.log("service success ", vm.invoices);
-            return vm.invoices;
+            vm.reports = data.data;
+            //console.log("service success ", vm.reports);
+            return vm.reports;
             //share();
         }
 
-        function invoiceError(data, status, headers, config, response) {
+        function reportError(data, status, headers, config, response) {
             last_request_failed = true;
-            //Snackbar.error("Error retrieving invoices");
+            //Snackbar.error("Error retrieving reports");
             return $q.reject(response);
         }
     }

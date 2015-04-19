@@ -138,7 +138,7 @@ namespace PERA.Controllers
         private void FileHandler(MultipartFormDataStreamProvider result, QLActiveParkerReport APR)
         {
             Trace.WriteLine("result.FileData: " + result.FileData);
-            foreach (var file in result.FileData)
+            foreach (var file in result.FileData)  // for each file that is sumbitted
             {
                 // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
                 // so this is how you can get the original file name
@@ -153,8 +153,9 @@ namespace PERA.Controllers
                                     ExcelParser(file.LocalFileName, originalFileName, APR, garageID);
                 
                 Trace.WriteLine("teamMembers.Count: " + teamMembers.Count);
-
                 Save(APR, teamMembers);
+                //List<QLTeamMember> uniqueTeamMembers = RemoveDuplicatesFromSystemGalaxy(teamMembers, garageID);
+                //Save(APR, uniqueTeamMembers);
             }
         }
 
@@ -341,6 +342,48 @@ namespace PERA.Controllers
                 } // end for columns
            // }  // end for tables
             return teamMembers;
+        }
+
+        //
+        public List<QLTeamMember> RemoveDuplicatesFromSystemGalaxy(List<QLTeamMember> teamMembers, int garageID)
+        {
+            //List<QLTeamMember> Duplicates = new List<QLTeamMember>();
+            Dictionary<string, string> Matches = new Dictionary<string, string>();
+
+            foreach(QLTeamMember qlTM in teamMembers.Reverse<QLTeamMember>())  // iterate backwards so we can remove as we iterate
+            {
+                //var qlTM = QLReport.TeamMembers[i];
+                // Get the most recent badge scan for this TM
+                PERAContext db = new PERAContext();
+                var BadgeScan = db.BadgeScans.Where(
+                     x => x.FirstName == qlTM.FirstName
+                       && x.LastName == qlTM.LastName
+                       && x.GarageID == garageID)
+                .OrderByDescending(x => x.ScanDateTime)
+                    .FirstOrDefault();
+
+                string qlName = qlTM.FirstName + qlTM.LastName;
+
+                if (Matches.ContainsKey(qlName)) // it's a duplicate
+                    teamMembers.Remove(qlTM);
+                    //db.ParkerReportTeamMembers.Remove(qlTM);
+                //    continue;
+                else
+                {    //check if it's valid
+                    if (qlTM.BadgeID == BadgeScan.BadgeID)
+                        Matches[qlName] = qlName;
+                    else // it's invalid so remove it later
+                        teamMembers.Remove(qlTM);
+                        //db.ParkerReportTeamMembers.Remove(qlTM);
+                    //    Duplicates.Add(qlTM);
+                }
+            }
+            return teamMembers;
+            //for (int i = Duplicates.Count - 1; i > -1; i--)
+            //{
+            //    PERAContext db = new PERAContext();
+            //    db.ParkerReportTeamMembers.Remove(Duplicates[i]);
+            //}
         }
 
 
