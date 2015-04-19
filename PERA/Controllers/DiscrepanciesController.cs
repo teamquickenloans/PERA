@@ -19,6 +19,7 @@ using System.Data;
 using System.Text;
 using System.Timers;
 using Newtonsoft.Json;
+using System.Windows.Forms;
 
 namespace PERA.Controllers
 {
@@ -93,20 +94,39 @@ namespace PERA.Controllers
             Trace.WriteLine(result);
             Trace.WriteLine("hello");
             Trace.WriteLine(jsonobj[0][0]["TokenID"]);
-            System.IO.File.Copy(@"C:\Users\Matt\Desktop\School\Spring2015\CSE 498\pera\book.xlsx", "output.xlsx", true);
-            Trace.Write(System.IO.File.Exists("output.xlsx"));
+            string fileLocation = Path.GetFullPath(System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath) + "output.xlsx";
+            System.IO.File.Copy(Path.GetFullPath(System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath)+"book.xlsx", fileLocation, true);
+            //Trace.Write(System.IO.File.Exists("output.xlsx"));
             Trace.WriteLine("Exporting");
-            Trace.WriteLine(Path.GetFullPath(@"output.xlsx"), "File exported to: ");
+            //Trace.WriteLine(Path.GetFullPath(System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath));
+            //Trace.WriteLine(Path.GetFullPath(System.Web.HttpContext.Current.Server.MapPath.ToString());
+            //Trace.WriteLine(Path.GetFullPath(@"output.xlsx"), "File exported to: ");
             Trace.WriteLine(jsonobj.Count());
             int max_row = 0;
             for(int i=0; i<jsonobj.Count(); i++){
                 max_row = max_row + jsonobj[i].Count();
             }
             Trace.WriteLine(max_row, "Excel row size: ");
-            ExportIssues("output.xlsx", max_row, jsonobj[0][0].Count(), jsonobj);
-            
-            Trace.WriteLine(duplicates[0][0].TokenID);
 
+            /*
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = Convert.ToString(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog.Filter = "Excel|*.xlsx";
+            //saveFileDialog.FilterIndex = saveAsType;
+            saveFileDialog.Title = "Save Data";
+            saveFileDialog.FileName = "My File";
+            saveFileDialog.ShowDialog();*/
+
+            ExportIssues(fileLocation, max_row, jsonobj[0][0].Count(), jsonobj);
+            
+            
+            //WebClient wc = new WebClient();
+            //wc.DownloadFile(Path.GetFullPath(@"output.xlsx"), "output.xlsx");
+            //Response.AddHeader("Content-Disposition", "attachment; filename=" +"output.xlsx");
+            //Response.WriteFile("C:\\Program Files (x86)\\IIS Express\\output.xlsx");
+            //Response.AddHeader("Content-Length", "output.xlsx".Length.ToString());
+            Trace.WriteLine(duplicates[0][0].TokenID);
+            //Process.Start("output.xlsx", "-p");
             return Json(duplicates, JsonRequestBehavior.AllowGet);
         }
 
@@ -390,5 +410,6 @@ namespace PERA.Controllers
                 }
             }
         }
+        
     }
 }
