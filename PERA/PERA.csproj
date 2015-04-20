@@ -29,6 +29,9 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
+    <DocumentationFile>
+    </DocumentationFile>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -68,6 +71,12 @@
       <HintPath>..\..\..\..\Downloads\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Postal">
+      <HintPath>..\packages\Postal.Mvc5.1.2.0\lib\net45\Postal.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.4.2\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Device" />
@@ -91,6 +100,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -217,9 +227,11 @@
     <Compile Include="Controllers\GaragesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoicesController.cs" />
+    <Compile Include="Controllers\QLActiveParkerReportsController.cs" />
     <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DAL\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -231,97 +243,13 @@
       @name Entity Framework Models
     -->
     <Compile Include="HelperClasses\ExcelData.cs" />
-    <Compile Include="Migrations\201503211904223_create.cs" />
-    <Compile Include="Migrations\201503211904223_create.Designer.cs">
-      <DependentUpon>201503211904223_create.cs</DependentUpon>
+    <Compile Include="Migrations\201504200055077_InitialCreate.cs" />
+    <Compile Include="Migrations\201504200055077_InitialCreate.Designer.cs">
+      <DependentUpon>201504200055077_InitialCreate.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\201503212149404_new.cs" />
-    <Compile Include="Migrations\201503212149404_new.Designer.cs">
-      <DependentUpon>201503212149404_new.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503222019595_new2.cs" />
-    <Compile Include="Migrations\201503222019595_new2.Designer.cs">
-      <DependentUpon>201503222019595_new2.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503222117265_HID.cs" />
-    <Compile Include="Migrations\201503222117265_HID.Designer.cs">
-      <DependentUpon>201503222117265_HID.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503222210014_tokens.cs" />
-    <Compile Include="Migrations\201503222210014_tokens.Designer.cs">
-      <DependentUpon>201503222210014_tokens.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503230038409_datereceived.cs" />
-    <Compile Include="Migrations\201503230038409_datereceived.Designer.cs">
-      <DependentUpon>201503230038409_datereceived.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503230100383_PRTM.cs" />
-    <Compile Include="Migrations\201503230100383_PRTM.Designer.cs">
-      <DependentUpon>201503230100383_PRTM.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503231133449_update.cs" />
-    <Compile Include="Migrations\201503231133449_update.Designer.cs">
-      <DependentUpon>201503231133449_update.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201503301739348_BadgeScan.cs" />
-    <Compile Include="Migrations\201503301739348_BadgeScan.Designer.cs">
-      <DependentUpon>201503301739348_BadgeScan.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504031939378_redo.cs" />
-    <Compile Include="Migrations\201504031939378_redo.Designer.cs">
-      <DependentUpon>201504031939378_redo.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504041446049_migration23.cs" />
-    <Compile Include="Migrations\201504041446049_migration23.Designer.cs">
-      <DependentUpon>201504041446049_migration23.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504041845334_RecreateInvoice.cs" />
-    <Compile Include="Migrations\201504041845334_RecreateInvoice.Designer.cs">
-      <DependentUpon>201504041845334_RecreateInvoice.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504041909501_IdentityInsertInvoice.cs" />
-    <Compile Include="Migrations\201504041909501_IdentityInsertInvoice.Designer.cs">
-      <DependentUpon>201504041909501_IdentityInsertInvoice.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504080134364_ERMAGAWD.cs" />
-    <Compile Include="Migrations\201504080134364_ERMAGAWD.Designer.cs">
-      <DependentUpon>201504080134364_ERMAGAWD.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504052119437_discrepancy.cs" />
-    <Compile Include="Migrations\201504052119437_discrepancy.Designer.cs">
-      <DependentUpon>201504052119437_discrepancy.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504142022382_updatess.cs" />
-    <Compile Include="Migrations\201504142022382_updatess.Designer.cs">
-      <DependentUpon>201504142022382_updatess.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504120327312_UpdateState1.cs" />
-    <Compile Include="Migrations\201504120327312_UpdateState1.Designer.cs">
-      <DependentUpon>201504120327312_UpdateState1.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504120328449_BadgeScan_BadgeID.cs" />
-    <Compile Include="Migrations\201504120328449_BadgeScan_BadgeID.Designer.cs">
-      <DependentUpon>201504120328449_BadgeScan_BadgeID.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504142203024_workplz.cs" />
-    <Compile Include="Migrations\201504142203024_workplz.Designer.cs">
-      <DependentUpon>201504142203024_workplz.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504192158353_BSSTUFF.cs" />
-    <Compile Include="Migrations\201504192158353_BSSTUFF.Designer.cs">
-      <DependentUpon>201504192158353_BSSTUFF.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504192336140_BSBS.cs" />
-    <Compile Include="Migrations\201504192336140_BSBS.Designer.cs">
-      <DependentUpon>201504192336140_BSBS.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504200132476_bsbsbs.cs" />
-    <Compile Include="Migrations\201504200132476_bsbsbs.Designer.cs">
-      <DependentUpon>201504200132476_bsbsbs.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\201504200553583_bsbsbsbs.cs" />
-    <Compile Include="Migrations\201504200553583_bsbsbsbs.Designer.cs">
-      <DependentUpon>201504200553583_bsbsbsbs.cs</DependentUpon>
+    <Compile Include="Migrations\201504200319383_updatemigrationhistory.cs" />
+    <Compile Include="Migrations\201504200319383_updatemigrationhistory.Designer.cs">
+      <DependentUpon>201504200319383_updatemigrationhistory.cs</DependentUpon>
     </Compile>
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
@@ -331,7 +259,6 @@
     <Compile Include="Models\InvoiceActiveParkerReportDTO.cs" />
     <Compile Include="Models\InvoiceTeamMember.cs" />
     <Compile Include="Models\QLActiveParkerReport.cs" />
-    <Compile Include="Models\InvoiceActiveParkerReport.cs" />
     <Compile Include="Models\ParkerReportTeamMember.cs" />
     <Compile Include="Models\GarageManager.cs" />
     <Compile Include="Models\QLTeamMember.cs" />
@@ -353,7 +280,6 @@
     <Content Include="Content\Images\parking_green.png" />
     <Content Include="Content\Images\parking_red.png" />
     <Content Include="Content\Images\parking_yellow.png" />
-    <Content Include="Content\Images\spinner.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -367,6 +293,7 @@
     <Content Include="Scripts\css\foundation-icons.css" />
     <Content Include="Scripts\css\foundation.css" />
     <Content Include="Scripts\css\foundation.min.css" />
+    <Content Include="Scripts\font\foundation-icons.svg" />
     <Content Include="Scripts\js\angular-google-maps.js" />
     <Content Include="Scripts\js\bootstrap.js" />
     <Content Include="Scripts\js\bootstrap.min.js" />
@@ -399,7 +326,10 @@
     <Content Include="Scripts\js\modernizr-2.6.2.js" />
     <Content Include="Scripts\pera-app\expenses\controllers\datavisualization.controller.js" />
     <Content Include="Scripts\pera-app\expenses\services\invoiceAPR.service.js" />
+    <Content Include="Scripts\pera-app\expenses\services\qlAPR.service.js" />
     <Content Include="Scripts\pera-app\expenses\services\invoices.service.js" />
+    <Content Include="Scripts\pera-app\export\controllers\exportReport.controller.js" />
+    <Content Include="Scripts\pera-app\export\export.module.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\badgeScan.controller.js" />
     <Content Include="Scripts\pera-app\fileupload\controllers\parkerreport.controller.js" />
     <Content Include="Scripts\pera-app\expenses\controllers\discrepancies.controller.js" />
@@ -431,6 +361,7 @@
     <Content Include="Scripts\pera-app\tabs\controllers\tab.controller.js" />
     <Content Include="Scripts\pera-app\tabs\tabs.module.js" />
     <Content Include="Scripts\pera-app\utils\directives\datepicker.directive.js" />
+    <Content Include="Scripts\pera-app\utils\directives\ngRightClick.directive.js" />
     <Content Include="Scripts\pera-app\utils\services\snackbar.service.js" />
     <Content Include="Scripts\pera-app\utils\utils.module.js" />
     <Content Include="Scripts\pera-app\invoiceTeamMembers\controllers\invoiceTeamMembers.controller.js" />
@@ -441,65 +372,18 @@
     <Content Include="Scripts\js\angular-file-upload\FileAPI.flash.swf" />
     <Content Include="Scripts\js\angular-file-upload\FileAPI.min.js" />
     <Content Include="Scripts\js\ELabels3.js" />
-    <EmbeddedResource Include="Migrations\201503211904223_create.resx">
-      <DependentUpon>201503211904223_create.cs</DependentUpon>
-    </EmbeddedResource>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <EmbeddedResource Include="Migrations\201503212149404_new.resx">
-      <DependentUpon>201503212149404_new.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503222019595_new2.resx">
-      <DependentUpon>201503222019595_new2.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503222117265_HID.resx">
-      <DependentUpon>201503222117265_HID.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503222210014_tokens.resx">
-      <DependentUpon>201503222210014_tokens.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503230038409_datereceived.resx">
-      <DependentUpon>201503230038409_datereceived.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503230100383_PRTM.resx">
-      <DependentUpon>201503230100383_PRTM.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503231133449_update.resx">
-      <DependentUpon>201503231133449_update.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201503301739348_BadgeScan.resx">
-      <DependentUpon>201503301739348_BadgeScan.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504031939378_redo.resx">
-      <DependentUpon>201504031939378_redo.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504041446049_migration23.resx">
-      <DependentUpon>201504041446049_migration23.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504041845334_RecreateInvoice.resx">
-      <DependentUpon>201504041845334_RecreateInvoice.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504041909501_IdentityInsertInvoice.resx">
-      <DependentUpon>201504041909501_IdentityInsertInvoice.cs</DependentUpon>
-    </EmbeddedResource>
     <Content Include="DAL\garages_new.csv" />
-    <EmbeddedResource Include="Migrations\201504052119437_discrepancy.resx">
-      <DependentUpon>201504052119437_discrepancy.cs</DependentUpon>
-    </EmbeddedResource>
     <Content Include="DAL\garages_new.csv" />
     <EmbeddedResource Include="DAL\garages.csv" />
-    <EmbeddedResource Include="Migrations\201504080134364_ERMAGAWD.resx">
-      <DependentUpon>201504080134364_ERMAGAWD.cs</DependentUpon>
+    <Compile Include="Models\InvoiceActiveParkerReport.cs" />
+    <EmbeddedResource Include="Migrations\201504200055077_InitialCreate.resx">
+      <DependentUpon>201504200055077_InitialCreate.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504142022382_updatess.resx">
-      <DependentUpon>201504142022382_updatess.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504120327312_UpdateState1.resx">
-      <DependentUpon>201504120327312_UpdateState1.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504120328449_BadgeScan_BadgeID.resx">
-      <DependentUpon>201504120328449_BadgeScan_BadgeID.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504200319383_updatemigrationhistory.resx">
+      <DependentUpon>201504200319383_updatemigrationhistory.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201504142203024_workplz.resx">
       <DependentUpon>201504142203024_workplz.cs</DependentUpon>
@@ -517,6 +401,9 @@
       <DependentUpon>201504200553583_bsbsbsbs.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\PublishProfiles\Test.pubxml" />
+    <Content Include="Scripts\font\foundation-icons.eot" />
+    <Content Include="Scripts\font\foundation-icons.ttf" />
+    <Content Include="Scripts\font\foundation-icons.woff" />
     <None Include="Scripts\js\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\css\snackbar.css" />
     <Content Include="Scripts\css\snackbar.min.css" />
@@ -592,10 +479,11 @@
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
+    <Content Include="Views\Navigation\Expense.cshtml" />
+    <Content Include="Views\Form\BadgeScan.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Scripts\font\" />
     <Folder Include="Views\ActiveParkerReport\" />
     <Folder Include="Views\ParkerReportParser\" />
     <Folder Include="Views\QLActiveParkerReport\" />
@@ -603,7 +491,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
     <Content Include="Views\Form\Invoice.cshtml" />
   </ItemGroup>
   <ItemGroup>

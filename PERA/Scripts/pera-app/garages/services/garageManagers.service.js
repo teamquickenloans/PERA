@@ -46,8 +46,7 @@
         */
         function all() {
             if (!allPromise || last_request_failed) {
-                console.log("querying database");
-                allPromise = $http.get('/api/garageManagers/');
+                allPromise = $http.get('/api/garageManagers/getGarageManagers');
                 allPromise.then(managersSuccess, managersError);
             }
             return allPromise;
@@ -63,7 +62,6 @@
         {
             if (!managerPromise[managerID] || last_manager_failed[managerID]) {
                 managerPromise[managerID] = $http.get('/api/garageManagers/' + managerID);
-                console.log("getting one garageManager");
                 managerPromise.then(managerSuccess, managerError);
             }
             return managerPromise;

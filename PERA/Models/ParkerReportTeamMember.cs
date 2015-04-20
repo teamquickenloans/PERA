@@ -29,7 +29,6 @@ namespace PERA.Models
         public int? BadgeID { get; set; }
         public int? TokenID { get; set; }
         public int? InvoiceActiveParkerReportID { get; set; }
-        public int LineNumber { get; set; }
 
     }
 }

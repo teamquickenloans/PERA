@@ -30,7 +30,7 @@
         */
         function all() {
             if (!allPromise || last_request_failed) {
-                console.log("querying database");
+               // console.log("querying database");
                 allPromise = $http.get('/api/invoices/getInvoices/');
                 allPromise.then(invoiceSuccess, invoiceError);
             }
@@ -44,14 +44,14 @@
         function invoiceSuccess(data, status, headers, config, response) {
             last_request_failed = false;
             vm.invoices = data.data;
-            console.log("service success ", vm.invoices);
+            //console.log("service success ", vm.invoices);
             return vm.invoices;
             //share();
         }
 
         function invoiceError(data, status, headers, config, response) {
             last_request_failed = true;
-            Snackbar.error("Error retrieving invoices");
+            //Snackbar.error("Error retrieving invoices");
             return $q.reject(response);
         }
     }

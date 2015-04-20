@@ -5,6 +5,8 @@ using System.Linq;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using Postal;
+using System.Net.Mail;
 
 namespace PERA.Controllers
 {
@@ -12,6 +14,12 @@ namespace PERA.Controllers
     {
         public ActionResult Index()
         {
+            /*var smtpClient = new SmtpClient();
+            var msg = new MailMessage();
+            msg.To.Add("soullie7@msu.edu");
+            msg.Subject = "Test";
+            msg.Body = "This is just a test email";
+            smtpClient.Send(msg);*/
             return View();
         }
 

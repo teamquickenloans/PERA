@@ -96,7 +96,8 @@
                 'sidebar@garage': {
                     templateUrl: 'Garage/GarageInfo',
                     controller: 'TeamMembersController as teamCtrl'
-                }
+                },
+
             }
         }
         $stateProvider.state(mapView);
@@ -114,6 +115,37 @@
             }
         }
         $stateProvider.state(mapGarage);
+
+        /////////////////////////////
+        //   Garage > Map > Edit   //
+        ////////////////////////////
+        var editGarage = {
+            name: 'garage.map.edit',
+            views: {
+                'modalView@': {
+                    templateUrl: 'Form/EditGarage',
+                    controller: 'EditGarageController as controller'
+                }
+            }
+        }
+        $stateProvider.state(editGarage);
+
+
+        ////////////////////////////
+        //    Garage > Map > Add //
+        //////////////////////////
+        var garageAdd = {
+            name: 'garage.map.add',
+            views: {
+                'modalView@': {
+                    templateUrl: 'Form/EditGarage',
+                    controller: 'AddGarageController as controller'
+                }
+            }
+        }
+        $stateProvider.state(garageAdd);
+
+
 
           //////////////////////
          //    Garage > Edit //
@@ -138,9 +170,6 @@
             }
         }
         $stateProvider.state(garageEdit);
-
-
-
 
 
 

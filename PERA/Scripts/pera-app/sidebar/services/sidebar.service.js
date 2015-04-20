@@ -19,6 +19,7 @@
 
         var vm = this;
         vm.currentGarage = null;
+        vm.marker = null;
 
         var SideBar = {
             getCurrent: getCurrent,
@@ -33,6 +34,13 @@
         function setCurrent(garage) {
             vm.currentGarage = garage;
             console.log(garage.name);
+        }
+        function setMarker(marker) {
+            vm.marker = marker;
+            console.log("SideBar.setMarker");
+        }
+        function getMarker() {
+            return vm.marker;
         }
     }
 })();

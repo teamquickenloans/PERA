@@ -11,6 +11,7 @@
         'pera.map',
         'pera.tabs',
         'pera.fileupload',
+        'pera.export',
         'pera.teammembers',
         'pera.invoiceTeamMembers',
         'pera.sidebar',
