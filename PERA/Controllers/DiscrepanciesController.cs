@@ -10,6 +10,16 @@ using Newtonsoft.Json.Linq;
 using System.Diagnostics;
 using System.Collections.Specialized;
 using System.Web.Mvc;
+using DocumentFormat.OpenXml.Spreadsheet;
+using DocumentFormat.OpenXml.Packaging;
+using DocumentFormat.OpenXml;
+using System.Globalization;
+using System.IO;
+using System.Data;
+using System.Text;
+using System.Timers;
+using Newtonsoft.Json;
+using System.Windows.Forms;
 
 namespace PERA.Controllers
 {
@@ -79,6 +89,44 @@ namespace PERA.Controllers
             var duplicates = IdentifyDiscrepancies(InvoiceReport, QLReport, InvoiceReports);
             CalculatePrice(InvoiceReport);
 
+            string result = JsonConvert.SerializeObject(duplicates);
+            JArray jsonobj = JArray.Parse(result);
+            Trace.WriteLine(result);
+            Trace.WriteLine("hello");
+            Trace.WriteLine(jsonobj[0][0]["TokenID"]);
+            string fileLocation = Path.GetFullPath(System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath) + "output.xlsx";
+            System.IO.File.Copy(Path.GetFullPath(System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath)+"book.xlsx", fileLocation, true);
+            //Trace.Write(System.IO.File.Exists("output.xlsx"));
+            Trace.WriteLine("Exporting");
+            //Trace.WriteLine(Path.GetFullPath(System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath));
+            //Trace.WriteLine(Path.GetFullPath(System.Web.HttpContext.Current.Server.MapPath.ToString());
+            //Trace.WriteLine(Path.GetFullPath(@"output.xlsx"), "File exported to: ");
+            Trace.WriteLine(jsonobj.Count());
+            int max_row = 0;
+            for(int i=0; i<jsonobj.Count(); i++){
+                max_row = max_row + jsonobj[i].Count();
+            }
+            Trace.WriteLine(max_row, "Excel row size: ");
+
+            /*
+            SaveFileDialog saveFileDialog = new SaveFileDialog();
+            saveFileDialog.InitialDirectory = Convert.ToString(Environment.SpecialFolder.MyDocuments);
+            saveFileDialog.Filter = "Excel|*.xlsx";
+            //saveFileDialog.FilterIndex = saveAsType;
+            saveFileDialog.Title = "Save Data";
+            saveFileDialog.FileName = "My File";
+            saveFileDialog.ShowDialog();*/
+
+            ExportIssues(fileLocation, max_row, jsonobj[0][0].Count(), jsonobj);
+            
+            
+            //WebClient wc = new WebClient();
+            //wc.DownloadFile(Path.GetFullPath(@"output.xlsx"), "output.xlsx");
+            //Response.AddHeader("Content-Disposition", "attachment; filename=" +"output.xlsx");
+            //Response.WriteFile("C:\\Program Files (x86)\\IIS Express\\output.xlsx");
+            //Response.AddHeader("Content-Length", "output.xlsx".Length.ToString());
+            Trace.WriteLine(duplicates[0][0].TokenID);
+            //Process.Start("output.xlsx", "-p");
             return Json(duplicates, JsonRequestBehavior.AllowGet);
         }
 
@@ -254,7 +302,80 @@ namespace PERA.Controllers
             issues.Add(Extras);
             issues.Add(Missing);
             //issues.Add(Discrepancies);
+            string result2 = JsonConvert.SerializeObject(issues);
+            Trace.WriteLine(result2);
             return issues;
         }
+        public void ExportIssues(string filename, int numRows, int numCols, JArray json)
+        {
+            using (SpreadsheetDocument myDoc = SpreadsheetDocument.Open(filename, true))
+            {
+                WorkbookPart workbookPart = myDoc.WorkbookPart;
+                WorksheetPart worksheetPart = workbookPart.WorksheetParts.First();
+
+                SheetData sheetData = worksheetPart.Worksheet.Elements<SheetData>().First();
+
+                Trace.Write(json[0][0]["FirstName"]);
+                DateTime time = DateTime.Now;              // Use current time
+                string format = "MMM ddd d HH:mm yyyy";    // Use this format
+                for (int i = 0; i < json.Count(); i++)
+                {
+                    for (int row = 0; row < json[i].Count(); row++)
+                    {
+                        Row r = new Row();
+
+                        for (int col = 0; col < numCols; col++)
+                        {
+                            if (col == 0)
+                            {
+                                Cell c = new Cell();
+                                c.CellValue = new CellValue(json[i][row]["FirstName"].ToString());
+                                //c.Append(x);
+                                c.DataType = new EnumValue<CellValues>(CellValues.String);
+                                r.Append(c);
+                            }
+
+                            else if (col == 1)
+                            {
+                                Cell c = new Cell();
+                                c.CellValue = new CellValue(json[i][row]["LastName"].ToString());
+                                //c.Append(x);
+                                c.DataType = new EnumValue<CellValues>(CellValues.String);
+                                r.Append(c);
+                            }
+
+                            else if (col == 2)
+                            {
+                                Cell c = new Cell();
+                                c.CellValue = new CellValue(json[i][row]["TokenID"].ToString());
+                                //c.Append(x);
+                                c.DataType = new EnumValue<CellValues>(CellValues.String);
+                                r.Append(c);
+                            }
+
+                            else if (col == 3)
+                            {
+                                Cell c = new Cell();
+                                c.CellValue = new CellValue(json[i][row]["Action"].ToString());
+                                //c.Append(x);
+                                c.DataType = new EnumValue<CellValues>(CellValues.String);
+                                r.Append(c);
+                            }
+
+                            else
+                            {
+                                Cell c = new Cell();
+                                c.CellValue = new CellValue(time.ToString(format));
+                                //c.Append(x);
+                                c.DataType = new EnumValue<CellValues>(CellValues.String);
+                                r.Append(c);
+                            }
+                        }
+                        sheetData.Append(r);
+                    }
+                }
+            }
+        }
+        
     }
 }

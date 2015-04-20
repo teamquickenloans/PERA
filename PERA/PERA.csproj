@@ -71,6 +71,12 @@
       <HintPath>..\..\..\..\Downloads\ICSharpCode.SharpZipLib.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Postal">
+      <HintPath>..\packages\Postal.Mvc5.1.2.0\lib\net45\Postal.dll</HintPath>
+    </Reference>
+    <Reference Include="RazorEngine">
+      <HintPath>..\packages\RazorEngine.3.4.2\lib\net45\RazorEngine.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Device" />
@@ -94,6 +100,7 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.AspNet.WebApi.WebHost.5.2.3\lib\net45\System.Web.Http.WebHost.dll</HintPath>
     </Reference>
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Web" />
     <Reference Include="System.Web.Extensions" />
@@ -224,6 +231,7 @@
     <Compile Include="Controllers\TeamMembersController.cs" />
     <Compile Include="Controllers\ModuleController.cs" />
     <Compile Include="Controllers\UploadController.cs" />
+    <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="DAL\Configuration.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -264,7 +272,6 @@
     <Content Include="Content\Images\parking_green.png" />
     <Content Include="Content\Images\parking_red.png" />
     <Content Include="Content\Images\parking_yellow.png" />
-    <Content Include="Content\Images\spinner.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
