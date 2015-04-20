@@ -14,13 +14,12 @@
                     <thead id="uploadTableHead">
                         <tr>
                             <th>Garage</th>
-                            <th>Invoice ID</th>
+                            <th>ID</th>
                             <th>Date</th>
                         </tr>
                     </thead>
 
-                    <tbody id="uploadTableBody" ng-repeat="invoice in invoices">
-                    
+                    <tbody id="uploadTableBody">
                         <tr class="tableRow" ng-repeat="invoiceAPR in invoiceAPRs[invoice.invoiceID]">
                             <td>{{garages[invoiceAPR.garageID].name}}</td>
                             <td>{{invoiceAPR.id}}</td>

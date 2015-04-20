@@ -88,8 +88,7 @@
 
         }
 
-        function update()
-        {
+        function update() {
             console.log("watch current garage: " + SideBar.getCurrent().name);
             $scope.new = angular.copy(SideBar.getCurrent());
         }

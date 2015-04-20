@@ -14,7 +14,7 @@
             </tr>
         </table>
 
-        <div id="usageTableBodyWrapper" ng-show="teamCtrl.teamMembers.length === 0">
+        <div id="usageTableBodyWrapper">
             <table id="usageTableBody">
                 <tr class="tableRow" ng-repeat="teammember in teamCtrl.teamMembers[getCurrent().garageID]">
                     <td class="nameColUsageTable">{{teammember.firstName}} {{teammember.lastName}}</td>

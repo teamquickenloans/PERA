@@ -38,6 +38,7 @@
         }
 
         function teammembersSuccessFn(data, status, headers, config) {
+            console.log(data.data);
             vm.teamMembers[$scope.currentGarage.garageID] = data.data;         //this will depend on what the API returns, it may have to change
         }
 
