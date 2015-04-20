@@ -130,6 +130,45 @@ namespace PERA.Controllers
             return Json(duplicates, JsonRequestBehavior.AllowGet);
         }
 
+        //
+        public void RemoveDuplicatesFromSystemGalaxy(QLActiveParkerReport QLReport, int garageID)
+        {
+            List<QLTeamMember> Duplicates = new List<QLTeamMember>(); 
+            Dictionary <string, string> Matches = new Dictionary <string, string>();
+
+            foreach (QLTeamMember qlTM in QLReport.TeamMembers)
+            {
+                //var qlTM = QLReport.TeamMembers[i];
+                // Get the most recent badge scan for this TM
+                PERAContext db = new PERAContext();
+                var BadgeScan = db.BadgeScans.Where(
+                     x => x.FirstName == qlTM.FirstName
+                       && x.LastName == qlTM.LastName
+                       && x.GarageID == QLReport.GarageID)
+                .OrderByDescending(x => x.ScanDateTime)
+                    .FirstOrDefault();
+
+                string qlName = qlTM.FirstName + qlTM.LastName;
+
+                if (Matches.ContainsKey(qlName)) // it's a duplicate
+                    db.ParkerReportTeamMembers.Remove(qlTM);
+                //    continue;
+                else
+                {    //check if it's valid
+                    if (qlTM.BadgeID == BadgeScan.BadgeID)
+                        Matches[qlName] = qlName;
+                    else // it's invalid so remove it later
+                        db.ParkerReportTeamMembers.Remove(qlTM);
+                    //    Duplicates.Add(qlTM);
+                }
+            }
+            //for (int i = Duplicates.Count - 1; i > -1; i--)
+            //{
+            //    PERAContext db = new PERAContext();
+            //    db.ParkerReportTeamMembers.Remove(Duplicates[i]);
+            //}
+        }
+
 
         public void CalculatePrice(InvoiceActiveParkerReport IAPR)
         {
@@ -163,6 +202,7 @@ namespace PERA.Controllers
             //List<Discrepancy> Discrepancies = new List<Discrepancy>();
 
             Trace.WriteLine(InvoiceReport.TeamMembers.First());
+            Trace.WriteLine("# of parkers: " + QLReport.TeamMembers.Count);
 
             foreach (QLTeamMember qlTM in QLReport.TeamMembers) //for each TM in the qlReport
             {
