@@ -4,7 +4,7 @@
 
     <meta charset="UTF-8">
     <title>Parking Dashboard</title>
-
+     
     <!-- ====================== jQuery ============================== -->
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js" type="text/javascript"></script>
     @Scripts.Render("~/bundles/jquery")
@@ -12,7 +12,7 @@
     <!-- ======================= jQuery UI ========================= -->
     <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.js" type="text/javascript"></script>
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.11.3/jquery-ui.js" media="all" rel="stylesheet" type="text/css" />
-
+    
     <!--x<link href="~/Scripts/css/MonthPicker.css" rel="stylesheet"/>
     <script src="https://raw.github.com/digitalBush/jquery.maskedinput/1.3.1/dist/jquery.maskedinput.min.js" type="text/javascript"></script>
     <script src="~/Scripts/js/MonthPicker.min.js"></script>-->
@@ -80,7 +80,7 @@
 
     <!--====================== pera-app ======================== -->
     @*@Scripts.Render("~/bundles/pera-app")*@
-    
+
     <script type="text/javascript" src="~/Scripts/pera-app/pera.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/pera.config.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/expenses/expenses.module.js"></script>
@@ -121,7 +121,11 @@
     <script type="text/javascript" src="~/Scripts/pera-app/sidebar/sidebar.module.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/sidebar/services/sidebar.service.js"></script>
     <script type="text/javascript" src="~/Scripts/pera-app/sidebar/controllers/sidebar.controller.js"></script>
+    <script type="text/javascript" src="~/Scripts/pera-app/export/export.module.js"></script>
+    <script type="text/javascript" src="~/Scripts/pera-app/export/controllers/exportReport.controller.js"></script>
     
+
+
     <!-- ====================== CSS ================================= -->
     <link rel="stylesheet" href="~/Scripts/css/site.css" />
 
@@ -142,8 +146,8 @@
 
         <!--Right Nav Section -->
         <ul class="right" ui-view="right-nav">
-                    </ul>
-
+        </ul>
+                  
         <!-- Left Nav Section -->
         <ul class="left">
             <li class="divider"></li>
@@ -152,17 +156,17 @@
                 <ul class="dropdown">
                     <li ui-sref-active="active">                    <!--ng-class="{active: tabCtrl.isSet(3)}"-->
                         <a ui-sref="expense.discrepancies" ng-click="tabCtrl.setTab(3);">Identify Discrepancies</a>
-                    </li>
+                            </li>
                     <li ui-sref-active="active">                    <!--ng-class="{active: tabCtrl.isSet(4)}">-->
                         <a ui-sref="upload.invoice" ng-click="tabCtrl.setTab(4);">Uploads</a>
-                    </li>
+                            </li>
                 </ul>
             </li>
             <li class="divider"></li>
             <li ui-sref-active="active" ng-controller="MapController as map">
                 <!--ng-class="{active: tabCtrl.isSet(1) || tabCtrl.isSet(2)}">-->
                 <a ui-sref="garage.map" ng-click="tabCtrl.setTab(1);">Garage Map</a>
-            </li>
+                    </li>
 
                 @*<ul class="dropdown" ng-controller="MapController as map">
 
@@ -174,7 +178,7 @@
                         <a ui-sref="garage.add" ng-click="tabCtrl.setTab(2);">Add Garage</a>
                     </li>
                 </ul>*@
-
+                
             <li class="divider"></li>
             <li ng-class="{active: tabCtrl.isSet(5)}">
                 <a href="#" ng-click="tabCtrl.setTab(5);">Notifications</a>
@@ -185,19 +189,19 @@
 </nav>
 
     <div class="column small-6 medium-8 large-10" id="map-canvas" ng-show="tabCtrl.isSet(1)"></div>
-    <div ui-view></div>    
+<div ui-view></div>
 
 
     <div id="modal" class="reveal-modal" data-reveal aria-labelledby="modalTitle" aria-hidden="true" role="dialog">
         <div ui-view="modalView"></div>
         <a class="close-reveal-modal" aria-label="Close">&#215;</a>
-    </div>
+        </div>
 
 
 @*ng-show="$state.includes('garage.map')"*@
 
 
-    <!-- Makes Foundation Stuff Work -->
+      <!-- Makes Foundation Stuff Work -->
     <script type="text/javascript">
         $(document).foundation();
     </script>
