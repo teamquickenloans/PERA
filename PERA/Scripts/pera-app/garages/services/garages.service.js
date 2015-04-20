@@ -143,6 +143,7 @@
         function create(content) {
             return $http.post('/api/garages/', content);
         }
+
         /**
          * @name update
          * @desc Update a garage

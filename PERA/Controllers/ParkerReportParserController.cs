@@ -67,8 +67,8 @@ namespace PERA.Controllers
             { 15, new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}},
             { 16, new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}}
             //  5   5,6
-            
         };
+
         //These have the format row[2] = Lastname, Firstname
         Dictionary<int, int> nameColumns = new Dictionary<int, int>()
         {
@@ -104,7 +104,6 @@ namespace PERA.Controllers
           { 14, new Name{first = 2, last = 1}},
           { 16, new Name{first = 2, last = 1}},
           { 15, new Name{first = 2, last = 1}},
-
         };
 
         [HttpPost] // This is from System.Web.Http, and not from System.Web.Mvc

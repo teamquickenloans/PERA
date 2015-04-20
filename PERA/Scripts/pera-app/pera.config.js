@@ -276,6 +276,28 @@
         }
         $stateProvider.state(discrepancies);
 
+          /////////////////////////////////////
+         //    Expense > Data Visualization //
+        /////////////////////////////////////
+        var datavisualization = {
+            name: 'expense.datavisualization',
+            views: {
+                '': {
+                    templateUrl: 'Expense/DataVisualization',
+                    controller: 'DataVisualizationController as controller'
+                },
+                'right-nav@': {
+                    templateUrl: 'Navigation/TopBar',
+                    controller: 'SideBarController as sidebar'
+                },
+                'sidebar@expense': {
+                    templateUrl: 'Navigation/Overview',
+                    controller: 'SideBarController as sidebar'
+                }
+            }
+        }
+        $stateProvider.state(datavisualization);
+
           ////////////////////////////////////////////
          //     Expense > Discrepancies > Overview //
         ////////////////////////////////////////////

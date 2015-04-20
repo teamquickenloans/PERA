@@ -28,6 +28,11 @@ namespace PERA.Controllers
             return View();
         }
 
+        public ActionResult DataVisualization()
+        {
+            return View();
+        }
+
 
     }
 }
