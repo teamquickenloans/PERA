@@ -9,19 +9,20 @@
       .module('pera.garages.controllers')
       .controller('AddGarageController', AddGarageController);
 
-    AddGarageController.$inject = ['$scope', 'Garages', 'Snackbar']; //Here 'AddGarage' is the AddGarage Service (pera.garages.service)
+    AddGarageController.$inject = ['$scope', 'Garages', 'Snackbar' , 'GarageManagers']; //Here 'AddGarage' is the AddGarage Service (pera.garages.service)
 
     /**
     * @namespace EditGarageController
     */
-    function AddGarageController($scope, Garages, Snackbar) {
+    function AddGarageController($scope, Garages, Snackbar, GarageManagers) {
         var vm = this;
         $scope.garages = []; //the list of garages to be returned
+        $scope.garageManagers = [];
         $scope.title = "Add a Garage";
 
 
         var defaultForm = {
-            garageID: '',
+            //garageID: '',
             name: '',
             address: '',
             latitude: '',
@@ -44,6 +45,8 @@
             garageManagerID: ''
         };
 
+
+        GarageManagers.all().then(managersSuccess, managersFail);
         $scope.new = angular.copy(defaultForm);
 
 
@@ -61,15 +64,25 @@
             //Snackbar.error("Failed to retrieve garages");
         }
 
+        function managersSuccess(data, status, headers, config) {
+            $scope.managers = data.data;         //this will depend on what the API returns, it may have to change
+        }
+
+        function managersFail(data, status, headers, config) {
+            //Snackbar.error("Failed to retrieve garages");
+        }
+
+
         function submit() {
             console.log("submit");
             // Here you will post a garage to the API
             //  using the $http angular service
             Garages.create($scope.new, $scope.new.garageID).then(success);
+            clearForm();
         }
 
         function success() {
-            Snackbar.show($scope.new.name + " has been updated");
+            Snackbar.show($scope.new.name + " has been created");
         }
 
        /*

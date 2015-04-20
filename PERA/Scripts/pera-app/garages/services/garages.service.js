@@ -141,7 +141,7 @@
         * @memberOf thinkster.garages.services.Garages
         */
         function create(content) {
-            return $http.post('/api/garages/', content);
+            return $http.post('/api/garages/postGarage', content);
         }
         /**
          * @name update
@@ -153,7 +153,7 @@
          */
         function update(Garage, garageID) {
             console.log(garageID + " " + Garage.garageID);
-            return $http.put('/api/garages/' + garageID, Garage);
+            return $http.put('/api/garages/putGarage/' + garageID, Garage);
         }
 
         /**
