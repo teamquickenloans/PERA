@@ -99,7 +99,18 @@ namespace PERA.Controllers
                 invoice = db.Invoices.Find(invoice.InvoiceID);
             }
 
-            Trace.WriteLine("invoice.InvoiceID: " + invoice.InvoiceID);
+            //Invoice newinvoice = db.Invoices.Create();
+
+            //Trace.WriteLine("nI" + newinvoice.InvoiceID);
+            //newinvoice.ID = invoice.ID;
+            //newinvoice.DateReceived = invoice.DateReceived;
+            //newinvoice.DateUploaded = invoice.DateUploaded;
+            //newinvoice.MonthYear = invoice.MonthYear;
+            //newinvoice.TotalAmountBilled = invoice.TotalAmountBilled;
+            //newinvoice.TotalLeasedSpots = invoice.TotalLeasedSpots;
+
+
+            Trace.WriteLine("invoice.ID: " + invoice.ID);
             Trace.WriteLine("invoice.MonthYear: " + invoice.MonthYear);
             Trace.WriteLine("invoice.TotalAmountBilled: " + invoice.TotalAmountBilled);
             FileHandler(result, invoice);
@@ -122,12 +133,13 @@ namespace PERA.Controllers
                 var uploadedFileInfo = new FileInfo(file.LocalFileName);
                 int garageID = Convert.ToInt32(result.FormData.GetValues("garageID").First());
             
-                InvoiceActiveParkerReport APR =  db.InvoiceActiveParkerReports.Create();
+                InvoiceActiveParkerReport APR = db.InvoiceActiveParkerReports.Create();
                 APR.GarageID = garageID;
                 APR.DateUploaded = invoice.DateUploaded;
                 APR.DateReceived = invoice.DateReceived;
                 APR.MonthYear = invoice.MonthYear;
                 APR.InvoiceID = invoice.InvoiceID;
+                Trace.WriteLine("invoice.InvoiceID"+ invoice.InvoiceID);
                 //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
                 Trace.WriteLine(file.LocalFileName);
                 List<ParkerReportTeamMember> teamMembers = 

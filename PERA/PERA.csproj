@@ -243,6 +243,14 @@
       @name Entity Framework Models
     -->
     <Compile Include="HelperClasses\ExcelData.cs" />
+    <Compile Include="Migrations\201504200055077_InitialCreate.cs" />
+    <Compile Include="Migrations\201504200055077_InitialCreate.Designer.cs">
+      <DependentUpon>201504200055077_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201504200319383_updatemigrationhistory.cs" />
+    <Compile Include="Migrations\201504200319383_updatemigrationhistory.Designer.cs">
+      <DependentUpon>201504200319383_updatemigrationhistory.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
     <Compile Include="Models\BadgeScanReport.cs" />
@@ -370,6 +378,12 @@
     <Content Include="DAL\garages_new.csv" />
     <EmbeddedResource Include="DAL\garages.csv" />
     <Compile Include="Models\InvoiceActiveParkerReport.cs" />
+    <EmbeddedResource Include="Migrations\201504200055077_InitialCreate.resx">
+      <DependentUpon>201504200055077_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201504200319383_updatemigrationhistory.resx">
+      <DependentUpon>201504200319383_updatemigrationhistory.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <Content Include="Scripts\font\foundation-icons.eot" />
     <Content Include="Scripts\font\foundation-icons.ttf" />
@@ -453,7 +467,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Migrations\" />
     <Folder Include="Views\ActiveParkerReport\" />
     <Folder Include="Views\ParkerReportParser\" />
     <Folder Include="Views\QLActiveParkerReport\" />

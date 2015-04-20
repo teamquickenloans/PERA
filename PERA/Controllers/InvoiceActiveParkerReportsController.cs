@@ -35,13 +35,13 @@ namespace PERA.Controllers
             return Ok(invoiceActiveParkerReport);
         }
         
-        // GET: api/InvoiceActiveParkerReports/invoice/5
+         //GET: api/InvoiceActiveParkerReports/invoice/5
         [HttpGet]
         [ActionName("Invoice")]
         [ResponseType(typeof(InvoiceActiveParkerReport))]
         public IQueryable<InvoiceActiveParkerReport> Invoice(int id)
         {
-            //int invoiceInt = Convert.ToInt32(id);
+            int invoiceInt = Convert.ToInt32(id);
             return db.InvoiceActiveParkerReports.Where(x => x.InvoiceID == id);
         }
 
