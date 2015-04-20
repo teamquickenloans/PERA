@@ -368,40 +368,45 @@ namespace PERA.Controllers
                             if (col == 0)
                             {
                                 Cell c = new Cell();
-                                CellValue x = new CellValue(json[i][row]["FirstName"].ToString());
-                                c.Append(x);
+                                c.CellValue = new CellValue(json[i][row]["FirstName"].ToString());
+                                //c.Append(x);
+                                c.DataType = new EnumValue<CellValues>(CellValues.String);
                                 r.Append(c);
                             }
 
                             else if (col == 1)
                             {
                                 Cell c = new Cell();
-                                CellValue x = new CellValue(json[i][row]["LastName"].ToString());
-                                c.Append(x);
+                                c.CellValue = new CellValue(json[i][row]["LastName"].ToString());
+                                //c.Append(x);
+                                c.DataType = new EnumValue<CellValues>(CellValues.String);
                                 r.Append(c);
                             }
 
                             else if (col == 2)
                             {
                                 Cell c = new Cell();
-                                CellValue x = new CellValue(json[i][row]["TokenID"].ToString());
-                                c.Append(x);
+                                c.CellValue = new CellValue(json[i][row]["TokenID"].ToString());
+                                //c.Append(x);
+                                c.DataType = new EnumValue<CellValues>(CellValues.String);
                                 r.Append(c);
                             }
 
                             else if (col == 3)
                             {
                                 Cell c = new Cell();
-                                CellValue x = new CellValue(json[i][row]["Action"].ToString());
-                                c.Append(x);
+                                c.CellValue = new CellValue(json[i][row]["Action"].ToString());
+                                //c.Append(x);
+                                c.DataType = new EnumValue<CellValues>(CellValues.String);
                                 r.Append(c);
                             }
 
                             else
                             {
                                 Cell c = new Cell();
-                                CellValue x = new CellValue(time.ToString(format));
-                                c.Append(x);
+                                c.CellValue = new CellValue(time.ToString(format));
+                                //c.Append(x);
+                                c.DataType = new EnumValue<CellValues>(CellValues.String);
                                 r.Append(c);
                             }
                         }
