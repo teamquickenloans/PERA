@@ -9,12 +9,12 @@
       .module('pera.fileupload.controllers')
       .controller('BadgeScanController', BadgeScanController);
 
-    BadgeScanController.$inject = ['$scope', '$upload', 'Upload', 'Garages', 'Snackbar', '$filter']; //Here 'Garages' is the Garages Service (pera.garages.service)
+    BadgeScanController.$inject = ['$scope', '$upload', 'Upload', 'Snackbar', '$filter' ,'$http', 'Garages'];
 
     /**
     * @namespace BadgeScanController
     */
-    function BadgeScanController($scope, $upload, Upload, Garages, Snackbar, $filter) {
+    function BadgeScanController($scope, $upload, Upload, Snackbar, $filter, $http, Garages) {
 
         var vm = this;
         vm.files = [];
@@ -24,9 +24,17 @@
 
         vm.clearForm = clearForm;
         vm.uploadAll = uploadAll;
+        vm.findUsage = findUsage;
         vm.addReport = addReport;
         vm.removeReport = removeReport;
 
+        /*
+        vm.usage = [];
+        vm.index = 0;
+        */
+        vm.usage = {};
+
+        Garages.all().then(garagesSuccess);
 
         vm.defaultForm = {
             dateReceived: '',
@@ -36,7 +44,6 @@
 
         vm.form = angular.copy(vm.defaultForm);
 
-        Garages.all().then(garagesSuccessFn, garagesErrorFn);
 
         function addReport() {
             vm.counter++;
@@ -84,18 +91,45 @@
             vm.reports = angular.copy(vm.defaultReport);
             console.log("clear form");
         }
+
         function uploadFail() {
             Snackbar.error("Card Activity Report upload failed.  Please recheck the formatting of the excel file.");
             clearForm();
         }
 
-        function garagesSuccessFn(data, status, headers, config) {
-            $scope.garages = data.data;         //this will depend on what the API returns, it may have to change
-            //console.log("fileupload Contoller garages success", $scope.garages);
+        function garagesSuccess(data) {
+            $scope.garages = data.data;
+        }
+        /*
+        function badgeScanSuccessFn(data, status, headers, config) {
+            console.log("BADGE SCAN SUCCESS FN");
+            console.log("data.data: " + data.data);
+            console.log("index: " + vm.index);
+            vm.usage[vm.index] = data.data;
+        }
+        */
+        function badgeScanSuccessFn(data, status, headers, config) {
+            var tempArray = data.data;
+
+            tempArray.forEach(function (val, i) {
+                if (i % 2 === 1) return;
+                console.log('val: '+val);
+                vm.usage[val] = tempArray[i + 1];
+            });
         }
 
-        function garagesErrorFn(data, status, headers, config) {
+        function badgeScanErrorFn(data, status, headers, config) {
             Snackbar.error(data.data.error);
+        }
+
+        /*
+        function findUsage(id, firstName, lastName, index) {
+            $http.get('/api/BadgeScans/GetNumberOfScans/' + id + '/' + firstName + '/' + lastName).then(badgeScanSuccessFn, badgeScanErrorFn); //promise
+            vm.index = index;
+        }
+        */
+        function findUsage(id) {
+            $http.get('/api/BadgeScans/GetNumberOfScans/' + id).then(badgeScanSuccessFn, badgeScanErrorFn); //promise
         }
 
     }

@@ -35,6 +35,8 @@ namespace PERA.Models
 
         public System.Data.Entity.DbSet<PERA.Models.BadgeScan> BadgeScans { get; set; }
 
+        public System.Data.Entity.DbSet<PERA.Models.BadgeScanReport> BadgeScanReports { get; set; }
+
         public System.Data.Entity.DbSet<PERA.Models.CarpoolGroup> CarpoolGroups { get; set; }
 
         public System.Data.Entity.DbSet<PERA.Models.Invoice> Invoices { get; set; }
@@ -42,6 +44,8 @@ namespace PERA.Models
         public System.Data.Entity.DbSet<PERA.Models.InvoiceActiveParkerReport> InvoiceActiveParkerReports { get; set; }
 
         public System.Data.Entity.DbSet<PERA.Models.QLActiveParkerReport> QLActiveParkerReports { get; set; }
+
+
     
     }
 }

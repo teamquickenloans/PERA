@@ -111,8 +111,8 @@ namespace PERA.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, new { returnData });
         }
 
-        private void FileHandler(MultipartFormDataStreamProvider result, Invoice invoice){
-
+        private void FileHandler(MultipartFormDataStreamProvider result, Invoice invoice)
+        {
             int i = 0;
             foreach(var file in result.FileData)
             {
