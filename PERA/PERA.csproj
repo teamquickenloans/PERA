@@ -251,6 +251,10 @@
     <Compile Include="Migrations\201504200319383_updatemigrationhistory.Designer.cs">
       <DependentUpon>201504200319383_updatemigrationhistory.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201504221933183_something.cs" />
+    <Compile Include="Migrations\201504221933183_something.Designer.cs">
+      <DependentUpon>201504221933183_something.cs</DependentUpon>
+    </Compile>
     <Compile Include="Models\ActiveParkerReport.cs" />
     <Compile Include="Models\BadgeScan.cs" />
     <Compile Include="Models\BadgeScanReport.cs" />
@@ -385,20 +389,8 @@
     <EmbeddedResource Include="Migrations\201504200319383_updatemigrationhistory.resx">
       <DependentUpon>201504200319383_updatemigrationhistory.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504142203024_workplz.resx">
-      <DependentUpon>201504142203024_workplz.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504192158353_BSSTUFF.resx">
-      <DependentUpon>201504192158353_BSSTUFF.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504192336140_BSBS.resx">
-      <DependentUpon>201504192336140_BSBS.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504200132476_bsbsbs.resx">
-      <DependentUpon>201504200132476_bsbsbs.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\201504200553583_bsbsbsbs.resx">
-      <DependentUpon>201504200553583_bsbsbsbs.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201504221933183_something.resx">
+      <DependentUpon>201504221933183_something.cs</DependentUpon>
     </EmbeddedResource>
     <None Include="Properties\PublishProfiles\Test.pubxml" />
     <Content Include="Scripts\font\foundation-icons.eot" />

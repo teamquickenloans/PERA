@@ -242,14 +242,9 @@ namespace PERA.Controllers
                     {
                         var first = row[splitNameColumns[garageID].first];
                         var last = row[splitNameColumns[garageID].last];
-                        if (first == null)
-                        {
-                            firstName = "";
-                        }
-                        else if (last == null)
-                        {
-                            lastName = "";
-                        }
+
+                        if (last.Equals(DBNull.Value))
+                            break;
                         firstName = (string)first;
                         lastName = (string)last;
 

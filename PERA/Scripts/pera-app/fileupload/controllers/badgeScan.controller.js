@@ -21,18 +21,13 @@
         vm.defaultReport = [{ garageID: 0 }];
         vm.reports = angular.copy(vm.defaultReport);
         $scope.garages = [];
+        $scope.usage = {};
 
         vm.clearForm = clearForm;
         vm.uploadAll = uploadAll;
         vm.findUsage = findUsage;
         vm.addReport = addReport;
-        vm.removeReport = removeReport;
 
-        /*
-        vm.usage = [];
-        vm.index = 0;
-        */
-        vm.usage = {};
 
         Garages.all().then(garagesSuccess);
 
@@ -109,13 +104,15 @@
         }
         */
         function badgeScanSuccessFn(data, status, headers, config) {
-            var tempArray = data.data;
+            $scope.usage = data.data;
+            console.log(data.data);
+            return data.data;
 
-            tempArray.forEach(function (val, i) {
+            /*tempArray.forEach(function (val, i) {
                 if (i % 2 === 1) return;
                 console.log('val: '+val);
                 vm.usage[val] = tempArray[i + 1];
-            });
+            });*/
         }
 
         function badgeScanErrorFn(data, status, headers, config) {
@@ -129,7 +126,8 @@
         }
         */
         function findUsage(id) {
-            $http.get('/api/BadgeScans/GetNumberOfScans/' + id).then(badgeScanSuccessFn, badgeScanErrorFn); //promise
+            $http.get('/api/BadgeScans/GetNumberOfScans/' + id )
+                .then(badgeScanSuccessFn, badgeScanErrorFn); //promise
         }
 
     }

@@ -35,6 +35,25 @@ namespace PERA.Controllers
             return Ok(qLActiveParkerReport);
         }
 
+
+        // GET: api/QLActiveParkerReports/garage/5
+        [HttpGet]
+        [ActionName("Garage")]
+        [ResponseType(typeof(QLActiveParkerReport))]
+        public QLActiveParkerReport GetQLActiveParkerReportbyGarage(int id)
+        {
+            QLActiveParkerReport QLReport = db.QLActiveParkerReports.Where(
+                x => x.GarageID == id).OrderByDescending(x => x.MonthYear).FirstOrDefault();
+
+            if (QLReport == null)
+            {
+                return null;
+            }
+
+            return QLReport;
+        }
+
+
         // PUT: api/QLActiveParkerReports/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutQLActiveParkerReport(int id, QLActiveParkerReport qLActiveParkerReport)

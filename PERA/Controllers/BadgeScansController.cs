@@ -10,6 +10,8 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using System.Diagnostics;
 using PERA.Models;
+using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 
 namespace PERA.Controllers
 {
@@ -35,17 +37,33 @@ namespace PERA.Controllers
 
             return Ok(badgeScan);
         }
-        /*
+        
         // GET: api/BadgeScans/GetNumberOfScans
-        public int GetNumberOfScans(int id, string firstName, string lastName)
+        public string GetNumberOfScans(int id)
         {
+            // Grab the most recent badge scan report for this garage
             BadgeScanReport report = db.BadgeScanReports.Where(x => x.GarageID == id).OrderByDescending(x => x.MonthYear).FirstOrDefault();
 
-            List<BadgeScan> scans = report.BadgeScans.Where(x => x.FirstName == firstName && x.LastName == lastName).ToList();
+            QLActiveParkerReport QLReport = db.QLActiveParkerReports.Where( x => x.GarageID == id).OrderByDescending(x => x.MonthYear).FirstOrDefault();
 
-            return scans.Count;
+           Dictionary<string, int> usage = new Dictionary<string,int>();
+
+           Trace.WriteLine(report.BadgeScans.Count);
+
+
+            // Grab all of the scans for this person in that report
+            foreach(QLTeamMember qlTM in QLReport.TeamMembers) {
+                List<BadgeScan> scans = report.BadgeScans.Where(x => x.FirstName == qlTM.FirstName && x.LastName == qlTM.LastName).ToList();
+                usage[qlTM.FirstName + qlTM.LastName] = scans.Count;
+            }
+
+            //JavaScriptSerializer serializer = new JavaScriptSerializer();
+            //string json = serializer.Serialize((object)usage);
+
+            return JsonConvert.SerializeObject((object)usage);
+            
         }
-        */
+        /*
         // GET: api/BadgeScans/GetNumberOfScans
         public int[] GetNumberOfScans(int id)
         {
@@ -58,8 +76,8 @@ namespace PERA.Controllers
             }
 
             //Organize badge scans into a list
-          //  List<BadgeScan> scans = report.BadgeScans.ToList();
-            List<BadgeScan> scans = db.BadgeScans.Where(x => 1002 == report.ID).ToList();
+            // List<BadgeScan> scans = report.BadgeScans.ToList();
+             List<BadgeScan> scans = db.BadgeScans.Where(x => 1 == report.ID).ToList();
             
             Trace.WriteLine("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV");
             Trace.WriteLine("Number of badge scan results for selected garage: " + scans.Count);
@@ -84,7 +102,7 @@ namespace PERA.Controllers
 
             return dictArray;
         }
-
+        */
         // PUT: api/BadgeScans/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutBadgeScan(int id, BadgeScan badgeScan)

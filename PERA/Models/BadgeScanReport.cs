@@ -7,7 +7,7 @@ namespace PERA.Models
 {
     public class BadgeScanReport : ActiveParkerReport
     {
-        public ICollection<BadgeScan> BadgeScans { get; set; }
+        public virtual ICollection<BadgeScan> BadgeScans { get; set; }
         
         protected BadgeScanReport()
         {

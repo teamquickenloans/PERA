@@ -26,8 +26,8 @@ namespace PERA.App_Start
 
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
-                routeTemplate: "api/{controller}/{action}/{id}",
-                defaults: new { id = RouteParameter.Optional }
+                routeTemplate: "api/{controller}/{action}/{id}/{firstName}/{lastName}",
+                defaults: new { id = RouteParameter.Optional, firstName = RouteParameter.Optional, lastName = RouteParameter.Optional }
             );
         }
     }
