@@ -124,7 +124,7 @@ namespace PERA.Controllers
 
 
                 //BadgeScanReport bsReport = db.BadgeScanReports.Create();
-                //bsReport.GarageID = garageID;
+                bsReport0.GarageID = garageID;
                 //bsReport.MonthYear = bsReport0.MonthYear;
                 //bsReport.DateReceived = bsReport0.DateReceived;
                 //bsReport.DateUploaded = bsReport0.DateUploaded;
@@ -183,13 +183,13 @@ namespace PERA.Controllers
             {
 
                 // if this row is the headings, skip this row
-                System.Diagnostics.Debug.WriteLine("loop");
+                Trace.WriteLine("loop");
                 if (row == null || row.Equals( System.DBNull.Value) )
                 {
                     System.Diagnostics.Debug.WriteLine("null");
                     continue;
                 }
-                
+
                 if (row[0] == null || row[0].Equals(System.DBNull.Value))
                 {
                     System.Diagnostics.Debug.WriteLine("null");
@@ -209,6 +209,10 @@ namespace PERA.Controllers
                     System.Diagnostics.Debug.WriteLine("row[2] is null");
                     continue;
                 }
+
+
+
+
                 string firstName, lastName;
                 
                 string fullName = row[2].ToString();
@@ -222,8 +226,8 @@ namespace PERA.Controllers
                 }
                 else
                 {
-                    string[] firstnames = names[1].Split(' ');
-                    firstName = firstnames[1];
+                    //string[] firstnames = names[1].Split(' ');
+                    firstName = names[1];
                     lastName = names[0];
                 }
                 
@@ -235,6 +239,7 @@ namespace PERA.Controllers
 
                 badgeScan.FirstName = firstName;
                 badgeScan.LastName = lastName;
+
 
 
                 if (row[0] == DBNull.Value)
