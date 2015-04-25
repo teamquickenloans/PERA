@@ -22,6 +22,7 @@
         vm.reports = angular.copy(vm.defaultReport);
         $scope.garages = [];
         $scope.usage = {};
+        $scope.daysInMonth;
 
 
         vm.clearForm = clearForm;
@@ -96,42 +97,22 @@
         function garagesSuccess(data) {
             $scope.garages = data.data;
         }
-        /*
-        function badgeScanSuccessFn(data, status, headers, config) {
-            console.log("BADGE SCAN SUCCESS FN");
-            console.log("data.data: " + data.data);
-            console.log("index: " + vm.index);
-            vm.usage[vm.index] = data.data;
-        }
-        */
-        function badgeScanSuccessFn(data, status, headers, config) {
-           // $scope.usage = data.data;
-           // console.log($scope.usage);
-            // return data.data;
-            /*
-            var tempArray = data.data;
 
-            tempArray.forEach(function (val, i) {
-                if (i % 2 === 1) return;
-                console.log('val: ' + val);
-                console.log('i: ' + i);
-                $scope.usage[val] = tempArray[i + 1];
-            });
-            */
+        function badgeScanSuccessFn(data, status, headers, config)
+        {
+            //remove number of days in the month from the end of string
+            var temp = data.data.split("}");
+            $scope.daysInMonth = temp[1];
             
             //Read data.data as a string. Parse it into an array of arrays(key/value pairs)
-            var temp = data.data.replace(/"/g, '');
+            temp = temp[0].replace(/"/g, '');
             temp = temp.replace('{', '');
-            temp = temp.replace('}', '');
             var array = temp.split(",");
             
             for(var i=0; i<array.length; i++)
             {
                array[i] = array[i].split(":");
             }
-
-            //console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
-            //console.log(array[0][0]);
 
             //Enter the data into a javascript dictionary which can be referenced in a view
             for(var i=0; i<array.length; i++)
@@ -144,12 +125,6 @@
             Snackbar.error(data.data.error);
         }
 
-        /*
-        function findUsage(id, firstName, lastName, index) {
-            $http.get('/api/BadgeScans/GetNumberOfScans/' + id + '/' + firstName + '/' + lastName).then(badgeScanSuccessFn, badgeScanErrorFn); //promise
-            vm.index = index;
-        }
-        */
         function findUsage(id) {
             $http.get('/api/BadgeScans/GetNumberOfScans/' + id )
                 .then(badgeScanSuccessFn, badgeScanErrorFn); //promise
