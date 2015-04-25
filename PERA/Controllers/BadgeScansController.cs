@@ -54,12 +54,6 @@ namespace PERA.Controllers
 
             Dictionary<string, int> usage = new Dictionary<string,int>();
 
-            if (report.BadgeScans != null)
-            {
-                Trace.WriteLine(report.BadgeScans.Count);
-            }
-
-
             // Grab all of the scans for this person in that report
             foreach(QLTeamMember qlTM in QLReport.TeamMembers) {
                 List<BadgeScan> scans = report.BadgeScans.Where(x => x.FirstName == qlTM.FirstName && x.LastName == qlTM.LastName).ToList();
