@@ -15,12 +15,10 @@
         </table>
 
         <div id="usageTableBodyWrapper" ng-controller="BadgeScanController as bsCtrl">
-            <table id="usageTableBody" ng-if="getCurrent().garageID > 0"
-                   ng-init="bsCtrl.findUsage(getCurrent().garageID)">
-                <!-- No garages have an ID of 0 -->
+            <table id="usageTableBody" ng-if="getCurrent().garageID > 0" ng-init="bsCtrl.findUsage(getCurrent().garageID)"> <!-- No garages have an ID of 0 -->
                 <tr class="tableRow" ng-repeat="teammember in teamCtrl.teamMembers[getCurrent().garageID]">
                     <td class="nameColUsageTable">{{teammember.firstName}} {{teammember.lastName}}</td>
-                    <td class="usageColUsageTable">{{usage[teammember.firstName+teammember.lastName]}}/30</td>
+                    <td class="usageColUsageTable">{{usage[teammember.firstName + teammember.lastName]}}/30</td>
                 </tr>
             </table>
         </div>

@@ -46,9 +46,12 @@ namespace PERA.Controllers
 
             QLActiveParkerReport QLReport = db.QLActiveParkerReports.Where( x => x.GarageID == id).OrderByDescending(x => x.MonthYear).FirstOrDefault();
 
-           Dictionary<string, int> usage = new Dictionary<string,int>();
+            Dictionary<string, int> usage = new Dictionary<string,int>();
 
-           Trace.WriteLine(report.BadgeScans.Count);
+            if (report.BadgeScans != null)
+            {
+                Trace.WriteLine(report.BadgeScans.Count);
+            }
 
 
             // Grab all of the scans for this person in that report
@@ -60,9 +63,9 @@ namespace PERA.Controllers
             //JavaScriptSerializer serializer = new JavaScriptSerializer();
             //string json = serializer.Serialize((object)usage);
 
-            return JsonConvert.SerializeObject((object)usage);
-            
+            return JsonConvert.SerializeObject((object)usage);  
         }
+
         /*
         // GET: api/BadgeScans/GetNumberOfScans
         public int[] GetNumberOfScans(int id)

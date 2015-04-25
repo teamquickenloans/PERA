@@ -23,6 +23,7 @@
         $scope.garages = [];
         $scope.usage = {};
 
+
         vm.clearForm = clearForm;
         vm.uploadAll = uploadAll;
         vm.findUsage = findUsage;
@@ -104,15 +105,39 @@
         }
         */
         function badgeScanSuccessFn(data, status, headers, config) {
-            $scope.usage = data.data;
-            console.log(data.data);
-            return data.data;
+           // $scope.usage = data.data;
+           // console.log($scope.usage);
+            // return data.data;
+            /*
+            var tempArray = data.data;
 
-            /*tempArray.forEach(function (val, i) {
+            tempArray.forEach(function (val, i) {
                 if (i % 2 === 1) return;
-                console.log('val: '+val);
-                vm.usage[val] = tempArray[i + 1];
-            });*/
+                console.log('val: ' + val);
+                console.log('i: ' + i);
+                $scope.usage[val] = tempArray[i + 1];
+            });
+            */
+            
+            //Read data.data as a string. Parse it into an array of arrays(key/value pairs)
+            var temp = data.data.replace(/"/g, '');
+            temp = temp.replace('{', '');
+            temp = temp.replace('}', '');
+            var array = temp.split(",");
+            
+            for(var i=0; i<array.length; i++)
+            {
+               array[i] = array[i].split(":");
+            }
+
+            //console.log("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+            //console.log(array[0][0]);
+
+            //Enter the data into a javascript dictionary which can be referenced in a view
+            for(var i=0; i<array.length; i++)
+            {
+                $scope.usage[array[i][0]] = array[i][1];
+            }  
         }
 
         function badgeScanErrorFn(data, status, headers, config) {
