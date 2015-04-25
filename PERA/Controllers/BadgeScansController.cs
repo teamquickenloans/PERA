@@ -44,7 +44,11 @@ namespace PERA.Controllers
             // Grab the most recent badge scan report for this garage
             BadgeScanReport report = db.BadgeScanReports.Where(x => x.GarageID == id).OrderByDescending(x => x.MonthYear).FirstOrDefault();
 
-            int days = DateTime.DaysInMonth(report.MonthYear.Year, report.MonthYear.Month);
+            int days = 30;
+            if (report != null)
+            {
+                days = DateTime.DaysInMonth(report.MonthYear.Year, report.MonthYear.Month);
+            }
 
             QLActiveParkerReport QLReport = db.QLActiveParkerReports.Where( x => x.GarageID == id).OrderByDescending(x => x.MonthYear).FirstOrDefault();
 
