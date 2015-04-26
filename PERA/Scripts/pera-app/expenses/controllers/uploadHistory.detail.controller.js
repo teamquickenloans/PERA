@@ -12,12 +12,16 @@
 
     function UploadHistoryDetailController($scope, Snackbar, $stateParams, TeamMembers) {
 
-        console.log($stateParams.invoiceId);
+        console.log($stateParams.reportId);
 
-        getTeamMembers();
+        if ($stateParams.typeId == 1)
+            getTeamMembers();
+
+        else if ($stateParams.typeId == 2)
+            TeamMembers.qlreport($stateParams.reportId).then(success, error);
 
         function getTeamMembers() {
-            TeamMembers.invoice($stateParams.invoiceId).then(success, error);
+            TeamMembers.invoice($stateParams.reportId).then(success, error);
         }
 
         function success(data) {

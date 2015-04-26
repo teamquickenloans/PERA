@@ -215,7 +215,7 @@
         ///////////////////////////////
         var uploadHistoryDetail = {
             name: 'upload.history.detail',
-            url: '/invoice/:invoiceId',
+            url: '/invoice/:reportId/type/:typeId',
             views: {
                 '@upload': {    //the blank view in the 'upload' template
                     templateUrl: 'Upload/HistoryDetail',
@@ -227,6 +227,7 @@
             }
         }
         $stateProvider.state(uploadHistoryDetail);
+
 
 
           /////////////////////////////////

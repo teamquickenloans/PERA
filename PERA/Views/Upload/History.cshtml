@@ -21,7 +21,7 @@
                     <td>${{invoice.totalAmountBilled}}</td>
                     <td>
                         <font ng-repeat="invoiceAPR in invoiceAPRs[invoice.invoiceID]">
-                            <a ui-sref="upload.history.detail({invoiceId:invoiceAPR.id})">
+                            <a ui-sref="upload.history.detail({reportId:invoiceAPR.id,typeId:1})">
                                 {{garages[invoiceAPR.garageID].name}}
                             </a>
                         </font>
@@ -43,7 +43,11 @@
 
         <tbody id="uploadTableBody">
             <tr class="tableRow" ng-repeat="report in qlAPRs" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
-                <td>{{garages[report.garageID].name}}</td>
+                <td>
+                    <a ui-sref="upload.history.detail({reportId:report.id,typeId:2})">
+                        {{garages[report.garageID].name}}
+                    </a>
+                </td>
                 <td>{{report.monthYear | date:'MMMM yyyy'}}</td>
                 <td>{{report.dateUploaded | date:'M-dd-yyyy'}}</td>
             </tr>

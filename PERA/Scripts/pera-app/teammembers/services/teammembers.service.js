@@ -27,6 +27,7 @@
             all: all,
             garage: garage,
             invoice: invoice,
+            qlreport: qlreport,
             create: create,
             get: get,
             share: share
@@ -74,6 +75,16 @@
         */
         function garage(garageID) {
            return $http.get('/api/parkerReportTeamMembers/garage/' + garageID);
+        }
+
+        /**
+      * @name qlreport
+      * @desc Get all ParkerReportTeamMembers for a QLreport
+      * @returns {Promise}
+      * @memberOf pera.teammmembers.services.TeamMembers
+      */
+        function qlreport(reportID) {
+            return $http.get('/api/parkerReportTeamMembers/qlreport/' + reportID);
         }
 
         /**
