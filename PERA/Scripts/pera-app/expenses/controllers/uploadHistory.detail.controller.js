@@ -33,6 +33,7 @@
         }
 
         function success(data) {
+            console.log(data.data)
             $scope.teamMembers = data.data;
         }
 

@@ -56,7 +56,7 @@
             </div>
         </div>
         <div class="row">
-            <button class="radius button" type="submit">Upload</button>
+            <button class="radius button" ng-click="uploading=true" type="submit">Upload</button>
             <a class="radius button" ng-click="fileCtrl.clearForm()">Clear Form</a>
         </div>
 
@@ -66,7 +66,7 @@
 
     <!-- ========================== NO WORKY ===================================== -->
     <a class="radius button" ng-click="bsCtrl.uploading = !bsCtrl.uploading;">Simulate Upload</a>
-    <div class="ball" ng-show="bsCtrl.uploading">
+    <div class="ball" ng-show="uploading" ng-hide="!uploading">
         Loading...
     </div>
     <!-- ========================== NO WORKY ===================================== -->

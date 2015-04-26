@@ -56,9 +56,7 @@
         function uploadAll() {
             //========================== NO WORKY =====================================
             $scope.uploading = true;
-            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
-                $scope.$apply();
-            }
+
             console.log("uploading: " + $scope.uploading);
             //========================== NO WORKY =====================================
 
@@ -88,6 +86,7 @@
         function uploadSuccess() {
             //========================== NO WORKY =====================================
             $scope.uploading = false;
+            vm.reports = {};
             if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
                 $scope.$apply();
             }
@@ -100,7 +99,7 @@
 
         function clearForm() {
             vm.form = angular.copy(vm.defaultForm);
-            $scope.badgeScanForm.$setPristine();
+            //$scope.badgeScanForm.$setPristine();
             vm.files = [];
             vm.reports = angular.copy(vm.defaultReport);
             console.log("clear form");
