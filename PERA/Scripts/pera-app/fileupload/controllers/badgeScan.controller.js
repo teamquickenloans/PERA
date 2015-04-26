@@ -23,6 +23,7 @@
         $scope.garages = [];
         $scope.usage = {};
         $scope.daysInMonth;
+        $scope.uploading = false;
 
 
         vm.clearForm = clearForm;
@@ -53,6 +54,14 @@
         }
 
         function uploadAll() {
+            //========================== NO WORKY =====================================
+            $scope.uploading = true;
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+            console.log("uploading: " + $scope.uploading);
+            //========================== NO WORKY =====================================
+
             console.log("uploadAll");
             var form = vm.form;
             var date = Date.now();
@@ -77,6 +86,14 @@
         }
 
         function uploadSuccess() {
+            //========================== NO WORKY =====================================
+            $scope.uploading = false;
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+            console.log("uploading: " + $scope.uploading);
+            //========================== NO WORKY =====================================
+
             Snackbar.show("Card Activity Report Uploaded Successfully");
             clearForm();
         }
@@ -90,6 +107,14 @@
         }
 
         function uploadFail() {
+            //========================== NO WORKY =====================================
+            $scope.uploading = false;
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+            console.log("uploading: " + $scope.uploading);
+            //========================== NO WORKY =====================================
+
             Snackbar.error("Card Activity Report upload failed.  Please recheck the formatting of the excel file.");
             clearForm();
         }
