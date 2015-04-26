@@ -24,15 +24,14 @@ namespace PERA.Controllers
 
         // GET: api/InvoiceActiveParkerReports/5
         [ResponseType(typeof(InvoiceActiveParkerReport))]
-        public IHttpActionResult GetInvoiceActiveParkerReport(int id)
+        public InvoiceActiveParkerReport GetInvoiceActiveParkerReport(int id)
         {
             InvoiceActiveParkerReport invoiceActiveParkerReport = db.InvoiceActiveParkerReports.Find(id);
             if (invoiceActiveParkerReport == null)
             {
-                return NotFound();
+                //return NotFound();
             }
-
-            return Ok(invoiceActiveParkerReport);
+            return invoiceActiveParkerReport;
         }
         
          //GET: api/InvoiceActiveParkerReports/invoice/5
