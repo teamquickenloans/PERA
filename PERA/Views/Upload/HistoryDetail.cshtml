@@ -12,10 +12,12 @@
             </tr>
         </thead>
         <tbody>
-            <tr ng-repeat="member in teamMembers">
+            <tr dir-paginate="member in teamMembers | itemsPerPage: 10">
                 <td>{{member.firstName}} {{member.lastName}}</td>
                 <td>{{member.badgeID}}</td>
             </tr>
         </tbody>
     </table>
+
+    <dir-pagination-controls></dir-pagination-controls>
 </div>
