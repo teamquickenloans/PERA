@@ -133,7 +133,6 @@ namespace PERA.Controllers
         //
 
 
-
         public void CalculatePrice(InvoiceActiveParkerReport IAPR)
         {
             // for this invoice APR
