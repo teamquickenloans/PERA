@@ -9,18 +9,21 @@
       .module('pera.expenses.services')
       .factory('InvoiceAPRs', InvoiceAPRs);
 
-    InvoiceAPRs.$inject = ['$http'];
+    InvoiceAPRs.$inject = ['$http', '$q'];
 
 
-    function InvoiceAPRs($http) {
+    function InvoiceAPRs($http, $q) {
         var allPromise = undefined;
         var last_request_failed = false;
         var vm = this;
         vm.invoiceAPRs = [];
         vm.invoiceAPR;
 
+
         var InvoiceAPRs = {
-            all: all
+            all: all,
+            reports: reports,
+            get: get,
         };
 
         return InvoiceAPRs;
@@ -31,7 +34,7 @@
         */
         function all() {
             if (!allPromise || last_request_failed) {
-                console.log("querying database");
+                //console.log("querying database");
                 allPromise = $http.get('/api/InvoiceActiveParkerReports/getInvoiceActiveParkerReports/');
                 allPromise.then(allSuccess, allError);
             }
@@ -44,7 +47,7 @@
         function allSuccess(data, status, headers, config, response) {
             last_request_failed = false;
             vm.invoiceAPRs = data.data;
-            console.log("service success ", vm.invoiceAPRs);
+            //console.log("service success ", vm.invoiceAPRs);
             return vm.invoiceAPRs;
             //share();
         }
@@ -54,6 +57,32 @@
         */
         function allError(data, status, headers, config, response) {
             last_request_failed = true;
+            return $q.reject(response);
+        }
+
+        /**
+          * @desc  
+          */
+        function reports(invoiceID) {
+            var promise = $http.get('/api/invoiceActiveParkerReports/invoice/' + invoiceID);
+            promise.then(reportsSuccess);
+            return promise;
+        }
+
+        function reportsSuccess(data) {
+            return data.data;
+        }
+
+        function oneSuccess(data, status, headers, config, response) {
+            //last_request_failed = false;
+            vm.invoiceAPR = data.data;
+            console.log("service success ", vm.invoiceAPR);
+            return vm.invoiceAPR;
+            //share();
+        }
+
+        function oneError(data, status, headers, config, response) {
+            //last_request_failed = true;
             //Snackbar.error("Error retrieving invoiceAPRs");
             return $q.reject(response);
         }
@@ -65,11 +94,11 @@
         * @returns {Promise}
         * @memberOf pera.expenses.services.InvoiceAPRs
         */
-        function get(garageID) {
-            var promise = $http.get('/api/garages/' + garageID);
-            console.log("getting one garage");
+        function get(invoiceAPRID) {
+            var promise = $http.get('/api/invoiceActiveParkerReports/getInvoiceActiveParkerReports/' + invoiceAPRID);
+            //console.log("getting one IAPR");
             promise.then(oneSuccess, oneError);
-            return garagePromise;
+            return promise;
         }
 
        

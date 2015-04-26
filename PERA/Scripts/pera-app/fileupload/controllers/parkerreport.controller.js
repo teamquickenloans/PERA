@@ -48,35 +48,37 @@
 
         function uploadAll() {
             if ($scope.parkerReportForm.$valid) {
-                console.log("uploadAll");
-                var form = vm.form;
-                var date = Date.now();
-                form.dateUploaded = $filter('date')(date, 'yyyy-MM-dd');
-                if (form.dateReceived == '') {
-                    form.dateReceived = null;
-                }
+            $(".ball").removeClass("hideMe");
+            console.log("uploadAll");
+            var form = vm.form;
+            var date = Date.now();
+            form.dateUploaded = $filter('date')(date, 'yyyy-MM-dd');
+            if (form.dateReceived == '') {
+                form.dateReceived = null;
+            }
 
-                //invoice.monthYear = '01-' + invoice.monthYear 
-                console.log("Upload all");
-                console.log("uploadAll monthYear:" + vm.form.monthYear);
-                console.log("uploadAll dateReceived:" + vm.form.dateReceived);
-                console.log("uploadAll dateUploaded:" + vm.form.dateUploaded);
-                if (vm.reports && vm.reports.length) {
-                    for (var i = 0; i < vm.reports.length; i++) {
-                        console.log(vm.reports[i].file[0].name)
-                        vm.files.push(vm.reports[i].file[0])
-                    }
-                    var files = angular.copy(vm.files);
-                    var form = angular.copy(vm.form);
-                    var reports = angular.copy(vm.reports);
-                    //clearForm();
-                    Upload.upload(vm.files, vm.form, vm.reports, "./api/parkerreportparser/upload")
+            //invoice.monthYear = '01-' + invoice.monthYear 
+            console.log("Upload all");
+            console.log("uploadAll monthYear:" + vm.form.monthYear);
+            console.log("uploadAll dateReceived:" + vm.form.dateReceived);
+            console.log("uploadAll dateUploaded:" + vm.form.dateUploaded);
+            if (vm.reports && vm.reports.length) {
+                for (var i = 0; i < vm.reports.length; i++) {
+                    console.log(vm.reports[i].file[0].name)
+                    vm.files.push(vm.reports[i].file[0])
+                }
+                var files = angular.copy(vm.files);
+                var form = angular.copy(vm.form);
+                var reports = angular.copy(vm.reports);
+                //clearForm();
+                Upload.upload(vm.files, vm.form, vm.reports, "./api/parkerreportparser/upload")
                         .then(uploadSuccess, uploadFail);
                 }
             }
 
         }
         function uploadSuccess() {
+            $(".ball").addClass("hideMe");
             Snackbar.show("Parker Report Uploaded Successfully");
             clearForm();
         }
@@ -89,6 +91,7 @@
             console.log("clear form");
         }
         function uploadFail() {
+            $(".ball").addClass("hideMe");
             Snackbar.error("Invoice upload failed.  Please recheck the formatting of the excel file.");
         }
         function garagesSuccessFn(data, status, headers, config) {

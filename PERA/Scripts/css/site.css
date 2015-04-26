@@ -6,6 +6,14 @@ html, body, #wrapper {
     margin: 0;
 }
 
+table tr th,
+  table tr td {
+   font-size: 1rem;
+} 
+
+table thead tr th {
+    font-size: 1rem;
+}
 
 #wrapper {
     overflow: hidden;
@@ -297,3 +305,11 @@ h4 {
     padding: 0;
 }
 
+.datepicker {
+    top: 0% !important; /* !important is bad practice, but it's hard to overcome the specificity of inline styles */
+    left: 0% !important;
+}
+
+.hideMe {
+    visibility: hidden;
+}

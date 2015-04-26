@@ -290,12 +290,14 @@
         vm.garages = [];
         vm.garageMarkers = [];
         vm.initialized = false; //tracks if the maps has already been initialized
+
+        $scope.addGarage = addGarage;
+
         $rootScope.$state = $state;
 
         vm.styleArray = styleArray;
 
         //initialize the map
-        console.log('map ctrl');
         vm.initialize = initialize;
         initialize();
         //window.onload = initialize;
@@ -316,7 +318,6 @@
                 streetViewControl: false,
                 overviewMapControl: false
             };
-            console.log("initalize");
 
             /*Initializer.mapsInitialized
                 .then(function () {
@@ -334,7 +335,7 @@
             //Add key to map
             vm.map.controls[google.maps.ControlPosition.BOTTOM_LEFT].push(document.getElementById('mapKey'));
             Garages.all().then(garagesSuccessFn, garagesErrorFn);
-            console.log(vm.garages);
+            //console.log(vm.garages);
             vm.initialized = true;
           } //end intialize function
 
@@ -355,6 +356,23 @@
                       });
               });
           }
+
+          function rightClick(marker, garage) {
+              google.maps.event.addListener(marker, 'rightclick', function (mouseEvent) {
+                  console.log(marker.garage);
+                  SideBar.setCurrent(marker.garage);
+                  $state.go('garage.map.edit').then(openModal)
+              })
+          }
+
+          function addGarage() {
+              console.log("add garage!");
+              $state.go('garage.map.add').then(openModal);
+          }
+
+          function openModal() {
+              $('#modal').foundation('reveal', 'open');
+          }
           function PlaceMarkers(map, garages, garageMarkers) {
               for (var i = 0; i < garages.length; i++) {
                   var position = new google.maps.LatLng(garages[i].latitude, garages[i].longitude);
@@ -373,6 +391,7 @@
                   var garage = garages[i];
                   //add click event
                   attachGarage(marker, garage);
+                  rightClick(marker, garage);
 
                   //add marker image
                   var load = parseFloat(garages[i].numberOfLeasedSpaces) - parseFloat(garages[i].numberOfTeamMemberSpaces);

@@ -1,27 +1,27 @@
 ﻿<div class="small-12 medium-12 large-10">
-<h3>Upload an Active Parker Report</h3>
-<p>
-    This form allows you to upload a Quicken Loans active parker report.  The report can be a System Galaxy
-    excel file, but could be other formats as well. This data will be ingested into the database
-    and can be used in the Expense Reconciliation Tool to identify discrepancies.
-</p>
+    <h3>Upload an Active Parker Report</h3>
+    <p>
+        This form allows you to upload a Quicken Loans active parker report.  The report can be a System Galaxy
+        excel file, but could be other formats as well. This data will be ingested into the database
+        and can be used in the Expense Reconciliation Tool to identify discrepancies.
+    </p>
                                                       
-<form novalidate name="parkerReportForm" ng-submit="fileCtrl.uploadAll()">
+    <form novalidate name="parkerReportForm" ng-submit="fileCtrl.uploadAll()">
 
         <h4>Date</h4>
     <div class="large-6 column" ng-class="{ 'has-error' : parkerReportForm.monthYear.$invalid && !parkerReportForm.monthYear.$pristine }">
 
 
 
-        <label for="monthYear">Month/Year of Report</label>
+            <label for="monthYear">Month/Year of Report</label>
 
-        <date-picker id="monthYear" format="MMM yyyy" placeholder="."
-                     ng-model="fileCtrl.form.monthYear">
-        </date-picker>
+            <date-picker id="monthYear" format="MMM yyyy" placeholder="."
+                         ng-model="fileCtrl.form.monthYear">
+            </date-picker>
 
-        @*<input type="text" ng-model="fileCtrl.invoice.monthYear" id="monthYear" ng-datepicker="{}" required />*@
+            @*<input type="text" ng-model="fileCtrl.invoice.monthYear" id="monthYear" ng-datepicker="{}" required />*@
         <small class="error" ng-show="parkerReportForm.monthYear.$invalid && !parkerReportForm.monthYear.$pristine">Month/Year of report must be in MMM yyyy format.</small>
-    </div>
+        </div>
 
     <div ng-class="{ 'has-error' : parkerReportForm.dateReceived.$invalid && !parkerReportForm.dateReceived.$pristine }">
         <label for="dateReceived">Date Received:</label>
@@ -33,16 +33,16 @@
         <small class="error" ng-show="parkerReportForm.dateReceived.$invalid && !parkerReportForm.dateReceived.$pristine">Date received of the report must be in dd MMM yyyy format.</small>
     </div>
 
-   
+
         <h4>
             Active Parker Reports
-        <a ng-click="fileCtrl.addReport()">
-            <i class="fi-plus green px24"></i>
-        </a>
-        <a ng-click="fileCtrl.removeReport()">
-            <i class="fi-minus orange px24"></i>
-        </a><br />
-    </h4>
+            <a ng-click="fileCtrl.addReport()">
+                <i class="fi-plus green px24"></i>
+            </a>
+            <a ng-click="fileCtrl.removeReport()">
+                <i class="fi-minus orange px24"></i>
+            </a><br />
+        </h4>
 
 
         <!--<input type="file" class="fileInput" ng-file-select ng-model="files" ng-multiple="false" />-->
@@ -70,11 +70,15 @@
         <br />
 
 
-</form>
+        <div class="ball hideMe">
+            Uploading...
+        </div>
+
+    </form>
 </div>
 
 
 
-@*<script type="text/javascript">
-        $('.date-pick').pickadate()
-    </script>*@
+    @*<script type="text/javascript">
+            $('.date-pick').pickadate()
+        </script>*@

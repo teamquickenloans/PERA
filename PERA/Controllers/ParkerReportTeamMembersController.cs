@@ -47,10 +47,49 @@ namespace PERA.Controllers
 
             if (QLReport == null)
             {
-                //return NotFound();
+                return null;
+            }
+            
+            return QLReport.TeamMembers;
+        }
+
+
+        // GET: api/ParkerReportTeamMembers/qlreport/5
+        [HttpGet]
+        [ActionName("QLreport")]
+        [ResponseType(typeof(ParkerReportTeamMember))]
+        public ICollection<QLTeamMember> GetParkerReportTeamMembersByReport(int id)
+        {
+            QLActiveParkerReport QLReport = db.QLActiveParkerReports.Where(
+                x => x.ID == id).FirstOrDefault();
+
+            //OrderByDescending(x => x.MonthYear).
+
+            if (QLReport == null)
+            {
+                return null;
             }
 
             return QLReport.TeamMembers;
+        }
+
+
+        // GET: api/ParkerReportTeamMembers/invoice/5
+        [HttpGet]
+        [ActionName("invoice")]
+        [ResponseType(typeof(ParkerReportTeamMember))]
+        public ICollection<ParkerReportTeamMember> GetParkerReportTeamMembersByInvoice(int id)
+        {
+            InvoiceActiveParkerReport InvoiceReport = db.InvoiceActiveParkerReports.Where(
+                x => x.ID == id).FirstOrDefault();
+
+
+            if (InvoiceReport == null)
+            {
+                return null;
+            }
+
+            return InvoiceReport.TeamMembers;
         }
 
         // PUT: api/ParkerReportTeamMembers/5

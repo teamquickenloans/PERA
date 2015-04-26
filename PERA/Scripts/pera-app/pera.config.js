@@ -14,6 +14,9 @@
     */
     function config($stateProvider, $routeProvider, $urlRouterProvider) {
 
+        //set default page to garage map
+        $urlRouterProvider.otherwise('/garage');
+
         /*uiGmapGoogleMapApiProvider.configure({
             key: 'AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM',
             v: '3.17',
@@ -96,7 +99,8 @@
                 'sidebar@garage': {
                     templateUrl: 'Garage/GarageInfo',
                     controller: 'TeamMembersController as teamCtrl'
-                }
+                },
+
             }
         }
         $stateProvider.state(mapView);
@@ -114,6 +118,37 @@
             }
         }
         $stateProvider.state(mapGarage);
+
+        /////////////////////////////
+        //   Garage > Map > Edit   //
+        ////////////////////////////
+        var editGarage = {
+            name: 'garage.map.edit',
+            views: {
+                'modalView@': {
+                    templateUrl: 'Form/EditGarage',
+                    controller: 'EditGarageController as controller'
+                }
+            }
+        }
+        $stateProvider.state(editGarage);
+
+
+        ////////////////////////////
+        //    Garage > Map > Add //
+        //////////////////////////
+        var garageAdd = {
+            name: 'garage.map.add',
+            views: {
+                'modalView@': {
+                    templateUrl: 'Form/EditGarage',
+                    controller: 'AddGarageController as controller'
+                }
+            }
+        }
+        $stateProvider.state(garageAdd);
+
+
 
           //////////////////////
          //    Garage > Edit //
@@ -144,9 +179,6 @@
 
 
 
-
-
-
         // ====================== Upload ==============================
 
 
@@ -161,14 +193,14 @@
         }
         $stateProvider.state(upload);
 
-          /////////////////////////////////
-         //     Upload > Upload History //
-        /////////////////////////////////
+          ///////////////////////
+         // Upload > History  //
+        ///////////////////////
         var uploadHistory = {
-            name: 'upload.uploadHistory',
+            name: 'upload.history',
             views: {
                 '': {
-                    templateUrl: 'Upload/UploadHistory',
+                    templateUrl: 'Upload/History',
                     controller: 'UploadHistoryController as controller'
                 },
                 'sidebar-left@upload': {
@@ -177,6 +209,26 @@
             }
         }
         $stateProvider.state(uploadHistory);
+
+        /////////////////////////////////
+        //  Upload > History > Detail //
+        ///////////////////////////////
+        var uploadHistoryDetail = {
+            name: 'upload.history.detail',
+            url: '/invoice/:reportId/type/:typeId',
+            views: {
+                '@upload': {    //the blank view in the 'upload' template
+                    templateUrl: 'Upload/HistoryDetail',
+                    controller: 'UploadHistoryDetailController as controller'
+                },
+                'sidebar-left@upload': {
+                    templateUrl: 'Navigation/Upload'
+                }
+            }
+        }
+        $stateProvider.state(uploadHistoryDetail);
+
+
 
           /////////////////////////////////
          //            Upload > Invoice //
@@ -275,6 +327,28 @@
             }
         }
         $stateProvider.state(discrepancies);
+
+          /////////////////////////////////////
+         //    Expense > Data Visualization //
+        /////////////////////////////////////
+        var datavisualization = {
+            name: 'expense.datavisualization',
+            views: {
+                '': {
+                    templateUrl: 'Expense/DataVisualization',
+                    controller: 'DataVisualizationController as controller'
+                },
+                'right-nav@': {
+                    templateUrl: 'Navigation/TopBar',
+                    controller: 'SideBarController as sidebar'
+                },
+                'sidebar@expense': {
+                    templateUrl: 'Navigation/Overview',
+                    controller: 'SideBarController as sidebar'
+                }
+            }
+        }
+        $stateProvider.state(datavisualization);
 
           ////////////////////////////////////////////
          //     Expense > Discrepancies > Overview //

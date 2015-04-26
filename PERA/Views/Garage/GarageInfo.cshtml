@@ -14,18 +14,16 @@
             </tr>
         </table>
 
-        <div id="usageTableBodyWrapper">
-            <table id="usageTableBody">
+        <div id="usageTableBodyWrapper" ng-controller="BadgeScanController as bsCtrl">
+            <table id="usageTableBody" ng-if="getCurrent().garageID > 0" ng-init="bsCtrl.findUsage(getCurrent().garageID)"> <!-- No garages have an ID of 0 -->
                 <tr class="tableRow" ng-repeat="teammember in teamCtrl.teamMembers[getCurrent().garageID]">
                     <td class="nameColUsageTable">{{teammember.firstName}} {{teammember.lastName}}</td>
-                    <td class="usageColUsageTable">0/31</td>
+                    <td class="usageColUsageTable">{{usage[teammember.firstName + teammember.lastName]}}/{{daysInMonth}}</td>
                 </tr>
             </table>
         </div>
 
-    </div> <!-- usageTableWrapper end -->
-
-
+    </div> <!-- usageTableWrapper end -->                                                                   
 
 </div> <!-- sideBar end -->
 

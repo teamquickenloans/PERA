@@ -18,8 +18,8 @@
     /*
     * @namespace InvoiceFormController
     */
-    function ngFile(){
-
+    function ngFile()
+    {
         var scope = { 
             fileread: "="
         }

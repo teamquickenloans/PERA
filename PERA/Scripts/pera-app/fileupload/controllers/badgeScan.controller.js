@@ -9,24 +9,30 @@
       .module('pera.fileupload.controllers')
       .controller('BadgeScanController', BadgeScanController);
 
-    BadgeScanController.$inject = ['$scope', '$upload', 'Upload', 'Garages', 'Snackbar', '$filter']; //Here 'Garages' is the Garages Service (pera.garages.service)
+    BadgeScanController.$inject = ['$scope', '$upload', 'Upload', 'Snackbar', '$filter' ,'$http', 'Garages'];
 
     /**
     * @namespace BadgeScanController
     */
-    function BadgeScanController($scope, $upload, Upload, Garages, Snackbar, $filter) {
+    function BadgeScanController($scope, $upload, Upload, Snackbar, $filter, $http, Garages) {
 
         var vm = this;
         vm.files = [];
         vm.defaultReport = [{ garageID: 0 }];
         vm.reports = angular.copy(vm.defaultReport);
         $scope.garages = [];
+        $scope.usage = {};
+        $scope.daysInMonth;
+
 
         vm.clearForm = clearForm;
         vm.uploadAll = uploadAll;
+        vm.findUsage = findUsage;
         vm.addReport = addReport;
         vm.removeReport = removeReport;
 
+
+        Garages.all().then(garagesSuccess);
 
         vm.defaultForm = {
             dateReceived: '',
@@ -36,7 +42,6 @@
 
         vm.form = angular.copy(vm.defaultForm);
 
-        Garages.all().then(garagesSuccessFn, garagesErrorFn);
 
         function addReport() {
             vm.counter++;
@@ -49,6 +54,7 @@
         }
 
         function uploadAll() {
+            $(".ball").removeClass("hideMe");
             console.log("uploadAll");
             var form = vm.form;
             var date = Date.now();
@@ -73,29 +79,59 @@
         }
 
         function uploadSuccess() {
+            $(".ball").addClass("hideMe");
             Snackbar.show("Card Activity Report Uploaded Successfully");
             clearForm();
         }
 
         function clearForm() {
             vm.form = angular.copy(vm.defaultForm);
-            $scope.badgeScanForm.$setPristine();
+            //$scope.badgeScanForm.$setPristine();
             vm.files = [];
             vm.reports = angular.copy(vm.defaultReport);
             console.log("clear form");
         }
+
         function uploadFail() {
+            $(".ball").addClass("hideMe");
             Snackbar.error("Card Activity Report upload failed.  Please recheck the formatting of the excel file.");
             clearForm();
         }
 
-        function garagesSuccessFn(data, status, headers, config) {
-            $scope.garages = data.data;         //this will depend on what the API returns, it may have to change
-            //console.log("fileupload Contoller garages success", $scope.garages);
+        function garagesSuccess(data) {
+            $scope.garages = data.data;
         }
 
-        function garagesErrorFn(data, status, headers, config) {
+        function badgeScanSuccessFn(data, status, headers, config)
+        {
+            //remove number of days in the month from the end of string
+            var temp = data.data.split("}");
+            $scope.daysInMonth = temp[1];
+            
+            //Read data.data as a string. Parse it into an array of arrays(key/value pairs)
+            temp = temp[0].replace(/"/g, '');
+            temp = temp.replace('{', '');
+            var array = temp.split(",");
+            
+            for(var i=0; i < array.length; i++)
+            {
+               array[i] = array[i].split(":");
+            }
+
+            //Enter the data into a javascript dictionary which can be referenced in a view
+            for(var i=0; i < array.length; i++)
+            {
+                $scope.usage[array[i][0]] = array[i][1];
+            }  
+        }
+
+        function badgeScanErrorFn(data, status, headers, config) {
             Snackbar.error(data.data.error);
+        }
+
+        function findUsage(id) {
+            $http.get('/api/BadgeScans/GetNumberOfScans/' + id )
+                .then(badgeScanSuccessFn, badgeScanErrorFn); //promise
         }
 
     }

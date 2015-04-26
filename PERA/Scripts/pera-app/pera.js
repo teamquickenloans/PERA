@@ -11,6 +11,7 @@
         'pera.map',
         'pera.tabs',
         'pera.fileupload',
+        'pera.export',
         'pera.teammembers',
         'pera.invoiceTeamMembers',
         'pera.sidebar',
@@ -20,7 +21,8 @@
         //'ct.ui.router.extras',
         'angular-datepicker',
         'bzm-date-picker',
-        'uiGmapgoogle-maps'
+        'uiGmapgoogle-maps',
+        'angularUtils.directives.dirPagination'
         ])
     
     //angular

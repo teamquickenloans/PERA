@@ -58,32 +58,34 @@
         function uploadAll()
         {
             if ($scope.invoiceForm.$valid) {
-                var invoice = vm.invoice;
-                var date = Date.now();
-                invoice.dateUploaded = $filter('date')(date, 'yyyy-MM-dd');
-                if (invoice.dateReceived == '') {
-                    invoice.dateReceived = null;
-                }
+            $(".ball").removeClass("hideMe");
+            var invoice = vm.invoice;
+            var date = Date.now();
+            invoice.dateUploaded = $filter('date')(date, 'yyyy-MM-dd');
+            if (invoice.dateReceived == '') {
+                invoice.dateReceived = null;
+            }
                 if (invoice.totalAmountBilled == '') {
-                    invoice.totalAmountBilled = 0;
-                }
-                //invoice.monthYear = '01-' + invoice.monthYear 
-                console.log("Upload all");
-                console.log("uploadAll monthYear:" + vm.invoice.monthYear);
-                console.log("uploadAll dateReceived:" + vm.invoice.dateReceived);
-                console.log("uploadAll dateUploaded:" + vm.invoice.dateUploaded);
+                invoice.totalAmountBilled = 0;
+            }
+            //invoice.monthYear = '01-' + invoice.monthYear 
+            console.log("Upload all");
+            console.log("uploadAll monthYear:" + vm.invoice.monthYear);
+            console.log("uploadAll dateReceived:" + vm.invoice.dateReceived);
+            console.log("uploadAll dateUploaded:" + vm.invoice.dateUploaded);
                 if (vm.reports && vm.reports.length) {
-                    for (var i = 0; i < vm.reports.length; i++) {
-                        console.log(vm.reports[i].file[0].name)
-                        vm.files.push(vm.reports[i].file[0])
-                    }
-                    Upload.upload(vm.files, vm.invoice, vm.reports, "./api/invoiceparser/upload").then(uploadSuccess, uploadFail);
+                for (var i = 0; i < vm.reports.length; i++) {
+                    console.log(vm.reports[i].file[0].name)
+                    vm.files.push(vm.reports[i].file[0])
                 }
+                Upload.upload(vm.files, vm.invoice, vm.reports, "./api/invoiceparser/upload").then(uploadSuccess, uploadFail);
+            }
             }
 
         }
 
-        function uploadSuccess(){
+        function uploadSuccess() {
+            $(".ball").addClass("hideMe");
             Snackbar.show("Invoice Uploaded Successfully");
             clearForm();
         }
@@ -95,6 +97,7 @@
             console.log("clean form");
         }
         function uploadFail() {
+            $(".ball").addClass("hideMe");
             Snackbar.error("Invoice upload failed. Please recheck the formatting of the excel file.");
         }
         function garagesSuccessFn(data, status, headers, config) {

@@ -15,7 +15,6 @@ namespace PERA.Models
         public DateTime? DateReceived { get; set; }
         public DateTime DateUploaded { get; set; }
         public DateTime MonthYear { get; set; }
-        
 
     }
 }

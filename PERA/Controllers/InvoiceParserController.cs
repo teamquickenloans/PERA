@@ -111,8 +111,8 @@ namespace PERA.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, new { returnData });
         }
 
-        private void FileHandler(MultipartFormDataStreamProvider result, Invoice invoice){
-
+        private void FileHandler(MultipartFormDataStreamProvider result, Invoice invoice)
+        {
             int i = 0;
             foreach(var file in result.FileData)
             {
@@ -129,6 +129,7 @@ namespace PERA.Controllers
                 APR.MonthYear = invoice.MonthYear;
                 APR.InvoiceID = invoice.InvoiceID;
                 //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
+                Trace.WriteLine(file.LocalFileName);
                 List<ParkerReportTeamMember> teamMembers = 
                     ExcelParser(file.LocalFileName, originalFileName, invoice, APR, garageID);
                 foreach (ParkerReportTeamMember teamMember in teamMembers)
@@ -160,9 +161,12 @@ namespace PERA.Controllers
         {
             System.Diagnostics.Debug.WriteLine("begin excel parser");
             IExcelDataReader reader = null;
-            //Trace.WriteLine(garageID);
             var excelData = new ExcelData(path);
+
+            Trace.WriteLine(garageID);
+
             reader = excelData.getExcelReader(name);
+
 
             // Create column names from first row
             reader.IsFirstRowAsColumnNames = true;

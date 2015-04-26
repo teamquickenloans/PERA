@@ -34,7 +34,7 @@ namespace PERA.Controllers
 
         private PERAContext db = new PERAContext();
         
-
+        /*
         public struct Scanner
         {
             public int garageID;
@@ -44,7 +44,7 @@ namespace PERA.Controllers
         List<Scanner> garageScanners = new List<Scanner> //TODO: finish data-entry (one way or another)
         {
             //1001 Woodward
-            new Scanner { garageID = 2, scannerName = ""},
+            new Scanner { garageID = 2, scannerName = "1001 Garage - 1st. Fl. Left Inbound Lane 49.1.1.1"},
 
             //2 Detroit
             new Scanner { garageID = 5, scannerName = ""},
@@ -67,7 +67,7 @@ namespace PERA.Controllers
             //The Z
             new Scanner { garageID = 15, scannerName = ""}
         };
-
+        */
 
 
 
@@ -83,13 +83,25 @@ namespace PERA.Controllers
             var provider = GetMultipartProvider();
             var result = await Request.Content.ReadAsMultipartAsync(provider);
 
-           
 
-            //Trace.WriteLine("badgeScan.ID: " + badgeScan.ID);
-            //Trace.WriteLine("badgeScan.GarageID: " + badgeScan.GarageID);
-            //Trace.WriteLine("badgeScan.BadgeID: " + badgeScan.BadgeID);
+            //string invoice = result.FormData.GetValues(0).FirstOrDefault();
+            //Invoice newInvoice = JsonConvert.DeserializeObject<Invoice>(fileUploadObj);
+            BadgeScanReport bsReport0 = GetFormData(result);
 
-            FileHandler(result);
+            var exists = db.BadgeScanReports.Any(x => x.GarageID == bsReport0.GarageID && x.MonthYear == bsReport0.MonthYear);
+
+            if(exists)
+            {
+                bsReport0 = db.BadgeScanReports.Find(bsReport0.GarageID, bsReport0.MonthYear);
+            }
+
+            Trace.WriteLine("bsReport.GarageID: " + bsReport0.GarageID);
+            Trace.WriteLine("bsReport.MonthYear: " + bsReport0.MonthYear);
+            Trace.WriteLine("bsReport.DateReceived: " + bsReport0.DateReceived);
+            Trace.WriteLine("bsReport.DateUploaded: " + bsReport0.DateUploaded);
+            
+
+            FileHandler(result, bsReport0);
 
 
             // Through the request response you can return an object to the Angular controller
@@ -99,18 +111,57 @@ namespace PERA.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, new { returnData });
         }
 
-        private void FileHandler(MultipartFormDataStreamProvider result)
+        private void FileHandler(MultipartFormDataStreamProvider result, BadgeScanReport bsReport0)
         {
-            // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
-            // so this is how you can get the original file name
-            var file = result.FileData[0];
-            var originalFileName = GetDeserializedFileName(file);
-            int garageID = Convert.ToInt32(result.FormData.GetValues("garageID").First());
+            int i = 0;
+            foreach (var file in result.FileData)
+            {
+                // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
+                // so this is how you can get the original file name
+                //var file = result.FileData[0];
+                var originalFileName = GetDeserializedFileName(file);
+                int garageID = Convert.ToInt32(result.FormData.GetValues("garageID").First());
 
-            ExcelParser(file.LocalFileName, originalFileName, garageID);
+
+                //BadgeScanReport bsReport = db.BadgeScanReports.Create();
+                bsReport0.GarageID = garageID;
+                //bsReport.MonthYear = bsReport0.MonthYear;
+                //bsReport.DateReceived = bsReport0.DateReceived;
+                //bsReport.DateUploaded = bsReport0.DateUploaded;
+            
+                List<BadgeScan> badgeScans = 
+                    ExcelParser(file.LocalFileName, originalFileName, garageID);
+                foreach (BadgeScan badgeScan in badgeScans)
+                {
+                    if(badgeScan == null)
+                    {
+                        Trace.WriteLine("null team member");
+                        continue;
+                    }
+                    
+                    Trace.WriteLine(badgeScan.ID);
+                    Trace.WriteLine(badgeScan.FirstName);
+                    Trace.WriteLine(badgeScan.LastName);
+                    Trace.WriteLine(badgeScan.ScanDateTime);
+                   // Trace.WriteLine(bsReport.DateUploaded);
+                   // Trace.WriteLine(bsReport.MonthYear);
+                    Trace.WriteLine(badgeScan.BadgeID);
+                  //  Trace.WriteLine(bsReport.BadgeScans);
+                    
+                    bsReport0.BadgeScans.Add(badgeScan);
+                }
+                db.BadgeScanReports.Add(bsReport0);
+                db.SaveChanges();
+                //bsReport0.BadgeScanReports.Add(bsReport);
+                //db.SaveChanges();
+                i++;
+            }
+            //badgeScan.ID = badgeScan.InvoiceID;
+            //db.Invoices.Add(badgeScan);
+            //db.SaveChanges();
         }
 
-        public void ExcelParser(string path, string name, int garageID)
+        public List<BadgeScan> ExcelParser(string path, string name, int garageID)
         {
             System.Diagnostics.Debug.WriteLine("begin excel parser");
             IExcelDataReader reader = null;
@@ -118,7 +169,7 @@ namespace PERA.Controllers
             var excelData = new ExcelData(path);
             reader = excelData.getExcelReader(name);
 
-
+            List<BadgeScan> badgeScans = new List<BadgeScan>();
             // Create column names from first row
             reader.IsFirstRowAsColumnNames = true;
 
@@ -132,19 +183,25 @@ namespace PERA.Controllers
             {
 
                 // if this row is the headings, skip this row
-                System.Diagnostics.Debug.WriteLine("loop");
-                if (row == null)
+                Trace.WriteLine("loop");
+                if (row == null || row.Equals( System.DBNull.Value) )
                 {
                     System.Diagnostics.Debug.WriteLine("null");
                     continue;
                 }
 
+                if (row[0] == null || row[0].Equals(System.DBNull.Value))
+                {
+                    System.Diagnostics.Debug.WriteLine("null");
+                    continue;
+                }
+                
                 if (row[0].GetType() == typeof(String) )
                 {
                     System.Diagnostics.Debug.WriteLine(row[0]);
                     continue;
                 }
-
+                
                 BadgeScan badgeScan = db.BadgeScans.Create();
 
                 if (row[2] == DBNull.Value)
@@ -152,6 +209,10 @@ namespace PERA.Controllers
                     System.Diagnostics.Debug.WriteLine("row[2] is null");
                     continue;
                 }
+
+
+
+
                 string firstName, lastName;
                 
                 string fullName = row[2].ToString();
@@ -165,8 +226,8 @@ namespace PERA.Controllers
                 }
                 else
                 {
-                    string[] firstnames = names[1].Split(' ');
-                    firstName = firstnames[1];
+                    //string[] firstnames = names[1].Split(' ');
+                    firstName = names[1];
                     lastName = names[0];
                 }
                 
@@ -178,6 +239,7 @@ namespace PERA.Controllers
 
                 badgeScan.FirstName = firstName;
                 badgeScan.LastName = lastName;
+
 
 
                 if (row[0] == DBNull.Value)
@@ -195,12 +257,9 @@ namespace PERA.Controllers
                 badgeScan.ScanDateTime = ExcelDateToDateTime( (double)row[0] );
                 System.Diagnostics.Debug.WriteLine("DateTime: " + badgeScan.ScanDateTime);
 
-                //TODO: we need access to HR database so we can have one place where we can find additional info on all QL Team Members  \\MAYBE, but not for this
-                //TODO: ask Megan for a list of how the garages are referred to in the badge scan excel files so we can parse a GarageID out.
-                //TODO: only add one entry per person per day into the database.
 
 
-                
+               /*
                 //look up what garage the scanner is in and find the corresponding garageID. If the scanner is not for garage entrance/exit disregard the badge scan?
                 badgeScan.GarageID = -1; //to check if the actual GarageID was found
                 for (int i = 0; i < garageScanners.Count(); i++)
@@ -215,6 +274,9 @@ namespace PERA.Controllers
                 {
                     continue; //don't add this row to the database
                 }
+               */
+
+                badgeScan.GarageID = garageID;
                     
 
                 //Check if the database already holds a report of a person with the same name checking into the same garage on the same day already. 
@@ -228,11 +290,13 @@ namespace PERA.Controllers
                         && x.ScanDateTime.Day == badgeScan.ScanDateTime.Day);
                 if (bs == null)
                 {
+                    badgeScans.Add(badgeScan);
                     db.BadgeScans.Add(badgeScan);
                     db.SaveChanges();
                 }  
-
+                
             } // end for rows
+            return badgeScans;
             System.Diagnostics.Debug.WriteLine("Parsing Completed!");
         }
 
@@ -278,6 +342,30 @@ namespace PERA.Controllers
             DateTime datetime = new DateTime(1970, 1, 1, 0, 0, 0, 0, System.DateTimeKind.Utc);
             return datetime.AddSeconds(unixTimeStamp);
         }
+
+
+
+        // Extracts Request FormatData as a strongly typed model
+        private BadgeScanReport GetFormData(MultipartFormDataStreamProvider result)
+        {
+            if (result.FormData.HasKeys())
+            {
+
+                var unescapedFormData = Uri.UnescapeDataString(result.FormData
+                    .GetValues("data").FirstOrDefault() ?? String.Empty);
+                Trace.WriteLine(unescapedFormData);
+
+                if (!String.IsNullOrEmpty(unescapedFormData))
+                {
+                    return JsonConvert.DeserializeObject<BadgeScanReport>(unescapedFormData,
+                         new IsoDateTimeConverter { DateTimeFormat = "yyyy-MM-dd" });
+                }
+            }
+            return null;
+        }
+
+
+
     }
 }
 

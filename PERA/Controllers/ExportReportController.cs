@@ -24,13 +24,14 @@ namespace PERA.Controllers
         {
             //File.Copy("PERA.Controllers.book.xlsx", "output.xlsx", true);
             //File.Create("book.xlsx");
-            File.Copy("book.xlsx", "output.xlsx", true);
+            File.Copy(@"C:\Users\Matt\Desktop\School\Spring2015\CSE 498\pera\book.xlsx", @"C:\Users\Matt\Desktop\School\Spring2015\CSE 498\pera\output.xlsx", true);
             Trace.Write(File.Exists("output.xlsx"));
             string Json = "{ 'Issues': [{'garage': 'The Z', 'name': 'Matt', 'commonID': 23532,  'issue': 'Duplicate','date': '12/25/13'}, {'garage': 'OCM', 'name': 'Tim', 'commonID': 24000,  'issue': 'Duplicate','date': '12/25/14'}]}";
             JObject jsonobj = JObject.Parse(Json);
             WriteRandomValuesDOM("output.xlsx", jsonobj["Issues"].Count(), jsonobj["Issues"][0].Count(), jsonobj);
         }
-
+        //System.Net.Mail.Attachment attach = new System.Net.Mail.Attachment();
+        //MailMessage()
         public void WriteRandomValuesDOM(string filename, int numRows, int numCols, JObject json)
         {
             using (SpreadsheetDocument myDoc = SpreadsheetDocument.Open(filename, true))

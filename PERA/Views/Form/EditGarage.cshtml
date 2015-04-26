@@ -1,19 +1,19 @@
 ﻿<div class="row">
-<h3 class="padTop">{{ title }}</h3>
 
+<h3 class="padTop">{{ title }}</h3>
 
 <form name="editGarageForm" ng-submit="controller.submit()" novalidate>
     <div class="column small-6">
         <div class="switch">
-            <input id="edit" name="mode" type="checkbox" ng-model="mode">
+            <input id="edit" name="mode" type="checkbox" ng-model="mode" value="true">
             <label for="edit" onclick="">Edit</label>
             <!--<input type="radio" ng-model="mode" name="mode" value="false" id="add">
             <label for="add">Add</label>-->
         </div>
 
     </div>
+    <!--
     <div class="columns small-4">
-        <!--ng-show="mode" ng-hide="mode == 'false'"-->
         <label for="garageID">Garage</label>
         <select ng-model="current" ng-disabled="mode == false" ng-options="garage as garage.name for garage in garages" id="garageID" name="garage" ng-model-options="{ updateOn: 'blur' }" required>
             <option value="">-- select a garage --</option>
@@ -21,18 +21,18 @@
         <small class="error" ng-show="editGarageForm.garage.$invalid && !editGarageForm.garage.$pristine">Garage is required.</small>
     </div>
 
-    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.name.$invalid && !editGarageForm.name.$pristine }">
+    <div class="columns small-5" ng-class="{ 'has-error' : editGarageForm.name.$invalid && !editGarageForm.name.$pristine }">
         <label for="name">Garage Name</label>
         <input type="text"
                name="name"
                ng-model="new.name"
                ng-model-options="{ updateOn: 'blur' }"
-               ng-keyup="cancel($event)"
+               ng-keyup="cancel($event)" 
                required />
         <small class="error" ng-show="editGarageForm.name.$invalid && !editGarageForm.name.$pristine">Garage name is required.</small>
     </div>
 
-    <div class="columns small-6" ng-class="{ 'has-error' : editGarageForm.address.$invalid && !editGarageForm.address.$pristine }">
+    <div class="columns small-7" ng-class="{ 'has-error' : editGarageForm.address.$invalid && !editGarageForm.address.$pristine }">
         <label for="address">Garage Address</label>
         <input type="text"
                name="address"
@@ -43,18 +43,18 @@
         <small class="error" ng-show="editGarageForm.address.$invalid && !editGarageForm.address.$pristine">Garage address is invalid.</small>
     </div>
 
-    <div class="columns small-2" ng-class="{ 'has-error' : editGarageForm.latitude.$invalid && !editGarageForm.latitude.$pristine }">
+    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.latitude.$invalid && !editGarageForm.latitude.$pristine }">
         <label for="latitude">Garage Latitude</label>
         <input type="number"
                name="latitude"
                ng-model="new.latitude"
                ng-model-options="{ updateOn: 'blur' }"
-               ng-keyup="cancel($event)"
+               ng-keyup="cancel($event)" 
                required />
         <small class="error" ng-show="editGarageForm.latitude.$invalid && !editGarageForm.latitude.$pristine">Latitude of the Garage is required and must be a number.</small>
     </div>
 
-    <div class="columns small-2" ng-class="{ 'has-error' : editGarageForm.longitude.$invalid && !editGarageForm.longitude.$pristine }">
+    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.longitude.$invalid && !editGarageForm.longitude.$pristine }">
         <label for="longitude">Garage Longitude</label>
         <input type="number"
                name="longitude"
@@ -65,7 +65,7 @@
         <small class="error" ng-show="editGarageForm.longitude.$invalid && !editGarageForm.longitude.$pristine">Longitude of the Garage is required and must be a number.</small>
     </div>
 
-    <div class="columns small-2" ng-class="{ 'has-error' : editGarageForm.capacity.$invalid && !editGarageForm.capacity.$pristine }">
+    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.capacity.$invalid && !editGarageForm.capacity.$pristine }">
         <label for="capacity">Capacity</label>
         <input type="number"
                name="capacity"
@@ -78,7 +78,7 @@
         <small class="error" ng-show="editGarageForm.capacity.$error.min">Capacity of the Garage must be at least 0.</small>
     </div>
 
-    <div class="columns small-2" ng-class="{ 'has-error' : editGarageForm.numberOfLeasedSpaces.$invalid && !editGarageForm.numberOfLeasedSpaces.$pristine }">
+    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.numberOfLeasedSpaces.$invalid && !editGarageForm.numberOfLeasedSpaces.$pristine }">
         <label for="numberofleasedspaces">Number of Leased Spaces</label>
         <input type="number"
                name="numberOfLeasedSpaces"
@@ -91,7 +91,7 @@
         <small class="error" ng-show="editGarageForm.numberOfLeasedSpaces.$error.min">Number of leased spaces in the Garage must be at least 0.</small>
     </div>
 
-    <div class="columns small-2" ng-class="{ 'has-error' : editGarageForm.numberOfTeamMemberSpaces.$invalid && !editGarageForm.numberOfTeamMemberSpaces.$pristine }">
+    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.numberOfTeamMemberSpaces.$invalid && !editGarageForm.numberOfTeamMemberSpaces.$pristine }">
         <label for="numberofteammemberspaces">Number of Team Member Spaces</label>
         <input type="number"
                name="numberOfTeamMemberSpaces"
@@ -104,7 +104,7 @@
         <small class="error" ng-show="editGarageForm.numberOfTeamMemberSpaces.$error.min">Number of Team Member spaces in the Garage must be at least 0.</small>
     </div>
 
-    <div class="column" ng-class="{ 'has-error' : editGarageForm.minimumNumberOfBufferSpaces.$invalid && !editGarageForm.minimumNumberOfBufferSpaces.$pristine }">
+    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.minimumNumberOfBufferSpaces.$invalid && !editGarageForm.minimumNumberOfBufferSpaces.$pristine }">
         <label for="minimumnumberofbufferspaces">Minimum Number of Buffer Spaces</label>
         <input type="number"
                name="minimumNumberOfBufferSpaces"
@@ -117,7 +117,7 @@
         <small class="error" ng-show="editGarageForm.minimumNumberOfBufferSpaces.$error.min">Minimum number of buffer spaces in the Garage must be at least 0.</small>
     </div>
 
-    <div class="column" ng-class="{ 'has-error' : editGarageForm.spaceCost.$invalid && !editGarageForm.spaceCost.$pristine }">
+    <div class="columns small-2" ng-class="{ 'has-error' : editGarageForm.spaceCost.$invalid && !editGarageForm.spaceCost.$pristine }">
         <label for="spacecost">Space Cost</label>
         <input type="number"
                name="spaceCost"
@@ -130,7 +130,7 @@
         <small class="error" ng-show="editGarageForm.spaceCost.$error.min">The cost of each space in the Garage must be at least 0.</small>
     </div>
 
-    <div class="column" ng-class="{ 'has-error' : editGarageForm.transientSalePrice.$invalid && !editGarageForm.transientSalePrice.$pristine }">
+    <div class="columns small-3" ng-class="{ 'has-error' : editGarageForm.transientSalePrice.$invalid && !editGarageForm.transientSalePrice.$pristine }">
         <label for="transientsaleprice">Transient Sale Price</label>
         <input type="number"
                name="transientSalePrice"
@@ -143,7 +143,7 @@
         <small class="error" ng-show="editGarageForm.transientSalePrice.$error.min">Transient sale price of each space in the Garage must be at least 0.</small>
     </div>
 
-    <div class="column" ng-class="{ 'has-error' : editGarageForm.owner.$invalid && !editGarageForm.owner.$pristine }">
+    <div class="columns small-3" ng-class="{ 'has-error' : editGarageForm.owner.$invalid && !editGarageForm.owner.$pristine }">
         <label for="owner">Owner</label>
         <input type="text"
                name="owner"
@@ -154,7 +154,7 @@
         <small class="error" ng-show="editGarageForm.owner.$invalid && !editGarageForm.owner.$pristine">Owner of the Garage is required.</small>
     </div>
 
-    <div class="column" ng-class="{ 'has-error' : editGarageForm.billingParty.$invalid && !editGarageForm.billingParty.$pristine }">
+    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.billingParty.$invalid && !editGarageForm.billingParty.$pristine }">
         <label for="billingparty">Billing Party</label>
         <input type="text"
                name="billingParty"
@@ -171,7 +171,7 @@
                ng-keyup="cancel($event)"
                required />*@
 
-    <div class="column" ng-class="{ 'has-error' : editGarageForm.accessToken.$invalid && !editGarageForm.accessToken.$pristine }">
+    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.accessToken.$invalid && !editGarageForm.accessToken.$pristine }">
         <label for="accesstoken">Access Token</label>
         <input type="number"
                name="accessToken"
@@ -181,7 +181,7 @@
         <small class="error" ng-show="editGarageForm.accessToken.$invalid && !editGarageForm.accessToken.$pristine">Access token type for the Garage is required and must be a number.</small>
     </div>
 
-    <div class="column" ng-class="{ 'has-error' : editGarageForm.accessTokenOptional.$invalid && !editGarageForm.accesTokenOptional.$pristine }">
+    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.accessTokenOptional.$invalid && !editGarageForm.accesTokenOptional.$pristine }">
         <label for="accesstokenoptional">Access Token Optional</label>
         <input type="number"
                name="accessTokenOptional"
@@ -191,7 +191,7 @@
         <small class="error" ng-show="editGarageForm.accessTokenOptional.$invalid && !editGarageForm.accessTokenOptional.$pristine">Access token must be a number.</small>
     </div>
 
-    <div class="column" ng-class="{ 'has-error' : editGarageForm.accessTokenCost.$invalid && !editGarageForm.accessTokenCost.$pristine }">
+    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.accessTokenCost.$invalid && !editGarageForm.accessTokenCost.$pristine }">
         <label for="accesstokencost">Access Token Cost</label>
         <input type="number"
                name="accessTokenCost"
@@ -204,7 +204,7 @@
         <small class="error" ng-show="editGarageForm.accessTokenCost.$error.min">Cost of each access token in the Garage must be at least 0.</small>
     </div>
 
-    <div class="column" ng-class="{ 'has-error' : editGarageForm.changeCost.$invalid && !editGarageForm.changeCost.$pristine }">
+    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.changeCost.$invalid && !editGarageForm.changeCost.$pristine }">
         <label for="changecost">Change Cost</label>
         <input type="number"
                name="changeCost"
@@ -217,7 +217,7 @@
         <small class="error" ng-show="editGarageForm.changeCost.$error.min">Cost of changing a parker in the garage must be at least 0.</small>
     </div>
 
-    <div class="column" ng-class="{ 'has-error' : editGarageForm.validationCost.$invalid && !editGarageForm.validationCost.$pristine }">
+    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.validationCost.$invalid && !editGarageForm.validationCost.$pristine }">
         <label for="validationcost">Validation Cost</label>
         <input type="number"
                name="validationCost"
@@ -230,7 +230,7 @@
         <small class="error" ng-show="editGarageForm.validationCost.$error.min">Cost of validations in the Garage must be at least 0.</small>
     </div>
 
-    <div class="column" ng-class="{ 'has-error' : editGarageForm.numberOfValidations.$error.min || (editGarageForm.numberOfValidations.$invalid && !editGarageForm.numberOfValidations.$pristine) }">
+    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.numberOfValidations.$error.min || (editGarageForm.numberOfValidations.$invalid && !editGarageForm.numberOfValidations.$pristine) }">
         <label for="numberofvalidations">Number of Validations</label>
         <input type="number"
                name="numberOfValidations"
@@ -249,15 +249,14 @@
             ng-model-options="{ updateOn: 'blur' }"
             ng-keyup="cancel($event)"
             placeholder="optional" />-->
-
-    <div class="column">
+    <div class="columns small-4">
         <label for="garageManager">Garage Manager</label>
         <select ng-model="new.garageManagerID" ng-options="manager.id as manager.companyName for manager in managers" id="garageManager">
             <option value="">-- select a garage manager --</option>
         </select>
     </div>
 
-    <div class="column" ng-class="{ 'has-error' : editGarageForm.badgeScannerName.$invalid && !editGarageForm.badgeScannerName.$pristine }">
+    <div class="columns small-4" ng-class="{ 'has-error' : editGarageForm.badgeScannerName.$invalid && !editGarageForm.badgeScannerName.$pristine }">
         <label for="badgescannername">Badge Scanner Name</label>
         <input type="text"
                name="badgeScannerName"
@@ -267,7 +266,7 @@
         <small class="error" ng-show="editGarageForm.badgeScannerName.$invalid && !editGarageForm.badgeScannerName.$pristine">Invalid badge scanner name.</small>
     </div>
 
-        <div class="column">
+        <div class="row">
             <button class="radius button" type="submit" ng-disabled="editGarageForm.$invalid">Submit</button>
         </div>
 

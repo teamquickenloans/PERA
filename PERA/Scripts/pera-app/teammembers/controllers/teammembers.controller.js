@@ -38,12 +38,12 @@
         }
 
         function teammembersSuccessFn(data, status, headers, config) {
+            console.log('teammembersSuccessFn');
             vm.teamMembers[$scope.currentGarage.garageID] = data.data;         //this will depend on what the API returns, it may have to change
         }
 
         function teammembersErrorFn(data, status, headers, config) {
             Snackbar.error("Failed to retreive Team Members");
-
         }
 
 

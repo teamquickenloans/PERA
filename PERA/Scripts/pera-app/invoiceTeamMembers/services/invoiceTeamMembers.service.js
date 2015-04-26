@@ -42,7 +42,7 @@
         */
         function all() {
             if (!promise || last_request_failed) {
-                console.log("querying database");
+                //console.log("querying database");
                 promise = $http.get('/api/parkerReportTeamMembers/getParkerReportTeamMembers/');
                 promise.then(invoiceTeamMembersSuccessFn, invoiceTeamMembersErrorFn);
             }
@@ -59,7 +59,7 @@
         function invoiceTeamMembersSuccessFn(data, status, headers, config, response) {
             last_request_failed = false;
             vm.invoiceTeamMembers = data.data;
-            console.log("service success ", vm.invoiceTeamMembers);
+            //console.log("service success ", vm.invoiceTeamMembers);
             return vm.invoiceTeamMembers;
             //share();
         }

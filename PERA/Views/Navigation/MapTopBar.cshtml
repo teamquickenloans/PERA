@@ -1,8 +1,15 @@
 ﻿
 <li class="divider"></li>
+
+<li ng-controller="MapController as map">
+    <a ng-click="addGarage()">
+        <i class="fi-plus"></i>
+    </a>
+</li>
+
 @*Single Garage Dropdown*@
 <li ng-class="{active:!tabCtrl.sideIsSet(-1)}" ng-controller="SideBarController as sidebar" class="has-dropdown">
-    <a href="#">Garage</a><a ng-if="sidebar.currentGarage != null" href="#">: {{ sidebar.currentGarage.name }}</a>
+    <a href="#">Garage</a>  <a ng-if="sidebar.currentGarage" href="#">: {{ sidebar.currentGarage.name }}</a>
     <ul class="dropdown">
         <li ng-repeat="garage in sidebar.garages">
             <ul>

@@ -8,7 +8,10 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Description;
+using System.Diagnostics;
 using PERA.Models;
+using Newtonsoft.Json;
+using System.Web.Script.Serialization;
 
 namespace PERA.Controllers
 {
@@ -35,6 +38,43 @@ namespace PERA.Controllers
             return Ok(badgeScan);
         }
 
+        // GET: api/BadgeScans/report/5
+        [ResponseType(typeof(BadgeScan))]
+        [ActionName("Report")]
+        public ICollection<BadgeScan> GetBadgeScansByReport(int id)
+        {
+            BadgeScanReport badgeScanReport = db.BadgeScanReports.Find(id);
+
+            return badgeScanReport.BadgeScans;
+        }
+
+        
+        // GET: api/BadgeScans/GetNumberOfScans
+        public string GetNumberOfScans(int id)
+        {
+            // Grab the most recent badge scan report for this garage
+            BadgeScanReport report = db.BadgeScanReports.Where(x => x.GarageID == id).OrderByDescending(x => x.MonthYear).FirstOrDefault();
+
+            int days = 30;
+            if (report != null)
+            {
+                days = DateTime.DaysInMonth(report.MonthYear.Year, report.MonthYear.Month);
+            }
+
+            QLActiveParkerReport QLReport = db.QLActiveParkerReports.Where( x => x.GarageID == id).OrderByDescending(x => x.MonthYear).FirstOrDefault();
+
+            Dictionary<string, int> usage = new Dictionary<string,int>();
+
+            // Grab all of the scans for this person in that report
+            foreach(QLTeamMember qlTM in QLReport.TeamMembers) {
+                List<BadgeScan> scans = report.BadgeScans.Where(x => x.FirstName == qlTM.FirstName && x.LastName == qlTM.LastName).ToList();
+                usage[qlTM.FirstName + qlTM.LastName] = scans.Count;
+            }
+
+            return JsonConvert.SerializeObject((object)usage) + days;  
+        }
+
+        
         // PUT: api/BadgeScans/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutBadgeScan(int id, BadgeScan badgeScan)
@@ -69,6 +109,25 @@ namespace PERA.Controllers
 
             return StatusCode(HttpStatusCode.NoContent);
         }
+
+        // GET: api/BadgeScans/getBadgeScans/5
+        //[HttpGet]
+        //[ActionName("Garage")]
+        //[ResponseType(typeof(BadgeScan))]
+        //public ICollection<BadgeScan> GetBadgeScans(string id)
+        //{
+        //    int garageid = Convert.ToInt32(id);
+        //    BadgeScan BadgeScan = db.BadgeScans.Where(
+        //        x => x.GarageID == garageid).OrderByDescending(x => x.MonthYear).FirstOrDefault();
+
+        //    if (QLReport == null)
+        //    {
+        //        return null;
+        //    }
+
+        //    return QLReport.TeamMembers;
+        //}
+
 
         // POST: api/BadgeScans
         [ResponseType(typeof(BadgeScan))]
