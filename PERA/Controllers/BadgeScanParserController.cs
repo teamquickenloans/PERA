@@ -118,9 +118,12 @@ namespace PERA.Controllers
             {
                 // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
                 // so this is how you can get the original file name
+                //var file = result.FileData[0];
                 var originalFileName = GetDeserializedFileName(file);
                 int garageID = Convert.ToInt32(result.FormData.GetValues("garageID").First());
 
+
+                //BadgeScanReport bsReport = db.BadgeScanReports.Create();
                 bsReport0.GarageID = garageID;
                 //bsReport.MonthYear = bsReport0.MonthYear;
                 //bsReport.DateReceived = bsReport0.DateReceived;
@@ -146,12 +149,16 @@ namespace PERA.Controllers
                   //  Trace.WriteLine(bsReport.BadgeScans);
                     
                     bsReport0.BadgeScans.Add(badgeScan);
-                    db.SaveChanges();
                 }
                 db.BadgeScanReports.Add(bsReport0);
                 db.SaveChanges();
+                //bsReport0.BadgeScanReports.Add(bsReport);
+                //db.SaveChanges();
                 i++;
             }
+            //badgeScan.ID = badgeScan.InvoiceID;
+            //db.Invoices.Add(badgeScan);
+            //db.SaveChanges();
         }
 
         public List<BadgeScan> ExcelParser(string path, string name, int garageID)
@@ -203,7 +210,11 @@ namespace PERA.Controllers
                     continue;
                 }
 
+
+
+
                 string firstName, lastName;
+                
                 string fullName = row[2].ToString();
                 string[] names = fullName.Split(',');   //split the name
 
@@ -219,7 +230,8 @@ namespace PERA.Controllers
                     firstName = names[1];
                     lastName = names[0];
                 }
-            
+                
+
                 //Convert names to Title Case 
                 TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
                 firstName = textInfo.ToTitleCase(firstName.ToLower());
@@ -227,6 +239,8 @@ namespace PERA.Controllers
 
                 badgeScan.FirstName = firstName;
                 badgeScan.LastName = lastName;
+
+
 
                 if (row[0] == DBNull.Value)
                 {
@@ -245,22 +259,22 @@ namespace PERA.Controllers
 
 
 
-                /*
-                  //look up what garage the scanner is in and find the corresponding garageID. If the scanner is not for garage entrance/exit disregard the badge scan?
-                  badgeScan.GarageID = -1; //to check if the actual GarageID was found
-                  for (int i = 0; i < garageScanners.Count(); i++)
-                  {
-                      if(row[1].ToString() == garageScanners[i].scannerName)
-                      {
-                          badgeScan.GarageID = garageScanners[i].garageID;
-                      }
-                  }
+               /*
+                //look up what garage the scanner is in and find the corresponding garageID. If the scanner is not for garage entrance/exit disregard the badge scan?
+                badgeScan.GarageID = -1; //to check if the actual GarageID was found
+                for (int i = 0; i < garageScanners.Count(); i++)
+                {
+                    if(row[1].ToString() == garageScanners[i].scannerName)
+                    {
+                        badgeScan.GarageID = garageScanners[i].garageID;
+                    }
+                }
 
-                  if(badgeScan.GarageID == -1) //if the GarageID was not found
-                  {
-                      continue; //don't add this row to the database
-                  }
-                  */
+                if(badgeScan.GarageID == -1) //if the GarageID was not found
+                {
+                    continue; //don't add this row to the database
+                }
+               */
 
                 badgeScan.GarageID = garageID;
                     
@@ -274,7 +288,6 @@ namespace PERA.Controllers
                         && x.ScanDateTime.Year == badgeScan.ScanDateTime.Year
                         && x.ScanDateTime.Month == badgeScan.ScanDateTime.Month
                         && x.ScanDateTime.Day == badgeScan.ScanDateTime.Day);
-
                 if (bs == null)
                 {
                     badgeScans.Add(badgeScan);
@@ -284,6 +297,7 @@ namespace PERA.Controllers
                 
             } // end for rows
             return badgeScans;
+            System.Diagnostics.Debug.WriteLine("Parsing Completed!");
         }
 
 

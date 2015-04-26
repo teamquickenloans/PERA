@@ -133,13 +133,13 @@
             temp = temp.replace('{', '');
             var array = temp.split(",");
             
-            for(var i=0; i<array.length; i++)
+            for(var i=0; i < array.length; i++)
             {
                array[i] = array[i].split(":");
             }
 
             //Enter the data into a javascript dictionary which can be referenced in a view
-            for(var i=0; i<array.length; i++)
+            for(var i=0; i < array.length; i++)
             {
                 $scope.usage[array[i][0]] = array[i][1];
             }  
