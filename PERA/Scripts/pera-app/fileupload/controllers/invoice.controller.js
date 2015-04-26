@@ -57,6 +57,7 @@
 
         function uploadAll()
         {
+            $(".ball").removeClass("hideMe");
             var invoice = vm.invoice;
             var date = Date.now();
             invoice.dateUploaded = $filter('date')(date, 'yyyy-MM-dd');
@@ -83,7 +84,8 @@
 
         }
 
-        function uploadSuccess(){
+        function uploadSuccess() {
+            $(".ball").addClass("hideMe");
             Snackbar.show("Invoice Uploaded Successfully");
             clearForm();
         }
@@ -95,6 +97,7 @@
             console.log("clean form");
         }
         function uploadFail() {
+            $(".ball").addClass("hideMe");
             Snackbar.error("Invoice upload failed. Please recheck the formatting of the excel file.");
         }
         function garagesSuccessFn(data, status, headers, config) {

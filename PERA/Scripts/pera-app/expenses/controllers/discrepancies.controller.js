@@ -26,13 +26,12 @@
         $scope.duplicate = [];
         $scope.missing = [];
         $scope.extra = [];
-        $scope.spinner = false;
         $scope.loaded = false;
 
         Garages.all().then(garagesSuccessFn);
 
         function submit() {
-            $scope.spinner = true;
+            $(".ball").removeClass("hideMe");
             vm.promise = FormSubmit.submit(vm.garageID, vm.monthYear)
             vm.promise.then(submitSuccess, submitFail);
         }
@@ -44,7 +43,7 @@
         }
 
         function submitSuccess(response) {
-            $scope.spinner = false;
+            $(".ball").addClass("hideMe");
             Snackbar.show('Succesfully identified discrepancies');
             clearForm();
             $scope.duplicate = response.data[0];
@@ -67,6 +66,7 @@
 
         function submitFail()
         {
+            $(".ball").addClass("hideMe");
             Snackbar.show('Error identifying discrepancies')
             //clearForm();
         }

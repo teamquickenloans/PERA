@@ -47,6 +47,7 @@
         }
 
         function uploadAll() {
+            $(".ball").removeClass("hideMe");
             console.log("uploadAll");
             var form = vm.form;
             var date = Date.now();
@@ -75,6 +76,7 @@
 
         }
         function uploadSuccess() {
+            $(".ball").addClass("hideMe");
             Snackbar.show("Parker Report Uploaded Successfully");
             clearForm();
         }
@@ -87,6 +89,7 @@
             console.log("clear form");
         }
         function uploadFail() {
+            $(".ball").addClass("hideMe");
             Snackbar.error("Invoice upload failed.  Please recheck the formatting of the excel file.");
         }
         function garagesSuccessFn(data, status, headers, config) {
