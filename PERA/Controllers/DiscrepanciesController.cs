@@ -131,7 +131,7 @@ namespace PERA.Controllers
         }
 
         //
-        
+
 
         public void CalculatePrice(InvoiceActiveParkerReport IAPR)
         {

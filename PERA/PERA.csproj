@@ -208,6 +208,7 @@
       @name ASP.NET MVC Controllers
     -->
     <Compile Include="Controllers\BadgeScanParserController.cs" />
+    <Compile Include="Controllers\BadgeScanReportsController.cs" />
     <Compile Include="Controllers\DiscrepanciesController.cs" />
     <Compile Include="Controllers\ExpenseController.cs" />
     <Compile Include="Controllers\ExportReportController.cs" />
@@ -306,6 +307,7 @@
     <Content Include="Scripts\css\foundation-datepicker.css" />
     <Content Include="Scripts\js\angular-datepicker.js" />
     <Content Include="Scripts\js\bzm-date-picker.min.js" />
+    <Content Include="Scripts\js\dirPagination.js" />
     <Content Include="Scripts\js\foundation-datepicker.js" />
     <Content Include="Scripts\js\MonthPicker.js" />
     <Content Include="Scripts\js\MonthPicker.min.js" />
@@ -331,6 +333,8 @@
     <Content Include="Scripts\js\ui-router-extras\modular\ct-ui-router-extras.transition.min.js" />
     <Content Include="Scripts\js\modernizr-2.6.2.js" />
     <Content Include="Scripts\pera-app\expenses\controllers\datavisualization.controller.js" />
+    <Content Include="Scripts\pera-app\expenses\controllers\uploadHistory.detail.controller.js" />
+    <Content Include="Scripts\pera-app\expenses\services\badgeScanReports.service.js" />
     <Content Include="Scripts\pera-app\expenses\services\invoiceAPR.service.js" />
     <Content Include="Scripts\pera-app\expenses\services\qlAPR.service.js" />
     <Content Include="Scripts\pera-app\expenses\services\invoices.service.js" />
@@ -355,7 +359,7 @@
     <Content Include="Scripts\pera-app\teamMembers\services\teamMembers.service.js" />
     <Content Include="Scripts\pera-app\teamMembers\teamMembers.module.js" />
     <Content Include="Scripts\pera-app\fileupload\directives\ngfile.directive.js" />
-    <Content Include="Scripts\pera-app\expenses\controllers\uploadhistory.controller.js" />
+    <Content Include="Scripts\pera-app\expenses\controllers\uploadHistory.controller.js" />
     <Content Include="Scripts\pera-app\expenses\expenses.module.js" />
     <Content Include="Scripts\pera-app\map\controllers\map.controller.js" />
     <Content Include="Scripts\pera-app\map\map.module.js" />
@@ -455,7 +459,7 @@
     <Content Include="Scripts\pera-app\sidebar\controllers\sidebar.controller.js" />
     <Content Include="Views\Navigation\Overview.cshtml" />
     <Content Include="Views\Navigation\Garage.cshtml" />
-    <Content Include="Views\Upload\UploadHistory.cshtml" />
+    <Content Include="Views\Upload\History.cshtml" />
     <Content Include="Scripts\js\snackbar.min.js.map" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Form\ParkerReport.cshtml" />
@@ -470,6 +474,7 @@
     <Content Include="Views\Navigation\MapTopBar.cshtml" />
     <Content Include="Views\Upload\Base.cshtml" />
     <Content Include="Views\Expense\DataVisualization.cshtml" />
+    <Content Include="Views\Upload\HistoryDetail.cshtml" />
     <None Include="Web.Test.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

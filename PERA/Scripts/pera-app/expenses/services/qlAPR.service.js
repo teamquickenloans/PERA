@@ -19,7 +19,8 @@
         vm.reports = [];
 
         var QLAPRs = {
-            all: all
+            all: all,
+            get: get
         };
 
         return QLAPRs;
@@ -37,6 +38,17 @@
             return allPromise;
         }
         
+        /**
+        * @name get
+        * @desc Get one InvoiceAPR
+        * @returns {Promise}
+        * @memberOf pera.expenses.services.InvoiceAPRs
+        */
+        function get(reportID) {
+            var promise = $http.get('/api/qlActiveParkerReports/getQLactiveParkerReport/' + reportID);
+            return promise;
+        }
+
         /**
         * @name getParkerReports
         * @desc 

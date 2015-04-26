@@ -396,7 +396,48 @@ namespace PERA.Controllers
             return teamMembers;
         }
 
+        public List<QLTeamMember> RemoveDuplicatesFromSystemGalaxy(QLActiveParkerReport QLReport, int garageID)
+        {
+            List<QLTeamMember> TeamMembers = new List<QLTeamMember>();
+            List<QLTeamMember> Duplicates = new List<QLTeamMember>();
+            Dictionary<string, string> Matches = new Dictionary<string, string>();
 
+            foreach (QLTeamMember qlTM in QLReport.TeamMembers)
+            {
+                //var qlTM = QLReport.TeamMembers[i];
+                // Get the most recent badge scan for this TM
+                PERAContext db = new PERAContext();
+                var BadgeScan = db.BadgeScans.Where(
+                     x => x.FirstName == qlTM.FirstName
+                       && x.LastName == qlTM.LastName
+                       && x.GarageID == QLReport.GarageID)
+                .OrderByDescending(x => x.ScanDateTime)
+                    .FirstOrDefault();
+
+                string qlName = qlTM.FirstName + qlTM.LastName;
+
+                if (Matches.ContainsKey(qlName)) // it's a duplicate
+                    db.ParkerReportTeamMembers.Remove(qlTM);
+                //    continue;
+                else
+                {
+                    Matches[qlName] = qlName;
+                    TeamMembers.Add(qlTM);
+                    //check if it's valid
+                    //if (qlTM.BadgeID == BadgeScan.BadgeID)
+                       // Matches[qlName] = qlName;
+                    //else // it's invalid so remove it later
+                        //db.ParkerReportTeamMembers.Remove(qlTM);
+                    //    Duplicates.Add(qlTM);
+                }
+            }
+            return TeamMembers;
+            //for (int i = Duplicates.Count - 1; i > -1; i--)
+            //{
+            //    PERAContext db = new PERAContext();
+            //    db.ParkerReportTeamMembers.Remove(Duplicates[i]);
+            //}
+        }
         // You could extract these two private methods to a separate utility class since
         // they do not really belong to a controller class but that is up to you
         private MultipartFormDataStreamProvider GetMultipartProvider()

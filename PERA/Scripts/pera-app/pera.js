@@ -21,7 +21,8 @@
         //'ct.ui.router.extras',
         'angular-datepicker',
         'bzm-date-picker',
-        'uiGmapgoogle-maps'
+        'uiGmapgoogle-maps',
+        'angularUtils.directives.dirPagination'
         ])
     
     //angular
