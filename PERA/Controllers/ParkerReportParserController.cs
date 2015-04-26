@@ -420,9 +420,12 @@ namespace PERA.Controllers
                     db.ParkerReportTeamMembers.Remove(qlTM);
                 //    continue;
                 else
-                {    //check if it's valid
+                {
+                    Matches[qlName] = qlName;
+                    TeamMembers.Add(qlTM);
+                    //check if it's valid
                     //if (qlTM.BadgeID == BadgeScan.BadgeID)
-                        //Matches[qlName] = qlName;
+                       // Matches[qlName] = qlName;
                     //else // it's invalid so remove it later
                         //db.ParkerReportTeamMembers.Remove(qlTM);
                     //    Duplicates.Add(qlTM);

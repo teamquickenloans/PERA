@@ -37,6 +37,17 @@ namespace PERA.Controllers
 
             return Ok(badgeScan);
         }
+
+        // GET: api/BadgeScans/report/5
+        [ResponseType(typeof(BadgeScan))]
+        [ActionName("Report")]
+        public ICollection<BadgeScan> GetBadgeScansByReport(int id)
+        {
+            BadgeScanReport badgeScanReport = db.BadgeScanReports.Find(id);
+
+            return badgeScanReport.BadgeScans;
+        }
+
         
         // GET: api/BadgeScans/GetNumberOfScans
         public string GetNumberOfScans(int id)
