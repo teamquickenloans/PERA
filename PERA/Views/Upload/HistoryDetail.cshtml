@@ -1,0 +1,21 @@
+﻿<h3>Upload History
+    <a ui-sref="upload.history">
+        <i class="fi-arrow-left green px24"></i>
+    </a>
+    </h3>
+<div id="uploadHistoryContent">
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>BadgeID</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="member in teamMembers">
+                <td>{{member.firstName}} {{member.lastName}}</td>
+                <td>{{member.badgeID}}</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

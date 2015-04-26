@@ -18,10 +18,14 @@ namespace PERA.Controllers
             return View();
         }
 
-        public ActionResult UploadHistory()
+        public ActionResult History()
         {
             return View();
         }
 
+        public ActionResult HistoryDetail()
+        {
+            return View();
+        }
     }
 }

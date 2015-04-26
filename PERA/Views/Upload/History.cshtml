@@ -1,0 +1,77 @@
+﻿
+<h3>Upload History</h3>
+<div id="uploadHistoryContent">
+        <h4>Invoices</h4>
+
+        <table ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+            <thead id="uploadTableHead">
+                <tr>
+                    <th>Invoice ID</th>
+                    <th>Billing Date</th>
+                    <th>Date Uploaded</th>
+                    <th>Amount</th>
+                    <th>Garage(s)</th>
+                </tr>
+            </thead>
+            <tbody id="uploadTableBody">
+                <tr class="tableRow" ng-repeat="invoice in invoices" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                    <td>#{{invoice.id}}</td>
+                    <td>{{invoice.monthYear | date:'MMMM yyyy'}}</td>
+                    <td>{{invoice.dateUploaded | date:'M-dd-yyyy'}}</td>
+                    <td>${{invoice.totalAmountBilled}}</td>
+                    <td>
+                        <font ng-repeat="invoiceAPR in invoiceAPRs[invoice.invoiceID]">
+                            <a ui-sref="upload.history.detail({reportId:invoiceAPR.id,typeId:1})">
+                                {{garages[invoiceAPR.garageID].name}}
+                            </a>
+                        </font>
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+        
+    <h4>QL Active Parker Reports</h4>
+    <table ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+        <thead id="uploadTableHead">
+            <tr>
+                <th>Garage</th>
+                <th>Report Date</th>
+                <th>Date Uploaded</th>
+            </tr>
+        </thead>
+
+        <tbody id="uploadTableBody">
+            <tr class="tableRow" ng-repeat="report in qlAPRs" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                <td>
+                    <a ui-sref="upload.history.detail({reportId:report.id,typeId:2})">
+                        {{garages[report.garageID].name}}
+                    </a>
+                </td>
+                <td>{{report.monthYear | date:'MMMM yyyy'}}</td>
+                <td>{{report.dateUploaded | date:'M-dd-yyyy'}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <h4>Badge Activity Reports</h4>
+    <table ng-controller="TabController as tabCtrl" ng-init="tabCtrl.setTab(-1)">
+        <thead id="uploadTableHead">
+            <tr>
+                <th>Garage</th>
+                <th>Report Date</th>
+                <th>Date Uploaded</th>
+            </tr>
+        </thead>
+
+        <tbody id="uploadTableBody">
+            <tr class="tableRow" ng-repeat="report in badgeReports" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
+                <td>{{garages[report.garageID].name}}</td>
+                <td>{{report.monthYear | date:'MMMM yyyy'}}</td>
+                <td>{{report.dateUploaded | date:'M-dd-yyyy'}}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    </div>
+

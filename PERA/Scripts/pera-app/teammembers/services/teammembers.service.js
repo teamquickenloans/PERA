@@ -26,6 +26,8 @@
         var TeamMembers = {
             all: all,
             garage: garage,
+            invoice: invoice,
+            qlreport: qlreport,
             create: create,
             get: get,
             share: share
@@ -44,7 +46,22 @@
         function all() {
             if (!promise || last_request_failed) {
                 console.log("querying database");
-                promise = $http.get('/api/teammembers/get/');
+                promise = $http.get('/api/parkerReportTeamMembers/get/');
+                promise.then(teammembersSuccessFn, teammembersErrorFn);
+            }
+            return promise;
+        }
+
+        /**
+        * @name all
+        * @desc Get all TeamMembers
+        * @returns {Promise}
+        * @memberOf pera.teammembers.services.TeamMembers
+        */
+        function all() {
+            if (!promise || last_request_failed) {
+                console.log("querying database");
+                promise = $http.get('/api/parkerReportTeamMembers/get/');
                 promise.then(teammembersSuccessFn, teammembersErrorFn);
             }
             return promise;
@@ -58,6 +75,26 @@
         */
         function garage(garageID) {
            return $http.get('/api/parkerReportTeamMembers/garage/' + garageID);
+        }
+
+        /**
+      * @name qlreport
+      * @desc Get all ParkerReportTeamMembers for a QLreport
+      * @returns {Promise}
+      * @memberOf pera.teammmembers.services.TeamMembers
+      */
+        function qlreport(reportID) {
+            return $http.get('/api/parkerReportTeamMembers/qlreport/' + reportID);
+        }
+
+        /**
+        * @name invoice
+        * @desc Gets all ParkerReportTeamMembers for an invoice
+        * @returns {Promise}
+        * @memberOF pera.teammembers.services.TeamMembers
+        */
+        function invoice(invoiceID) {
+            return $http.get('/api/parkerReportTeamMembers/invoice/' + invoiceID);
         }
 
         /**
