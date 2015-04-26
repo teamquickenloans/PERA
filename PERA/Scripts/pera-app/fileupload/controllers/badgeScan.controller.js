@@ -53,7 +53,12 @@
         }
 
         function uploadAll() {
-            $(".ball").removeClass("hideMe");
+            //========================== NO WORKY =====================================
+            $scope.uploading = true;
+
+            console.log("uploading: " + $scope.uploading);
+            //========================== NO WORKY =====================================
+
             console.log("uploadAll");
             var form = vm.form;
             var date = Date.now();
@@ -78,14 +83,21 @@
         }
 
         function uploadSuccess() {
-            $(".ball").addClass("hideMe");
+            //========================== NO WORKY =====================================
+            $scope.uploading = false;
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+            console.log("uploading: " + $scope.uploading);
+            //========================== NO WORKY =====================================
+
             Snackbar.show("Card Activity Report Uploaded Successfully");
             clearForm();
         }
 
         function clearForm() {
             vm.form = angular.copy(vm.defaultForm);
-            $scope.badgeScanForm.$setPristine();
+            //$scope.badgeScanForm.$setPristine();
             vm.files = [];
             vm.reports = angular.copy(vm.defaultReport);
             console.log("clear form");
@@ -112,13 +124,13 @@
             temp = temp.replace('{', '');
             var array = temp.split(",");
             
-            for(var i=0; i<array.length; i++)
+            for(var i=0; i < array.length; i++)
             {
                array[i] = array[i].split(":");
             }
 
             //Enter the data into a javascript dictionary which can be referenced in a view
-            for(var i=0; i<array.length; i++)
+            for(var i=0; i < array.length; i++)
             {
                 $scope.usage[array[i][0]] = array[i][1];
             }  

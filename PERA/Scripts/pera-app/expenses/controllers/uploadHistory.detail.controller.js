@@ -25,6 +25,7 @@
         else if ($stateParams.typeId == 2) {
             TeamMembers.qlreport($stateParams.reportId).then(success, error);
             QLAPRs.get($stateParams.reportId).then(reportSuccess, reportError);
+            $scope.title = "Quicken Loans Active Parker Report";
         }
 
         else if ($stateParams.typeId == 3) {
@@ -33,7 +34,9 @@
         }
 
         function success(data) {
+            console.log(data.data)
             $scope.teamMembers = data.data;
+
         }
 
         function error(data) {
@@ -46,6 +49,7 @@
 
         function reportSuccess(data) {
             $scope.report = data.data;
+            $scope.title += $scope.report.monthYear;
         }
 
         function reportError(data) {

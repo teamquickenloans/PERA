@@ -153,19 +153,15 @@
         <!-- Left Nav Section -->
         <ul class="left">
             <li class="divider"></li>
-            <li class="has-dropdown" ng-class="{active: tabCtrl.isSet(3) || tabCtrl.isSet(4)}"> <!--NO WORKY: ui-sref-active="active" -->
-                <a href="#">Expenses</a>
-                <ul class="dropdown">
-                    <li ui-sref-active="active">
-                        <!--ng-class="{active: tabCtrl.isSet(3)}"-->
-                        <a ui-sref="expense.discrepancies" ng-click="tabCtrl.setTab(3); Pace.restart();">Identify Discrepancies</a>
-                    </li>
-                    <li ui-sref-active="active">
-                        <!--ng-class="{active: tabCtrl.isSet(4)}">-->
-                        <a ui-sref="upload.invoice" ng-click="tabCtrl.setTab(4); Pace.restart();">Uploads</a>
-                    </li>
-                </ul>
+            <li ui-sref-active="active">
+                <a ui-sref="upload.history" ng-click="tabCtrl.setTab(3); Pace.restart();">Uploads</a>
             </li>
+            <li class="divider"></li>
+
+            <li ui-sref-active="active">
+                <a ui-sref="expense.discrepancies" ng-click="tabCtrl.setTab(3); Pace.restart();">Identify Discrepancies</a>
+            </li>
+
             <li class="divider"></li>
             <li ui-sref-active="active" ng-controller="MapController as map">
                 <!--ng-class="{active: tabCtrl.isSet(1) || tabCtrl.isSet(2)}">-->

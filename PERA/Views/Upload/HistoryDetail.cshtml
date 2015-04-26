@@ -3,6 +3,7 @@
         <i class="fi-arrow-left green px24"></i>
     </a>
     </h3>
+<h4>{{title}}</h4>
 <div id="uploadHistoryContent">
     <table>
         <thead>
@@ -12,7 +13,7 @@
             </tr>
         </thead>
         <tbody>
-            <tr dir-paginate="member in teamMembers | itemsPerPage: 10">
+            <tr dir-paginate="member in teamMembers | itemsPerPage: 20">
                 <td>{{member.firstName}} {{member.lastName}}</td>
                 <td>{{member.badgeID}}</td>
             </tr>
