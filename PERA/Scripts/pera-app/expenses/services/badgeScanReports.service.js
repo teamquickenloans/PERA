@@ -15,7 +15,9 @@
     function BadgeScanReports($http, $q) {
 
         var BadgeScanReports = {
-            all: all
+            all: all,
+            scans: scans,
+            get: get
         };
 
         return BadgeScanReports;
@@ -55,5 +57,12 @@
             return $q.reject(response);
         }
 
+        function scans(id) {
+            return $http.get('/api/BadgeScans/report/' + id);
+        }
+
+        function get(id) {
+            return $http.get('/api/BadgeScanReports/getBadgeScanReport/' + id)
+        }
     }
 })();

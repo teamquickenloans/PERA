@@ -8,9 +8,9 @@
     angular
       .module('pera.expenses.controllers')
       .controller('UploadHistoryDetailController', UploadHistoryDetailController);
-    UploadHistoryDetailController.$inject = ['$scope', 'Snackbar', '$stateParams', 'TeamMembers', 'InvoiceAPRs', 'QLAPRs']
+    UploadHistoryDetailController.$inject = ['$scope', 'Snackbar', '$stateParams', 'TeamMembers', 'InvoiceAPRs', 'QLAPRs', 'BadgeScanReports']
 
-    function UploadHistoryDetailController($scope, Snackbar, $stateParams, TeamMembers, InvoiceAPRs, QLAPRs) {
+    function UploadHistoryDetailController($scope, Snackbar, $stateParams, TeamMembers, InvoiceAPRs, QLAPRs, BadgeScanReports) {
 
         console.log($stateParams.reportId);
         $scope.report;
@@ -25,6 +25,11 @@
         else if ($stateParams.typeId == 2) {
             TeamMembers.qlreport($stateParams.reportId).then(success, error);
             QLAPRs.get($stateParams.reportId).then(reportSuccess, reportError);
+        }
+
+        else if ($stateParams.typeId == 3) {
+            BadgeScanReports.scans($stateParams.reportId).then(success, error);
+            BadgeScanReports.get($stateParams.reportId).then(reportSuccess, reportError);
         }
 
         function success(data) {
