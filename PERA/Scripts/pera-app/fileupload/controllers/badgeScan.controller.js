@@ -29,6 +29,7 @@
         vm.uploadAll = uploadAll;
         vm.findUsage = findUsage;
         vm.addReport = addReport;
+        vm.removeReport = removeReport;
 
 
         Garages.all().then(garagesSuccess);
@@ -53,12 +54,7 @@
         }
 
         function uploadAll() {
-            //========================== NO WORKY =====================================
-            $scope.uploading = true;
-
-            console.log("uploading: " + $scope.uploading);
-            //========================== NO WORKY =====================================
-
+            $(".ball").removeClass("hideMe");
             console.log("uploadAll");
             var form = vm.form;
             var date = Date.now();
@@ -83,14 +79,7 @@
         }
 
         function uploadSuccess() {
-            //========================== NO WORKY =====================================
-            $scope.uploading = false;
-            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
-                $scope.$apply();
-            }
-            console.log("uploading: " + $scope.uploading);
-            //========================== NO WORKY =====================================
-
+            $(".ball").addClass("hideMe");
             Snackbar.show("Card Activity Report Uploaded Successfully");
             clearForm();
         }
