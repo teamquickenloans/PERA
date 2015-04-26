@@ -35,7 +35,13 @@
     <!-- ====================== Angular ui-router =========================== -->
     <script type="text/javascript" src="~/Scripts/js/angular-ui-router.js"></script>
 
+    <!-- =========================== PACE Progress Bars ============================ -->
+    <script type="text/javascript" src="~/Scripts/js/pace.js" data-pace-options='{ "ajax": false, "document": true, "eventLag": true, "startOnPageLoad": true }'></script>
+    <link rel="stylesheet" href="~/Scripts/css/pace.css" />
     <script src="~/Scripts/js/dirPagination.js"></script>
+
+    <!-- ====================== Loading Spinner CSS =============================== -->
+    <link rel="stylesheet" href="http://css-spinners.com/css/spinner/ball.css" type="text/css">
 
     <!--====================== Foundation ============================ -->
     @*<link rel=" stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/foundation/5.5.0/css/foundation.min.css" />*@
@@ -122,9 +128,6 @@
     <script type="text/javascript" src="~/Scripts/pera-app/export/controllers/exportReport.controller.js"></script>
     
 
-    
-
-
     <!-- ====================== CSS ================================= -->
     <link rel="stylesheet" href="~/Scripts/css/site.css" />
 
@@ -150,24 +153,23 @@
         <!-- Left Nav Section -->
         <ul class="left">
             <li class="divider"></li>
-            <li class="has-dropdown" ui-sref-active="active">       <!--ng-class="{active: tabCtrl.isSet(3) || tabCtrl.isSet(4)}">-->
+            <li class="has-dropdown" ng-class="{active: tabCtrl.isSet(3) || tabCtrl.isSet(4)}"> <!--NO WORKY: ui-sref-active="active" -->
                 <a href="#">Expenses</a>
                 <ul class="dropdown">
-                    <li ui-sref-active="active">                    <!--ng-class="{active: tabCtrl.isSet(3)}"-->
-                        <a ui-sref="expense.discrepancies" ng-click="tabCtrl.setTab(3);">Identify Discrepancies</a>
+                    <li ui-sref-active="active">
+                        <!--ng-class="{active: tabCtrl.isSet(3)}"-->
+                        <a ui-sref="expense.discrepancies" ng-click="tabCtrl.setTab(3); Pace.restart();">Identify Discrepancies</a>
                     </li>
-                    <li ui-sref-active="active">                    <!--ng-class="{active: tabCtrl.isSet(4)}">-->
-                        <a ui-sref="expense.datavisualization" ng-click="tabCtrl.setTab(4);">Data Visualization</a>
-                    </li>
-                    <li ui-sref-active="active">                    <!--ng-class="{active: tabCtrl.isSet(5)}">-->
-                        <a ui-sref="upload.history" ng-click="tabCtrl.setTab(5);">Uploads</a>
+                    <li ui-sref-active="active">
+                        <!--ng-class="{active: tabCtrl.isSet(4)}">-->
+                        <a ui-sref="upload.invoice" ng-click="tabCtrl.setTab(4); Pace.restart();">Uploads</a>
                     </li>
                 </ul>
             </li>
             <li class="divider"></li>
             <li ui-sref-active="active" ng-controller="MapController as map">
                 <!--ng-class="{active: tabCtrl.isSet(1) || tabCtrl.isSet(2)}">-->
-                <a ui-sref="garage.map" ng-click="tabCtrl.setTab(1);">Garage Map</a>
+                <a ui-sref="garage.map" ng-click="tabCtrl.setTab(1); Pace.restart();">Garage Map</a>
                     </li>
 
                 @*<ul class="dropdown" ng-controller="MapController as map">

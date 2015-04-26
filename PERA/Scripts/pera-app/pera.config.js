@@ -14,6 +14,9 @@
     */
     function config($stateProvider, $routeProvider, $urlRouterProvider) {
 
+        //set default page to garage map
+        $urlRouterProvider.otherwise('/garage');
+
         /*uiGmapGoogleMapApiProvider.configure({
             key: 'AIzaSyBV-BwHOcVyVW0e8yJa1sAk5GBFtm5YeHM',
             v: '3.17',

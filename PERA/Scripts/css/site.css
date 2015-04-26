@@ -305,3 +305,7 @@ h4 {
     padding: 0;
 }
 
+.datepicker {
+    top: 0% !important; /* !important is bad practice, but it's hard to overcome the specificity of inline styles */
+    left: 0% !important;
+}

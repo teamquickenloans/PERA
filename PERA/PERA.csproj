@@ -285,6 +285,7 @@
     <Content Include="Content\Images\parking_green.png" />
     <Content Include="Content\Images\parking_red.png" />
     <Content Include="Content\Images\parking_yellow.png" />
+    <Content Include="Content\Images\spinner.png" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -298,6 +299,7 @@
     <Content Include="Scripts\css\foundation-icons.css" />
     <Content Include="Scripts\css\foundation.css" />
     <Content Include="Scripts\css\foundation.min.css" />
+    <Content Include="Scripts\css\pace.css" />
     <Content Include="Scripts\font\foundation-icons.svg" />
     <Content Include="Scripts\js\angular-google-maps.js" />
     <Content Include="Scripts\js\bootstrap.js" />
@@ -310,6 +312,7 @@
     <Content Include="Scripts\js\foundation-datepicker.js" />
     <Content Include="Scripts\js\MonthPicker.js" />
     <Content Include="Scripts\js\MonthPicker.min.js" />
+    <Content Include="Scripts\js\pace.js" />
     <Content Include="Scripts\js\ui-router-extras\ct-ui-router-extras.core.js" />
     <Content Include="Scripts\js\ui-router-extras\ct-ui-router-extras.min.js" />
     <Content Include="Scripts\js\angular-ui-router.js" />
