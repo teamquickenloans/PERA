@@ -67,8 +67,8 @@ namespace PERA.Controllers
             { 15, new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}},
             { 16, new Token{ID_CODE_26W = 10, HID_CORP1K_ID = 12}}
             //  5   5,6
+            
         };
-
         //These have the format row[2] = Lastname, Firstname
         Dictionary<int, int> nameColumns = new Dictionary<int, int>()
         {
@@ -104,7 +104,67 @@ namespace PERA.Controllers
           { 14, new Name{first = 2, last = 1}},
           { 16, new Name{first = 2, last = 1}},
           { 15, new Name{first = 2, last = 1}},
+
         };
+
+
+        public List<QLTeamMember> RemoveDuplicatesFromSystemGalaxy(List<QLTeamMember> teamMembers, int garageID)
+        {
+            List<QLTeamMember> Duplicates = new List<QLTeamMember>();
+            Dictionary<string, int> Matches = new Dictionary<string, int>();
+            List<QLTeamMember> uniques = new List<QLTeamMember>();
+
+            foreach (QLTeamMember qlTM in teamMembers)
+            {
+                //var qlTM = QLReport.TeamMembers[i];
+                // Get the most recent badge scan for this TM
+                PERAContext db = new PERAContext();
+
+                var BadgeScan = db.BadgeScans.Where(
+                     x => x.FirstName == qlTM.FirstName
+                       && x.LastName == qlTM.LastName
+                       && x.GarageID == garageID)
+                    .OrderByDescending(x => x.ScanDateTime)
+                    .FirstOrDefault();
+
+                string qlName = qlTM.FirstName + qlTM.LastName;
+
+                if (Matches.ContainsKey(qlName)) // it's a duplicate
+                    continue;
+                //    db.ParkerReportTeamMembers.Remove(qlTM);
+
+                else
+                {    //check if it's valid
+                    if (BadgeScan != null)
+                    {
+                        Matches[qlName] = BadgeScan.BadgeID;
+                        qlTM.BadgeID = BadgeScan.BadgeID;
+                        uniques.Add(qlTM);
+                    }
+                    else
+                    {
+                        Matches[qlName] = 1;
+                        uniques.Add(qlTM);
+                    }
+                    /*
+                    if (qlTM.BadgeID == BadgeScan.BadgeID)
+                        Matches[qlName] = qlName;
+                    else // it's invalid so remove it later
+                        db.ParkerReportTeamMembers.Remove(qlTM);*/
+                    //    Duplicates.Add(qlTM);
+                }
+            }
+
+            return uniques;
+
+            //for (int i = Duplicates.Count - 1; i > -1; i--)
+            //{
+            //    PERAContext db = new PERAContext();
+            //    db.ParkerReportTeamMembers.Remove(Duplicates[i]);
+            //}
+        }
+
+
 
         [HttpPost] // This is from System.Web.Http, and not from System.Web.Mvc
         public async Task<HttpResponseMessage> Upload()
@@ -125,7 +185,9 @@ namespace PERA.Controllers
             Trace.WriteLine("apr.DateReceived: " + apr.DateReceived);
             Trace.WriteLine("apr.DateUploaded: " + apr.DateUploaded);
 
+
             FileHandler(result, apr);
+
 
             // Through the request response you can return an object to the Angular controller
             // You will be able to access this in the .success callback through its data attribute
@@ -136,7 +198,6 @@ namespace PERA.Controllers
 
         private void FileHandler(MultipartFormDataStreamProvider result, QLActiveParkerReport APR)
         {
-            Trace.WriteLine("result.FileData: " + result.FileData);
             foreach (var file in result.FileData)
             {
                 // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
@@ -153,7 +214,8 @@ namespace PERA.Controllers
                 
                 Trace.WriteLine("teamMembers.Count: " + teamMembers.Count);
 
-                Save(APR, teamMembers);
+                List<QLTeamMember> uniqueTeamMembers = RemoveDuplicatesFromSystemGalaxy(teamMembers, garageID);
+                Save(APR, uniqueTeamMembers);
             }
         }
 
@@ -174,8 +236,14 @@ namespace PERA.Controllers
                   x => x.MonthYear.Month == APR.MonthYear.Month
                   && x.MonthYear.Year == APR.MonthYear.Year
                   && x.GarageID == APR.GarageID);
+
             if(report != null)
             {
+                foreach(QLTeamMember qlTM in report.TeamMembers)
+                {
+                    db.QLTeamMembers.Remove(qlTM);
+                    db.ParkerReportTeamMembers.Remove(qlTM);
+                }
                 report.DateUploaded = APR.DateUploaded;
                 report.DateReceived = APR.DateReceived;
                 report.TeamMembers = APR.TeamMembers;
@@ -204,13 +272,11 @@ namespace PERA.Controllers
             // The result of each spreadsheet will be created in the result.Tables
             DataSet result = reader.AsDataSet();
 
-            Trace.WriteLine(result);
-
             List<QLTeamMember> teamMembers = new List<QLTeamMember>();
 
             int i = 0;
             System.Diagnostics.Debug.WriteLine("begin for loop");
-            Trace.WriteLine("result.Tables.Count: " + result.Tables.Count);
+            Trace.WriteLine(result.Tables.Count);
             DataTable table = result.Tables[0];
             //foreach (DataTable table in result.Tables)
             //{
