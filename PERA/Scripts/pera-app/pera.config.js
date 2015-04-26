@@ -190,14 +190,14 @@
         }
         $stateProvider.state(upload);
 
-          /////////////////////////////////
-         //     Upload > Upload History //
-        /////////////////////////////////
+          ///////////////////////
+         // Upload > History  //
+        ///////////////////////
         var uploadHistory = {
-            name: 'upload.uploadHistory',
+            name: 'upload.history',
             views: {
                 '': {
-                    templateUrl: 'Upload/UploadHistory',
+                    templateUrl: 'Upload/History',
                     controller: 'UploadHistoryController as controller'
                 },
                 'sidebar-left@upload': {
@@ -206,6 +206,25 @@
             }
         }
         $stateProvider.state(uploadHistory);
+
+        /////////////////////////////////
+        //  Upload > History > Detail //
+        ///////////////////////////////
+        var uploadHistoryDetail = {
+            name: 'upload.history.detail',
+            url: '/invoice/:invoiceId',
+            views: {
+                '@upload': {    //the blank view in the 'upload' template
+                    templateUrl: 'Upload/HistoryDetail',
+                    controller: 'UploadHistoryDetailController as controller'
+                },
+                'sidebar-left@upload': {
+                    templateUrl: 'Navigation/Upload'
+                }
+            }
+        }
+        $stateProvider.state(uploadHistoryDetail);
+
 
           /////////////////////////////////
          //            Upload > Invoice //
