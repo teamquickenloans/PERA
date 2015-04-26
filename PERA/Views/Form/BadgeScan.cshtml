@@ -4,12 +4,10 @@
     This form allows you to upload a card activity report.
 </p>
 
-<form novalidate name="badgeScanForm" ng-submit="fileCtrl.uploadAll()">
+<form novalidate name="badgeScanForm" ng-submit="fileCtrl.uploadAll()" ng-controller="BadgeScanController as bsCtrl">
 
         <h4>Date</h4>
         <div class="large-6 column">
-
-
 
             <label for="monthYear">Month/Year of Report</label>
 
@@ -65,5 +63,12 @@
         <br />
 
     <br />
+
+    <!-- ========================== NO WORKY ===================================== -->
+    <a class="radius button" ng-click="bsCtrl.uploading = !bsCtrl.uploading;">Simulate Upload</a>
+    <div class="ball" ng-show="bsCtrl.uploading">
+        Loading...
+    </div>
+    <!-- ========================== NO WORKY ===================================== -->
 
 </form>

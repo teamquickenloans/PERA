@@ -44,12 +44,15 @@ namespace PERA.Controllers
             // Grab the most recent badge scan report for this garage
             BadgeScanReport report = db.BadgeScanReports.Where(x => x.GarageID == id).OrderByDescending(x => x.MonthYear).FirstOrDefault();
 
+            int days = 30;
+            if (report != null)
+            {
+                days = DateTime.DaysInMonth(report.MonthYear.Year, report.MonthYear.Month);
+            }
+
             QLActiveParkerReport QLReport = db.QLActiveParkerReports.Where( x => x.GarageID == id).OrderByDescending(x => x.MonthYear).FirstOrDefault();
 
-           Dictionary<string, int> usage = new Dictionary<string,int>();
-
-           Trace.WriteLine(report.BadgeScans.Count);
-
+            Dictionary<string, int> usage = new Dictionary<string,int>();
 
             // Grab all of the scans for this person in that report
             foreach(QLTeamMember qlTM in QLReport.TeamMembers) {
@@ -57,52 +60,10 @@ namespace PERA.Controllers
                 usage[qlTM.FirstName + qlTM.LastName] = scans.Count;
             }
 
-            //JavaScriptSerializer serializer = new JavaScriptSerializer();
-            //string json = serializer.Serialize((object)usage);
-
-            return JsonConvert.SerializeObject((object)usage);
-            
+            return JsonConvert.SerializeObject((object)usage) + days;  
         }
-        /*
-        // GET: api/BadgeScans/GetNumberOfScans
-        public int[] GetNumberOfScans(int id)
-        {
-            //Get most recent card activity report for the selected garage
-            BadgeScanReport report = db.BadgeScanReports.Where(x => x.GarageID == id).OrderByDescending(x => x.MonthYear).FirstOrDefault();
-            
-            if (report == null)
-            {
-                return null;
-            }
 
-            //Organize badge scans into a list
-            // List<BadgeScan> scans = report.BadgeScans.ToList();
-             List<BadgeScan> scans = db.BadgeScans.Where(x => 1 == report.ID).ToList();
-            
-            Trace.WriteLine("VVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV");
-            Trace.WriteLine("Number of badge scan results for selected garage: " + scans.Count);
-            Trace.WriteLine("^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^");
-
-            //Create a dictionary to hold usage value for each person
-            Dictionary<int, int> dict = new Dictionary<int, int>();
-
-            //Gather usage data for each person in card activity report
-            foreach(BadgeScan scan in scans) 
-            {
-                if ( !dict.ContainsKey(scan.BadgeID) )
-                {
-                    //dict.Add(scan.BadgeID, report.BadgeScans.Where(x => x.FirstName == scan.FirstName && x.LastName == scan.LastName).ToList().Count);
-                    dict[scan.BadgeID] = db.BadgeScans.Where(x => x.FirstName == scan.FirstName && x.LastName == scan.LastName).ToList().Count;
-                }
-            }
-
-            //Convert dictionary to array to allow for passing back to javascript
-            int[] dictArray = new int[dict.Count];
-            dict.Values.CopyTo(dictArray, 0);
-
-            return dictArray;
-        }
-        */
+        
         // PUT: api/BadgeScans/5
         [ResponseType(typeof(void))]
         public IHttpActionResult PutBadgeScan(int id, BadgeScan badgeScan)

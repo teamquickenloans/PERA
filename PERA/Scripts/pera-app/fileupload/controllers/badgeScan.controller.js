@@ -22,6 +22,9 @@
         vm.reports = angular.copy(vm.defaultReport);
         $scope.garages = [];
         $scope.usage = {};
+        $scope.daysInMonth;
+        $scope.uploading = false;
+
 
         vm.clearForm = clearForm;
         vm.uploadAll = uploadAll;
@@ -51,6 +54,14 @@
         }
 
         function uploadAll() {
+            //========================== NO WORKY =====================================
+            $scope.uploading = true;
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+            console.log("uploading: " + $scope.uploading);
+            //========================== NO WORKY =====================================
+
             console.log("uploadAll");
             var form = vm.form;
             var date = Date.now();
@@ -75,6 +86,14 @@
         }
 
         function uploadSuccess() {
+            //========================== NO WORKY =====================================
+            $scope.uploading = false;
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+            console.log("uploading: " + $scope.uploading);
+            //========================== NO WORKY =====================================
+
             Snackbar.show("Card Activity Report Uploaded Successfully");
             clearForm();
         }
@@ -88,6 +107,14 @@
         }
 
         function uploadFail() {
+            //========================== NO WORKY =====================================
+            $scope.uploading = false;
+            if ($scope.$root.$$phase != '$apply' && $scope.$root.$$phase != '$digest') {
+                $scope.$apply();
+            }
+            console.log("uploading: " + $scope.uploading);
+            //========================== NO WORKY =====================================
+
             Snackbar.error("Card Activity Report upload failed.  Please recheck the formatting of the excel file.");
             clearForm();
         }
@@ -95,36 +122,34 @@
         function garagesSuccess(data) {
             $scope.garages = data.data;
         }
-        /*
-        function badgeScanSuccessFn(data, status, headers, config) {
-            console.log("BADGE SCAN SUCCESS FN");
-            console.log("data.data: " + data.data);
-            console.log("index: " + vm.index);
-            vm.usage[vm.index] = data.data;
-        }
-        */
-        function badgeScanSuccessFn(data, status, headers, config) {
-            $scope.usage = data.data;
-            console.log(data.data);
-            return data.data;
 
-            /*tempArray.forEach(function (val, i) {
-                if (i % 2 === 1) return;
-                console.log('val: '+val);
-                vm.usage[val] = tempArray[i + 1];
-            });*/
+        function badgeScanSuccessFn(data, status, headers, config)
+        {
+            //remove number of days in the month from the end of string
+            var temp = data.data.split("}");
+            $scope.daysInMonth = temp[1];
+            
+            //Read data.data as a string. Parse it into an array of arrays(key/value pairs)
+            temp = temp[0].replace(/"/g, '');
+            temp = temp.replace('{', '');
+            var array = temp.split(",");
+            
+            for(var i=0; i<array.length; i++)
+            {
+               array[i] = array[i].split(":");
+            }
+
+            //Enter the data into a javascript dictionary which can be referenced in a view
+            for(var i=0; i<array.length; i++)
+            {
+                $scope.usage[array[i][0]] = array[i][1];
+            }  
         }
 
         function badgeScanErrorFn(data, status, headers, config) {
             Snackbar.error(data.data.error);
         }
 
-        /*
-        function findUsage(id, firstName, lastName, index) {
-            $http.get('/api/BadgeScans/GetNumberOfScans/' + id + '/' + firstName + '/' + lastName).then(badgeScanSuccessFn, badgeScanErrorFn); //promise
-            vm.index = index;
-        }
-        */
         function findUsage(id) {
             $http.get('/api/BadgeScans/GetNumberOfScans/' + id )
                 .then(badgeScanSuccessFn, badgeScanErrorFn); //promise
