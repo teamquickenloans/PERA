@@ -93,7 +93,7 @@ namespace PERA.Controllers
             JArray jsonobj = JArray.Parse(result);
             Trace.WriteLine(result);
             Trace.WriteLine("hello");
-            Trace.WriteLine(jsonobj[0][0]["TokenID"]);
+            //Trace.WriteLine(jsonobj[0][0]["TokenID"]);
             string fileLocation = Path.GetFullPath(System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath) + "output.xlsx";
             System.IO.File.Copy(Path.GetFullPath(System.Web.Hosting.HostingEnvironment.ApplicationPhysicalPath)+"book.xlsx", fileLocation, true);
             //Trace.Write(System.IO.File.Exists("output.xlsx"));
