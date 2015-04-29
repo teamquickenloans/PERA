@@ -21,7 +21,7 @@
         vm.defaultReport = [{ garageID: 0 }];
         vm.reports = angular.copy(vm.defaultReport);
         $scope.garages = [];
-        $scope.usage = {};
+        $scope.usage = [];
         $scope.daysInMonth;
 
 
@@ -41,6 +41,11 @@
         }
 
         vm.form = angular.copy(vm.defaultForm);
+
+        function TeamMember(name, usage) {
+            this.name = name;
+            this.usage = usage;
+        }
 
 
         function addReport() {
@@ -113,16 +118,12 @@
             temp = temp.replace('{', '');
             var array = temp.split(",");
             
-            for(var i=0; i < array.length; i++)
+            for (var i = 0; i < array.length; i++)
             {
-               array[i] = array[i].split(":");
-            }
+                array[i] = array[i].split(":");
 
-            //Enter the data into a javascript dictionary which can be referenced in a view
-            for(var i=0; i < array.length; i++)
-            {
-                $scope.usage[array[i][0]] = array[i][1];
-            }  
+                $scope.usage.push(new TeamMember(array[i][0], array[i][1]));
+            }
         }
 
         function badgeScanErrorFn(data, status, headers, config) {
