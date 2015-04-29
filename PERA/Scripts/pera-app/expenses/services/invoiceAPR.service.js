@@ -95,7 +95,7 @@
         * @memberOf pera.expenses.services.InvoiceAPRs
         */
         function get(invoiceAPRID) {
-            var promise = $http.get('/api/invoiceActiveParkerReports/getInvoiceActiveParkerReports/' + invoiceAPRID);
+            var promise = $http.get('/api/invoiceActiveParkerReports/getInvoiceActiveParkerReport/' + invoiceAPRID);
             //console.log("getting one IAPR");
             promise.then(oneSuccess, oneError);
             return promise;

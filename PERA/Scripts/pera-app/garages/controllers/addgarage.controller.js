@@ -78,11 +78,11 @@
             // Here you will post a garage to the API
             //  using the $http angular service
             Garages.create($scope.new, $scope.new.garageID).then(success);
-            clearForm();
         }
 
         function success() {
             Snackbar.show($scope.new.name + " has been created");
+            clearForm();
         }
 
        /*

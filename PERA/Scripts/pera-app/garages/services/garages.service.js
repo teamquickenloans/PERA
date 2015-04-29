@@ -76,12 +76,7 @@
         */
         function get(garageID) 
         {
-            if (!garagePromise[garageID] || last_garage_failed[garageID]) {
-                garagePromise[garageID] = $http.get('/api/garages/get/' + garageID);
-                //console.log("getting one garage");
-                garagePromise[garageID].then(garageSuccess, garageError);
-            }
-            return garagePromise;
+            return $http.get('/api/garages/getgarage/' + garageID);
         }
 
         function garageSuccess(data, status, headers, config, response) {
