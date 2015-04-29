@@ -15,7 +15,7 @@
             </thead>
             <tbody id="uploadTableBody">
                 <tr class="tableRow" ng-repeat="invoice in invoices" ng-class="{selected:tabCtrl.isSet($index)}" ng-click="tabCtrl.setTab($index)">
-                    <td>#{{invoice.id}}</td>
+                    <td ng-click="delete(invoice.invoiceID)">#{{invoice.id}}</td>
                     <td>{{invoice.monthYear | date:'MMMM yyyy'}}</td>
                     <td>{{invoice.dateUploaded | date:'M-dd-yyyy'}}</td>
                     <td>${{invoice.totalAmountBilled}}</td>

@@ -232,22 +232,29 @@ namespace PERA.Controllers
             }
 
             //check if report exists in db
-            QLActiveParkerReport report = db.QLActiveParkerReports.FirstOrDefault(
+            /*QLActiveParkerReport report = db.QLActiveParkerReports.FirstOrDefault(
+                  x => x.MonthYear.Month == APR.MonthYear.Month
+                  && x.MonthYear.Year == APR.MonthYear.Year
+                  && x.GarageID == APR.GarageID);*/
+
+            if(db.QLActiveParkerReports.Any(
+                  x => x.MonthYear.Month == APR.MonthYear.Month
+                  && x.MonthYear.Year == APR.MonthYear.Year
+                  && x.GarageID == APR.GarageID))
+            {
+                QLActiveParkerReport report = db.QLActiveParkerReports.FirstOrDefault(
                   x => x.MonthYear.Month == APR.MonthYear.Month
                   && x.MonthYear.Year == APR.MonthYear.Year
                   && x.GarageID == APR.GarageID);
 
-            if(report != null)
-            {
-                foreach(QLTeamMember qlTM in report.TeamMembers)
+                foreach (var tm in report.TeamMembers)
                 {
-                    db.QLTeamMembers.Remove(qlTM);
-                    db.ParkerReportTeamMembers.Remove(qlTM);
+                    using (var newContext = new PERAContext())
+                    {
+                        newContext.Entry(tm).State = System.Data.Entity.EntityState.Deleted;
+                        newContext.SaveChanges();
+                    }  
                 }
-                report.DateUploaded = APR.DateUploaded;
-                report.DateReceived = APR.DateReceived;
-                report.TeamMembers = APR.TeamMembers;
-                db.SaveChanges();
 
             }
             else //report doesn't exist yet, add it

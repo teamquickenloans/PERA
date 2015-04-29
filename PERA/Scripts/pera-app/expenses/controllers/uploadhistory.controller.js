@@ -63,5 +63,9 @@
             console.log(data.data);
             $scope.badgeReports = data.data;
         }
+
+        function deleteInvoice(invoiceID) {
+
+        }
     };
 })();

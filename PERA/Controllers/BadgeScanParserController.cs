@@ -88,12 +88,21 @@ namespace PERA.Controllers
             //Invoice newInvoice = JsonConvert.DeserializeObject<Invoice>(fileUploadObj);
             BadgeScanReport bsReport0 = GetFormData(result);
 
-            var exists = db.BadgeScanReports.Any(x => x.GarageID == bsReport0.GarageID && x.MonthYear == bsReport0.MonthYear);
+            //var exists = db.BadgeScanReports.Any(x => x.GarageID == bsReport0.GarageID && x.MonthYear == bsReport0.MonthYear);
 
-            if(exists)
+            if (db.BadgeScanReports.Any(
+                x => x.MonthYear.Month == bsReport0.MonthYear.Month
+                  && x.MonthYear.Year == bsReport0.MonthYear.Year
+                  && x.GarageID == bsReport0.GarageID))
+            {
+                return Request.CreateResponse(HttpStatusCode.NotFound, "Invalid ID");
+            }
+
+
+            /*if(exists)
             {
                 bsReport0 = db.BadgeScanReports.Find(bsReport0.GarageID, bsReport0.MonthYear);
-            }
+            }*/
 
             Trace.WriteLine("bsReport.GarageID: " + bsReport0.GarageID);
             Trace.WriteLine("bsReport.MonthYear: " + bsReport0.MonthYear);
@@ -128,7 +137,8 @@ namespace PERA.Controllers
                 //bsReport.MonthYear = bsReport0.MonthYear;
                 //bsReport.DateReceived = bsReport0.DateReceived;
                 //bsReport.DateUploaded = bsReport0.DateUploaded;
-            
+
+
                 List<BadgeScan> badgeScans = 
                     ExcelParser(file.LocalFileName, originalFileName, garageID);
                 foreach (BadgeScan badgeScan in badgeScans)
@@ -149,16 +159,24 @@ namespace PERA.Controllers
                   //  Trace.WriteLine(bsReport.BadgeScans);
                     
                     bsReport0.BadgeScans.Add(badgeScan);
+                    db.SaveChanges();
                 }
-                db.BadgeScanReports.Add(bsReport0);
-                db.SaveChanges();
-                //bsReport0.BadgeScanReports.Add(bsReport);
-                //db.SaveChanges();
                 i++;
             }
-            //badgeScan.ID = badgeScan.InvoiceID;
-            //db.Invoices.Add(badgeScan);
-            //db.SaveChanges();
+
+            if(db.BadgeScanReports.Any(
+                x => x.MonthYear.Month == bsReport0.MonthYear.Month
+                  && x.MonthYear.Year == bsReport0.MonthYear.Year
+                  && x.GarageID == bsReport0.GarageID))
+            {
+
+            }
+            else
+            {
+                db.BadgeScanReports.Add(bsReport0);
+                db.SaveChanges();
+            }
+
         }
 
         public List<BadgeScan> ExcelParser(string path, string name, int garageID)
@@ -281,15 +299,20 @@ namespace PERA.Controllers
 
                 //Check if the database already holds a report of a person with the same name checking into the same garage on the same day already. 
                 //If so, don't add another entry into the database.
-                BadgeScan bs = db.BadgeScans.FirstOrDefault(
+
+                if (db.BadgeScans.Any(
                         x => x.FirstName == badgeScan.FirstName
                         && x.LastName == badgeScan.LastName
                         && x.GarageID == badgeScan.GarageID
                         && x.ScanDateTime.Year == badgeScan.ScanDateTime.Year
                         && x.ScanDateTime.Month == badgeScan.ScanDateTime.Month
-                        && x.ScanDateTime.Day == badgeScan.ScanDateTime.Day);
-                if (bs == null)
+                        && x.ScanDateTime.Day == badgeScan.ScanDateTime.Day)
+                    )
                 {
+                    continue;
+                }
+
+                else {
                     badgeScans.Add(badgeScan);
                     db.BadgeScans.Add(badgeScan);
                     db.SaveChanges();
@@ -297,7 +320,6 @@ namespace PERA.Controllers
                 
             } // end for rows
             return badgeScans;
-            System.Diagnostics.Debug.WriteLine("Parsing Completed!");
         }
 
 
