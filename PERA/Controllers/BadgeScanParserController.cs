@@ -88,13 +88,15 @@ namespace PERA.Controllers
             //Invoice newInvoice = JsonConvert.DeserializeObject<Invoice>(fileUploadObj);
             BadgeScanReport bsReport0 = GetFormData(result);
 
-            //var exists = db.BadgeScanReports.Any(x => x.GarageID == bsReport0.GarageID && x.MonthYear == bsReport0.MonthYear);
+            var exists = db.BadgeScanReports.Any(
+                x => x.GarageID == bsReport0.GarageID 
+                  && x.MonthYear.Month == bsReport0.MonthYear.Month
+                  && x.MonthYear.Year == bsReport0.MonthYear.Year);
 
-            if (db.BadgeScanReports.Any(
-                x => x.MonthYear.Month == bsReport0.MonthYear.Month
-                  && x.MonthYear.Year == bsReport0.MonthYear.Year
-                  && x.GarageID == bsReport0.GarageID))
+            Trace.WriteLine("exists: " + exists);
+            if (exists)
             {
+                Trace.WriteLine("report already found, not creating a new one!");
                 return Request.CreateResponse(HttpStatusCode.NotFound, "Invalid ID");
             }
 
