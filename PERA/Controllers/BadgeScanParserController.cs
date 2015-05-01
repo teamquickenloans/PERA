@@ -86,35 +86,51 @@ namespace PERA.Controllers
 
             //string invoice = result.FormData.GetValues(0).FirstOrDefault();
             //Invoice newInvoice = JsonConvert.DeserializeObject<Invoice>(fileUploadObj);
-            BadgeScanReport bsReport0 = GetFormData(result);
+            BadgeScanReport bsReport = GetFormData(result);
+            int garageID = Convert.ToInt32(result.FormData.GetValues("garageID").First());
+            bsReport.GarageID = garageID;
 
             var exists = db.BadgeScanReports.Any(
-                x => x.GarageID == bsReport0.GarageID 
-                  && x.MonthYear.Month == bsReport0.MonthYear.Month
-                  && x.MonthYear.Year == bsReport0.MonthYear.Year);
+                x => x.GarageID == bsReport.GarageID 
+                  && x.MonthYear.Month == bsReport.MonthYear.Month
+                  && x.MonthYear.Year == bsReport.MonthYear.Year);
 
             Trace.WriteLine("exists: " + exists);
-            if (exists)
+            //if (exists)
+            //{
+            //    Trace.WriteLine("report already found, not creating a new one!");
+            //    return Request.CreateResponse(HttpStatusCode.NotFound, "Invalid ID");
+            //}
+
+            if (exists)  //if a report for this garage and month already exists
             {
                 Trace.WriteLine("report already found, not creating a new one!");
-                return Request.CreateResponse(HttpStatusCode.NotFound, "Invalid ID");
+                BadgeScanReport scanReport = db.BadgeScanReports.Where(
+                    x => x.GarageID == bsReport.GarageID
+                  && x.MonthYear.Month == bsReport.MonthYear.Month
+                  && x.MonthYear.Year == bsReport.MonthYear.Year).FirstOrDefault();
+
+
+                List<BadgeScan> scans = scanReport.BadgeScans.ToList();
+
+                foreach (BadgeScan scan in scans)
+                {
+                    db.BadgeScans.Remove(scan);
+                }
+
+                scanReport.DateReceived = bsReport.DateReceived;
+                scanReport.DateUploaded = bsReport.DateUploaded;
+                bsReport = scanReport;
             }
 
+            FileHandler(result, bsReport);
 
-            /*if(exists)
+            if(!exists)
             {
-                bsReport0 = db.BadgeScanReports.Find(bsReport0.GarageID, bsReport0.MonthYear);
-            }*/
-
-            Trace.WriteLine("bsReport.GarageID: " + bsReport0.GarageID);
-            Trace.WriteLine("bsReport.MonthYear: " + bsReport0.MonthYear);
-            Trace.WriteLine("bsReport.DateReceived: " + bsReport0.DateReceived);
-            Trace.WriteLine("bsReport.DateUploaded: " + bsReport0.DateUploaded);
-            
-
-            FileHandler(result, bsReport0);
-
-
+                Trace.WriteLine("adding new report");
+                db.BadgeScanReports.Add(bsReport);
+            }
+            db.SaveChanges();
             // Through the request response you can return an object to the Angular controller
             // You will be able to access this in the .success callback through its data attribute
             // If you want to send something to the .error callback, use the HttpStatusCode.BadRequest instead
@@ -122,7 +138,7 @@ namespace PERA.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, new { returnData });
         }
 
-        private void FileHandler(MultipartFormDataStreamProvider result, BadgeScanReport bsReport0)
+        private void FileHandler(MultipartFormDataStreamProvider result, BadgeScanReport bsReport)
         {
             int i = 0;
             foreach (var file in result.FileData)
@@ -131,18 +147,14 @@ namespace PERA.Controllers
                 // so this is how you can get the original file name
                 //var file = result.FileData[0];
                 var originalFileName = GetDeserializedFileName(file);
-                int garageID = Convert.ToInt32(result.FormData.GetValues("garageID").First());
-
-
-                //BadgeScanReport bsReport = db.BadgeScanReports.Create();
-                bsReport0.GarageID = garageID;
+ 
                 //bsReport.MonthYear = bsReport0.MonthYear;
                 //bsReport.DateReceived = bsReport0.DateReceived;
                 //bsReport.DateUploaded = bsReport0.DateUploaded;
 
 
                 List<BadgeScan> badgeScans = 
-                    ExcelParser(file.LocalFileName, originalFileName, garageID);
+                    ExcelParser(file.LocalFileName, originalFileName, bsReport.GarageID);
                 foreach (BadgeScan badgeScan in badgeScans)
                 {
                     if(badgeScan == null)
@@ -151,33 +163,13 @@ namespace PERA.Controllers
                         continue;
                     }
                     
-                    Trace.WriteLine(badgeScan.ID);
-                    Trace.WriteLine(badgeScan.FirstName);
-                    Trace.WriteLine(badgeScan.LastName);
-                    Trace.WriteLine(badgeScan.ScanDateTime);
-                   // Trace.WriteLine(bsReport.DateUploaded);
-                   // Trace.WriteLine(bsReport.MonthYear);
-                    Trace.WriteLine(badgeScan.BadgeID);
-                  //  Trace.WriteLine(bsReport.BadgeScans);
-                    
-                    bsReport0.BadgeScans.Add(badgeScan);
+                    bsReport.BadgeScans.Add(badgeScan);
+                    db.BadgeScans.Add(badgeScan);
+
                     db.SaveChanges();
                 }
                 i++;
-            }
-
-            if(db.BadgeScanReports.Any(
-                x => x.MonthYear.Month == bsReport0.MonthYear.Month
-                  && x.MonthYear.Year == bsReport0.MonthYear.Year
-                  && x.GarageID == bsReport0.GarageID))
-            {
-
-            }
-            else
-            {
-                db.BadgeScanReports.Add(bsReport0);
-                db.SaveChanges();
-            }
+            }    
 
         }
 
@@ -230,9 +222,6 @@ namespace PERA.Controllers
                     continue;
                 }
 
-
-
-
                 string firstName, lastName;
                 
                 string fullName = row[2].ToString();
@@ -250,7 +239,6 @@ namespace PERA.Controllers
                     firstName = names[1];
                     lastName = names[0];
                 }
-                
 
                 //Convert names to Title Case 
                 TextInfo textInfo = new CultureInfo("en-US", false).TextInfo;
@@ -316,8 +304,6 @@ namespace PERA.Controllers
 
                 else {
                     badgeScans.Add(badgeScan);
-                    db.BadgeScans.Add(badgeScan);
-                    db.SaveChanges();
                 }  
                 
             } // end for rows
@@ -349,7 +335,6 @@ namespace PERA.Controllers
         {
             return fileData.Headers.ContentDisposition.FileName;
         }
-
 
 
         /* This function converts from an Excel Date to a DateTime which we insert into the database

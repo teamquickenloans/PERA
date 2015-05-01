@@ -221,15 +221,6 @@ namespace PERA.Controllers
 
         private void Save(QLActiveParkerReport APR, List<QLTeamMember> teamMembers)
         {
-            foreach (QLTeamMember teamMember in teamMembers)
-            {
-                //Trace.WriteLine(teamMember.ParkerReportTeamMemberID);
-                //Trace.WriteLine(teamMember.FirstName);
-                //Trace.WriteLine(teamMember.LastName);
-
-                APR.TeamMembers.Add(teamMember);
-                db.SaveChanges();
-            }
 
             //check if report exists in db
             /*QLActiveParkerReport report = db.QLActiveParkerReports.FirstOrDefault(
@@ -247,19 +238,31 @@ namespace PERA.Controllers
                   && x.MonthYear.Year == APR.MonthYear.Year
                   && x.GarageID == APR.GarageID);
 
-                foreach (var tm in report.TeamMembers)
-                {
-                    using (var newContext = new PERAContext())
-                    {
-                        newContext.Entry(tm).State = System.Data.Entity.EntityState.Deleted;
-                        newContext.SaveChanges();
-                    }  
-                }
+                report.GarageID = APR.GarageID;
+                report.DateUploaded = APR.DateUploaded;
+                report.DateReceived = APR.DateReceived;
 
+                List<QLTeamMember> members = report.TeamMembers.ToList();
+                foreach (var tm in members)
+                {
+                    report.TeamMembers.Remove(tm);
+                    db.ParkerReportTeamMembers.Remove(tm);
+                }
+                APR = report;
             }
             else //report doesn't exist yet, add it
             {
                 db.QLActiveParkerReports.Add(APR);
+            }
+
+            foreach (QLTeamMember teamMember in teamMembers)
+            {
+                //Trace.WriteLine(teamMember.ParkerReportTeamMemberID);
+                //Trace.WriteLine(teamMember.FirstName);
+                //Trace.WriteLine(teamMember.LastName);
+
+                APR.TeamMembers.Add(teamMember);
+                db.SaveChanges();
             }
 
             db.SaveChanges();

@@ -32,7 +32,7 @@ namespace PERA.Controllers
     public class InvoiceParserController : ApiController
     {
 
-        private PERAContext db = new PERAContext();
+        //private PERAContext db = new PERAContext();
 
         // key: garageID, value: column index # of token ID (badge, hangtag, puck)
         Dictionary<int, int> tokenColumns = new Dictionary<int, int>()
@@ -76,7 +76,6 @@ namespace PERA.Controllers
         [HttpPost] // This is from System.Web.Http, and not from System.Web.Mvc
         public async Task<HttpResponseMessage> Upload()
         {
-            Trace.WriteLine("Begin Upload!!!");
             if (!Request.Content.IsMimeMultipartContent())
             {
                 this.Request.CreateResponse(HttpStatusCode.UnsupportedMediaType);
@@ -84,26 +83,48 @@ namespace PERA.Controllers
 
             var provider = GetMultipartProvider();
             var result = await Request.Content.ReadAsMultipartAsync(provider);
+            PERAContext db = new PERAContext();
 
-
-            //string invoice = result.FormData.GetValues(0).FirstOrDefault();
-            //Invoice newInvoice = JsonConvert.DeserializeObject<Invoice>(fileUploadObj);
             Invoice invoice = GetFormData(result);
+            int garageID = Convert.ToInt32(result.FormData.GetValues("garageID").First());
 
-            //var exists = db.Invoices.Where(x => x.InvoiceID == invoice.InvoiceID);
-
-            var exists = db.Invoices.Any(x => x.InvoiceID == invoice.InvoiceID);
+            var exists = db.Invoices.Any(x => x.ID == invoice.InvoiceID
+                && x.MonthYear.Month == invoice.MonthYear.Month
+                && x.MonthYear.Year == invoice.MonthYear.Year);
 
             if(exists)
             {
-                invoice = db.Invoices.Find(invoice.InvoiceID);
+                Trace.WriteLine("THIS!\n\n\n\n\n\n\n\n\n\\n\n\n\n\n\\n\n");
+                Invoice oldInvoice = db.Invoices.Where(x => x.ID == invoice.InvoiceID
+                && x.MonthYear.Month == invoice.MonthYear.Month
+                && x.MonthYear.Year == invoice.MonthYear.Year).FirstOrDefault();
+
+                oldInvoice.DateReceived = invoice.DateReceived;
+                oldInvoice.DateUploaded = invoice.DateUploaded;
+                oldInvoice.TotalAmountBilled = invoice.TotalAmountBilled;
+                //oldInvoice.TotalLeasedSpots = invoice.TotalLeasedSpots;
+
+                List<InvoiceActiveParkerReport> reports = oldInvoice.InvoiceActiveParkerReports.ToList();
+                foreach (InvoiceActiveParkerReport report in reports)
+                {
+                    List<ParkerReportTeamMember> TMs = report.TeamMembers.ToList();
+                    foreach (ParkerReportTeamMember tm in TMs)
+                    {
+                        db.ParkerReportTeamMembers.Remove(tm);
+                        report.TeamMembers.Remove(tm);
+                        db.SaveChanges();
+                    }
+                    db.InvoiceActiveParkerReports.Remove(report);
+                    invoice.InvoiceActiveParkerReports.Remove(report);
+                    db.SaveChanges();
+                }
+
+                invoice = oldInvoice;
             }
 
-            Trace.WriteLine("invoice.InvoiceID: " + invoice.InvoiceID);
-            Trace.WriteLine("invoice.MonthYear: " + invoice.MonthYear);
-            Trace.WriteLine("invoice.TotalAmountBilled: " + invoice.TotalAmountBilled);
-            FileHandler(result, invoice);
+            FileHandler(result, invoice, garageID);
 
+            
             // Through the request response you can return an object to the Angular controller
             // You will be able to access this in the .success callback through its data attribute
             // If you want to send something to the .error callback, use the HttpStatusCode.BadRequest instead
@@ -111,38 +132,59 @@ namespace PERA.Controllers
             return this.Request.CreateResponse(HttpStatusCode.OK, new { returnData });
         }
 
-        private void FileHandler(MultipartFormDataStreamProvider result, Invoice invoice)
+        private void FileHandler(MultipartFormDataStreamProvider result, Invoice invoice, int garageID)
         {
             int i = 0;
+            PERAContext db = new PERAContext();
             foreach(var file in result.FileData)
             {
                 // On upload, files are given a generic name like "BodyPart_26d6abe1-3ae1-416a-9429-b35f15e6e5d5"
                 // so this is how you can get the original file name
                 var originalFileName = GetDeserializedFileName(file);
                 var uploadedFileInfo = new FileInfo(file.LocalFileName);
-                int garageID = Convert.ToInt32(result.FormData.GetValues("garageID").First());
-            
-                InvoiceActiveParkerReport APR =  db.InvoiceActiveParkerReports.Create();
+                //int garageID = Convert.ToInt32(result.FormData.GetValues("garageID").First());
+
+                InvoiceActiveParkerReport APR;
+
+                /*var exists = db.InvoiceActiveParkerReports.Any(
+                    x => x.GarageID == garageID
+                      && x.MonthYear.Month == invoice.MonthYear.Month
+                      && x.MonthYear.Year == invoice.MonthYear.Year);
+
+                if (exists)
+                {
+                    APR = db.InvoiceActiveParkerReports.Where(
+                        x => x.GarageID == garageID
+                          && x.MonthYear.Month == invoice.MonthYear.Month
+                          && x.MonthYear.Year == invoice.MonthYear.Year).FirstOrDefault();
+                    List<ParkerReportTeamMember> members = APR.TeamMembers.ToList();
+
+                    foreach (ParkerReportTeamMember member in members)
+                    {
+                        db.ParkerReportTeamMembers.Remove(member);
+                    }
+                }
+                else
+                {
+                    APR = db.InvoiceActiveParkerReports.Create();
+                }
+                */
+                APR = db.InvoiceActiveParkerReports.Create();
                 APR.GarageID = garageID;
                 APR.DateUploaded = invoice.DateUploaded;
                 APR.DateReceived = invoice.DateReceived;
                 APR.MonthYear = invoice.MonthYear;
                 APR.InvoiceID = invoice.InvoiceID;
-                //System.Diagnostics.Debug.WriteLine(uploadedFileInfo);
-                Trace.WriteLine(file.LocalFileName);
+
                 List<ParkerReportTeamMember> teamMembers = 
                     ExcelParser(file.LocalFileName, originalFileName, invoice, APR, garageID);
+
                 foreach (ParkerReportTeamMember teamMember in teamMembers)
                 {
                     if(teamMember == null)
                     {
-                        Trace.WriteLine("null team member");
                         continue;
                     }
-                    Trace.WriteLine(teamMember.ParkerReportTeamMemberID);
-                    Trace.WriteLine(teamMember.FirstName);
-                    Trace.WriteLine(teamMember.LastName);
-                    Trace.WriteLine(APR.TeamMembers);
                     APR.TeamMembers.Add(teamMember);
                 }
                 db.InvoiceActiveParkerReports.Add(APR);
@@ -151,9 +193,16 @@ namespace PERA.Controllers
                 db.SaveChanges();
                 i++;
             }
-            invoice.ID = invoice.InvoiceID;
-            db.Invoices.Add(invoice);
-            db.SaveChanges();
+            var exists = db.Invoices.Any(x => x.ID == invoice.InvoiceID
+                && x.MonthYear.Month == invoice.MonthYear.Month
+                && x.MonthYear.Year == invoice.MonthYear.Year);
+
+            if (!exists)
+            {
+                invoice.ID = invoice.InvoiceID;
+                db.Invoices.Add(invoice);
+                db.SaveChanges();
+            }
         }
         
         private List<ParkerReportTeamMember> ExcelParser(string path, string name, Invoice invoice, 
@@ -163,10 +212,7 @@ namespace PERA.Controllers
             IExcelDataReader reader = null;
             var excelData = new ExcelData(path);
 
-            Trace.WriteLine(garageID);
-
             reader = excelData.getExcelReader(name);
-
 
             // Create column names from first row
             reader.IsFirstRowAsColumnNames = true;
@@ -182,8 +228,8 @@ namespace PERA.Controllers
             { 
                 foreach (DataRow row in table.Rows) // each row
                 {
+                    PERAContext db = new PERAContext();
                     // if this row is the headings, skip this row
-                    System.Diagnostics.Debug.WriteLine("row");
                     if(row == null )
                     {
                         System.Diagnostics.Debug.WriteLine("null");
